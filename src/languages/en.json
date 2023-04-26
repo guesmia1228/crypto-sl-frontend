@@ -1,0 +1,412 @@
+{
+  "navigation": {
+    "home": "Home",
+    "solutions": "Solutions",
+    "payment": "Payment",
+    "paymentDescription": "Experience the future of finance with modern invoicing and payment processes.",
+    "payroll": "Payroll",
+    "payrollDescription": "Simplify your payroll process with flexible and efficient crypto and FIAT payroll solutions.",
+    "resources": "Resources",
+    "affiliate": "Affiliate Program",
+    "login": "Log in",
+    "signUp": "Get started",
+    "menu": "Registration"
+  },
+  "home": {
+    "heroTitle": "Level-up Business with Nefentus",
+    "heroDescription": "Our revolutionary state-of-the-art automation and secure crypto checkouts let you focus on your core business while maximizing earnings. Leave manual payments behind and embrace the future of commerce today.",
+    "heroButton": "Start now, it’s free",
+    "heroAvailable": "Available on:",
+    "cardSubtitle": "Your partner for scaling",
+    "cardTitle": "Companies around the world use Nefentus to manage and scale their payment processing.",
+    "cardList": [
+      {
+        "title": "Free onboarding support",
+        "description": "Take advantage of our onboarding support to help you get started."
+      },
+      {
+        "title": "Bespoke Solutions",
+        "description": "We offer customized solutions that can be tailored to your unique needs."
+      },
+      {
+        "title": "Benefit from our expertise",
+        "description": "Leverage our deep industry knowledge to drive success within your business."
+      }
+    ],
+    "layoutButton": "Get Started for Free",
+    "simplifySubtitle": "Simplify",
+    "simplifyTitle": "Manage crypto payments and invoicing",
+    "simplifyDescription": "Our secure platform is an all-encompassing, secure platform which streamlines, automates, and facilitate various types of transactions, including traditional and digital currencies, for businesses and customers alike.",
+    "payrollDescription": "Use our streamlined, efficient solution for managing employee compensation, including salary payments and benefit allocations.",
+    "payrollSubtitle": "Process Payroll",
+    "payrollTitleP1": "Grow with our",
+    "payrollTitleP2": "payroll system",
+    "aboutCard1Subtitle": "Rapid Adoption",
+    "aboutCard1Title": "Users trust is reflected in their increased activity",
+    "aboutCard1Description": "The growing user activity on Nefentus showcases our users' trust and the outstanding value they derive from our service. We are committed to continually delivering excellence and preserving their confidence.",
+    "aboutCard2Subtitle": "Manage",
+    "aboutCard2TitleP1": "Leverage the power",
+    "aboutCard2TitleP2": "of our Dashboards",
+    "aboutCard2Description": "Our advanced dashboards enable you to gain deeper insights and make data-driven decisions with ease, improving your productivity and profitability. With powerful data visualization and analysis tools at your fingertips, you can uncover hidden trends, identify key performance indicators, and optimize your operations for peak efficiency.",
+    "aboutCard3Subtitle": "Integrate",
+    "aboutCard3TitleP1": "Effortlessly connect ",
+    "aboutCard3TitleP2": "with your other tools",
+    "aboutCard3Description": "Easily integrating your existing financial stack with our platform not only enables you to access over 200 wallets for crypto payments but also allows you to leverage your current infrastructure, reduce the need for additional resources, streamline your financial operations, and gain better control over your business's financial data.",
+    "reviewList": [
+      {
+        "name": "Stephan Walouch",
+        "position": "Founder & CEO",
+        "message": "Nefentus increased my revenue and saved me time!"
+      },
+      {
+        "name": "Leon Enzminger",
+        "position": "Founder & CEO",
+        "message": "Thanks to Nefentus, I can focus on growing my business!"
+      },
+      {
+        "name": "Natalia Sakharova",
+        "position": "Head of Compliance",
+        "message": "Switching to Nefentus was the best decision I made for my payments!"
+      }
+    ],
+    "reviewTitleP1": "Hear Directly from ",
+    "reviewTitleP2": "Our Customers",
+    "reviewSubtitle": "Reviews"
+  },
+  "payment": {
+    "heroHeading": "Accept Crypto in less than 5 minutes",
+    "heroDescription": "Experience the future of finance by revolutionizing your invoicing and payment processes with our advanced automation tools and secure crypto-based checkouts, simplifying financial management and maximizing revenue potential.",
+    "heroButton": "Start now, it’s free",
+    "growSubtitle": "Grow",
+    "growTitle": "Supercharge Your Sales",
+    "growContent": [
+      {
+        "title": "Turn Intelligence Into Growth",
+        "description": "Gain instant insight into your business by leveraging our automated calculations of key metrics, enabling you to easily monitor your growth and stay on top of your business."
+      },
+      {
+        "title": "Optimized checkouts",
+        "description": "Maximize your sales potential with our sales-optimized checkouts, featuring lightning-fast load times, exceptional conversion rates, and an unparalleled user experience, guaranteed to delight your customers and boost your revenue."
+      },
+      {
+        "title": "Automate Your Financial Stack ",
+        "description": "From accounting and tax payments to product provisioning, returns and cancellations, commission and affiliate management, e-ticketing, and beyond, Nefentus offers a comprehensive suite of tools to help streamline and optimize your business operations."
+      }
+    ],
+    "iconTitleP1": "Adopt the Payment",
+    "iconTitleP2": "that Power the Future",
+    "iconSubtitle": "Dont Be Left Behind",
+    "iconDescription": "We offer a diverse range of payment options, including popular cryptocurrencies like Bitcoin, Ethereum, Ripple, and USDT, to help you effortlessly sell your products and services to a global audience. Our platform's flexibility and scalability enable you to customize your payment capabilities and stay ahead of the curve in today's rapidly evolving payment landscape. Join us today and take your business to the next level.",
+    "whyTitle": "Why Nefentus?",
+    "whyContent": [
+      {
+        "title": "Made in Europe",
+        "description": "Our in-house team of expert IT specialists continuously develops and improves Nefentus to the highest standards,"
+      },
+      {
+        "title": "GDPR compliant",
+        "description": "We prioritize data protection, adhering to the highest security and privacy standards to ensure the protection of your company and customers' data."
+      },
+      {
+        "title": "Secure",
+        "description": "With our powerful and secure servers that offer 100% availability, you can trust that your website will always be accessible, and your data will always be safe."
+      }
+    ],
+    "dataContent": [
+      {
+        "title": "3.5% Commission",
+        "description": "Experience unparalleled payment processing, featuring strong conversion rates, popular and intuitive payment methods, and fast, safe transactions.",
+        "list": [
+          "Strong conversion rates",
+          "Popular payment methods",
+          "Fast & Safe",
+          "Intuitive payment process"
+        ]
+      },
+      {
+        "title": "Smart Analytics",
+        "description": "We calculate key metrics for your business and keep track of your growth effortlessly.",
+        "list": [
+          "See Measurable growth",
+          "Optimize processes",
+          "Access analytics",
+          "Gain Insights"
+        ]
+      },
+      {
+        "title": "Automatons",
+        "description": "Nefentus saves you from manual invoicing and simplifies your accounting.",
+        "list": [
+          "Automated invoicing",
+          "Insightful dashboards",
+          "Financial overview",
+          "Completely complient "
+        ]
+      },
+      {
+        "title": "Digital Products",
+        "description": "Securely upload digital products once to Nefentus and make them available for download after purchase, without any third-party providers.",
+        "list": [
+          "Secure your Content",
+          "Access to digital products ",
+          "Have Your Own cloud"
+        ]
+      }
+    ],
+    "paymentSubtitle": "Cost",
+    "paymentTitleP1": "0€ Upfront Fee, 0€ Monthly Fee ",
+    "paymentTitleP2": "Pay Only for Results",
+    "paymentCard1Title": "Basic - Vendor",
+    "paymentCard1Description": "3.5 % Comission",
+    "paymentCard2Title": "Customized - Enterpriser",
+    "paymentCard2Description": "100,000+ EUR monthly transaction ",
+    "paymentButton": "Sign Up For Free",
+    "paymentCard1": [
+      "Automated invoicing",
+      "Accept 7 different payment methods",
+      "24/7 uptime",
+      "Automated receivables",
+      "Premium and fast support",
+      "Instant access"
+    ],
+    "paymentCard2": [
+      "All benefits of the Basic-Vendor package",
+      "Support via phone and video by a dedicated  account manager",
+      "Free access to our private support group for questions, answers and discussion ",
+      "Early access to beta versions",
+      "Special discounts for transaction fees"
+    ]
+  },
+  "payroll": {
+    "heroTitleP1": "The most effortless payroll ",
+    "heroTitleP2": "processing for your business",
+    "heroSubtitle": "Payroll Solutions",
+    "heroDescription": "Simplify your payroll process with Nefentus' flexible and efficient crypto and FIAT payroll solutions. Add employees, set salaries, and pay with ease, all while taking advantage of the benefits of cryptocurrency. With our comprehensive reporting tools, you can gain valuable insights into your payroll data, enabling you to optimize your operations for improved productivity and profitability.",
+    "manageTitle": "Effortlessly manage payroll with crypto",
+    "manageDescription": "Empower your employees with Nefentus' advanced crypto payroll solutions, enabling you to pay full or partial salaries and bonuses in cryptocurrency, as well as allocate shares of your token to build loyalty and incentivize productivity.",
+    "manageButton": "Get Started for Free",
+    "manageSubtitle": "Manage",
+    "organizeSubtitle": "Organize payment",
+    "organizeTitle": "Effortlessly process employee benefits",
+    "organizeDescription": "Efficiently manage your payroll with Nefentus' advanced features, including multi-currency and multi-chain support, lower transaction fees for global teams, onboarding through CSV file uploads, and scheduling of recurring salaries.",
+    "trackSubtitle": "Track",
+    "trackTitleP1": "Track all payments ",
+    "trackTitleP2": "in one place",
+    "trackDescription": "Effortlessly review the status of all payment requests using Nefentus' visual dashboard, with the ability to easily send payment reminders to outstanding requests.",
+    "iconSubtitle": "Financial Stack",
+    "iconTitleP1": "Streamline Your Payment ",
+    "iconTitleP2": "with Seamless Integrations",
+    "iconDescription": "Simplify your payment processing with Nefentus' seamless platform, offering access to over 200 wallets for effortless acceptance and processing of cryptocurrency payments with advanced security features.",
+    "payrollContent": [
+      {
+        "title": "Invoicing",
+        "description": "Your all-in-one platform to manage your invoices. Designed for Finance & Operations teams in companies."
+      },
+      {
+        "title": "Payroll",
+        "description": "Processing salaries and bonuses in cryptocurrency has become increasingly popular due to its simplicity and efficiency."
+      },
+      {
+        "title": "Expenses",
+        "description": "Simplify expense claims submissions for your team. Approve and reimburse expenses in crypto quickly and easily."
+      }
+    ]
+  },
+  "forgot-password": {
+    "title": "Forgot Password",
+    "button": "Send email",
+    "info": "Dont know your email please contact the support! "
+  },
+  "reset-password": {
+    "title": "Reset Password",
+    "button": "reset",
+    "info": "Don't want to reset your password? Login instead.",
+    "button-label-confirm": "Confirm password"
+  },
+  "signUp": {
+    "titleP1": "Get started with",
+    "titleP2": "Nefentus",
+    "description": "Start now, it is free. Nefentus helps you manage your business operations in a compliant and sustainable way.",
+    "info": "Already have an account? ",
+    "infoButton": "Sign in",
+    "firstNameLabel": "First name",
+    "firstNamePlaceholder": "John",
+    "lastNameLabel": "Last name",
+    "lastNamePlaceholder": "Doe",
+    "telefonLabel": "Telefon",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@email.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Password",
+    "optionLabel": "What do you want to register for?",
+    "option1": "Vendor",
+    "option2": "Affiliate",
+    "formButton": "Create Account",
+    "formInfo": "By signing up, you agree to out Privacy Policy and Terms of Service."
+  },
+  "login": {
+    "title": "Welcome back",
+    "button": "Sign in",
+    "info": "Don't have an account? ",
+    "infoButton": "Sign up",
+    "forgot": "Forgot password?"
+  },
+  "affiliate": {
+    "heroSubtitle": "Affiliate Program",
+    "heroHeading": "Earn commissions effortlessly ",
+    "heroDescription": "Sign up for Nefentus' affiliate program for free and start earning commissions on autopilot.",
+    "heroButton": "Create your account",
+    "affiliateList": [
+      "No investment required to join",
+      "Earn from products you believe",
+      "Safe & Secure",
+      "Potential for unlimited earnings"
+    ],
+    "whyTitleP1": "Products Tailored ",
+    "whyTitleP2": "for Affiliate",
+    "whyContent": [
+      {
+        "title": "Overview",
+        "description": "At a glance, see how much you have earned and how many transactions have been completed."
+      },
+      {
+        "title": "Leaderboard",
+        "description": "Compare your performance to other affiliates and get listed on the leaderboard."
+      },
+      {
+        "title": "Goal function",
+        "description": "Track your commissions and compare revenues for your promoted products."
+      },
+      {
+        "title": "Mobile App",
+        "description": "Keep track of your commissions and get notified about sales with our app."
+      }
+    ],
+    "compareContent": [
+      {
+        "type": "cons",
+        "title": "Difficulty in standing out among competitors in a crowded market",
+        "description": "With so many affiliate programs and traditional products available, it can be challenging for affiliates to differentiate themselves and their promotions from the competition. This can lead to lower engagement and sales, making it harder to earn commissions."
+      },
+      {
+        "title": "Difficulty in standing out among competitors in a crowded market",
+        "description": "Nefentus is a revolutionary platfomr and offers its affiliates a range of marketing materials, including banners and landing pages, to help them differentiate themselves and stand out in a crowded market. Additionally, the program offers attractive commissions and a range of products and services to promote, giving affiliates a competitive edge."
+      },
+      {
+        "type": "cons",
+        "title": "Dependence on the performance of the products or services",
+        "description": "Affiliates are at the mercy of the performance and quality of the products or services they are promoting. If the product or service underperforms, it can negatively impact an affiliate's reputation and earnings potential."
+      },
+      {
+        "title": "Dependence on the performance of the products or services",
+        "description": "Nefentus is committed to providing high-quality, reliable products and services to its customers, which ultimately benefits its affiliates by maintaining a positive reputation and ensuring customer satisfaction. We have been growing  quickly and have high levels of customer satisfaction."
+      },
+      {
+        "type": "cons",
+        "title": "Limited control over the product or service, including pricing",
+        "description": "Traditionally affiliates  have limited control over the products or services they promote, including pricing, customer support, and other aspects of the customer experience. This can lead to frustration or dissatisfaction among customers, which can ultimately impact an affiliate's earnings potential."
+      },
+      {
+        "title": "Limited control over the product or service, including pricing",
+        "description": "Nefentus' customer support team is available 24/7 to handle any issues or concerns that customers may have, ensuring a positive customer experience. We also offer very competitive pricing, ensuring that our products and services remain attractive to customers and affiliates alike."
+      }
+    ]
+  },
+  "support": {
+    "title": "Support Center Questions:",
+    "sideBar": [
+      "Introduction",
+      "Everything about payments",
+      "Everything around the topic of products",
+      "FAQ",
+      "Nefentus Basics",
+      "Nefentus Advanced",
+      "Everything around the topic Affiliate"
+    ],
+    "contact": {
+      "title": "For more help, contact us!",
+      "description": "If you prefer a more personal touch, we're always here to help via phone or email. Whether you have a quick question or need more in-depth assistance, we're just a call or click away.",
+      "button1Text": "Write on Instagram",
+      "button1Description": "You can write on instagram on",
+      "button2Description": "Your request will be answered within one day."
+    },
+    "introduction": {
+      "title": "Welcome to the support page from Nefentus Solutions!",
+      "mainDescription": "You can find all the information regarding Nefentus Solutions in this area. You can find detailed information on what you can do, links to frequently asked questions and popular blog posts, as well as a getting started guide that leads you through using the product step-by-step.",
+      "banner": "We've structured the documentation page into four groups:",
+      "description1": "1. Essential information about the product",
+      "description2": "2. Popular articles about product features",
+      "description3": "3. Additional resources you might find interesting",
+      "description4": "4. Ways to get in contact with us"
+    }
+  },
+  "contact": {
+    "title": "Free Onboarding Call",
+    "description": "At Nefentus, we believe in supporting our clients every step of the way. That's why we offer free onboarding calls to assist with registration and setup. Whether you're a bar owner, consultant, coach, trainer, speaker, or agency owner, we're committed to finding the perfect solution for your unique needs.",
+    "button": "Book a call"
+  },
+  "footer": {
+    "copyright": "© 2023 Nefentus. All rights reserved.",
+    "content": [
+      {
+        "label": "Overview",
+        "links": [
+          {
+            "text": "Home"
+          },
+          {
+            "text": "Payroll"
+          },
+          {
+            "text": "Payment"
+          },
+          {
+            "text": "Resources"
+          },
+          {
+            "text": "Affiliate"
+          }
+        ]
+      },
+      {
+        "label": "Join",
+        "links": [
+          {
+            "text": "Log in"
+          },
+          {
+            "text": "Sign up"
+          },
+          {
+            "text": "Play store"
+          },
+          {
+            "text": "App store"
+          }
+        ]
+      },
+      {
+        "label": "Information",
+        "links": [
+          {
+            "text": "Privacy Policy"
+          },
+          {
+            "text": "Imprint"
+          }
+        ]
+      },
+      {
+        "label": "Company",
+        "links": [
+          {
+            "text": "office@nefentus.com"
+          },
+          {
+            "text": "Larnaca, Cyprus"
+          }
+        ]
+      }
+    ]
+  }
+}

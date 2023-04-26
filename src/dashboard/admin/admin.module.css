@@ -1,0 +1,266 @@
+.body {
+  margin-bottom: 5rem;
+}
+
+.rows {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: ". . ." "graph graph .";
+  grid-template-rows: max-content 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.rows > div:nth-child(4) {
+  grid-area: graph;
+}
+
+.registration {
+  border-radius: 1rem;
+  padding: 3rem;
+}
+
+.registration h3 {
+  font-weight: 400;
+  font-size: 1.8rem;
+}
+
+.bar {
+  height: 2rem;
+  display: grid;
+  width: 100%;
+
+  margin-top: 2rem;
+}
+
+.barItem {
+  height: 100%;
+  width: 100%;
+}
+
+.barItem:nth-child(1),
+.leftLine:nth-child(1) .lineBox {
+  background-color: #1595c2;
+}
+
+.barItem:nth-child(2),
+.leftLine:nth-child(2) .lineBox {
+  background-color: #ffa600;
+}
+
+.barItem:nth-child(3),
+.leftLine:nth-child(3) .lineBox {
+  background-color: #23c215;
+}
+
+.barItem:nth-child(4),
+.leftLine:nth-child(4) .lineBox {
+  background-color: #c21515;
+}
+
+.barItem:nth-child(5),
+.leftLine:nth-child(5) .lineBox {
+  background-color: #7715c2;
+}
+
+.percentageLabel {
+  display: flex;
+  color: var(--gray-color);
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  justify-content: space-between;
+
+  margin-bottom: 3rem;
+}
+
+.totalBoxTop {
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 1.6rem;
+
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+  margin-bottom: 1.5rem;
+}
+
+.infoBox {
+  display: flex;
+  justify-content: space-between;
+
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+  margin-bottom: 2rem;
+}
+
+.leftLine {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.right {
+  display: flex;
+  gap: 3rem;
+}
+
+.right p {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.lineBox {
+  width: 1rem;
+  height: 1rem;
+}
+
+.button > div {
+  display: flex;
+  justify-content: center;
+  width: 100% !important;
+}
+
+.tableCard {
+  border-radius: 1rem;
+  margin-bottom: 5rem;
+
+  margin-top: 2rem;
+}
+
+.tableAdmin ul {
+  grid-template-columns: 1.2fr 0.8fr 1.5fr 1fr 1fr 1fr 0.5fr;
+}
+
+.tableDiamond ul {
+  grid-template-columns: 1.2fr 0.8fr 1.5fr 1fr 1fr 1fr;
+}
+
+.tableBody li:nth-child(4) {
+  padding: 0.3rem 1rem !important;
+  border-radius: 0.2rem;
+  width: max-content;
+}
+
+.approved {
+  background-color: rgba(35, 194, 21, 0.1);
+  color: #23c215;
+}
+
+.pending {
+  background-color: rgba(194, 21, 21, 0.1);
+  color: #c21515;
+}
+
+.tableBody li:last-child {
+  color: #1595c2;
+  cursor: pointer;
+}
+
+.tableWrapper {
+  margin-top: 3rem;
+}
+
+.tableWrapper h4 {
+  font-size: 2.2rem;
+  font-weight: 500;
+}
+
+.tableWrapper .top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.inputs {
+  display: grid;
+  grid-template-columns: 25rem 19rem;
+
+  grid-template-rows: 1fr;
+  gap: 2rem;
+}
+
+.inputs input {
+  height: 100% !important;
+}
+
+.modalWrapper > div > div {
+  width: 38.5rem;
+}
+
+.modal {
+  width: 100%;
+}
+
+.modal h4 {
+  font-size: 2.5rem;
+  font-weight: 500;
+  margin-bottom: 3rem;
+}
+
+.modalInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  margin-bottom: 3rem;
+}
+
+.modalButtons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  cursor: pointer;
+}
+
+.modalButtons > div {
+  width: 100%;
+}
+
+.button {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.6rem;
+  border-radius: 1rem;
+}
+
+@media (max-width: 900px) {
+  .rows {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tableCard {
+    overflow-x: scroll;
+  }
+
+  .tableAdmin ul {
+    grid-template-columns: 1.2fr 0.8fr 1.5fr 1fr 1fr 1fr 0.8fr;
+  }
+
+  .tableDiamond ul {
+    grid-template-columns: 1.2fr 0.8fr 1.5fr 1fr 1fr 1fr;
+  }
+
+  .tableCard::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tableWrapper .top {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .inputs {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+  }
+}

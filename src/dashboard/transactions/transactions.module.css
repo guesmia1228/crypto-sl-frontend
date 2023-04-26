@@ -1,0 +1,91 @@
+.top {
+  display: flex;
+  margin-bottom: 3rem;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.top h3 {
+  font-size: 2.2rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.top p {
+  font-size: 1.6rem;
+  color: var(--gray-color);
+
+  line-height: 140%;
+}
+
+.top span {
+  color: #23c215;
+}
+
+.input {
+  position: relative;
+  width: 26.3rem;
+  display: flex;
+  gap: 0.7rem;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.input input {
+  width: 100%;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  font-size: 1.4rem;
+  color: white;
+}
+
+.input img {
+  width: 1.2rem;
+}
+
+.card {
+  border-radius: 1rem;
+}
+
+.table ul {
+  grid-template-columns: 1.5fr 1.2fr 2fr 1fr 1fr 1.2fr 1.2fr 1fr 1fr;
+}
+
+.tableBody li:nth-child(5) {
+  background-color: rgba(21, 149, 194, 0.1);
+  color: #1595c2;
+
+  padding: 0.3rem 1rem;
+  border-radius: 0.2rem;
+  width: max-content;
+}
+
+.tableBody li:last-child {
+  color: #1595c2;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .input {
+    width: 100%;
+    max-width: 50rem;
+  }
+
+  .card {
+    overflow-x: scroll;
+  }
+
+  .card::-webkit-scrollbar {
+    display: none;
+  }
+}

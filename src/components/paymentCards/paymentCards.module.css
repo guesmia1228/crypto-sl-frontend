@@ -1,0 +1,102 @@
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: 36.4rem;
+  padding: 3rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  gap: 5rem;
+}
+
+.lightCard {
+  background: linear-gradient(
+    359.52deg,
+    rgba(21, 149, 194, 0.2) 0.37%,
+    rgba(102, 191, 222, 0.2) 99.54%
+  );
+  border-radius: 25px 0px 0px 25px;
+}
+
+.boldCard {
+  background: linear-gradient(
+    359.52deg,
+    rgb(21, 149, 194, 0.7) 0.37%,
+    rgba(102, 191, 222, 0.7) 99.54%
+  );
+  border-radius: 25px;
+  padding-bottom: 5rem;
+
+  gap: 6rem;
+}
+
+.card > div:last-child {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.top {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 1rem;
+}
+
+.top h5 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.top p {
+  color: var(--gray-color);
+  font-size: 1.2rem;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.list > div {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.list img {
+  width: 1rem;
+  padding-top: 0.6rem;
+}
+
+.lightCard .list p {
+  color: var(--gray-color);
+}
+
+.list p {
+  font-size: 1.4rem;
+  line-height: 140%;
+}
+
+@media (max-width: 750px) {
+  .body {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .card {
+    width: 100%;
+    border-radius: 2.5rem;
+
+    padding: 3rem 2rem !important;
+
+    gap: 5rem !important;
+  }
+}

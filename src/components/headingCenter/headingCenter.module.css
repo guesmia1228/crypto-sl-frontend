@@ -1,0 +1,40 @@
+.heading {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 7.5rem;
+}
+
+.heading h2 {
+  max-width: 93rem;
+  text-align: center;
+}
+
+.subtitle {
+  background: var(--linear-color);
+  -webkit-background-clip: text;
+  font-size: 2.2rem;
+  margin-bottom: 0.6rem;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 900px) {
+  .heading {
+    margin-bottom: 3rem;
+    align-items: flex-start;
+  }
+
+  .heading h2 {
+    text-align: left;
+  }
+
+  .subtitle {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 550px) {
+  .subtitle {
+    font-size: 1.4rem;
+  }
+}

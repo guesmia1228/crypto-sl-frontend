@@ -1,0 +1,81 @@
+.section > div:first-child {
+  margin-bottom: 1rem;
+}
+
+.description {
+  line-height: 140%;
+  margin: 0 auto;
+  font-size: 1.6rem;
+  color: var(--gray-color);
+  max-width: 75rem;
+  text-align: center;
+}
+
+.logos {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 7.5rem;
+}
+
+.logos img {
+  width: 9.6rem;
+}
+
+.logos div:nth-child(1),
+.logos div:nth-child(4),
+.logos div:nth-child(7) {
+  padding-top: 4.8rem;
+}
+
+.logos div:nth-child(3),
+.logos div:nth-child(6) {
+  padding-top: 9.6rem;
+}
+
+@media (max-width: 900px) {
+  .description {
+    text-align: left;
+  }
+
+  .logos img {
+    width: 6rem;
+  }
+
+  .logos div:nth-child(1),
+  .logos div:nth-child(4),
+  .logos div:nth-child(7) {
+    padding-top: 3rem;
+  }
+
+  .logos div:nth-child(3),
+  .logos div:nth-child(6) {
+    padding-top: 6rem;
+  }
+}
+
+@media (max-width: 650px) {
+  .logos img {
+    /* width: 4rem; */
+  }
+
+  .logos div:nth-child(3),
+  .logos div:nth-child(6) {
+    display: none;
+  }
+}
+
+@media (max-width: 450px) {
+  .logos img {
+    width: 5rem;
+  }
+
+  .logos {
+    margin-top: 2.5rem;
+  }
+
+  .logos div:nth-child(1),
+  .logos div:nth-child(4),
+  .logos div:nth-child(7) {
+    padding-top: 2.5rem;
+  }
+}

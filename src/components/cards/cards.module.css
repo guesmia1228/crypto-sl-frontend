@@ -1,0 +1,34 @@
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 4rem;
+}
+
+.card {
+  padding: 5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card video {
+  height: 10rem;
+  margin-bottom: 3rem;
+}
+
+.card p:nth-child(2) {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+.card p {
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+}

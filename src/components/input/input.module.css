@@ -1,0 +1,65 @@
+.inputWrapper .input {
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  padding: 1.2rem 2rem;
+  font-size: 1.2rem;
+  color: var(--white-color);
+}
+
+.inputWrapper input::placeholder {
+  color: var(--gray-color);
+}
+
+.inputWrapper .label {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.input {
+  position: relative;
+}
+
+.input img {
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  right: 2rem;
+}
+
+.option {
+  cursor: pointer;
+}
+
+.option .input {
+  position: relative;
+}
+
+.body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-radius: 0.5rem !important;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1.2rem 2rem;
+  bottom: 0;
+  transform: translateY(100%);
+
+  z-index: 100;
+}
+
+.dashboardLabel {
+  font-size: 1.6rem !important;
+}
+
+.dashboardInput {
+  font-size: 1.4rem !important;
+  color: var(--gray-color) !important;
+  padding: 1.6rem 2rem !important;
+}

@@ -1,0 +1,161 @@
+.body {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  margin-bottom: 5rem;
+}
+
+.balance {
+  padding: 3rem;
+  border-radius: 1rem;
+}
+
+.balanceTop {
+  display: flex;
+  justify-content: space-between;
+}
+
+.balanceInfo h4 {
+  font-size: 1.6rem;
+  color: var(--gray-color);
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+}
+
+.balanceInfo > p {
+  font-weight: 500;
+  font-size: 3rem;
+  margin-bottom: 0.7rem;
+}
+
+.buttons {
+  display: flex;
+  gap: 2rem;
+}
+
+.button {
+  padding: 1rem 0rem;
+  border: 1px solid var(--white-color);
+  border-radius: 0.5rem;
+  height: max-content;
+
+  text-align: center;
+  width: 14rem;
+
+  cursor: pointer;
+
+  font-size: 1.6rem;
+}
+
+.button1 {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--gray-color);
+}
+
+.button2 {
+  background-color: var(--white-color);
+  color: var(--black-color);
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.line {
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: space-between;
+}
+
+.line img {
+  height: 4rem;
+}
+
+.lineLeft {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.name,
+.dollar {
+  font-size: 1.6rem;
+  margin-bottom: 0.2rem;
+}
+
+.abbr,
+.crypto {
+  font-size: 1.2rem;
+  color: var(--gray-color);
+}
+
+.crypto {
+  text-align: right;
+}
+
+.withdrawal {
+  padding: 3rem;
+  border-radius: 1rem;
+}
+
+.withdrawal h3 {
+  font-size: 1.6rem;
+  color: var(--gray-color);
+  font-weight: 400;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.address {
+  margin: 3rem 0 5rem 0;
+}
+
+.withdrawal > div:last-child {
+  width: 100% !important;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .balanceTop {
+    gap: 3rem;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 550px) {
+  .buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .balance,
+  .withdrawal {
+    padding: 2rem;
+  }
+}

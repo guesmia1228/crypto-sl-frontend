@@ -1,0 +1,39 @@
+.section {
+  margin-top: 15rem;
+  margin-bottom: 15rem;
+}
+
+.section h2 {
+  margin-bottom: 3rem;
+}
+
+.section h3 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+.section h4 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.leftContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.section p {
+  font-size: 1.6rem;
+  line-height: 140%;
+  color: var(--gray-color);
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 900px) {
+  .body {
+    display: none;
+  }
+}

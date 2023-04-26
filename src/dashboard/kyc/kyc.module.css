@@ -1,0 +1,215 @@
+.top {
+  display: flex;
+  margin-bottom: 3rem;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.top h3 {
+  font-size: 2.2rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.top p {
+  font-size: 1.6rem;
+  color: var(--gray-color);
+
+  line-height: 140%;
+}
+
+.top span {
+  color: #23c215;
+}
+
+.input {
+  position: relative;
+  width: 26.3rem;
+  display: flex;
+  gap: 0.7rem;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.input input {
+  width: 100%;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  font-size: 1.4rem;
+  color: white;
+}
+
+.input img {
+  width: 1.2rem;
+}
+
+.card {
+  border-radius: 1rem;
+}
+
+.table ul {
+  grid-template-columns: 1.5fr 2fr 0.8fr 1fr 1fr 1fr 1.2fr;
+}
+
+.tableBody li:last-child {
+  display: flex;
+  gap: 1rem;
+  color: #1595c2;
+}
+
+.tableBody li:last-child > p:first-child {
+  cursor: pointer;
+  color: #23c215;
+}
+
+.tableBody li:last-child > p:last-child {
+  cursor: pointer;
+  color: #c21515;
+}
+
+.tableBody li:nth-child(3) {
+  color: #1595c2;
+  cursor: pointer;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.profileImage {
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profileImage img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.name {
+  font-size: 1.4rem;
+}
+
+.id {
+  font-size: 1rem;
+}
+
+.modalWrapper > div > div {
+  width: 38.5rem;
+}
+
+.modal {
+  width: 100%;
+}
+
+.modal h4 {
+  font-size: 2.5rem;
+  font-weight: 500;
+  margin-bottom: 5rem;
+}
+
+.modal .lines {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.modal .line {
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 1.4rem;
+}
+
+.modal img {
+  width: 1.6rem;
+  cursor: pointer;
+}
+
+.checkButton > div {
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.message {
+  margin-bottom: 2rem;
+}
+
+.message p {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.message textarea {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  outline: 0;
+
+  width: 100%;
+  border-radius: 1rem;
+
+  padding: 1.6rem 2rem;
+  font-size: 1.6rem;
+
+  font-family: Euclid;
+  color: white;
+  height: 20rem;
+  resize: none;
+}
+
+.message textarea::placeholder {
+  color: var(--gray-color);
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 2rem;
+}
+
+.buttons > div {
+  width: 100%;
+}
+
+.button {
+  font-size: 1.6rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .input {
+    width: 100%;
+    max-width: 50rem;
+  }
+
+  .card {
+    overflow-x: scroll;
+  }
+
+  .card::-webkit-scrollbar {
+    display: none;
+  }
+}

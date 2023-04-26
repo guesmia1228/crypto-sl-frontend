@@ -1,0 +1,52 @@
+.countdown {
+  position: fixed;
+
+  backdrop-filter: blur(5px);
+
+  background-color: rgba(0, 0, 0, 0.463);
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+
+  z-index: 1000;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+  gap: 2.5rem;
+  font-weight: bold;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.countdown h2 {
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+.countdownTimer {
+  display: flex;
+}
+
+.countdownTimer span {
+  margin: 0 0.5rem;
+}
+
+.countdownTimer span:first-of-type {
+  margin-left: 0;
+}
+
+.countdownTimer span:last-of-type {
+  margin-right: 0;
+}
+
+@media (max-width: 550px) {
+  .countdown {
+    font-size: 3rem;
+    gap: 2rem;
+  }
+}

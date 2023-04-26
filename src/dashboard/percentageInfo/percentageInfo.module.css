@@ -1,0 +1,13 @@
+.info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  color: var(--gray-color);
+  font-size: 1.2rem;
+}
+
+.info span {
+  font-size: 1.4rem;
+  font-weight: 500;
+}

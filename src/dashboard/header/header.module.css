@@ -1,0 +1,68 @@
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.navigation p {
+  font-size: 1.6rem;
+}
+
+.navigation > img {
+  height: 2.4rem;
+}
+
+.logout {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logout img {
+  width: 1.84rem;
+}
+
+.right {
+  cursor: pointer;
+}
+
+.settingsBody {
+  position: absolute;
+  padding: 2rem 2rem;
+  top: 4.5rem;
+  right: 0;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  transform: translateY(10px);
+  transition: 0.3s ease;
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+.right:hover .settingsBody {
+  transform: translateY(0px);
+  opacity: 1;
+  pointer-events: initial;
+}
+
+.settingsBody p {
+  font-size: 1.4rem !important;
+}
+
+.settingsBody img {
+  width: 1.4rem !important;
+}
+
+@media (max-width: 900px) {
+  .settingsBody {
+    top: 3.5rem;
+  }
+}

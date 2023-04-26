@@ -1,0 +1,99 @@
+.section {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+
+  grid-template-areas: "one one one one one one one two two two two two" "three three three three three four four four four four four four";
+  gap: 4rem;
+}
+
+.section > div:nth-child(1) {
+  grid-area: one;
+}
+.section > div:nth-child(2) {
+  grid-area: two;
+}
+.section > div:nth-child(3) {
+  grid-area: three;
+}
+.section > div:nth-child(4) {
+  grid-area: four;
+}
+
+.card {
+  padding: 3rem 3rem 5rem 3rem;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.top img {
+  width: 6.4rem;
+}
+
+.top h4 {
+  font-size: 2.2rem;
+  font-weight: 500;
+}
+
+.description {
+  font-size: 1.6rem;
+  line-height: 140%;
+  color: var(--gray-color);
+  margin-bottom: 3rem;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  grid-row-gap: 2rem;
+  grid-column-gap: 3rem;
+}
+
+.list > div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.list img {
+  width: 1rem;
+}
+
+.list p {
+  font-size: 1.4rem;
+  color: var(--gray-color);
+}
+
+@media (max-width: 900px) {
+  .section {
+    grid-template-columns: 1fr;
+    grid-template-areas: initial;
+  }
+
+  .section > div {
+    grid-area: initial !important;
+  }
+}
+
+@media (max-width: 550px) {
+  .list {
+    grid-template-columns: 1fr;
+  }
+
+  .top {
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .top img {
+    width: 4rem;
+  }
+
+  .top h4 {
+    font-size: 1.8rem;
+  }
+}

@@ -1,0 +1,324 @@
+{
+  "navigation": {
+    "home": "Startseite",
+    "solutions": "Lösungen",
+    "payment": "Zahlungen",
+    "paymentDescription": "Lorem ipsum, dolor sit amet consectetur adipisicing elit.",
+    "payroll": "Lohnabrechnung",
+    "payrollDescription": "Lorem ipsum, dolor sit amet consectetur adipisicing elit.",
+    "resources": "Ressourcen",
+    "affiliate": "Lohnabrechnung",
+    "login": "Einloggen",
+    "signUp": "Jetzt loslegen",
+    "menu": "Menu"
+  },
+  "reset-password": {
+    "title": "Passwort zurücksetzen",
+    "button": "zurücksetzen",
+    "info": "Möchten Sie Ihr Passwort nicht zurücksetzen? Stattdessen einloggen.",
+    "button-label-confirm": "Passwort bestätigen"
+    },
+  "forgot-password": {
+    "title": "Passwort vergessen",
+    "button": "E-Mail senden",
+    "info": "Sie wissen Ihre E-Mail-Adresse nicht? Bitte kontaktieren Sie den Support!"
+    },
+  "home": {
+    "heroTitle": "Skalieren Sie Ihr Geschäft mit Nefentus",
+    "heroDescription": "Unsere revolutionäre, hochmoderne Automatisierung und sichere Krypto-Checkouts ermöglichen es Ihnen, sich auf Ihr Kerngeschäft zu konzentrieren und gleichzeitig Ihre Einnahmen zu maximieren. Verabschieden Sie sich von manuellen Zahlungen und nutzen Sie heute die Zukunft des Handels.",
+    "heroButton": "Jetzt kostenlos starten",
+    "heroAvailable": "Verfügbar auf:",
+    "cardSubtitle": "Ihr Partner für die Skalierung",
+    "cardTitle": "Unternehmen weltweit nutzen Nefentus, um ihre Zahlungsabwicklung zu verwalten und zu skalieren.",
+    "cardList": [
+      {
+        "title": "Kostenlose Onboarding-Unterstützung",
+        "description": "Nutzen Sie unsere Onboarding-Unterstützung, um den Einstieg zu erleichtern."
+      },
+      {
+        "title": "Maßgeschneiderte Lösungen",
+        "description": "Wir bieten maßgeschneiderte Lösungen, die an Ihre individuellen Bedürfnisse angepasst werden können."
+      },
+      {
+        "title": "Profitieren Sie von unserem Fachwissen",
+        "description": "Nutzen Sie unser tiefes Branchenwissen, um den Erfolg in Ihrem Unternehmen voranzutreiben."
+      }
+    ],
+    "layoutButton": "Jetzt kostenlos starten",
+    "simplifySubtitle": "Vereinfachen",
+    "simplifyTitle": "Krypto-Zahlungen und Rechnungsstellung verwalten",
+    "simplifyDescription": "Unsere sichere Plattform ist eine umfassende, sichere Plattform, die verschiedene Arten von Transaktionen für Unternehmen und Kunden gleichermaßen vereinfacht, automatisiert und erleichtert, einschließlich traditioneller und digitaler Währungen.",
+    "payrollDescription": "Verwenden Sie unsere schlanken und effizienten Lösungen zur Verwaltung der Mitarbeitervergütung, einschließlich Gehaltszahlungen und Leistungszulagen.",
+    "payrollSubtitle": "Gehaltsabrechnung verarbeiten",
+    "payrollTitleP1": "Wachsen Sie mit unserem",
+    "payrollTitleP2": "Gehaltsabrechnungssystem",
+    "aboutCard1Subtitle": "Schnelle Einführung",
+    "aboutCard1Title": "Das Vertrauen der Benutzer spiegelt sich in ihrer gestiegenen Aktivität wider",
+    "aboutCard1Description": "Die wachsende Benutzeraktivität auf Nefentus zeigt das Vertrauen unserer Benutzer und den herausragenden Mehrwert, den sie aus unserem Service ziehen. Wir sind bestrebt, kontinuierlich Exzellenz zu liefern und ihr Vertrauen zu erhalten.",
+    "aboutCard2Subtitle": "Verwalten",
+    "aboutCard2TitleP1": "Nutzen Sie die Kraft",
+    "aboutCard2TitleP2": "unserer Dashboards",
+    "aboutCard2Description": "Unsere fortschrittlichen Dashboards ermöglichen es Ihnen, tiefere Einblicke zu gewinnen und datenbasierte Entscheidungen mühelos zu treffen, um Ihre Produktivität und Rentabilität zu verbessern. Mit leistungsstarken Tools zur Datenvisualisierung und -analyse können Sie versteckte Trends aufdecken, wichtige Leistungsindikatoren identifizieren und Ihre Abläufe für maximale Effizienz optimieren.",
+    "aboutCard3Subtitle": "Integrieren",
+    "aboutCard3TitleP1": "Verbinden Sie sich mühelos",
+    "aboutCard3TitleP2": "mit Ihren anderen Tools",
+    "aboutCard3Description": "Durch die nahtlose Integration Ihrer bestehenden Finanz-Tools mit unserer Plattform können Sie nicht nur auf über 200 Wallets für Kryptozahlungen zugreifen, sondern auch Ihre bestehende Infrastruktur nutzen, den Bedarf an zusätzlichen Ressourcen reduzieren, Ihre Finanzabläufe optimieren und eine bessere Kontrolle über die finanziellen Daten Ihres Unternehmens erlangen.",
+    "reviewList": [
+      {
+        "name": "Stephan Walouch",
+        "position": "Gründer  & CEO",
+        "message": "Nefentus hat meine Einnahmen gesteigert und mir Zeit gespart!"
+      },
+      {
+        "name": "Leon Enzminger",
+        "position": "Gründer  & CEO",
+        "message": "Dank Nefentus kann ich mich auf das Wachstum meines Unternehmens konzentrieren!"
+      },
+      {
+        "name": "Natalia Sakharova",
+        "position": "Head of Compliance",
+        "message": "Der Wechsel zu Nefentus war die beste Entscheidung, die ich für meine Zahlungen getroffen habe!"
+      }
+    ],
+    "reviewTitleP1": "Erfahre direkt von",
+    "reviewTitleP2": "unseren Kunden",
+    "reviewSubtitle": "Bewertungen"
+  },
+  "payment": {
+    "heroHeading": "Akzeptieren Sie Krypto in weniger als 5 Minuten",
+    "heroDescription": "Erleben Sie die Zukunft der Finanzen, indem Sie Ihre Rechnungs- und Zahlungsprozesse mit unseren fortschrittlichen Automatisierungstools und sicheren Krypto-Checkouts revolutionieren, um die Finanzverwaltung zu vereinfachen und das Umsatzpotenzial zu maximieren.",
+    "heroButton": "Jetzt kostenlos starten",
+    "growSubtitle": "Wachsen",
+    "growTitle": "Beschleunigen Sie Ihren Verkauf",
+    "growContent": [
+      {
+        "title": "Informationen in Wachstum umwandeln",
+        "description": "Gewinnen Sie sofortige Einblicke in Ihr Geschäft, indem Sie unsere automatisierten Berechnungen wichtiger Kennzahlen nutzen, um Ihr Wachstum einfach zu überwachen und auf dem neuesten Stand Ihres Geschäfts zu bleiben."
+      },
+      {
+        "title": "Automatisieren Sie Ihren Finanzstack",
+        "description": "Von Buchhaltung und Steuerzahlungen bis hin zur Produktbereitstellung, Rückgaben und Stornierungen, Provisions- und Partnermanagement, E-Ticketing und darüber hinaus bietet Nefentus eine umfassende Suite von Tools, um Ihre Geschäftsprozesse zu optimieren und zu vereinfachen."
+      },
+      {
+        "title": "Optimierte Checkouts",
+        "description": "Maximieren Sie Ihr Umsatzpotenzial mit unseren auf den Verkauf optimierten Checkouts, die blitzschnelle Ladezeiten, außergewöhnliche Konversionsraten und ein unvergleichliches Benutzererlebnis bieten und garantiert Ihre Kunden begeistern und Ihren Umsatz steigern."
+      }
+    ],
+    "iconTitleP1": "Nehmen Sie die Zahlung an",
+    "iconTitleP2": "die die Zukunft antreibt",
+    "iconSubtitle": "Nicht zurückbleiben",
+    "iconDescription": "Wir bieten eine Vielzahl von Zahlungsoptionen, einschließlich beliebter Kryptowährungen wie Bitcoin, Ethereum, Ripple und USDT, um Ihnen den mühelosen Verkauf Ihrer Produkte und Dienstleistungen an ein globales Publikum zu ermöglichen. Die Flexibilität und Skalierbarkeit unserer Plattform ermöglichen es Ihnen, Ihre Zahlungsfähigkeiten anzupassen und in der sich schnell entwickelnden Zahlungslandschaft von heute voraus zu bleiben. Treten Sie noch heute unserem Netzwerk bei und bringen Sie Ihr Geschäft auf die nächste Stufe.",
+    "whyTitle": "Warum Nefentus?",
+    "whyContent": [
+      {
+        "title": "Hergestellt in Europa",
+        "description": "Unser internes Team aus erfahrenen IT-Spezialisten entwickelt und verbessert Nefentus kontinuierlich auf höchstem Niveau."
+      },
+      {
+        "title": "DSGVO-konform",
+        "description": "Wir legen größten Wert auf Datenschutz und halten uns an die höchsten Sicherheits- und Datenschutzstandards, um den Schutz Ihrer Unternehmens- und Kundendaten zu gewährleisten."
+      },
+      {
+        "title": "Sicher",
+        "description": "Mit unseren leistungsstarken und sicheren Servern, die 100 % Verfügbarkeit bieten, können Sie darauf vertrauen, dass Ihre Website immer erreichbar und Ihre Daten immer sicher sind."
+      }
+    ],
+    "dataContent": [
+      {
+        "title": "3,5 % Provision",
+        "description": "Erleben Sie eine beispiellose Zahlungsabwicklung mit starken Konversionsraten, beliebten und intuitiven Zahlungsmethoden und schnellen, sicheren Transaktionen.",
+        "list": [
+          "Starke Konversionsraten",
+          "Beliebte Zahlungsmethoden",
+          "Schnell & Sicher",
+          "Intuitiver Bezahlvorgang"
+        ]
+      },
+      {
+        "title": "Intelligente Analytik",
+        "description": "Wir berechnen Schlüsselmetriken für Ihr Unternehmen und verfolgen Ihr Wachstum mühelos.",
+        "list": [
+          "Messbares Wachstum sehen",
+          "Optimierung von Prozessen",
+          "Zugriff auf Analytik",
+          "Gewinn von Erkenntnissen"
+        ]
+      },
+      {
+        "title": "Automatisierung",
+        "description": "Nefentus spart Ihnen manuelle Rechnungsstellung und vereinfacht Ihre Buchhaltung.",
+        "list": [
+          "Automatisierte Rechnungsstellung",
+          "Einblick in Dashboards",
+          "Finanzieller Überblick",
+          "Vollständig konform"
+        ]
+      },
+      {
+        "title": "Digitale Produkte",
+        "description": "Laden Sie Ihre digitalen Produkte sicher bei Nefentus hoch und stellen Sie sie nach dem Kauf zum Download zur Verfügung, ohne dass Drittanbieter beteiligt sind.",
+        "list": [
+          "Sichern Sie Ihren Inhalt.",
+          "Zugang zu digitalen Produkten. ",
+          "Haben Sie Ihre eigene Cloud."
+        ]
+      }
+    ],
+    "paymentSubtitle": "Kosten",
+    "paymentTitleP1": "0€ Anmeldegebühr, 0€ monatliche Gebühr",
+    "paymentTitleP2": "Zahlen Sie nur für Ergebnisse",
+    "paymentCard1Title": "Basis - Anbieter",
+    "paymentCard1Description": "3,5 % Provision",
+    "paymentCard2Title": "Automatisierte Rechnungsstellung",
+    "paymentCard2Description": "100,000+ EUR monatliche Transaktionen",
+    "paymentButton": "Melden Sie sich kostenlos an.",
+    "paymentCard1": [
+      "Automatisierte Rechnungsstellung.",
+      "Akzeptieren Sie 7 verschiedene Zahlungsmethoden.",
+      "24/7 Betriebszeit.",
+      "Automatisierte Forderungen.",
+      "Premium- und schneller Support.",
+      "Sofortiger Zugriff."
+    ],
+    "paymentCard2": [
+      "Alle Vorteile des Basic-Anbieterpakets.",
+      "Unterstützung per Telefon und Video durch einen dedizierten Account Manager.",
+      "Kostenloser Zugang zu unserer privaten Support-Gruppe für Fragen, Antworten und Diskussionen.",
+      "Früher Zugang zu Beta-Versionen.",
+      "Sonderangebote für Transaktionsgebühren."
+    ]
+  },
+  "payroll": {
+    "heroTitleP1": "Die müheloseste Lohnabrechnung",
+    "heroTitleP2": "für Ihr Unternehmen",
+    "heroSubtitle": "Lohnabrechnungslösungen",
+    "heroDescription": "Vereinfachen Sie Ihren Lohnabrechnungsprozess mit Nefentus' flexiblen und effizienten Krypto- und FIAT-Lohnabrechnungslösungen. Fügen Sie Mitarbeiter hinzu, setzen Sie Gehälter und zahlen Sie problemlos, während Sie die Vorteile von Kryptowährungen nutzen. Mit unseren umfassenden Reporting-Tools können Sie wertvolle Erkenntnisse aus Ihren Lohnabrechnungsdaten gewinnen und Ihre Betriebsabläufe für eine verbesserte Produktivität und Rentabilität optimieren.",
+    "manageTitle": "Verwalten Sie Lohnabrechnung mühelos mit Krypto",
+    "manageDescription": "Befähigen Sie Ihre Mitarbeiter mit Nefentus' fortschrittlichen Krypto-Lohnabrechnungslösungen und zahlen Sie volle oder teilweise Gehälter und Boni in Kryptowährung aus. Sie können auch Anteile Ihres Tokens zuweisen, um die Loyalität zu steigern und die Produktivität zu fördern.",
+    "manageButton": "Jetzt kostenlos starten",
+    "manageSubtitle": "Verwalten",
+    "organizeSubtitle": "Organisieren Sie Zahlungen",
+    "organizeTitle": "Bearbeiten Sie die Mitarbeiterleistungen mühelos",
+    "organizeDescription": "Verwalten Sie Ihre Lohnabrechnung effizient mit den fortgeschrittenen Funktionen von Nefentus, einschließlich Unterstützung für mehrere Währungen und Blockchains, niedrigeren Transaktionsgebühren für globale Teams, Onboarding durch CSV-Datei-Uploads und Planung von wiederkehrenden Gehältern.",
+    "trackSubtitle": "Tracking",
+    "trackTitleP1": "Verfolgen Sie alle Zahlungen ",
+    "trackTitleP2": "an einem Ort",
+    "trackDescription": "Überprüfen Sie mühelos den Status aller Zahlungsanforderungen mit dem visuellen Dashboard von Nefentus und senden Sie problemlos Zahlungserinnerungen an ausstehende Anforderungen.",
+    "iconSubtitle": "Finanzstack",
+    "iconTitleP1": "Optimieren Sie Ihre Zahlungen",
+    "iconTitleP2": "mit nahtlosen Integrationen",
+    "iconDescription": "Vereinfachen Sie Ihre Zahlungsabwicklung mit der nahtlosen Plattform von Nefentus, die Zugang zu über 200 Wallets bietet und die problemlose Annahme und Bearbeitung von Kryptowährungszahlungen mit fortschrittlichen Sicherheitsfunktionen ermöglicht.",
+    "payrollContent": [
+      {
+        "title": "Rechnungsstellung",
+        "description": "Ihre All-in-One-Plattform zur Verwaltung Ihrer Rechnungen. Entwickelt für Finanz- und Betriebsteams in Unternehmen."
+      },
+      {
+        "title": "Gehaltsabrechnung",
+        "description": "Die Abwicklung von Gehältern und Boni in Kryptowährungen ist aufgrund ihrer Einfachheit und Effizienz zunehmend beliebt geworden."
+      },
+      {
+        "title": "Ausgaben",
+        "description": "Vereinfachen Sie die Einreichung von Spesenabrechnungen für Ihr Team. Genehmigen und erstatten Sie Ausgaben schnell und einfach in Kryptowährungen."
+      }
+    ]
+  },
+  "signUp": {
+    "titleP1": "Beginnen Sie mit",
+    "titleP2": "Nefentus",
+    "description": "Legen Sie jetzt los, es ist kostenlos. Nefentus hilft Ihnen, Ihre Geschäftsprozesse auf rechtskonforme und nachhaltige Weise zu verwalten.",
+    "info": "Haben Sie bereits ein Konto? ",
+    "infoButton": "Einloggen",
+    "firstNameLabel": "Vorname",
+    "firstNamePlaceholder": "Max",
+    "lastNameLabel": "Nachname",
+    "lastNamePlaceholder": "Mustermann",
+    "telefonLabel": "Telefon",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@email.com",
+    "passwordLabel": "Passwort",
+    "passwordPlaceholder": "Passwort",
+    "optionLabel": "Wofür möchten Sie sich registrieren?",
+    "option1": "Vendor",
+    "option2": "Affiliate",
+    "formButton": "Konto erstellen",
+    "formInfo": "Durch die Anmeldung erklären Sie sich mit unserer Datenschutzerklärung und unseren Nutzungsbedingungen einverstanden."
+  },
+  "login": {
+    "title": "Willkommen zurück",
+    "button": "Anmelden",
+    "info": "Sie haben noch kein Konto? ",
+    "infoButton": "Registrieren",
+    "forgot": "Passwort vergessen?"
+  },
+  "contact": {
+    "title": "Kostenloses Onboarding-Gespräch",
+    "description": "Bei Nefentus glauben wir daran, unsere Kunden bei jedem Schritt des Weges zu unterstützen. Deshalb bieten wir kostenlose Onboarding-Calls an, um bei der Registrierung und Einrichtung zu helfen. Egal, ob Sie Barbesitzer, Berater, Coach, Trainer, Redner, oder Agenturinhaber, wir sind bestrebt, die perfekte Lösung für Ihre individuellen Anforderungen zu finden.",
+    "button": "Anruf buchen"
+  },
+
+  "footer": {
+    "copyright": "© 2023 Nefentus. All rights reserved.",
+    "content": [
+      {
+        "label": "Übersicht",
+        "links": [
+          {
+            "text": "Startseite"
+          },
+          {
+            "text": "Gehaltsabrechnung"
+          },
+          {
+            "text": "Zahlung"
+          },
+          {
+            "text": "Ressourcen"
+          },
+          {
+            "text": "Affiliate"
+          }
+        ]
+      },
+      {
+        "label": "Beitreten",
+        "links": [
+          {
+            "text": "Anmelden"
+          },
+          {
+            "text": "Registrieren"
+          },
+          {
+            "text": "Play store"
+          },
+          {
+            "text": "App store"
+          }
+        ]
+      },
+      {
+        "label": "Informationen",
+        "links": [
+          {
+            "text": "Datenschutzerklärung"
+          },
+          {
+            "text": "Impressum"
+          }
+        ]
+      },
+      {
+        "label": "Unternehmen",
+        "links": [
+          {
+            "text": "office@nefentus.com"
+          },
+          {
+            "text": "Larnaka, Zypern"
+          }
+        ]
+      }
+    ]
+  }
+}

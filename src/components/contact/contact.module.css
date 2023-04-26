@@ -1,0 +1,35 @@
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-image: url("../../assets/image/gradient.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  padding-top: 15rem;
+  padding-bottom: 24rem;
+}
+
+.description {
+  margin-top: 1rem;
+  max-width: 75rem;
+  font-size: 1.8rem;
+  line-height: 140%;
+  margin-bottom: 3rem;
+  text-align: center;
+  color: var(--gray-color);
+}
+
+@media (max-width: 900px) {
+  .description {
+    padding: 0 5rem;
+  }
+}
+
+@media (max-width: 550px) {
+  .description {
+    padding: 0 2.5rem;
+  }
+}

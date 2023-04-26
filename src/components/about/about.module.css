@@ -1,0 +1,124 @@
+.horizontalCard {
+  display: flex;
+  justify-content: space-between;
+  gap: 6rem;
+  padding-left: 6rem;
+  height: 54.4rem;
+  margin-bottom: 4rem;
+}
+
+.horizontalCard > div {
+  text-align: center;
+  align-self: center;
+}
+
+.horizontalCard img {
+  width: 52rem;
+  align-self: flex-end;
+}
+
+.description {
+  margin-top: 1.5rem;
+  font-size: 1.8rem;
+  color: var(--gray-color);
+  line-height: 140%;
+  font-weight: 400;
+}
+
+.cardRow {
+  display: grid;
+  gap: 4rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.verticalCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding-bottom: 9rem;
+}
+
+.verticalCard:first-child img {
+  padding: 4.5rem 3.5rem 0 3.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.verticalCard img {
+  width: 100%;
+}
+
+.verticalCard h3 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.content {
+  padding: 0 3.5rem;
+}
+
+.content p {
+  width: 35rem;
+}
+
+@media (max-width: 900px) {
+  .horizontalCard {
+    margin-bottom: 2rem;
+    flex-direction: column;
+    padding: 3rem 2rem 0 2rem;
+    height: max-content;
+    gap: 4rem;
+  }
+
+  .horizontalCard > div {
+    text-align: left;
+    align-self: flex-start;
+  }
+
+  .horizontalCard img {
+    width: 100%;
+  }
+
+  .description {
+    font-size: 1.6rem;
+  }
+
+  .cardRow {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .verticalCard {
+    padding: 0;
+    padding-bottom: 2rem;
+  }
+
+  .verticalCard img {
+    order: 1;
+  }
+
+  .verticalCard:first-child img {
+    padding: 2rem;
+    margin-bottom: 0;
+  }
+
+  .verticalCard img {
+    width: 100%;
+  }
+
+  .verticalCard h3 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .content {
+    padding: 3rem 2rem 0 2rem !important;
+    margin-bottom: 4rem;
+  }
+
+  .content p {
+    width: 100%;
+  }
+}

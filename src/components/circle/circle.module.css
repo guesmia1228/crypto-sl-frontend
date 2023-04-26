@@ -1,0 +1,17 @@
+.circle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.circle img {
+  max-width: 52rem;
+  height: auto;
+}
+
+@media (max-width: 900px) {
+  .circle img {
+    max-width: 80vw;
+  }
+}

@@ -1,0 +1,38 @@
+.card {
+  padding: 3rem;
+}
+
+.icon {
+  width: 3rem;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+.description {
+  font-size: 1.6rem;
+  line-height: 140%;
+  color: var(--gray-color);
+  margin-bottom: 5rem;
+}
+
+.image {
+  display: flex;
+  justify-content: center;
+}
+
+.image img {
+  height: auto;
+  width: 100%;
+}
+
+@media (max-width: 650px) {
+  .image img {
+    height: auto;
+    width: 100%;
+  }
+}

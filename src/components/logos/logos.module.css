@@ -1,0 +1,171 @@
+.logos {
+  padding: 5.5rem 0;
+  position: relative;
+
+  width: 100vw;
+  overflow: hidden;
+}
+
+.logoImage {
+  opacity: 0.5;
+  width: max-content;
+}
+
+.line1 {
+  width: 100vw;
+  transform: translate(0%);
+  display: flex;
+  align-items: center;
+
+  animation-name: move;
+  animation-duration: 50s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.line2 {
+  position: absolute;
+  width: 100vw;
+  top: 0;
+  bottom: 0;
+  height: max-content;
+  margin: auto 0;
+  transform: translateX(-100%);
+
+  display: flex;
+  align-items: center;
+
+  animation-name: move2;
+  animation-duration: 50s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.logoImage img {
+  height: 4.2rem;
+
+  margin: 0 5.25rem;
+}
+
+.line:first-child {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  right: 0;
+}
+
+.line img {
+  width: 100vw;
+  height: 1px;
+  object-fit: cover;
+}
+
+.line:last-child {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.messagecontainer {
+  background-color: #ccffcc;
+  color: green;
+  border: 1px solid green;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+@keyframes move {
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes move2 {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0%);
+  }
+}
+
+@media (max-width: 1200px) {
+  .logoImage img {
+    height: 3rem;
+
+    margin: 0 5.25rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .logoImage img:nth-child(5) {
+    display: none;
+  }
+
+  .logoImage img {
+    margin: 0 4.2rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .logoImage img:nth-child(5) {
+    display: none;
+  }
+
+  .logoImage img {
+    margin: 0 3rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .logoImage img:nth-child(5),
+  .logoImage img:nth-child(2) {
+    display: none;
+  }
+
+  .logoImage img {
+    margin: 0 3rem;
+  }
+}
+
+@media (max-width: 650px) {
+  .logoImage img:nth-child(5),
+  .logoImage img:nth-child(2) {
+    display: none;
+  }
+
+  .logoImage img {
+    height: 3rem;
+
+    margin: 0 2rem;
+  }
+}
+
+@media (max-width: 550px) {
+  .logoImage img:nth-child(5),
+  .logoImage img:nth-child(2),
+  .logoImage img:nth-child(4) {
+    display: none;
+  }
+
+  .logoImage img {
+    height: 3rem;
+
+    margin: 0 3rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .logoImage img {
+    height: 2rem;
+
+    margin: 0 3rem;
+  }
+}

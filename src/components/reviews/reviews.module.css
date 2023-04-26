@@ -1,0 +1,129 @@
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 4rem;
+}
+
+.image {
+  height: 22.7rem;
+  border-radius: 2.5rem;
+  padding: 3rem;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.image p {
+  position: relative;
+  z-index: 2;
+  font-size: 1.1rem;
+}
+
+.blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.blur img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  filter: blur(3px);
+  -webkit-filter: blur(3px);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.body {
+  padding: 3rem;
+}
+
+.quote {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.quote p {
+  font-size: 1.4rem;
+  color: var(--gray-color);
+}
+
+.text {
+  font-size: 1.8rem;
+  line-height: 2.8rem;
+}
+
+.reviews br {
+  display: none;
+}
+
+.imageVideo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  transition: 0.5s ease;
+}
+
+.imageVideo video {
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+}
+
+.speaker {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  z-index: 101;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 0.6rem;
+  display: flex;
+  align-items: center;
+  height: 2.6rem;
+  width: 2.6rem;
+  border-radius: 50%;
+  justify-content: center;
+  transition: 0.3 ease;
+}
+
+.speaker img {
+  width: 100%;
+
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+
+  .reviews br {
+    display: initial;
+  }
+}
+
+@media (max-width: 550px) {
+  .image p {
+    font-size: 1rem;
+  }
+}

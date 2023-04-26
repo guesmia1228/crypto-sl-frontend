@@ -1,0 +1,87 @@
+.banner {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  width: 100%;
+  max-width: 85rem;
+  align-items: center;
+
+  right: 50px;
+}
+
+.left {
+  align-items: center;
+  display: flex;
+  font-size: 1.4rem;
+  color: var(--gray-color);
+  line-height: 140%;
+  gap: 2rem;
+}
+
+.left a {
+  text-decoration: underline;
+}
+
+.left img {
+  width: 4rem;
+}
+
+.buttons {
+  display: flex;
+  gap: 2rem;
+}
+
+.button {
+  padding: 1.4rem 2.3rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+  border-radius: 1rem;
+}
+
+.button1 {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--gray-color);
+}
+
+.button2 {
+  background-color: white;
+  color: black;
+  border: 1px solid rgba(255, 255, 255, 1);
+}
+
+@media (max-width: 900px) {
+  .banner {
+    width: initial !important;
+    max-width: initial !important;
+    left: 0;
+
+    margin: 1rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .banner {
+    gap: 2rem;
+    align-items: flex-start;
+    flex-direction: column;
+    width: max-content;
+    max-width: 100%;
+  }
+
+  .buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+
+  .button {
+    width: 100%;
+    padding: 1rem 2rem;
+
+    text-align: center;
+  }
+}

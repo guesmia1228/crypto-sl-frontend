@@ -1,0 +1,25 @@
+.body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.right {
+  margin-top: 19rem;
+}
+
+@media (max-width: 900px) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+
+  .right {
+    margin-top: 0px;
+  }
+}

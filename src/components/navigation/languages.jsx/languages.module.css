@@ -1,0 +1,56 @@
+.languages {
+  cursor: pointer;
+  position: relative;
+  pointer-events: initial;
+}
+
+.languages img:first-child {
+  width: 1.3rem;
+}
+
+.languages .menu {
+  display: flex;
+}
+
+.languages p {
+  color: var(--white-color);
+  margin-left: 0.7rem;
+  margin-right: 0.5rem;
+}
+
+.dropdown {
+  position: absolute;
+  left: -2rem;
+  padding-top: 1rem;
+  opacity: 0;
+  transition: 0.2s ease-in;
+  z-index: 100;
+
+  pointer-events: none;
+}
+
+.body {
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: 1rem !important;
+}
+
+.item {
+  display: flex;
+}
+
+.item p {
+  pointer-events: none;
+}
+
+.languages:hover .dropdown {
+  opacity: 1;
+
+  pointer-events: initial;
+}
+
+.item:hover p {
+  opacity: 0.8;
+}

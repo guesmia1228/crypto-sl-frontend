@@ -1,0 +1,378 @@
+/* Import fonts */
+@font-face {
+  font-family: Euclid;
+  src: url(../assets/fonts/Euclid-Regular.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Euclid;
+  src: url(../assets/fonts/Euclid-Medium.ttf);
+  font-weight: 500;
+}
+
+/* Variable */
+:root {
+  --black-color: #000;
+  --white-color: #fff;
+  --gray-color: #c4c4c4;
+  --blue-color: #0784b5;
+  --linear-color: linear-gradient(90deg, #1595c2 0%, #66bfde 100%);
+}
+
+/* General */
+html {
+  font-size: 0.694vw;
+}
+
+@media (max-width: 1200px) {
+  html {
+    font-size: 0.833vw;
+  }
+}
+
+@media (max-width: 900px) {
+  html {
+    font-size: 10px;
+  }
+}
+
+* {
+  margin: 0px;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--black-color);
+  color: var(--white-color);
+  font-family: Euclid;
+  overflow-x: hidden;
+  width: 100vw;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--gray-color);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--blue-color);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Container */
+.container {
+  margin-left: 16.5rem;
+  margin-right: 16.5rem;
+}
+
+@media (max-width: 1200px) {
+  .container {
+    margin-left: 5rem;
+    margin-right: 5rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}
+
+.break {
+  margin-top: 20rem;
+  margin-bottom: 20rem;
+}
+
+@media (max-width: 550px) {
+  .container {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .break {
+    margin-top: 10rem;
+    margin-bottom: 10rem;
+  }
+}
+
+/* Text */
+.standard {
+  font-size: 1.6rem;
+  color: var(--gray-color);
+  line-height: 140%;
+}
+
+h1 {
+  font-weight: 500;
+  font-size: 5rem;
+  line-height: 115%;
+}
+
+h2 {
+  font-weight: 500;
+  font-size: 4rem;
+  line-height: 115%;
+}
+
+@media (max-width: 900px) {
+  h1,
+  h2 {
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 550px) {
+  h1 {
+    font-size: 3.5rem;
+  }
+
+  h2 {
+    font-size: 3rem;
+  }
+}
+
+.subtitle {
+  background: var(--linear-color);
+  -webkit-background-clip: text;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Card */
+
+.card {
+  background-color: #101010;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 2.5rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Animation */
+
+.hero > div:first-child {
+  opacity: 0;
+  transform: translateY(100px);
+}
+
+.hero > div:first-child {
+  animation-name: move;
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  animation-delay: 0.5s;
+}
+
+.hero > img,
+.hero > video {
+  transform: scale(0);
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  animation-delay: 0.5s;
+}
+
+.hero > img,
+.hero > video {
+  animation-name: scaleUp;
+}
+
+@keyframes move {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+nav {
+  opacity: 0;
+  animation-name: move2;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes move2 {
+  from {
+    opacity: 0;
+    top: -50px;
+  }
+
+  to {
+    opacity: 1;
+    top: 0px;
+  }
+}
+
+.scroll {
+  opacity: 0;
+}
+
+.scrollAnimation {
+  animation-name: move;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+}
+
+.payroll .scroll {
+  animation-name: initial !important;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+  .md-mob {
+    display: none;
+  }
+}
+
+/* Inputs */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+/* Dashboard */
+.dashboard {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+}
+
+.dashboard-body {
+  margin: 0 5rem;
+}
+
+.dashboard-table {
+}
+
+.dashboard-table ul {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+.dashboard-table ul li {
+  /* border: 1px solid red; */
+
+  list-style-type: none;
+
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dashboard-table li:first-child {
+  color: var(--white-color) !important;
+}
+
+.dashboard-table > div:first-child ul {
+  padding: 0 3rem;
+}
+
+.dashboard-table > div:first-child li {
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: #c4c4c4;
+  text-align: left;
+  opacity: 0.6;
+}
+
+.dashboard-table > div:last-child ul {
+  padding: 2rem 3rem;
+}
+
+.dashboard-table > div:last-child {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--gray-color);
+}
+
+.dashboard-table > div:last-child ul:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+@media (max-width: 1100px) {
+  .dashboard-table > div:first-child li {
+    font-size: 1rem;
+  }
+
+  .dashboard-table > div:last-child li {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .dashboard {
+    display: initial !important;
+  }
+
+  .dashboard-body {
+    margin: 0 2.5rem;
+  }
+
+  .dashboard-table {
+    width: max-content;
+  }
+
+  .dashboard-table li {
+    padding-right: 2.5rem !important;
+  }
+
+  .dashboard-table > div:first-child li {
+    font-size: 1.2rem;
+  }
+
+  .dashboard-table > div:last-child li {
+    font-size: 1.4rem;
+  }
+}

@@ -1,0 +1,98 @@
+.body {
+  margin: 0 5rem;
+  margin-bottom: 10rem;
+}
+
+.right {
+  position: relative;
+  cursor: pointer;
+}
+
+.header .top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 10%);
+  margin-bottom: 2rem;
+}
+
+.header .left h3 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.header .left p {
+  font-size: 1.6rem;
+  color: var(--gray-color);
+}
+
+.header .left span {
+  color: #23c215;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  border-radius: 1rem;
+  padding: 2rem 3rem 3rem 3rem;
+}
+
+.card h4 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+.amount {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  color: var(--gray-color);
+  font-size: 1.2rem;
+}
+
+.info span {
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .body {
+    margin: 0 2.5rem;
+  }
+
+  .header .top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 2rem;
+  }
+}

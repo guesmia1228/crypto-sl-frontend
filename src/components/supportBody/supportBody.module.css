@@ -1,0 +1,185 @@
+.section {
+  margin-top: 15rem;
+  padding-bottom: 22.5rem;
+
+  position: relative;
+}
+
+.blueBG {
+  background-image: url("../../assets/image/gradient.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50rem;
+  z-index: -1;
+}
+
+.section h2 {
+  margin-bottom: 3rem;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 8fr 4fr;
+  gap: 4rem;
+}
+
+.section h3 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.leftContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.description,
+.baner {
+  font-size: 1.6rem;
+  line-height: 140%;
+  color: var(--gray-color);
+}
+
+.baner {
+  padding: 1.5rem;
+  background: linear-gradient(
+    90deg,
+    rgba(21, 149, 194, 0.1) 0%,
+    rgba(102, 191, 222, 0.1) 100%
+  );
+  border-radius: 0 0.5rem 0.5rem 0;
+
+  border-left: 2px solid #1595c2;
+}
+
+.left video {
+  width: 100%;
+  border-radius: 0.5rem;
+}
+
+.right {
+  position: relative;
+}
+
+.list {
+  position: sticky;
+  top: 10rem;
+}
+
+.card {
+  padding: 2rem;
+  border-radius: 0px;
+  border: 0px solid;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+
+  cursor: pointer;
+  translate: 0.2 ease-in;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.card:first-child {
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.card:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.active {
+  background-color: var(--white-color) !important;
+  color: var(--black-color) !important;
+}
+
+.contact {
+  margin-top: 5rem;
+}
+
+.contact .description {
+  margin-bottom: 5rem;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+
+.cards > div {
+  padding: 2rem;
+  border-radius: 0.5rem;
+}
+
+.label {
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+}
+
+.info {
+  color: var(--gray-color);
+  font-size: 1.2rem;
+}
+
+.mobBody {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .body {
+    grid-template-columns: 1fr;
+    /* display: none; */
+  }
+
+  .left .contact {
+    display: none;
+  }
+
+  .contact {
+    margin-top: 3rem !important;
+  }
+
+  .mobBody {
+    display: initial;
+  }
+
+  .mobBody h3 {
+    font-size: 1.8rem;
+  }
+
+  .mobBody p {
+    font-size: 1.4rem;
+  }
+
+  .contact {
+    margin-top: 2rem;
+  }
+
+  .contact .description {
+    margin-bottom: 2rem;
+  }
+
+  .contact .cards {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.mobBody .content {
+  margin-top: 2rem;
+}
+
+.mobBody .card {
+  max-height: 6rem;
+  overflow: hidden;
+}
