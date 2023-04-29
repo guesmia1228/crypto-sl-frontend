@@ -4,7 +4,7 @@ export default class adminDashboardApi {
         //LAUNCH
         //this.baseURL = "https://nefentus.com:8443/api/dashboard/admin";
         //DEV
-        this.baseURL = "http://localhost:8080/api/dashboard/admin";
+        this.baseURL = process.env.REACT_APP_BASE_ENDPOINT_API +"/dashboard/admin";
 
         this.token = Cookies.get("token");
     }

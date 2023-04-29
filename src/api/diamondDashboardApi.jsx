@@ -4,7 +4,7 @@ export default class diamondDashboardApi {
         //LAUNCH
         //this.baseURL = "https://nefentus.com:8443/api/dashboard/admin";
         //DEV
-        this.baseURL = "http://localhost:8080/api/dashboard/diamond";
+        this.baseURL = process.env.REACT_APP_BASE_ENDPOINT_API + "/dashboard/diamond";
         this.token = Cookies.get("token");
     }
     async checkPermission(){
