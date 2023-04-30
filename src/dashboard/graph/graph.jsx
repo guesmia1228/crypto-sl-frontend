@@ -20,34 +20,54 @@ const oneDay = 24 * 60 * 60 * 1000; // Millisekunden in einem Tag
 const days = Math.round((today - new Date("Apr 01 2023")) / oneDay);
 
 // Erstelle die Labels für den Chart
-const labels = [];
+const labels1 = [];
+let labels = []
 for (let i = 0; i < days; i += 2) {
   const date = new Date("Apr 01 2023");
   date.setDate(date.getDate() + i);
   const month = date.toLocaleString("default", { month: "short" });
   const day = date.getDate();
-  labels.push(`${month}, ${day}`);
+  labels1.push(`${month}, ${day}`);
 }
-if (labels[labels.length - 1] !== today.toLocaleDateString()) {
+if (labels1[labels1.length - 1] !== today.toLocaleDateString()) {
   const month = today.toLocaleString("default", { month: "short" });
   const day = today.getDate();
-  labels.push(`${month}, ${day}`);
+  labels1.push(`${month}, ${day}`);
 }
 
 const randomData = Array.from({ length: days }, () => 0);
+function populateGraph(totalPrices) {
+  labels = Object.keys(totalPrices)
+  const values = Object.values(totalPrices)
+  return {
+    labels,
+    datasets: [
+      {
+        label: "Income",
+        data: values,
+        borderColor: "#1595C2",
+        backgroundColor: "#1595C2",
+        tension: 0.1,
+      },
+    ],
+  }
+}
+function getStartDate(data) {
+  if (data == null) {
+    return "2023-04-01"
+  } else {
+    return Object.keys(data)[0]
+  }
+}
 
-const data = {
-  labels,
-  datasets: [
-    {
-      label: "Income",
-      data: randomData,
-      borderColor: "#1595C2",
-      backgroundColor: "#1595C2",
-      tension: 0.1,
-    },
-  ],
-};
+function getEndDate(data) {
+  if (data == null) {
+    return "2023-04-30"
+  } else {
+    const keys = Object.keys(data)
+    return keys[keys.length - 1]
+  }
+}
 
 // Rest des Codes bleibt gleich
 ChartJS.register(
@@ -117,7 +137,7 @@ export const options = {
   },
 };
 
-const Graph = () => {
+const Graph = (totalPrices) => {
   return (
     <div className={`card ${styles.graphCard}`}>
       <div className={styles.info}>
@@ -127,14 +147,14 @@ const Graph = () => {
         </div>
 
         <div className={styles.datePicker}>
-          <p>{labels[0]}</p>
+          <p>{getStartDate(totalPrices.data)}</p>
           <p> - </p>
-          <p>{labels[labels.length - 1]}</p>
+          <p>{getEndDate(totalPrices.data)}</p>
         </div>
       </div>
 
       <div className={styles.chartContainer}>
-        <Line options={options} data={data} />
+        <Line options={options} data={populateGraph(totalPrices.data)} />
       </div>
     </div>
   );

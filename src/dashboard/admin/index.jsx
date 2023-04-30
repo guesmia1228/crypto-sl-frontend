@@ -46,6 +46,7 @@ const AdminBody = ({ type }) => {
   const [totalClicksPercentage, setTotalClicksPercentage] = useState(0);
   const [totalIncomesPercentage, setTotalIncomesPercentage] = useState(0);
   const [tableData, setTableData] = useState([]);
+  const [graphData, setGraphData] = useState([]);
   const [value, setValue] = useState("Filter");
   const [barContent, setBarContent] = useState([]);
   const navigate = useNavigate();
@@ -104,16 +105,29 @@ const AdminBody = ({ type }) => {
     if (result !== true) {
       navigate("/login");
     } else {
-      const dataReg = await diamondApi.getTotalRegistrations();
+      const getPromises = [
+        diamondApi.getTotalRegistrations(),
+        diamondApi.getTotalClicks(),
+        diamondApi.getTotalIncome(),
+        diamondApi.getUsers(),
+        diamondApi.getRoleReport(),
+        diamondApi.getTotalIncomesPerDay()
+      ]
+      const getResponses = await Promise.all(getPromises)
+
+      const dataReg = getResponses[0];
       setTotalRegistrations(dataReg.number);
       setTotalRegistrationsPercentage(dataReg.percentage);
-      const dataClick = await diamondApi.getTotalClicks();
+
+      const dataClick = getResponses[1];
       setTotalClicks(dataClick.number);
       setTotalClicksPercentage(dataClick.percentage);
-      const dataInc = await diamondApi.getTotalIncome();
+
+      const dataInc = getResponses[2];
       setTotalIncomes(dataInc.number);
       setTotalIncomesPercentage(dataInc.percentage);
-      const dataUsers = await diamondApi.getUsers();
+
+      const dataUsers = getResponses[3];
       setTableData(dataUsers.map(user => [
         user.fullname,
         user.roles.join(', '),
@@ -123,11 +137,15 @@ const AdminBody = ({ type }) => {
         user.joinedOn.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
       ]));
 
-      const reportResp = await diamondApi.getRoleReport();
+      const reportResp = getResponses[4];
       if (reportResp !== null) {
         console.log(reportResp);
         setBarContent(reportResp);
       }
+      const totalPricePerDate = getResponses[5];
+      setGraphData((totalPricePerDate))
+      console.log(totalPricePerDate);
+
     }
 };
 
@@ -280,7 +298,9 @@ const fetchGoldData = async () => {
             />
           ))}
 
-          <Graph />
+          <Graph
+              data  = {graphData}
+          />
 
           <div className={`${styles.registration} card`}>
             <h3>Registrations Roles</h3>
