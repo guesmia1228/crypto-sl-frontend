@@ -28,4 +28,4 @@ jobs:
           aws-region: eu-central-1
 
       - name: Deploy to S3 bucket
-        run: aws s3 sync ./dist/ s3://nefentus-react-dev
+        run: aws s3 sync ./build/ s3://nefentus-react-dev
