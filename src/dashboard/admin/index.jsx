@@ -73,31 +73,49 @@ const AdminBody = ({ type }) => {
         console.log("asdasdasdasds");
         navigate("/login");
       } else {
-        const dataReg = await adminApi.getTotalRegistrations();
-        setTotalRegistrations(dataReg.number);
-        setTotalRegistrationsPercentage(dataReg.percentage);
-        const dataClick = await adminApi.getTotalClicks();
-        setTotalClicks(dataClick.number);
-        setTotalClicksPercentage(dataClick.percentage);
-        const dataInc = await adminApi.getTotalIncome();
-        setTotalIncomes(dataInc.number);
-        setTotalIncomesPercentage(dataInc.percentage);
-        const dataUsers = await adminApi.getUsers();
-        setTableData(dataUsers.map(user => [
-          user.fullname,
-          user.roles.join(', '),
-          user.email,
-          user.status,
-          user.income,
-          user.joinedOn.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-        ]));
+        const getPromises = [
+          adminApi.getTotalRegistrations(),
+          adminApi.getTotalClicks(),
+          adminApi.getTotalIncome(),
+          adminApi.getUsers(),
+          adminApi.getRoleReport(),
+          adminApi.getTotalIncomesPerDay()
+        ]
+      
+      const getResponses = await Promise.all(getPromises)
 
-        const reportResp = await adminApi.getRoleReport();
-        if (reportResp !== null) {
-          console.log(reportResp);
-          setBarContent(reportResp);
-        }
+      const dataReg = getResponses[0];
+      setTotalRegistrations(dataReg.number);
+      setTotalRegistrationsPercentage(dataReg.percentage);
+
+      const dataClick = getResponses[1];
+      setTotalClicks(dataClick.number);
+      setTotalClicksPercentage(dataClick.percentage);
+
+      const dataInc = getResponses[2];
+      setTotalIncomes(dataInc.number);
+      setTotalIncomesPercentage(dataInc.percentage);
+
+      const dataUsers = getResponses[3];
+      setTableData(dataUsers.map(user => [
+        user.fullname,
+        user.roles.join(', '),
+        user.email,
+        user.status,
+        user.income,
+        user.joinedOn.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+      ]));
+
+      const reportResp = getResponses[4];
+      if (reportResp !== null) {
+        console.log(reportResp);
+        setBarContent(reportResp);
       }
+      const totalPricePerDate = getResponses[5];
+      setGraphData((totalPricePerDate))
+      console.log(totalPricePerDate);
+
+    }
   };
 
   const fetchDiamondData = async () => {
@@ -154,20 +172,36 @@ const fetchGoldData = async () => {
   if (result !== true) {
     navigate("/login");
   } else {
-    const dataReg = await goldApi.getTotalRegistrations();
+    const getPromises = [
+      goldApi.getTotalRegistrations(),
+      goldApi.getTotalClicks(),
+      goldApi.getTotalIncome(),
+      goldApi.getRoleReport(),
+      goldApi.getTotalIncomesPerDay()
+    ]
+    const getResponses = await Promise.all(getPromises)
+
+    const dataReg = getResponses[0];
     setTotalRegistrations(dataReg.number);
     setTotalRegistrationsPercentage(dataReg.percentage);
-    const dataClick = await goldApi.getTotalClicks();
+
+    const dataClick = getResponses[1];
     setTotalClicks(dataClick.number);
     setTotalClicksPercentage(dataClick.percentage);
-    const dataInc = await goldApi.getTotalIncome();
+
+    const dataInc = getResponses[2];
     setTotalIncomes(dataInc.number);
     setTotalIncomesPercentage(dataInc.percentage);
-    const reportResp = await goldApi.getRoleReport();
+
+    const reportResp = getResponses[3];
     if (reportResp !== null) {
       console.log(reportResp);
       setBarContent(reportResp);
     }
+    const totalPricePerDate = getResponses[4];
+    setGraphData((totalPricePerDate))
+    console.log(totalPricePerDate);
+
   }
 };
 

@@ -181,4 +181,25 @@ export default class goldDashboardApi {
             return null; // or return some default value
         }
     }
+    async getTotalIncomesPerDay() {
+        try{
+            const url = `${this.baseURL}/totalIncomesPerDay`;
+            const options = {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${this.token}`
+                },
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        } catch (error) {
+            console.log(error)
+            return null; // or return some default value
+        }
+
+    }
 }
