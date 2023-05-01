@@ -4,7 +4,7 @@ export default class affiliateDashboardApi {
         //LAUNCH
         //this.baseURL = "https://nefentus.com:8443/api/dashboard/admin";
         //DEV
-        this.baseURL = "http://localhost:8080/api/dashboard/affiliate";
+        this.baseURL = process.env.REACT_APP_BASE_ENDPOINT_API + "/dashboard/affiliate";
         this.token = Cookies.get("token");
     }
     async checkPermission(){

@@ -6,7 +6,7 @@ export default class backendAPI {
         //LAUNCH
         //this.baseURL = "https://nefentus.com:8443/api";
         //DEV
-        this.baseURL = "http://localhost:8080/api";
+        this.baseURL = process.env.REACT_APP_BASE_ENDPOINT_API;
 
         this.token = Cookies.get("token");
     }

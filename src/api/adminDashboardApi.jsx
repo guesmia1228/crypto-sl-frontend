@@ -4,7 +4,7 @@ export default class adminDashboardApi {
         //LAUNCH
         //this.baseURL = "https://nefentus.com:8443/api/dashboard/admin";
         //DEV
-        this.baseURL = "http://localhost:8080/api/dashboard/admin";
+        this.baseURL = process.env.REACT_APP_BASE_ENDPOINT_API +"/dashboard/admin";
 
         this.token = Cookies.get("token");
     }
@@ -181,5 +181,27 @@ export default class adminDashboardApi {
         } catch (error) {
             return null; // or return some default value
         }
+    }
+
+    async getTotalIncomesPerDay() {
+        try{
+            const url = `${this.baseURL}/totalIncomesPerDay`;
+            const options = {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${this.token}`
+                },
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        } catch (error) {
+            console.log(error)
+            return null; // or return some default value
+        }
+
     }
 }

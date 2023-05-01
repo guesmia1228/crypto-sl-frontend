@@ -46,6 +46,7 @@ const AdminBody = ({ type }) => {
   const [totalClicksPercentage, setTotalClicksPercentage] = useState(0);
   const [totalIncomesPercentage, setTotalIncomesPercentage] = useState(0);
   const [tableData, setTableData] = useState([]);
+  const [graphData, setGraphData] = useState([]);
   const [value, setValue] = useState("Filter");
   const [barContent, setBarContent] = useState([]);
   const navigate = useNavigate();
@@ -72,86 +73,166 @@ const AdminBody = ({ type }) => {
         console.log("asdasdasdasds");
         navigate("/login");
       } else {
-        const dataReg = await adminApi.getTotalRegistrations();
-        setTotalRegistrations(dataReg.number);
-        setTotalRegistrationsPercentage(dataReg.percentage);
-        const dataClick = await adminApi.getTotalClicks();
-        setTotalClicks(dataClick.number);
-        setTotalClicksPercentage(dataClick.percentage);
-        const dataInc = await adminApi.getTotalIncome();
-        setTotalIncomes(dataInc.number);
-        setTotalIncomesPercentage(dataInc.percentage);
-        const dataUsers = await adminApi.getUsers();
-        setTableData(dataUsers.map(user => [
-          user.fullname,
-          user.roles.join(', '),
-          user.email,
-          user.status,
-          user.income,
-          user.joinedOn.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-        ]));
-
-        const reportResp = await adminApi.getRoleReport();
-        if (reportResp !== null) {
-          console.log(reportResp);
-          setBarContent(reportResp);
+        const getPromises = [
+          adminApi.getTotalRegistrations(),
+          adminApi.getTotalClicks(),
+          adminApi.getTotalIncome(),
+          adminApi.getUsers(),
+          adminApi.getRoleReport(),
+          adminApi.getTotalIncomesPerDay()
+        ]
+      
+        const getResponses = await Promise.allSettled(getPromises)
+  
+        const dataReg = getResponses[0];
+        if (dataReg.status === 'fulfilled' && dataReg.value !== null) {
+          setTotalRegistrations(dataReg.value.number);
+          setTotalRegistrationsPercentage(dataReg.value.percentage)
+        }
+    
+        const dataClick = getResponses[1];
+        if (dataClick.status === 'fulfilled' && dataClick.value !== null) {
+          setTotalClicks(dataClick.value.number);
+          setTotalClicksPercentage(dataClick.value.percentage)
+        }
+    
+        const dataInc = getResponses[2];
+        if (dataInc.status === 'fulfilled' && dataInc.value !== null) {
+          setTotalIncomes(dataInc.value.number);
+          setTotalIncomesPercentage(dataInc.value.percentage)
+        }
+    
+        const dataUsers = getResponses[3];
+        if (dataUsers.status === 'fulfilled' && dataUsers.value !== null) {
+          setTableData(dataUsers.value.map(user => [
+            user.fullname,
+            user.roles.join(', '),
+            user.email,
+            user.status,
+            user.income,
+            user.joinedOn.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+          ]))
+        }
+    
+        const reportResp = getResponses[4];
+        if (reportResp.status === 'fulfilled' && reportResp.value !== null) {
+          console.log(reportResp.value);
+          setBarContent(reportResp.value);
+        }
+    
+        const totalPricePerDate = getResponses[5];
+        if (totalPricePerDate.status === 'fulfilled' && totalPricePerDate.value !== null) {
+          setGraphData(totalPricePerDate.value)
+          console.log(totalPricePerDate.value);
         }
       }
-  };
+    };
 
   const fetchDiamondData = async () => {
     const result = await diamondApi.checkPermission();
     if (result !== true) {
       navigate("/login");
     } else {
-      const dataReg = await diamondApi.getTotalRegistrations();
-      setTotalRegistrations(dataReg.number);
-      setTotalRegistrationsPercentage(dataReg.percentage);
-      const dataClick = await diamondApi.getTotalClicks();
-      setTotalClicks(dataClick.number);
-      setTotalClicksPercentage(dataClick.percentage);
-      const dataInc = await diamondApi.getTotalIncome();
-      setTotalIncomes(dataInc.number);
-      setTotalIncomesPercentage(dataInc.percentage);
-      const dataUsers = await diamondApi.getUsers();
-      setTableData(dataUsers.map(user => [
-        user.fullname,
-        user.roles.join(', '),
-        user.email,
-        user.status,
-        user.income,
-        user.joinedOn.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-      ]));
-
-      const reportResp = await diamondApi.getRoleReport();
-      if (reportResp !== null) {
-        console.log(reportResp);
-        setBarContent(reportResp);
+      const getPromises = [
+        diamondApi.getTotalRegistrations(),
+        diamondApi.getTotalClicks(),
+        diamondApi.getTotalIncome(),
+        diamondApi.getUsers(),
+        diamondApi.getRoleReport(),
+        diamondApi.getTotalIncomesPerDay()
+      ]
+      const getResponses = await Promise.allSettled(getPromises)
+  
+      const dataReg = getResponses[0];
+      if (dataReg.status === 'fulfilled' && dataReg.value !== null) {
+        setTotalRegistrations(dataReg.value.number);
+        setTotalRegistrationsPercentage(dataReg.value.percentage)
+      }
+  
+      const dataClick = getResponses[1];
+      if (dataClick.status === 'fulfilled' && dataClick.value !== null) {
+        setTotalClicks(dataClick.value.number);
+        setTotalClicksPercentage(dataClick.value.percentage)
+      }
+  
+      const dataInc = getResponses[2];
+      if (dataInc.status === 'fulfilled' && dataInc.value !== null) {
+        setTotalIncomes(dataInc.value.number);
+        setTotalIncomesPercentage(dataInc.value.percentage)
+      }
+  
+      const dataUsers = getResponses[3];
+      if (dataUsers.status === 'fulfilled' && dataUsers.value !== null) {
+        setTableData(dataUsers.value.map(user => [
+          user.fullname,
+          user.roles.join(', '),
+          user.email,
+          user.status,
+          user.income,
+          user.joinedOn.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+        ]))
+      }
+  
+      const reportResp = getResponses[4];
+      if (reportResp.status === 'fulfilled' && reportResp.value !== null) {
+        console.log(reportResp.value);
+        setBarContent(reportResp.value);
+      }
+  
+      const totalPricePerDate = getResponses[5];
+      if (totalPricePerDate.status === 'fulfilled' && totalPricePerDate.value !== null) {
+        setGraphData(totalPricePerDate.value)
+        console.log(totalPricePerDate.value);
       }
     }
-};
+  };
+  
 
 const fetchGoldData = async () => {
   const result = await goldApi.checkPermission();
   if (result !== true) {
     navigate("/login");
   } else {
-    const dataReg = await goldApi.getTotalRegistrations();
-    setTotalRegistrations(dataReg.number);
-    setTotalRegistrationsPercentage(dataReg.percentage);
-    const dataClick = await goldApi.getTotalClicks();
-    setTotalClicks(dataClick.number);
-    setTotalClicksPercentage(dataClick.percentage);
-    const dataInc = await goldApi.getTotalIncome();
-    setTotalIncomes(dataInc.number);
-    setTotalIncomesPercentage(dataInc.percentage);
-    const reportResp = await goldApi.getRoleReport();
-    if (reportResp !== null) {
-      console.log(reportResp);
-      setBarContent(reportResp);
+    const getPromises = [
+      goldApi.getTotalRegistrations(),
+      goldApi.getTotalClicks(),
+      goldApi.getTotalIncome(),
+      goldApi.getRoleReport(),
+      goldApi.getTotalIncomesPerDay()
+    ]
+    const getResponses = await Promise.allSettled(getPromises)
+  
+      const dataReg = getResponses[0];
+      if (dataReg.status === 'fulfilled' && dataReg.value !== null) {
+        setTotalRegistrations(dataReg.value.number);
+        setTotalRegistrationsPercentage(dataReg.value.percentage)
+      }
+  
+      const dataClick = getResponses[1];
+      if (dataClick.status === 'fulfilled' && dataClick.value !== null) {
+        setTotalClicks(dataClick.value.number);
+        setTotalClicksPercentage(dataClick.value.percentage)
+      }
+  
+      const dataInc = getResponses[2];
+      if (dataInc.status === 'fulfilled' && dataInc.value !== null) {
+        setTotalIncomes(dataInc.value.number);
+        setTotalIncomesPercentage(dataInc.value.percentage)
+      }
+  
+      const reportResp = getResponses[3];
+      if (reportResp.status === 'fulfilled' && reportResp.value !== null) {
+        console.log(reportResp.value);
+        setBarContent(reportResp.value);
+      }
+  
+      const totalPricePerDate = getResponses[4];
+      if (totalPricePerDate.status === 'fulfilled' && totalPricePerDate.value !== null) {
+        setGraphData(totalPricePerDate.value)
+        console.log(totalPricePerDate.value);
+      }
     }
-  }
-};
+  };
 
   const cardsContent = [
     {
@@ -280,7 +361,9 @@ const fetchGoldData = async () => {
             />
           ))}
 
-          <Graph />
+          <Graph
+              data  = {graphData}
+          />
 
           <div className={`${styles.registration} card`}>
             <h3>Registrations Roles</h3>
