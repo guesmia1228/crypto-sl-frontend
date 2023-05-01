@@ -37,8 +37,8 @@ if (labels1[labels1.length - 1] !== today.toLocaleDateString()) {
 
 const randomData = Array.from({ length: days }, () => 0);
 function populateGraph(totalPrices) {
-  labels = Object.keys(totalPrices)
-  const values = Object.values(totalPrices)
+  labels = totalPrices ? Object.keys(totalPrices) : []
+  const values = totalPrices ? Object.values(totalPrices) : []
   return {
     labels,
     datasets: [
