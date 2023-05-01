@@ -82,41 +82,51 @@ const AdminBody = ({ type }) => {
           adminApi.getTotalIncomesPerDay()
         ]
       
-      const getResponses = await Promise.all(getPromises)
-
-      const dataReg = getResponses[0];
-      setTotalRegistrations(dataReg.number);
-      setTotalRegistrationsPercentage(dataReg.percentage);
-
-      const dataClick = getResponses[1];
-      setTotalClicks(dataClick.number);
-      setTotalClicksPercentage(dataClick.percentage);
-
-      const dataInc = getResponses[2];
-      setTotalIncomes(dataInc.number);
-      setTotalIncomesPercentage(dataInc.percentage);
-
-      const dataUsers = getResponses[3];
-      setTableData(dataUsers.map(user => [
-        user.fullname,
-        user.roles.join(', '),
-        user.email,
-        user.status,
-        user.income,
-        user.joinedOn.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-      ]));
-
-      const reportResp = getResponses[4];
-      if (reportResp !== null) {
-        console.log(reportResp);
-        setBarContent(reportResp);
+        const getResponses = await Promise.allSettled(getPromises)
+  
+        const dataReg = getResponses[0];
+        if (dataReg.status === 'fulfilled' && dataReg.value !== null) {
+          setTotalRegistrations(dataReg.value.number);
+          setTotalRegistrationsPercentage(dataReg.value.percentage)
+        }
+    
+        const dataClick = getResponses[1];
+        if (dataClick.status === 'fulfilled' && dataClick.value !== null) {
+          setTotalClicks(dataClick.value.number);
+          setTotalClicksPercentage(dataClick.value.percentage)
+        }
+    
+        const dataInc = getResponses[2];
+        if (dataInc.status === 'fulfilled' && dataInc.value !== null) {
+          setTotalIncomes(dataInc.value.number);
+          setTotalIncomesPercentage(dataInc.value.percentage)
+        }
+    
+        const dataUsers = getResponses[3];
+        if (dataUsers.status === 'fulfilled' && dataUsers.value !== null) {
+          setTableData(dataUsers.value.map(user => [
+            user.fullname,
+            user.roles.join(', '),
+            user.email,
+            user.status,
+            user.income,
+            user.joinedOn.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+          ]))
+        }
+    
+        const reportResp = getResponses[4];
+        if (reportResp.status === 'fulfilled' && reportResp.value !== null) {
+          console.log(reportResp.value);
+          setBarContent(reportResp.value);
+        }
+    
+        const totalPricePerDate = getResponses[5];
+        if (totalPricePerDate.status === 'fulfilled' && totalPricePerDate.value !== null) {
+          setGraphData(totalPricePerDate.value)
+          console.log(totalPricePerDate.value);
+        }
       }
-      const totalPricePerDate = getResponses[5];
-      setGraphData((totalPricePerDate))
-      console.log(totalPricePerDate);
-
-    }
-  };
+    };
 
   const fetchDiamondData = async () => {
     const result = await diamondApi.checkPermission();
@@ -131,41 +141,52 @@ const AdminBody = ({ type }) => {
         diamondApi.getRoleReport(),
         diamondApi.getTotalIncomesPerDay()
       ]
-      const getResponses = await Promise.all(getPromises)
-
+      const getResponses = await Promise.allSettled(getPromises)
+  
       const dataReg = getResponses[0];
-      setTotalRegistrations(dataReg.number);
-      setTotalRegistrationsPercentage(dataReg.percentage);
-
-      const dataClick = getResponses[1];
-      setTotalClicks(dataClick.number);
-      setTotalClicksPercentage(dataClick.percentage);
-
-      const dataInc = getResponses[2];
-      setTotalIncomes(dataInc.number);
-      setTotalIncomesPercentage(dataInc.percentage);
-
-      const dataUsers = getResponses[3];
-      setTableData(dataUsers.map(user => [
-        user.fullname,
-        user.roles.join(', '),
-        user.email,
-        user.status,
-        user.income,
-        user.joinedOn.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-      ]));
-
-      const reportResp = getResponses[4];
-      if (reportResp !== null) {
-        console.log(reportResp);
-        setBarContent(reportResp);
+      if (dataReg.status === 'fulfilled' && dataReg.value !== null) {
+        setTotalRegistrations(dataReg.value.number);
+        setTotalRegistrationsPercentage(dataReg.value.percentage)
       }
+  
+      const dataClick = getResponses[1];
+      if (dataClick.status === 'fulfilled' && dataClick.value !== null) {
+        setTotalClicks(dataClick.value.number);
+        setTotalClicksPercentage(dataClick.value.percentage)
+      }
+  
+      const dataInc = getResponses[2];
+      if (dataInc.status === 'fulfilled' && dataInc.value !== null) {
+        setTotalIncomes(dataInc.value.number);
+        setTotalIncomesPercentage(dataInc.value.percentage)
+      }
+  
+      const dataUsers = getResponses[3];
+      if (dataUsers.status === 'fulfilled' && dataUsers.value !== null) {
+        setTableData(dataUsers.value.map(user => [
+          user.fullname,
+          user.roles.join(', '),
+          user.email,
+          user.status,
+          user.income,
+          user.joinedOn.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+        ]))
+      }
+  
+      const reportResp = getResponses[4];
+      if (reportResp.status === 'fulfilled' && reportResp.value !== null) {
+        console.log(reportResp.value);
+        setBarContent(reportResp.value);
+      }
+  
       const totalPricePerDate = getResponses[5];
-      setGraphData((totalPricePerDate))
-      console.log(totalPricePerDate);
-
+      if (totalPricePerDate.status === 'fulfilled' && totalPricePerDate.value !== null) {
+        setGraphData(totalPricePerDate.value)
+        console.log(totalPricePerDate.value);
+      }
     }
-};
+  };
+  
 
 const fetchGoldData = async () => {
   const result = await goldApi.checkPermission();
@@ -179,31 +200,39 @@ const fetchGoldData = async () => {
       goldApi.getRoleReport(),
       goldApi.getTotalIncomesPerDay()
     ]
-    const getResponses = await Promise.all(getPromises)
-
-    const dataReg = getResponses[0];
-    setTotalRegistrations(dataReg.number);
-    setTotalRegistrationsPercentage(dataReg.percentage);
-
-    const dataClick = getResponses[1];
-    setTotalClicks(dataClick.number);
-    setTotalClicksPercentage(dataClick.percentage);
-
-    const dataInc = getResponses[2];
-    setTotalIncomes(dataInc.number);
-    setTotalIncomesPercentage(dataInc.percentage);
-
-    const reportResp = getResponses[3];
-    if (reportResp !== null) {
-      console.log(reportResp);
-      setBarContent(reportResp);
+    const getResponses = await Promise.allSettled(getPromises)
+  
+      const dataReg = getResponses[0];
+      if (dataReg.status === 'fulfilled' && dataReg.value !== null) {
+        setTotalRegistrations(dataReg.value.number);
+        setTotalRegistrationsPercentage(dataReg.value.percentage)
+      }
+  
+      const dataClick = getResponses[1];
+      if (dataClick.status === 'fulfilled' && dataClick.value !== null) {
+        setTotalClicks(dataClick.value.number);
+        setTotalClicksPercentage(dataClick.value.percentage)
+      }
+  
+      const dataInc = getResponses[2];
+      if (dataInc.status === 'fulfilled' && dataInc.value !== null) {
+        setTotalIncomes(dataInc.value.number);
+        setTotalIncomesPercentage(dataInc.value.percentage)
+      }
+  
+      const reportResp = getResponses[3];
+      if (reportResp.status === 'fulfilled' && reportResp.value !== null) {
+        console.log(reportResp.value);
+        setBarContent(reportResp.value);
+      }
+  
+      const totalPricePerDate = getResponses[4];
+      if (totalPricePerDate.status === 'fulfilled' && totalPricePerDate.value !== null) {
+        setGraphData(totalPricePerDate.value)
+        console.log(totalPricePerDate.value);
+      }
     }
-    const totalPricePerDate = getResponses[4];
-    setGraphData((totalPricePerDate))
-    console.log(totalPricePerDate);
-
-  }
-};
+  };
 
   const cardsContent = [
     {
