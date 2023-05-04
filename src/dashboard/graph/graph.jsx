@@ -60,6 +60,18 @@ function getStartDate(data) {
   }
 }
 
+function  getTotalIncome(totalPrices){
+  if(totalPrices){
+    const values = Object.values(totalPrices)
+    const sum = values.reduce(function (prev, currentValue) {
+      return prev + currentValue;
+    },0)
+    return '$' + sum.toLocaleString()
+  } else {
+    return "$0"
+  }
+}
+
 function getEndDate(data) {
   if (data == null) {
     return "2023-04-30"
@@ -143,7 +155,7 @@ const Graph = (totalPrices) => {
       <div className={styles.info}>
         <div className={styles.left}>
           <div className={styles.label}>Incomes</div>
-          <div className={styles.graphAmount}>$0</div>
+          <div className={styles.graphAmount}>{getTotalIncome(totalPrices.data)}</div>
         </div>
 
         <div className={styles.datePicker}>
