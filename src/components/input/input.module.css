@@ -51,7 +51,24 @@
   bottom: 0;
   transform: translateY(100%);
 
+  max-height: 200px;
+  overflow-y: scroll;
   z-index: 100;
+}
+
+/* Scrollbar */
+.body::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+.body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+.body::-webkit-scrollbar-thumb {
+  background: white;
 }
 
 .dashboardLabel {
