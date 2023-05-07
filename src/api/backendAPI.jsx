@@ -1,7 +1,6 @@
 import Cookies from "js-cookie";
-import setCookie from "../components/setCookie/setCookie"
+import setCookie from "../components/setCookie/setCookie";
 export default class backendAPI {
-
     constructor() {
         //LAUNCH
         //this.baseURL = "https://nefentus.com:8443/api";
@@ -11,14 +10,14 @@ export default class backendAPI {
         this.token = Cookies.get("token");
     }
 
-    async checkJwt(){
-        try{
+    async checkJwt() {
+        try {
             const url = `${this.baseURL}/auth/checkJWTCookie`;
             const options = {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${this.token}`
+                    Authorization: `Bearer ${this.token}`,
                 },
             };
             const response = await fetch(url, options);
@@ -75,16 +74,16 @@ export default class backendAPI {
         try {
             const request = {
                 newPassword: pass,
-                oldPassword: oldpass
+                oldPassword: oldpass,
             };
             const url = `${this.baseURL}/auth/reset-password-email`;
             const options = {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${this.token}`
+                    Authorization: `Bearer ${this.token}`,
                 },
-                body: JSON.stringify(request)
+                body: JSON.stringify(request),
             };
             const response = await fetch(url, options);
             if (!response.ok) {
@@ -100,8 +99,8 @@ export default class backendAPI {
         try {
             const request = {
                 token: token,
-                newPassword: newPassword
-            }
+                newPassword: newPassword,
+            };
             const url = `${this.baseURL}/auth/reset-password`;
             const options = {
                 method: "POST",
@@ -124,14 +123,14 @@ export default class backendAPI {
     async resetPasswordDashboard(token) {
         try {
             const request = {
-                token: token
-            }
+                token: token,
+            };
             const url = `${this.baseURL}/auth/reset-password-auth`;
             const options = {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${this.token}`
+                    Authorization: `Bearer ${this.token}`,
                 },
                 body: JSON.stringify(request),
             };
@@ -199,8 +198,7 @@ export default class backendAPI {
             console.error("There was an error uploading the file:", error);
             return null;
         }
-    };
-
+    }
 
     async signout() {
         try {
@@ -227,7 +225,7 @@ export default class backendAPI {
         }
     }
 
-    async getProfilePicture(token){
+    async getProfilePicture(token) {
         try {
             const url = `${this.baseURL}/auth/profilePic`;
             const options = {
@@ -238,9 +236,9 @@ export default class backendAPI {
                 },
             };
             return null;
-          } catch (error) {
+        } catch (error) {
             console.error(error);
-          }
+        }
     }
 
     async login(username, password, longToken) {
@@ -251,13 +249,18 @@ export default class backendAPI {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ email: username, password, rememberMe: longToken }),
+                body: JSON.stringify({
+                    email: username,
+                    password,
+                    rememberMe: longToken,
+                }),
             };
             const response = await fetch(url, options);
             if (!response.ok) {
                 throw new Error("Network response was not ok");
             }
             const data = await response.json();
+            console.log(data);
             setCookie("token", data.jwtToken);
             localStorage.setItem("token", data.jwtToken);
             localStorage.setItem("email", data.email);
@@ -268,10 +271,11 @@ export default class backendAPI {
             localStorage.setItem("business", data.business);
             localStorage.setItem("phoneNumber", data.phoneNumber);
             localStorage.setItem("username", data.username);
-            localStorage.setItem('profile_pic', data.profileImage);
-            localStorage.setItem('roles', data.roles);
-            localStorage.setItem('country',data.country);
-            localStorage.setItem('requireKyc',data.requireKyc)
+            localStorage.setItem("profile_pic", data.profileImage);
+            localStorage.setItem("roles", data.roles);
+            localStorage.setItem("country", data.country);
+            localStorage.setItem("requireKyc", data.requireKyc);
+            localStorage.setItem("userId", data.userId);
             return response;
         } catch (error) {
             return null; // or return some default value
@@ -300,9 +304,7 @@ export default class backendAPI {
         }
     }
 
-
     async checkPermissionAff() {
-
         if (!this.token) {
             // Der Benutzer ist nicht angemeldet
             return false;
@@ -356,8 +358,6 @@ export default class backendAPI {
         }
     }
 
-
-
     async checkPermissionAdmin() {
         if (!this.token) {
             // Der Benutzer ist nicht angemeldet
@@ -392,7 +392,7 @@ export default class backendAPI {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${this.token}`,
-            }
+            },
         };
         try {
             const response = await fetch(url, options);
@@ -437,12 +437,14 @@ export default class backendAPI {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                }
+                },
             };
             const response = await fetch(url, options);
 
             if (!response.ok) {
-                throw new Error(`Network response was not ok (${response.status} ${response.statusText})`);
+                throw new Error(
+                    `Network response was not ok (${response.status} ${response.statusText})`
+                );
             }
 
             const data = await response.json();
@@ -453,4 +455,46 @@ export default class backendAPI {
         }
     }
 
+    async uploadKYCByType(type, formData) {
+        try {
+            const userId = localStorage.getItem("userId");
+            const url = `${this.baseURL}/auth/${userId}/upload_kyc?type=${type}`;
+            const options = {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${this.token}`,
+                },
+                body: formData,
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            return null; // or return some default value
+        }
+    }
+
+    async getByKYC(type) {
+        try {
+            const userId = localStorage.getItem("userId");
+            const url = `${this.baseURL}/auth/${userId}/kyc-image-url?type=${type}`;
+            const options = {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${this.token}`,
+                },
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            return { [type]: data };
+        } catch (error) {
+            return null; // or return some default value
+        }
+    }
 }
