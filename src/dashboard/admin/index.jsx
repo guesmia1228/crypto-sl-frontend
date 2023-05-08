@@ -198,7 +198,8 @@ const fetchGoldData = async () => {
       goldApi.getTotalClicks(),
       goldApi.getTotalIncome(),
       goldApi.getRoleReport(),
-      goldApi.getTotalIncomesPerDay()
+      goldApi.getTotalIncomesPerDay(),
+      goldApi.getUsers()
     ]
     const getResponses = await Promise.allSettled(getPromises)
   
@@ -230,6 +231,18 @@ const fetchGoldData = async () => {
       if (totalPricePerDate.status === 'fulfilled' && totalPricePerDate.value !== null) {
         setGraphData(totalPricePerDate.value)
         console.log(totalPricePerDate.value);
+      }
+
+      const dataUsers = getResponses[5];
+      if (dataUsers.status === 'fulfilled' && dataUsers.value !== null) {
+        setTableData(dataUsers.value.map(user => [
+          user.fullname,
+          user.roles.join(', '),
+          user.email,
+          user.status,
+          user.income,
+          user.joinedOn.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+        ]))
       }
     }
   };
@@ -270,7 +283,7 @@ const fetchGoldData = async () => {
         window.location.reload();
       }
     }else{
-      const resp = await diamondApi.addUser(email, password, value);
+      const resp = await goldApi.addUser(email, password, value);
       if (resp === true) {
         setOpenModal(false);
         window.location.reload();
@@ -430,7 +443,7 @@ const fetchGoldData = async () => {
           </div>
         </div>
 
-        {type !== "gold" && (
+        {(
           <div className={styles.tableWrapper}>
             <div className={styles.top}>
               <h4>User Management</h4>
@@ -489,7 +502,7 @@ const fetchGoldData = async () => {
                   Cancel
                 </div>
                 <Button onClick={addUser} color="white">Add User</Button>
-              </div>
+              </div>feat/kyc-feature
             </div>
           </ModalOverlay>
         )}
@@ -515,10 +528,16 @@ const Table = ({ data, type }) => {
   const [modifiedData, setModifiedData] = useState(data);
   const adminApi = new adminDashboardApi();
   const diamondApi = new diamondDashboardApi();
+  const goldApi = new goldDashboardApi();
   useEffect(() => {
     if (type === "admin") {
       setTableHeader(header);
-    } else if (type === "diamond") {
+    }else if (type ==="gold"){
+      setTableHeader((prev) => {
+        const arr = header.slice(0, header.length - 1);
+        return [...arr];
+      });
+    }else if (type === "diamond") {
       setTableHeader((prev) => {
         const arr = header.slice(0, header.length - 1);
         return [...arr];
@@ -532,6 +551,11 @@ const Table = ({ data, type }) => {
 
     if(type === "admin"){
       const resp = await adminApi.patchStatus(newData[index][2]);
+      if (resp !== true) {
+        return;
+      }
+    }else if (type ==="gold") {
+      const resp = await goldApi.patchStatus(newData[index][2]);
       if (resp !== true) {
         return;
       }
