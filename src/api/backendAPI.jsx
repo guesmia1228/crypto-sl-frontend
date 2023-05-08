@@ -192,8 +192,8 @@ export default class backendAPI {
                 throw new Error("Network response was not ok");
             }
 
-            const data = await response.text();
-            localStorage.setItem("profile_pic", data);
+            const data = await response.json();
+            localStorage.setItem("profile_pic", data.message);
             return response;
         } catch (error) {
             console.error("There was an error uploading the file:", error);
@@ -268,7 +268,7 @@ export default class backendAPI {
             localStorage.setItem("business", data.business);
             localStorage.setItem("phoneNumber", data.phoneNumber);
             localStorage.setItem("username", data.username);
-            localStorage.setItem('profile_pic', data.imgData);
+            localStorage.setItem('profile_pic', data.profileImage);
             localStorage.setItem('roles', data.roles);
             return response;
         } catch (error) {
