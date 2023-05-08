@@ -241,6 +241,15 @@ function App() {
                 }
               />
 
+            <Route
+                path="/dashboard/ib-leader"
+                element={
+                    <>
+                        <Admin type={"ib_leader"} />
+                    </>
+                }
+            />
+
               <Route
                 path="/dashboard/kyc"
                 element={

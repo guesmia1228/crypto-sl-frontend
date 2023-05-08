@@ -67,13 +67,11 @@ const LoginBox = () => {
       const roles = localStorage.getItem("roles");
       const roleArray = roles.split(","); // Konvertiert den String in ein Array von Strings
       const isAdmin = roleArray.includes("ROLE_ADMIN"); // Überprüft, ob "ROLE_ADMIN" im Array enthalten ist
-        const isVendor = roleArray.includes("ROLE_VENDOR"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
-        const isAffiliate = roleArray.includes("ROLE_AFFILIATE"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
-        const isDiamond = roleArray.includes("ROLE_DIAMOND_PARTNER"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
-        const isGold = roleArray.includes("ROLE_GOLD_PARTNER"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
-
-
-        if (isAdmin) { navigate("/dashboard/admin"); }
+      const isVendor = roleArray.includes("ROLE_VENDOR"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
+      const isAffiliate = roleArray.includes("ROLE_AFFILIATE"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
+      const isDiamond = roleArray.includes("ROLE_DIAMOND_PARTNER"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
+      const isGold = roleArray.includes("ROLE_GOLD_PARTNER"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
+      if (isAdmin) { navigate("/dashboard/admin"); }
         else if (isAffiliate) { navigate("/dashboard/affiliate"); }
         else if (isVendor) { navigate("/dashboard/vendor"); }
         else if (isGold) { navigate("/dashboard/gold"); }

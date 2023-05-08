@@ -13,6 +13,7 @@ import adminDashboardApi from "../../api/adminDashboardApi";
 import { useNavigate } from "react-router-dom";
 import diamondDashboardApi from "../../api/diamondDashboardApi";
 import goldDashboardApi from "../../api/goldDashboardApi";
+import ibLeaderDashboardApi from "../../api/ibLeaderDashboardApi";
 
 // const barContent = [
 //   {
@@ -54,14 +55,17 @@ const AdminBody = ({ type }) => {
   const adminApi = new adminDashboardApi();
   const diamondApi = new diamondDashboardApi();
   const goldApi = new goldDashboardApi();
+  const ibLeaderApi = new ibLeaderDashboardApi()
   useEffect(() => {
     async function fetchData() {
       if(type === "admin"){
         fetchAdminData();
       }else if(type === "diamond"){
         fetchDiamondData();
-      }else{
+      } else if(type === "gold"){
         fetchGoldData();
+      } else {
+        fetchIBLeaderData();
       }
     }
     fetchData();
@@ -186,6 +190,65 @@ const AdminBody = ({ type }) => {
       }
     }
   };
+
+  const fetchIBLeaderData = async () => {
+    const result = await ibLeaderApi.checkPermission();
+    if (result !== true) {
+      navigate("/login");
+    } else {
+      const getPromises = [
+        ibLeaderApi.getTotalRegistrations(),
+        ibLeaderApi.getTotalClicks(),
+        ibLeaderApi.getTotalIncome(),
+        ibLeaderApi.getUsers(),
+        ibLeaderApi.getRoleReport(),
+        ibLeaderApi.getTotalIncomesPerDay()
+      ]
+      const getResponses = await Promise.allSettled(getPromises)
+
+      const dataReg = getResponses[0];
+      if (dataReg.status === 'fulfilled' && dataReg.value !== null) {
+        setTotalRegistrations(dataReg.value.number);
+        setTotalRegistrationsPercentage(dataReg.value.percentage)
+      }
+
+      const dataClick = getResponses[1];
+      if (dataClick.status === 'fulfilled' && dataClick.value !== null) {
+        setTotalClicks(dataClick.value.number);
+        setTotalClicksPercentage(dataClick.value.percentage)
+      }
+
+      const dataInc = getResponses[2];
+      if (dataInc.status === 'fulfilled' && dataInc.value !== null) {
+        setTotalIncomes(dataInc.value.number);
+        setTotalIncomesPercentage(dataInc.value.percentage)
+      }
+
+      const dataUsers = getResponses[3];
+      if (dataUsers.status === 'fulfilled' && dataUsers.value !== null) {
+        setTableData(dataUsers.value.map(user => [
+          user.fullname,
+          user.roles.join(', '),
+          user.email,
+          user.status,
+          user.income,
+          user.joinedOn.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+        ]))
+      }
+
+      const reportResp = getResponses[4];
+      if (reportResp.status === 'fulfilled' && reportResp.value !== null) {
+        console.log(reportResp.value);
+        setBarContent(reportResp.value);
+      }
+
+      const totalPricePerDate = getResponses[5];
+      if (totalPricePerDate.status === 'fulfilled' && totalPricePerDate.value !== null) {
+        setGraphData(totalPricePerDate.value)
+        console.log(totalPricePerDate.value);
+      }
+    }
+  };
   
 
 const fetchGoldData = async () => {
@@ -282,8 +345,14 @@ const fetchGoldData = async () => {
         setOpenModal(false);
         window.location.reload();
       }
-    }else{
+    }else if(type === "gold"){
       const resp = await goldApi.addUser(email, password, value);
+      if (resp === true) {
+        setOpenModal(false);
+        window.location.reload();
+      }
+    } else {
+      const resp = await ibLeaderApi.addUser(email, password, value);
       if (resp === true) {
         setOpenModal(false);
         window.location.reload();
@@ -354,7 +423,7 @@ const fetchGoldData = async () => {
     <>
       <div className={styles.body}>
         <Header
-          title={`${type === "admin" ? "Admin" : type === "diamond" ? "Senior IB" : "IB"
+          title={`${type === "admin" ? "Admin" : type === "diamond" ? "Senior IB" : type === "ib_leader" ? "IB Leader" : "IB"
             } Dashboard`}
         />
         <TopInfo
@@ -499,6 +568,7 @@ const fetchGoldData = async () => {
                     "Affiliate",
                     "IB",
                     "Senior IB",
+                    "IB Leader",
                   ]}
                   dashboard
                   setValue={setValue}
@@ -515,8 +585,18 @@ const fetchGoldData = async () => {
                   dashboard
                   setValue={setValue}
                 />}
-
-
+                {type === "ib_leader" && <Options
+                    label="Roles"
+                    value={value}
+                    options={[
+                      "Vendor",
+                      "Affiliate",
+                      "IB",
+                      "Senior IB",
+                    ]}
+                    dashboard
+                    setValue={setValue}
+                />}
               </div>
               <div className={styles.modalButtons}>
                 <div
@@ -561,7 +641,7 @@ const Table = ({ data, type }) => {
         const arr = header.slice(0, header.length - 1);
         return [...arr];
       });
-    }else if (type === "diamond") {
+    }else if (type === "diamond" || type === "ib_leader") {
       setTableHeader((prev) => {
         const arr = header.slice(0, header.length - 1);
         return [...arr];
@@ -583,7 +663,7 @@ const Table = ({ data, type }) => {
       if (resp !== true) {
         return;
       }
-    }else{
+    }else {
       const resp = await diamondApi.patchStatus(newData[index][2]);
       if (resp !== true) {
         return;
