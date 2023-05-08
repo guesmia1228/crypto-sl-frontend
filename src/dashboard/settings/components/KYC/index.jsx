@@ -47,7 +47,7 @@ export const KYC = () => {
         [KYC_TYPE.ADRESS]: null,
     });
 
-    const [fileStatus, setFileStatus] = useState({
+    const [files, setFiles] = useState({
         [KYC_TYPE.PASSPORT]: null,
         [KYC_TYPE.PERSONAL_PICTURE]: null,
         [KYC_TYPE.COMPANY_REGISTRATION]: null,
@@ -66,7 +66,7 @@ export const KYC = () => {
                 return { [key]: item[key].data };
             })
             .reduce((acc, curr) => ({ ...acc, ...curr }), {});
-        setFileStatus(transformedResults);
+        setFiles(transformedResults);
     };
 
     useEffect(() => {
@@ -87,28 +87,33 @@ export const KYC = () => {
                 ...uploadingFiles,
                 [selectingType]: inputRef.current.files[0],
             });
-            backendapi.uploadKYCByType(type, inputRef.current.files[0]);
+            backendapi.uploadKYCByType(
+                selectingType,
+                inputRef.current.files[0]
+            );
         }
     };
 
-    const handleRemove = (index) => {
-        setFileStatus((prev) => {
-            prev[index] = false;
+    const handleUpload = async () => {
+        const arrayWithResults = await Promise.all(
+            Object.keys(uploadingFiles).map((type) =>
+                backendapi.uploadKYCByType(type, uploadingFiles[type])
+            )
+        );
+        console.log(arrayWithResults);
+    };
 
-            return [...prev];
-        });
-
-        setStatusIndex(index);
+    const handleRemove = (type) => {
+        setUploadingFiles({ ...uploadingFiles, [type]: null });
     };
 
     const handleSelectType = (id) => {
-        console.log(id);
         setSelectingType(id);
     };
 
     return (
         <div className={styles.kyc}>
-            {selectingType && (
+            {!files[selectingType] ? (
                 <div className={styles.kycDrop}>
                     <img src={File} alt="" />
 
@@ -128,6 +133,10 @@ export const KYC = () => {
                         <div className={styles.size}>10MB max file size</div>
                     </div>
                 </div>
+            ) : (
+                <div className={styles.kycDrop}>
+                    <img src={files[selectingType]} />
+                </div>
             )}
 
             <div className={styles.kycList}>
@@ -137,32 +146,38 @@ export const KYC = () => {
                             selectingType === item.id ? styles.itemActive : ""
                         }`}
                         key={index}
-                        onClick={() => console.log("HELLO WORLD")}
+                        onClick={() => handleSelectType(item.id)}
                     >
                         <div className={styles.kycLabel}>{item.label}</div>
 
-                        {uploadingFiles[item.id] && (
+                        {uploadingFiles[item.id] ? (
                             <div
                                 className={styles.kycStatus}
-                                onClick={() => handleRemove(index)}
+                                onClick={() => handleRemove(item.id)}
                             >
                                 <p>
                                     {uploadingFiles[item.id]
                                         ? uploadingFiles[item.id].name
                                         : ""}
                                 </p>
-
-                                <img
-                                    src={fileStatus[item.id] ? Correct : Fail}
-                                    alt=""
-                                />
+                                <img src={Fail} alt="" />
                             </div>
+                        ) : (
+                            <>
+                                <p>
+                                    {files[item.id] ? files[item.id].name : ""}
+                                </p>
+                                <img src={Correct} alt="" />
+                            </>
                         )}
                     </div>
                 ))}
             </div>
 
-            <Buttons functions={["", ""]} buttons={["Cancel", "Confirm"]} />
+            <Buttons
+                functions={["", handleUpload]}
+                buttons={["Cancel", "Confirm"]}
+            />
         </div>
     );
 };

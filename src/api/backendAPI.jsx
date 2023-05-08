@@ -455,10 +455,15 @@ export default class backendAPI {
         }
     }
 
-    async uploadKYCByType(type, formData) {
+    async uploadKYCByType(type, file) {
         try {
+            if (!file) {
+                return null;
+            }
+            const formData = new FormData();
             const userId = localStorage.getItem("userId");
             const url = `${this.baseURL}/auth/${userId}/upload_kyc?type=${type}`;
+            formData.append("file", file);
             const options = {
                 method: "POST",
                 headers: {
