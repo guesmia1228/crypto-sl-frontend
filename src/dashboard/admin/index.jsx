@@ -354,7 +354,7 @@ const fetchGoldData = async () => {
     <>
       <div className={styles.body}>
         <Header
-          title={`${type === "admin" ? "Admin" : type === "diamond" ? "Diamond" : "Gold"
+          title={`${type === "admin" ? "Admin" : type === "diamond" ? "Senior IB" : "IB"
             } Dashboard`}
         />
         <TopInfo
@@ -481,18 +481,42 @@ const fetchGoldData = async () => {
                   secure
                 />
 
-                <Options
+                {type === "gold" && <Options
+                  label="Roles"
+                  value={value}
+                  options={[
+                    "Vendor",
+                    "Affiliate"
+                  ]}
+                  dashboard
+                  setValue={setValue}
+                />}
+                {type === "admin" && <Options
                   label="Roles"
                   value={value}
                   options={[
                     "Vendor",
                     "Affiliate",
-                    "Diamond Partner",
-                    "Gold Partner",
+                    "IB",
+                    "Senior IB",
                   ]}
                   dashboard
                   setValue={setValue}
-                />
+                />}
+                {type === "diamond" && <Options
+                  label="Roles"
+                  value={value}
+                  options={[
+                    "Vendor",
+                    "Affiliate",
+                    "IB",
+                    "Senior IB",
+                  ]}
+                  dashboard
+                  setValue={setValue}
+                />}
+
+
               </div>
               <div className={styles.modalButtons}>
                 <div
