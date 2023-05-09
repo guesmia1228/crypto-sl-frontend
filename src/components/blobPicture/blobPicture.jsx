@@ -9,10 +9,9 @@ const BlobPicture = () => {
 
     return (
     <div>
-      {base64Data && (
+      {(
         <img
-          src={`data:image/png;base64,${base64Data}`}
-          alt="Base64 Image"
+          src={`${base64Data}`}
           style={{ maxWidth: '100%', height: 'auto' }}
         />
       )}
