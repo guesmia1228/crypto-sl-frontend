@@ -40,13 +40,17 @@ const LoginBox = () => {
         const isAffiliate = roleArray.includes("ROLE_AFFILIATE"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
         const isDiamond = roleArray.includes("ROLE_DIAMOND_PARTNER"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
         const isGold = roleArray.includes("ROLE_GOLD_PARTNER"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
+        const isIbLeader = roleArray.includes("ROLE_IB_LEADER"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
 
 
         if (isAdmin) { navigate("/dashboard/admin"); }
         else if (isAffiliate) { navigate("/dashboard/affiliate"); }
         else if (isVendor) { navigate("/dashboard/vendor"); }
         else if (isGold) { navigate("/dashboard/gold"); }
+        else if (isIbLeader) { navigate("/dashboard/ib-leader"); }
         else if (isDiamond) { navigate("/dashboard/diamond"); }
+        
+        
 
       }
     }
@@ -71,11 +75,13 @@ const LoginBox = () => {
       const isAffiliate = roleArray.includes("ROLE_AFFILIATE"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
       const isDiamond = roleArray.includes("ROLE_DIAMOND_PARTNER"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
       const isGold = roleArray.includes("ROLE_GOLD_PARTNER"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
+      const isIbLeader = roleArray.includes("ROLE_IB_LEADER");
       if (isAdmin) { navigate("/dashboard/admin"); }
         else if (isAffiliate) { navigate("/dashboard/affiliate"); }
         else if (isVendor) { navigate("/dashboard/vendor"); }
         else if (isGold) { navigate("/dashboard/gold"); }
         else if (isDiamond) { navigate("/dashboard/diamond"); }
+        else if (isIbLeader) { navigate("/dashboard/ib-leader"); }
     } catch (error) {
       setErrorMessage("There was an error logging in");
     }

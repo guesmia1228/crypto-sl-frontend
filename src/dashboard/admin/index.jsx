@@ -606,7 +606,7 @@ const fetchGoldData = async () => {
                   Cancel
                 </div>
                 <Button onClick={addUser} color="white">Add User</Button>
-              </div>feat/kyc-feature
+              </div>
             </div>
           </ModalOverlay>
         )}
