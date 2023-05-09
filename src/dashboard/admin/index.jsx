@@ -579,8 +579,7 @@ const fetchGoldData = async () => {
                   options={[
                     "Vendor",
                     "Affiliate",
-                    "IB",
-                    "Senior IB",
+                    "IB"
                   ]}
                   dashboard
                   setValue={setValue}
