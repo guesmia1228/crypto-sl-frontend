@@ -270,6 +270,8 @@ export default class backendAPI {
             localStorage.setItem("username", data.username);
             localStorage.setItem('profile_pic', data.profileImage);
             localStorage.setItem('roles', data.roles);
+            localStorage.setItem('country',data.country);
+            localStorage.setItem('requireKyc',data.requireKyc)
             return response;
         } catch (error) {
             return null; // or return some default value

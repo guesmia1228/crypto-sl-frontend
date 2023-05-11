@@ -22,6 +22,11 @@ const nav = [
     </div>,
 ];
 
+const nav_kyc = [
+    "Profile",
+    "Change Password"
+];
+
 const instruction = [
     {
         title: "Personal information",
@@ -43,6 +48,7 @@ const instruction = [
 const SettingsBody = ({ type }) => {
     const backendapi = new backendAPI();
     const [active, setActive] = useState(0);
+    const [requireKyc, setRequireKyc] = useState(localStorage.getItem("requireKyc"))
     const [profilePicUrl, setProfilePicUrl] = useState(
         localStorage.getItem("profile_pic")
     );
@@ -52,6 +58,7 @@ const SettingsBody = ({ type }) => {
         const handleStorageChange = () => {
             setProfilePicUrl(localStorage.getItem("profile_pic"));
             setCounter(counter + 1);
+            setRequireKyc(localStorage.setItem("requireKyc"));
         };
 
         async function checkJwtAndNavigate() {
@@ -62,6 +69,9 @@ const SettingsBody = ({ type }) => {
                 const isAdmin = roleArray.includes("ROLE_ADMIN"); // Überprüft, ob "ROLE_ADMIN" im Array enthalten ist
                 const isVendor = roleArray.includes("ROLE_VENDOR"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
                 const isAffiliate = roleArray.includes("ROLE_AFFILIATE"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
+
+                console.log(requireKyc)
+
                 if (isAdmin) {
                     setLink("/dashboard/admin");
                 } else if (isAffiliate) {
@@ -126,8 +136,21 @@ const SettingsBody = ({ type }) => {
             </div>
 
             <div className={`${styles.settingsBody} card`}>
-                <div className={styles.settingsNav}>
-                    {nav.map((item, index) => (
+            <div className={styles.settingsNav}>
+                    {requireKyc === "true" && nav.map((item, index) => (
+                        <div
+                            className={styles.item}
+                            onClick={() => setActive(index)}
+                            style={{
+                                borderColor:
+                                    active === index ? "#fff" : "transparent",
+                                color: active === index ? "#fff" : "#c4c4c4",
+                            }}
+                        >
+                            {item}
+                        </div>
+                    ))}
+                    {requireKyc === "false" && nav_kyc.map((item, index) => (
                         <div
                             className={styles.item}
                             onClick={() => setActive(index)}

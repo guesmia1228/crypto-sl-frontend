@@ -236,6 +236,7 @@ const Signup = () => {
     setEmail("");
     setPassword("");
     setUseOption("Choose Options");
+    setCountryOption("Choose Country")
   };
 
   async function submitForm() {
@@ -246,6 +247,7 @@ const Signup = () => {
       email: Email,
       password: Password,
       roles: [UseOption],
+      country: CountryOption,
       affiliate: localStorage.getItem("affiliateJoined"),
     };
     resetForm();
