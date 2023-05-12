@@ -147,7 +147,7 @@ const LoginBox = () => {
             <p>Remeber me</p>
           </div>
 
-          <p>{t("login.forgot")}</p>
+          <Link to="/forgot-password">  <p>{t("login.forgot")}</p></Link>
         </div>
 
         <Button link={null} onClick={handleClick}>
