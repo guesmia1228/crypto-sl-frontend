@@ -203,6 +203,13 @@
     background-color: rgba(255, 255, 255, 0.1);
 }
 
+.kycLabelSection {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    align-items: center;
+}
+
 .kycStatus {
     display: flex;
     align-items: center;
@@ -389,5 +396,16 @@
         width: 10rem;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+}
+
+.kycImageContainer {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    .kycImage {
+        height: 25rem;
     }
 }
