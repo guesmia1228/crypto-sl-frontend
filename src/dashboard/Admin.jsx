@@ -7,5 +7,4 @@ const Admin = ({ type }) => {
     </div>
   );
 };
-
 export default Admin;
