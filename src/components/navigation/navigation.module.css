@@ -50,6 +50,10 @@
   gap: 0.8rem;
 }
 
+.menu a {
+	text-wrap: nowrap;
+  }
+
 .hover:hover .dropdownMenu {
   transform: translate(-50%, 0);
   opacity: 1;
@@ -158,6 +162,7 @@
 
 .right {
   gap: 3rem;
+  margin-left: 20px;
 }
 
 .right p {
