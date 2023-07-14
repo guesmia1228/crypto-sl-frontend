@@ -41,33 +41,7 @@ const Navigation = () => {
             </li>
             <li className={`standard ${styles.hover}`}>
               <div className={styles.menu}>
-                {t("navigation.solutions")} <img src={DropDown} alt="" />
-              </div>
-              <div className={`${styles.dropdownMenu}`}>
-                <div className={`${styles.listContent}`}>
-                  <Link to="/payment" className={styles.item}>
-                    <img src={Payment} alt="" />
-                    <div>
-                      <p className={styles.headline}>
-                        {t("navigation.payment")} <img src={Arrow} alt="" />
-                      </p>
-                      <p className={styles.subheadline}>
-                        {t("navigation.paymentDescription")}
-                      </p>
-                    </div>
-                  </Link>
-                  <Link to="/payroll" className={styles.item}>
-                    <img src={Cash} alt="" />
-                    <div>
-                      <p className={styles.headline}>
-                        {t("navigation.payroll")} <img src={Arrow} alt="" />
-                      </p>
-                      <p className={styles.subheadline}>
-                        {t("navigation.payrollDescription")}
-                      </p>
-                    </div>
-                  </Link>
-                </div>
+                <Link to="/payment">{t("navigation.solutions")}</Link>
               </div>
             </li>
             <li className="standard">
