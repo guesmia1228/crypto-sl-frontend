@@ -167,12 +167,16 @@
 
 .right p {
   cursor: pointer;
-  color: var(--white-color);
+  color: var(--gray-color);
   pointer-events: initial;
 }
 
 .right > p {
   font-size: 1.3rem;
+}
+
+.right p:hover {
+	color: var(--white-color);
 }
 
 .button {

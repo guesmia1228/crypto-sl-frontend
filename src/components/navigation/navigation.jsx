@@ -55,8 +55,11 @@ const Navigation = () => {
         </div>
 
         <div className={styles.mobMenu}>
+		  <Link to="/login">
+            <div className={styles.mobButton}>{t("navigation.login")}</div>
+          </Link>
           <Link to="/signup">
-            <div className={styles.mobButton}>{t("navigation.menu")}</div>
+            <div className={styles.mobButton}>{t("navigation.signUp")}</div>
           </Link>
 
           <img src={Hamburger} alt="" onClick={() => setOpenMenu(true)} />
