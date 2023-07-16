@@ -200,6 +200,16 @@
   display: none !important;
 }
 
+.mobMenu .midWidth {
+	display: contents;
+}
+
+@media (max-width: 600px) {
+	.mobMenu .midWidth {
+		display: none !important;
+	}
+}
+
 .mobileMenu {
   position: fixed;
   top: 0;
