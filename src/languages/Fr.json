@@ -266,16 +266,13 @@
             "text": "Home"
           },
           {
-            "text": "Payroll"
-          },
-          {
-            "text": "Payment"
+            "text": "Solutions de paiement"
           },
           {
             "text": "Ressources "
           },
           {
-            "text": "Affiliate"
+            "text": "Programme d'affiliation"
           }
         ]
       },
@@ -283,7 +280,7 @@
         "label": "Connexion",
         "links": [
           {
-            "text": "Log in"
+            "text": "Login"
           },
           {
             "text": "S'inscrire "

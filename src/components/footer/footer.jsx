@@ -12,7 +12,6 @@ const content = [
   {
     links: [
       { link: "/" },
-      { link: "/payroll" },
       { link: "/payment" },
       { link: "/support" },
       { link: "/affiliate" },
