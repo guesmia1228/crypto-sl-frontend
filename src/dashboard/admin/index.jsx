@@ -48,10 +48,13 @@ const AdminBody = ({ type }) => {
   const [totalIncomesPercentage, setTotalIncomesPercentage] = useState(0);
   const [tableData, setTableData] = useState([]);
   const [graphData, setGraphData] = useState([]);
-  const [value, setValue] = useState("Filter");
+  const [value, setValue] = useState("");
   const [barContent, setBarContent] = useState([]);
-  const navigate = useNavigate();
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const [openModal, setOpenModal] = useState(false);
+
+  const navigate = useNavigate();
   const adminApi = new adminDashboardApi();
   const diamondApi = new diamondDashboardApi();
   const goldApi = new goldDashboardApi();
@@ -327,9 +330,6 @@ const fetchGoldData = async () => {
       percentage: totalRegistrationsPercentage,
     },
   ];
-
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
 
   const addUser = async () => {
 
