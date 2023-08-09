@@ -13,7 +13,7 @@ const Input = ({
   disabled,
   dashboard,
   number,
-  date,
+  date
 }) => {
   const handleChange = (e) => {
     setState(e.target.value);
@@ -31,14 +31,14 @@ const Input = ({
         </p>
       )}
 
-      <input
-        className={`${styles.input} ${dashboard ? styles.dashboardInput : ""}`}
-        type={secure ? "password" : number ? "number" : date ? "date" : "text"}
-        placeholder={placeholder}
-        value={value}
-        onChange={handleChange}
-        disabled={disabled}
-      />
+	<input
+		className={`${styles.input} ${dashboard ? styles.dashboardInput : ""}`}
+		type={secure ? "password" : number ? "number" : date ? "date" : "text"}
+		placeholder={placeholder}
+		value={value}
+		onChange={handleChange}
+		disabled={disabled}
+	/>
     </div>
   );
 };
@@ -98,3 +98,40 @@ export const Options = ({
     </div>
   );
 };
+
+export const Textarea = ({
+	label,
+	placeholder,
+	value,
+	setState,
+	disabled,
+	dashboard,
+	rows = 5,
+  }) => {
+	const handleChange = (e) => {
+	  setState(e.target.value);
+	};
+  
+	return (
+	  <div className={styles.textareaWrapper}>
+		{label && (
+		  <p
+			className={`${styles.label} ${
+			  dashboard ? styles.dashboardLabel : ""
+			}`}
+		  >
+			{label}
+		  </p>
+		)}
+  
+		<textarea
+		  className={`${styles.textarea} ${dashboard ? styles.dashboardTextarea : ""}`}
+		  placeholder={placeholder}
+		  value={value}
+		  onChange={handleChange}
+		  disabled={disabled}
+		  rows={rows}
+		/>
+	  </div>
+	);
+ };

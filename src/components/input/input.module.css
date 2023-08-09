@@ -1,4 +1,4 @@
-.inputWrapper .input {
+.inputWrapper .input, .textareaWrapper .textarea {
   width: 100%;
   background-color: transparent;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -6,19 +6,20 @@
   padding: 1.2rem 2rem;
   font-size: 1.2rem;
   color: var(--white-color);
+  font-family: 'Euclid';
 }
 
-.inputWrapper input::placeholder {
+.inputWrapper input::placeholder, .textareaWrapper textarea::placeholder {
   color: var(--gray-color);
 }
 
-.inputWrapper .label {
+.inputWrapper .label, .textareaWrapper .label {
   font-size: 1.2rem;
   margin-bottom: 1rem;
   font-weight: 500;
 }
 
-.input {
+.input, .textarea {
   position: relative;
 }
 
@@ -75,7 +76,7 @@
   font-size: 1.6rem !important;
 }
 
-.dashboardInput {
+.dashboardInput, .dashboardTextarea {
   font-size: 1.4rem !important;
   color: var(--gray-color) !important;
   padding: 1.6rem 2rem !important;
