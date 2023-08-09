@@ -4,6 +4,7 @@
   border-radius: 1rem;
   width: max-content;
   cursor: pointer;
+  height: min-content;
 }
 
 .button > a > div {
