@@ -304,6 +304,31 @@ export default class backendAPI {
         }
     }
 
+	async checkPassword(password){
+        try{
+            const url = `${this.baseURL}/auth/checkPassword`;
+			const requestBody = {
+				password: password
+			}
+            const options = {
+                method: "POST",
+                headers: {
+					"Content-Type": "application/json",
+                    Authorization: `Bearer ${this.token}`
+                },
+				body: JSON.stringify(requestBody)
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            return null; // or return some default value
+        }
+    }
+
     async checkPermissionAff() {
         if (!this.token) {
             // Der Benutzer ist nicht angemeldet
@@ -498,6 +523,54 @@ export default class backendAPI {
             }
             const data = await response.json();
             return { [type]: data };
+        } catch (error) {
+            return null; // or return some default value
+        }
+    }
+
+	async getWalletAddresses(){
+        try{
+            const url = `${this.baseURL}/wallet/addresses`;
+            const options = {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${this.token}`
+                },
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            return null; // or return some default value
+        }
+    }
+
+	async send(tokenAddress, amount, toAddress, password){
+        try{
+            const url = `${this.baseURL}/wallet/send`;
+			const requestBody = {
+				tokenAddress: tokenAddress,
+				amount: amount,
+				toAddress: toAddress,
+				password: password
+			}
+            const options = {
+                method: "POST",
+                headers: {
+					"Content-Type": "application/json",
+                    Authorization: `Bearer ${this.token}`
+                },
+				body: JSON.stringify(requestBody)
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            return data;
         } catch (error) {
             return null; // or return some default value
         }
