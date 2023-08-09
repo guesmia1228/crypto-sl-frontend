@@ -7,9 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 const Vendor = () => {
   return (
-    <div style={{ height: "100vh", overflow: "hidden" }}>
+    <div style={{ height: "100vh" }}>
       <VendorBody />
-      <Countdown />
     </div>
   );
 };

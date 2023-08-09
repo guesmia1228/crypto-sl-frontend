@@ -154,7 +154,7 @@ const Graph = (totalPrices) => {
     <div className={`card ${styles.graphCard}`}>
       <div className={styles.info}>
         <div className={styles.left}>
-          <div className={styles.label}>Incomes</div>
+          <div className={styles.label}>Income</div>
           <div className={styles.graphAmount}>{getTotalIncome(totalPrices.data)}</div>
         </div>
 

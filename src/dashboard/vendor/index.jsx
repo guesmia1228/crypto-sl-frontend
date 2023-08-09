@@ -16,9 +16,11 @@ import ProfileBox from "../profileBox/profileBox";
 import Header from "../header/header";
 import Graph from "../graph/graph";
 import { transformNumber } from "../func/transformNumber";
+import vendorDashboardApi from "../../api/vendorDashboardApi";
 
 const VendorBody = () => {
   const backendAPI = new backend_API();
+  const dashboardApi = new vendorDashboardApi();
 
   const navigate = useNavigate();
 
@@ -33,29 +35,40 @@ const VendorBody = () => {
     }
   };
 
+  /*
   const [signUps, setSignUps] = useState(0);
   const [signUpsPercentage, setSignUpsPercentage] = useState(0.0);
   const [allClicks, setAllClicks] = useState(0);
   const [allClicksPercentage, setAllClicksPercentage] = useState(0);
   const [income, setIncome] = useState(0);
   const [incomePercentage, setIncomePercentage] = useState(0);
+  */
+ const [totalIncome, setTotalIncome] = useState(0);
+ const [totalIncomePercentage, setTotalIncomePercentage] = useState(0);
+ const [incomeLast30Days, setIncomeLast30Days] = useState(0);
+ const [incomeLast30DaysPercentage, setIncomeLast30DaysPercentage] = useState(0);
+ const [incomeToday, setIncomeToday] = useState(0);
+ const [incomeTodayPercentage, setIncomeTodayPercentage] = useState(0);
+ const [payments, setPayments] = useState(0);
+ const [paymentsPercentage, setPaymentsPercentage] = useState(0);
 
   const cardsContent = [
     {
-      title: "Income Today",
-      amount: income,
-      percentage: incomePercentage,
+      title: "Income: Today",
+      amount: incomeToday,
+      //percentage: incomeTodayPercentage,
     },
     {
-      title: "Income this month",
-      amount: allClicks,
-      percentage: allClicksPercentage,
+      title: "Income: Last 30 days",
+      amount: incomeLast30Days,
+      //percentage: incomeLast30DaysPercentage,
     },
     {
       title: "Total income",
-      amount: signUps,
-      percentage: signUpsPercentage,
+      amount: totalIncome,
+      //percentage: totalIncomePercentage,
     },
+	/*
     {
       title: "Employees on Payroll",
       amount: income,
@@ -66,25 +79,36 @@ const VendorBody = () => {
       amount: allClicks,
       percentage: allClicksPercentage,
     },
+	*/
     {
       title: "Payments",
-      amount: signUps,
-      percentage: signUpsPercentage,
+      amount: payments,
+      //percentage: paymentsPercentage,
     },
   ];
 
-  const fillCards = (data) => {
-    setAllClicks(data.allClicks);
-    setAllClicksPercentage(data.allClicksPercentage);
-    setIncome(data.income);
-    setIncomePercentage(data.incomePercentage);
-    setSignUps(data.signUps);
-    setSignUpsPercentage(data.signUpsPercentage);
-  };
-
   useEffect(() => {
-    checkPermissions();
+    async function fetchData() {
+      fetchAffData();
+    }
+    fetchData();
   }, []);
+
+  const fetchAffData = async () => {
+    const result = await dashboardApi.checkPermission();
+    if (result !== true) {
+      navigate("/login");
+    } else {
+		const getPromises = [
+			dashboardApi.getTotalIncome(),
+			dashboardApi.getIncomeLast30Days(),
+		  ];
+		
+		const [totalIncome, incomeLast30Days] = await Promise.allSettled(getPromises);
+		setTotalIncome(totalIncome.value);
+		setIncomeLast30Days(incomeLast30Days.value);
+    }
+  }
 
   return (
     <div className={`${styles.body}`}>
