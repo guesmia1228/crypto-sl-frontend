@@ -114,7 +114,7 @@
       ],
       "dataContent": [
       {
-      "title": "عمولة 3.5%",
+      "title": "عمولة %3",
       "description": "تجربة معالجة دفع غير مسبوقة، تتميز بمعدلات تحويل قوية، وطرق دفع شائعة وبديهية، ومعاملات سريعة وآمنة.",
       "list": [
       "معدلات تحويل قوية",
@@ -157,7 +157,7 @@
         "paymentTitleP1": "0 يورو رسوم مقدمة، 0 يورو رسوم شهرية",
         "paymentTitleP2": "ادفع فقط عند الحصول على النتائج",
         "paymentCard1Title": "بدائي - بائع",
-        "paymentCard1Description": "3.5% عمولة",
+        "paymentCard1Description": "3% عمولة",
         "paymentCard2Title": "مخصص - رائد الأعمال",
         "paymentCard2Description": "100,000+ يورو عملية شهرية",
         "paymentButton": "التسجيل مجانا",

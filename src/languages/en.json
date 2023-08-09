@@ -114,7 +114,7 @@
     ],
     "dataContent": [
       {
-        "title": "3.5% Commission",
+        "title": "3% Commission",
         "description": "Experience unparalleled payment processing, featuring strong conversion rates, popular and intuitive payment methods, and fast, safe transactions.",
         "list": [
           "Strong conversion rates",
@@ -157,7 +157,7 @@
     "paymentTitleP1": "0€ Upfront Fee, 0€ Monthly Fee ",
     "paymentTitleP2": "Pay Only for Results",
     "paymentCard1Title": "Basic - Vendor",
-    "paymentCard1Description": "3.5 % Comission",
+    "paymentCard1Description": "3% Commission",
     "paymentCard2Title": "Customized - Enterpriser",
     "paymentCard2Description": "100,000+ EUR monthly transaction ",
     "paymentButton": "Sign Up For Free",
