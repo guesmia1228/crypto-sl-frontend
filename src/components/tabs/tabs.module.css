@@ -1,0 +1,20 @@
+.tabBody {
+    border-radius: 0.5rem;
+    padding: 3rem 3rem 5rem 3rem;
+}
+
+.tabNav {
+    display: flex;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    gap: 5rem;
+    font-size: 1.6rem;
+}
+
+.tabNavItem {
+    transform: translateY(0.1rem);
+    padding: 0 1rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid transparent;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
