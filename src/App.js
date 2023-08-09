@@ -36,6 +36,7 @@ import Admin from "./dashboard/Admin";
 import Kyc from "./dashboard/Kyc";
 import CookieBanner from "./components/cookieBanner/cookieBanner";
 import Cookies from "js-cookie";
+import { MessageContextProvider } from "./context/message";
 
 function App() {
   useEffect(() => {
@@ -58,6 +59,7 @@ function App() {
 
   return (
     <div className="App">
+	<MessageContextProvider>
       <BrowserRouter>
         <ScrollToTop>
           <Routes>
@@ -274,6 +276,7 @@ function App() {
         {/* COOKIE BANNER */}
         {!ck  && <CookieBanner close={() => setCK(true)} />}
       </BrowserRouter>
+	</MessageContextProvider>
     </div>
   );
 }
