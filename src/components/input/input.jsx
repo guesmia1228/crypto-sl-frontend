@@ -1,7 +1,9 @@
 import styles from "./input.module.css";
 
 import dropDown from "../../assets/icon/dropdown.svg";
-import { useState } from "react";
+import AttachmentImage from "../../assets/icon/attachment.svg";
+import Delete from "../../assets/icon/delete.svg";
+import { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 const Input = ({
@@ -135,3 +137,59 @@ export const Textarea = ({
 	  </div>
 	);
  };
+
+ export const Attachment = ({ label, onUpload, onDelete, value, dashboard }) => {
+	const inputRef = useRef(null);
+  
+	const [text, setText] = useState(value ? value : false);
+  
+	const handleClick = () => {
+		inputRef.current.click();
+	};
+  
+	const allowedExtensions = ["jpg", "jpeg", "png", "JPG", "PNG", "JPEG"];
+  
+	function checkFileExtension(extension) {
+		return allowedExtensions.includes(extension);
+	}
+  
+	const handleChange = () => {
+		const file = inputRef.current.files[0];
+		const fileName = inputRef.current.value.split("\\").pop();
+		var extension = fileName.split(".").pop();
+		console.log(extension);
+		if(checkFileExtension(extension)){
+			setText(fileName);
+			onUpload(file);
+		} else{
+			//todo throw new Error maybe with toast!
+		}
+	};
+  
+	return (
+		<div className={styles.attachmentWrapper}>
+			{label && (
+				<p
+					className={`${styles.label} ${
+					dashboard ? styles.dashboardLabel : ""
+					}`}
+				>
+					{label}
+				</p>
+				)}
+			<div className={styles.attachment}>
+				<img src={AttachmentImage} alt="Attachment" onClick={handleClick} />
+				<p style={{ color: text ? "#fff" : "#c4c4c4" }} onClick={handleClick} >
+					{text ? text : "Add attachment"}
+				</p>
+				<img src={Delete} alt="Delete attachment" onClick={() => { onDelete(); setText(null)} } className={styles.deleteLogo} />
+			</div>
+			<input
+				ref={inputRef}
+				className={styles.hideInput}
+				type="file"
+				onChange={handleChange}
+			/>
+		</div>
+	);
+  };

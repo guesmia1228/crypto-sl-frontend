@@ -1,4 +1,4 @@
-.inputWrapper .input, .textareaWrapper .textarea {
+.inputWrapper .input, .textareaWrapper .textarea, .attachmentWrapper .attachment {
   width: 100%;
   background-color: transparent;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -9,17 +9,17 @@
   font-family: 'Euclid';
 }
 
-.inputWrapper input::placeholder, .textareaWrapper textarea::placeholder {
+.inputWrapper input::placeholder, .textareaWrapper textarea::placeholder, .attachmentWrapper .attachment::placeholder {
   color: var(--gray-color);
 }
 
-.inputWrapper .label, .textareaWrapper .label {
+.label {
   font-size: 1.2rem;
   margin-bottom: 1rem;
   font-weight: 500;
 }
 
-.input, .textarea {
+.input, .textarea, .attachment {
   position: relative;
 }
 
@@ -76,8 +76,26 @@
   font-size: 1.6rem !important;
 }
 
-.dashboardInput, .dashboardTextarea {
+.dashboardInput, .dashboardTextarea, .attachment {
   font-size: 1.4rem !important;
   color: var(--gray-color) !important;
   padding: 1.6rem 2rem !important;
 }
+
+/* Attachment */
+
+.attachment {
+	display: flex;
+	gap: 1.5rem;
+	cursor: pointer;
+}
+
+.attachment p {
+	flex: 1 1;
+}
+
+.hideInput {
+	position: absolute;
+	pointer-events: none;
+	opacity: 0;
+  }

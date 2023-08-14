@@ -1,6 +1,6 @@
 import styles from "./input.module.css";
 
-import Image from "../../assets/icon/attachment.svg";
+import AttachmentImage from "../../assets/icon/attachment.svg";
 import { useRef, useState } from "react";
 
 const Input = ({ label, placeholder, type = "text", setState, value }) => {
@@ -51,12 +51,11 @@ export const Attachment = ({ label, onUpload }) => {
 
   return (
     <>
-    
       <div className={styles.input}>
         <p>{label}</p>
 
         <div className={styles.attachment} onClick={handleClick}>
-          <img src={Image} alt="" />
+          <img src={AttachmentImage} alt="" />
           <p style={{ color: text ? "#fff" : "#c4c4c4" }}>
             {text ? text : "Add attachment"}
           </p>

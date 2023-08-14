@@ -13,6 +13,7 @@ import ModalOverlay from "../modal/modalOverlay";
 import vendorDashboardApi from "../../api/vendorDashboardApi";
 import MessageComponent from "../../components/message";
 import { MessageContext } from "../../context/message";
+import { Attachment } from "../../components/input/input";
 import { useContext } from "react";
 
 const ProductBody = () => {
@@ -21,41 +22,94 @@ const ProductBody = () => {
 	const [description, setDescription] = useState("");
 	const [price, setPrice] = useState("");
 	const [stock, setStock] = useState("");
-	const [image, setImage] = useState("");
-
+	const [image, setImage] = useState(null);
+	const [productId, setProductId] = useState(null);  // Set to productId if updating product
 	const [products, setProducts] = useState([]);
-
-	const [value, setValue] = useState("Filter");
-	const [password, setPassword] = useState("");
-	const [email, setEmail] = useState("");
+	const [signedImagePaths, setSignedImagePaths] = useState([]);
 
 	const { setInfoMessage, setErrorMessage } = useContext(MessageContext);
 
 	const dashboardApi = new vendorDashboardApi();
 
+	async function loadProducts() {
+		const newProducts = await dashboardApi.getProducts();
+		if (newProducts)
+			setProducts(newProducts);
+
+		// Get signed image paths
+		const newSignedImagePaths = await Promise.all(newProducts.map(product => dashboardApi.getSignedImagePath(product.id)));
+		if (newSignedImagePaths)
+			setSignedImagePaths(newSignedImagePaths);
+	}
+
 	useEffect(() => {
-		async function fetchData() {
-			const newProducts = await dashboardApi.getProducts();
-			console.log(newProducts)
-			if (newProducts)
-				setProducts(newProducts);
-		}
-		fetchData();
+		loadProducts();
 	  }, []);
 
-	const addProduct = async () => {
-		const resp = await dashboardApi.addProduct(name, description, price, stock, image);
-		if (resp) {
-			setInfoMessage("Product added successfully!");
-			const newProducts = await dashboardApi.getProducts();
-			console.log(newProducts)
-			if (newProducts)
-				setProducts(newProducts);
+	function showModal(updateProductId) {
+		if (updateProductId) {
+			const product = products.find((product) => product.id === updateProductId);
+
+			setProductId(updateProductId);
+			setName(product.name);
+			setDescription(product.description);
+			setPrice(product.price);
+			setStock(product.stock);
+			let imageName = null;
+			if (product.s3Key)
+				imageName = product.s3Key.split("_").pop();
+			setImage(imageName);
+
+			setOpenModal("update");
 		} else {
-			setErrorMessage("Could not add a new product!");
+			setProductId(null);
+			setName("");
+			setDescription("");
+			setPrice("");
+			setStock("");
+			setImage(null);
+
+			setOpenModal("add");
+		}
+	}
+
+	const addOrUpdateProduct = async () => {
+		const resp1 = await dashboardApi.upsertProduct(productId, name, description, price, stock, image);
+		const imageProductId = resp1.id;
+
+		let resp2 = null;
+		if (image) {
+			console.log("Uploading image for product id: " + imageProductId);
+            resp2 = await dashboardApi.uploadProductImage(imageProductId, image);
+        } else {
+			resp2 = await dashboardApi.deleteProductImage(imageProductId, image);
 		}
 
+		if (resp1 && resp2) {
+			if (productId !== null)
+				setInfoMessage("Product updated successfully!");
+			else
+				setInfoMessage("Product added successfully!");
+		} else {
+			if (productId !== null)
+				setErrorMessage("Could not update the product!");
+			else
+				setErrorMessage("Could not add a new product!");
+		}
+
+		loadProducts();
 		setOpenModal(false);
+	};
+
+	const deleteProduct = async (productId) => {
+		const resp = await dashboardApi.deleteProduct(productId);
+		if (resp) {
+			setInfoMessage("Product deleted successfully!");
+		} else {
+			setErrorMessage("Could not delete the product!");
+		}
+		loadProducts();
+
 	};
 
   return (
@@ -73,29 +127,48 @@ const ProductBody = () => {
 						</>
 					}
 				>
-					<Button color="white" onClick={() => setOpenModal(true)}>
+					<Button
+						color="white"
+						onClick={() => showModal(null) }
+					>
 						Create New product
 					</Button>
 				</TopInfo>
 
 				<div className={styles.row}>
-					{products.map((product) => (
+					{products.map((product, index) => (
 						<Card
+							key={product.id}
 							title={product.name}
 							description={product.description}
 							price={product.price + " $"}
-							image=""
+							image={signedImagePaths[index]}
+							onClickEdit={() =>
+								showModal(product.id)
+							}
+							onClickDelete={() => deleteProduct(product.id)}
 						/>
 					))}
 				</div>
 			</div>
+
 			<div className={styles.modalWrapper}>
-				{openModal && (
+				{openModal !== false && (
 					<ModalOverlay>
 						<div className={styles.modal}>
-							<h4>Create Product</h4>
+							<h4>
+								{openModal === "add" ? "Create" : "Update"}{" "}
+								Product
+							</h4>
 
 							<div className={styles.modalInputs}>
+								<Attachment
+									label="Product image"
+									onUpload={(file) => setImage(file)}
+									onDelete={() => setImage(null)}
+									value={image}
+									dashboard
+								/>
 								<Input
 									dashboard
 									label="Name"
@@ -109,33 +182,43 @@ const ProductBody = () => {
 									placeholder="Enter description"
 									value={description}
 									setState={setDescription}
+									rows={2}
 								/>
-								<Input
-									dashboard
-									label="Price"
-									placeholder="Enter price"
-									value={price}
-									setState={setPrice}
-									number
-								/>
-								<Input
-									dashboard
-									label="Stock"
-									placeholder="Enter stock"
-									value={stock}
-									setState={setStock}
-									number
-								/>
+								<div className={styles.inputRow}>
+									<Input
+										dashboard
+										label="Price"
+										placeholder="Enter price"
+										value={price}
+										setState={setPrice}
+										number
+									/>
+									<Input
+										dashboard
+										label="Stock"
+										placeholder="Enter stock"
+										value={stock}
+										setState={setStock}
+										number
+									/>
+								</div>
 							</div>
 							<div className={styles.modalButtons}>
 								<div
 									className={styles.button}
-									onClick={() => setOpenModal(false)}
+									onClick={() => {
+										setOpenModal(false);
+										setProductId(null);
+									}}
 								>
 									Cancel
 								</div>
-								<Button onClick={addProduct} color="white">
-									Add Product
+								<Button
+									onClick={addOrUpdateProduct}
+									color="white"
+								>
+									{openModal === "add" ? "Add" : "Update"}{" "}
+									Product
 								</Button>
 							</div>
 						</div>
@@ -148,15 +231,17 @@ const ProductBody = () => {
 
 export default ProductBody;
 
-const Card = ({ title, description, image, price }) => {
+const Card = ({ title, description, image, price, onClickEdit, onClickDelete }) => {
   return (
     <div className={`card ${styles.card}`}>
       <div className={styles.imageWrapper}>
         <div className={styles.icons}>
-          <img src={Edit} alt="" />
-          <img src={Delete} alt="" />
+          <img src={Edit} alt="Edit product" onClick={onClickEdit} />
+          <img src={Delete} alt="Delete product" onClick={onClickDelete} />
         </div>
-        <img src={image} alt="" className={styles.image} />
+        {image &&
+			<img src={image} alt={title} className={styles.image} />
+		}
       </div>
 
       <div className={styles.body}>
