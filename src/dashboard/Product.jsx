@@ -1,8 +1,15 @@
 import ProductBody from "./product/index";
-import Sidebar from "./sidebar/sidebar";
+import { Helmet } from "react-helmet";
 
 const Product = () => {
-  return <ProductBody />;
+	return (
+		<>
+			<Helmet>
+				<title>Nefentus | Products</title>
+			</Helmet>
+			<ProductBody />;
+		</>
+	)
 };
 
 export default Product;
