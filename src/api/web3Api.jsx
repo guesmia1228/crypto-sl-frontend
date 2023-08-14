@@ -69,8 +69,6 @@ export class uniswapApi {
 	 * @returns The price of the token in USDC
 	 */
 	async getUSDCPriceForToken(tokenAddress, decimalsToken0=null, decimalsToken1=null) {
-		console.log("getUSDCPriceForToken: " + tokenAddress);
-
 		if (tokenAddress === USDC_CONTRACT_ADDRESS) {
 			return 1;
 		}
@@ -110,18 +108,15 @@ export class web3Api {
 	}
 
 	async getBalanceToken(tokenAddress, walletAddress) {
-		console.log("getBalanceToken: " + tokenAddress + " " + walletAddress);
 		if (!tokenAddress)
 			return await this.getBalanceNative(walletAddress);
 
 		const tokenContract = new ethers.Contract(tokenAddress, ERC20_ABI, this.provider);
-		console.log("tokenContract: " + tokenContract)
 		const [digits, balanceWei] = await Promise.all([
 			tokenContract.decimals(),
 			tokenContract.balanceOf(walletAddress)
 		]);
-		console.log("digits: " + digits)
-		console.log("balanceWei: " + balanceWei)
+		
 		const balance = ethers.utils.formatUnits(balanceWei, digits);
 		return balance;
 	}
