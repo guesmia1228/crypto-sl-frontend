@@ -6,6 +6,7 @@ import Header from "../header/header";
 import PercentageInfo from "../percentageInfo/percentageInfo";
 import TopInfo from "../topInfo/topInfo";
 import ModalOverlay from "../modal/modalOverlay";
+import Table from "../../components/table";
 import copyClipboard from "../../assets/icon/copyClipboard.svg";
 
 import styles from "./wallet.module.css";
@@ -363,18 +364,11 @@ const Balances = ({balances, prices, metamask, walletAddress, fetchBalances}) =>
 									description={"You requested to withdraw funds from your account."}
 								/>
 
-								<table>
-									<tbody>
-										<tr>
-											<td>Amount:</td>
-											<td>{withdrawAmount} {withdrawCurrency}</td>
-										</tr>
-										<tr>
-											<td>Address:</td>
-											<td>{withdrawAddress}</td>
-										</tr>
-									</tbody>
-								</table>
+								<Table 
+									data={[["Amount:", `${withdrawAmount} ${withdrawCurrency}`], ["Address:", withdrawAddress]]} 
+									colSizes={[1, 3]} 
+									className={styles.withdrawalTable}
+								/>
 
 								<div className={styles.modalInputs}>
 									<Input

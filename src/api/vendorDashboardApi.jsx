@@ -220,4 +220,27 @@ export default class vendorDashboardApi {
 			return null; // or return some default value
 		}
 	}
+
+	async getOrders(productId) {
+        try {
+			const url = `${this.baseURL}/orders`;
+			const options = {
+				method: "GET",
+				headers: {
+					Authorization: `Bearer ${this.token}`
+				}
+			};
+			const response = await fetch(url, options);
+
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error("There was an error getting the orders", error);
+            return null;
+        }
+    }
 }

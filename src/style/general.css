@@ -18,6 +18,8 @@
   --gray-color: #c4c4c4;
   --blue-color: #0784b5;
   --linear-color: linear-gradient(90deg, #1595c2 0%, #66bfde 100%);
+  --success-color: #23c215;
+  --error-color: rgb(228, 46, 0);
 }
 
 /* General */
