@@ -1,6 +1,5 @@
 import WalletBody from "./wallet/index";
-import { ThirdwebProvider } from "@thirdweb-dev/react";
-import { metamaskWallet } from "@thirdweb-dev/react";
+import { ThirdwebProvider, metamaskWallet } from "@thirdweb-dev/react";
 import { Helmet } from "react-helmet";
 
 const Wallet = () => {

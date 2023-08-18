@@ -6,78 +6,29 @@ import Header from "../header/header";
 import PercentageInfo from "../percentageInfo/percentageInfo";
 import TopInfo from "../topInfo/topInfo";
 import ModalOverlay from "../modal/modalOverlay";
-
-import Bitcoin from "../../assets/icon/crypto/bitcoin.svg";
-import Polygon from "../../assets/icon/crypto/polygon.svg";
-import Cardano from "../../assets/icon/crypto/cardano.svg";
-import Binance from "../../assets/icon/crypto/binance.svg";
-import Ethereum from "../../assets/icon/crypto/ethereum.svg";
-import Tether from "../../assets/icon/crypto/tether.svg";
-import USDC from "../../assets/icon/crypto/usdc.svg";
 import copyClipboard from "../../assets/icon/copyClipboard.svg";
 
 import styles from "./wallet.module.css";
 import Input, { Options } from "./../../components/input/input";
 import { useState } from "react";
 import Button from "../../components/button/button";
-import Logo from "../../assets/logo/logo_n.png";
+import NefentusLogo from "../../assets/logo/logo_n.png";
 import MetaMaskLogo from "../../assets/logo/MetaMask.svg";
 import inputStyles from "../../components/input/input.module.css";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import MessageComponent from "../../components/message";
 import { MessageContext } from "../../context/message";
 import Tabs from "../../components/tabs";
-
+import useInternalWallet from "../../hooks/internalWallet";
+import useBalances from "../../hooks/balances";
+import usePrices from "../../hooks/prices";
+import { currencies } from "../../constants";
+import { formatTokenBalance, formatUSDBalance } from "../../utils";
 import { useConnect, useDisconnect, metamaskWallet, useConnectionStatus, useAddress } from "@thirdweb-dev/react";
 
-const currencies = [
-	{
-		icon: Ethereum,
-		name: "Ethereum",
-		abbr: "ETH",
-		address: null,
-		decimals: 18
-	},
-	{
-		icon: Tether,
-		name: "Tether",
-		abbr: "USDT",
-		address: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
-		decimals: 6
-	},
-	{
-		icon: USDC,
-		name: "USD Coin",
-		abbr: "USDC",
-		address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
-		decimals: 6
-	  },
-];
-
-function formatTokenBalance(x) {
-	const parsedFloat = parseFloat(x);
-	if (isNaN(parsedFloat)) {
-		return "loading";
-	} else {
-		return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-	}
-}
-
-function formatUSDBalance(x) {
-	const parsedFloat = parseFloat(x);
-	if (isNaN(parsedFloat)) {
-		return "loading";
-	} else {
-		return parsedFloat.toFixed(2).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-	}
-}
 
 const WalletBody = () => {
-	const backend_Api = new backendAPI();
-  	const [walletList, setWalletList] = useState([]);
-	const [prices, setPrices] = useState([initBalances()]);
-	const [allBalances, setAllBalances] = useState([initBalances(), initBalances()]);
-
+	let internalWalletAddress = useInternalWallet();
 	const metamask = {
 		connect: useConnect(),
 		disconnect: useDisconnect(),
@@ -86,59 +37,13 @@ const WalletBody = () => {
 		status: useConnectionStatus()
 	}
 
-	async function fetchInternalWalletAddresses() {
-		const newWalletList = await backend_Api.getWalletAddresses();
-		if (newWalletList) {
-			setWalletList(newWalletList);
-		}
-	}
-
-	async function fetchPrices() {
-		let providerSource = "thirdweb";
-		if (metamask.status === "connected") {
-			providerSource = "metamask";
-		}
-		const uniswapAPi = new uniswapApi(providerSource);
-
-		const addressesAndDecimals = currencies.map((currency) => [currency.address ? currency.address : uniswapAPi.WETH_CONTRACT_ADDRESS, currency.decimals]);
-		const pricesList = await Promise.all(addressesAndDecimals.map((element) => uniswapAPi.getUSDCPriceForToken(element[0], element[1], 6)));
-		setPrices(pricesList);
-	}
-
-	async function fetchBalances() {
-		let providerSource = "thirdweb";
-		if (metamask.status === "connected") {
-			providerSource = "metamask";
-		}
-		const web3API = new web3Api(providerSource);
-
-		const balancesEx = metamask.address ? await fetchBalanceForWallet(web3API, metamask.address) : initBalances();
-		const balancesIn = walletList.length > 0 ? await fetchBalanceForWallet(web3API, walletList[0]) : initBalances();
-		setAllBalances([balancesEx, balancesIn]);
-	}
-
-	async function fetchBalanceForWallet(web3API, walletAddress) {
-		const currency_addresses = currencies.map((currency) => currency.address);
-		const balances_list = await Promise.all(currency_addresses.map((address) => web3API.getBalanceToken(address, walletAddress)));
-		return balances_list;
-	}
-
-	function initBalances() {
-		return currencies.map((currency) => undefined);
-	}
-
-	useEffect(() => {
-		fetchInternalWalletAddresses();
-	}, []);
+	const { balances, fetchBalances } = useBalances(metamask);
+	const { prices, fetchPrices } = usePrices(metamask);
 
 	useEffect(() => {
 		fetchPrices();
 		fetchBalances();
 	}, [metamask.status, metamask.address]);
-
-	useEffect(() => {
-		fetchBalances();
-	}, [walletList]);
 
   	return (
 		<div className="dashboard-body">
@@ -168,11 +73,11 @@ const WalletBody = () => {
 						return (
 							<>
 								<img
-									src={Logo}
+									src={NefentusLogo}
 									className={styles.tabNavLogo}
-									alt="Internal Wallet"
+									alt="Nefentus Wallet"
 								/>{" "}
-								Internal
+								Nefentus Wallet
 							</>
 						);
 					}
@@ -181,7 +86,7 @@ const WalletBody = () => {
 					if (tabId === "metamask") {
 						return (
 							<Balances
-								balances={allBalances[0]}
+								balances={balances[0]}
 								prices={prices}
 								metamask={metamask}
 								walletAddress={metamask.address}
@@ -191,10 +96,10 @@ const WalletBody = () => {
 					} else if (tabId === "internal") {
 						return (
 							<Balances
-								balances={allBalances[1]}
+								balances={balances[1]}
 								prices={prices}
 								metamask={null}
-								walletAddress={walletList[0]}
+								walletAddress={internalWalletAddress}
 								fetchBalances={fetchBalances}
 							/>
 						);
@@ -324,7 +229,7 @@ const Balances = ({balances, prices, metamask, walletAddress, fetchBalances}) =>
 						</Button>
 					)}
 				</div>
-			</div>	
+			</div>
 		)
 	} else {
 		return (

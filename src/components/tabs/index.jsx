@@ -9,6 +9,7 @@ const Tabs = ({ tabIds, initActiveTab, getHeader, getBody, beforeChangeTab }) =>
 			<div className={styles.tabNav}>
 				{tabIds.map((tabId) => 
 					<div
+						key={tabId}
 						className={styles.tabNavItem}
 						onClick={() => { 
 							if (beforeChangeTab)

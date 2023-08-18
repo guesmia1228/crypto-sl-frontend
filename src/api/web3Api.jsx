@@ -1,4 +1,6 @@
 import { ethers } from "ethers";
+import { BigNumber } from "@ethersproject/bignumber";
+import { contractDeposits, currencies } from "../constants";
 import IUniswapV3PoolABI from '@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json'
 import IUniswapV3FactoryABI from '@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Factory.sol/IUniswapV3Factory.json'
 import ERC20_ABI from "../assets/abi/ERC20_ABI.json"
@@ -121,6 +123,8 @@ export class web3Api {
 		return balance;
 	}
 
+	/* Send cryptocurrency (native token or token) */
+
 	async send(tokenAddress, amount, toAddress) {
 		if (!tokenAddress)
 			return await this.sendNative(amount, toAddress);
@@ -146,5 +150,99 @@ export class web3Api {
 		const txRequest = await tokenContract.transfer(toAddress, ethers.utils.parseUnits(amount, decimals));
 		const txReceipt = await txRequest.wait();
 		return txReceipt;
+	}
+
+	/* Call deposit smart contract */
+	async callDepositContract(sellerAddress, affiliateAddress, brokerAddress, leaderAddress, stablecoinAddress, price) {
+		// Get min amount out
+		const uniswap = new uniswapApi();
+		const decimalsIn = 18;
+		const stablecoinDecimals = await uniswap.getDecimals(stablecoinAddress);
+		const priceConvert = await uniswap.getUSDCPriceForToken(uniswap.WETH_CONTRACT_ADDRESS, decimalsIn, stablecoinDecimals);
+		// Amount in token
+		const amountIn = price / priceConvert;
+		const amountInInt = Math.floor(amountIn * (10**decimalsIn));
+		// Amount in USD stablecoin
+		const minAmountOut = price*0.98*(10**stablecoinDecimals);
+
+		console.log("priceConvert: " + priceConvert);
+		console.log("amountIn: " + amountIn);
+		console.log("amountInInt: " + amountInInt);
+		console.log("minAmountOut: " + minAmountOut);
+
+		// Deposit contract
+		const contractInfo = contractDeposits[contractDeposits.length-1];
+		const signer = this.provider.getSigner();
+		const contract = new ethers.Contract(contractInfo.address, contractInfo.abi, signer);
+		const poolFee = 3000;
+
+		const timestampSent = Date.now();
+		const txRequest = await contract.deposit(sellerAddress, affiliateAddress, brokerAddress, leaderAddress, stablecoinAddress, minAmountOut, poolFee, {value: amountInInt});
+		const txReceipt = await txRequest.wait();
+		const timestampMined = Date.now();
+		// const transaction = await this.provider.getTransaction(txReceipt.transactionHash);
+
+		const info = this.parseReceipt(txRequest, txReceipt);
+		info.timestampSent = timestampSent;
+		info.timestampMined = timestampMined;
+		info.sellerAddress = sellerAddress;
+		info.affiliateAddress = affiliateAddress;
+		info.brokerAddress = brokerAddress;
+		info.leaderAddress = leaderAddress;
+		info.currencyAddress = null;
+		info.stablecoinAddress = stablecoinAddress;
+		return info;
+	}
+
+	parseReceipt(request, receipt) {
+		let info = {};
+
+		// Basic info
+		info.contractAddress = request.to;
+		info.status = receipt.status;
+
+		// Gas & value
+		info.gasPrice = BigNumber.from(request.gasPrice).toBigInt();
+		info.gasUsed = BigNumber.from(receipt.gasUsed).toBigInt();
+		info.value = BigNumber.from(request.value).toBigInt();
+		
+		// Amounts distributed
+		for (const event of receipt.events) {
+			if (event.event === "Distributed") {
+				const values = event.args.map((arg) => BigNumber.from(arg.hex).toBigInt());
+				// 	event Distributed(uint seller, uint affiliate, uint broker, uint leader, uint owner);
+				info = {...info,
+					sellerAmount: values[0],
+					affiliateAmount: values[1],
+					brokerAmount: values[2],
+					leaderAmount: values[3],
+					ownerAmount: values[4]
+				};
+			}
+		}
+
+		// Amount swapped
+		const decodeInterface = new ethers.utils.Interface(IUniswapV3PoolABI.abi);
+		for (const log of receipt.logs) {
+			try {
+				const swapReturn = decodeInterface.decodeEventLog("Swap", log.data, log.topics);
+				info.swappedAmount = BigNumber.from(swapReturn[3]).abs().toBigInt();
+			} catch (error) {
+			}
+		}
+
+		return info;
+	}
+
+	/**
+	 * Convert BigInts to String because they are not serializable.
+	 * @param {*} obj The boject to be converted
+	 */
+	convertBigIntToString(obj) {
+		for (const key of Object.keys(obj)) {
+			if (typeof obj[key] === 'bigint') {
+				obj[key] = obj[key].toString();
+			}
+		}
 	}
 }

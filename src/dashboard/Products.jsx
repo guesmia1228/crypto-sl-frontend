@@ -1,7 +1,7 @@
-import ProductBody from "./product/index";
+import ProductBody from "./products/index";
 import { Helmet } from "react-helmet";
 
-const Product = () => {
+const Products = () => {
 	return (
 		<>
 			<Helmet>
@@ -12,4 +12,4 @@ const Product = () => {
 	)
 };
 
-export default Product;
+export default Products;

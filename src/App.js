@@ -21,12 +21,13 @@ import Support from "./pages/Support";
 import Privacy from "./pages/Privacy";
 import Imprint from "./pages/Imprint";
 import PasswordForgot from "./pages/PasswordForgot";
+import Product from "./pages/Product";
 import { useEffect, useState } from "react";
 import AffiliateDashboard from "./dashboard/Affiliate";
 import Settings from "./dashboard/Settings";
 import Vendor from "./dashboard/Vendor";
 import ResetPassword from "./pages/ResetPassword";
-import Product from "./dashboard/Product";
+import Products from "./dashboard/Products";
 import DashboardLayout from "./dashboard/dashboardLayout/dashboardLayout";
 import Transactions from "./dashboard/Transactions";
 import PaymentDashboard from "./dashboard/Payment";
@@ -175,7 +176,7 @@ function App() {
                 path="/dashboard/product"
                 element={
                   <DashboardLayout>
-                    <Product />
+                    <Products />
                   </DashboardLayout>
                 }
               />
@@ -270,6 +271,17 @@ function App() {
                 }
               />
             </Route>
+			<Route 
+			  	path="/product/:productLink"
+			  	element={
+					<>
+						<Navigation />
+						
+						<Product />
+						<Footer />
+				  	</>
+				}
+			  />
           </Routes>
         </ScrollToTop>
         

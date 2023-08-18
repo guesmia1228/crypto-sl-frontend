@@ -575,4 +575,113 @@ export default class backendAPI {
             return null; // or return some default value
         }
     }
+
+	async getProduct(productLink){
+        try{
+            const url = `${this.baseURL}/product/${productLink}`;
+			let headers = {}
+			if (this.token) {
+				headers = {
+                    Authorization: `Bearer ${this.token}`
+                }
+			}
+
+            const options = {
+                method: "GET",
+                headers: headers,
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            return null; // or return some default value
+        }
+    }
+
+	async getProductImage(productLink){
+        try{
+            const url = `${this.baseURL}/productImage/${productLink}`;
+			let headers = {}
+			if (this.token) {
+				headers = {
+                    Authorization: `Bearer ${this.token}`
+                }
+			}
+
+            const options = {
+                method: "GET",
+                headers: headers,
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            return null; // or return some default value
+        }
+    }
+
+	async getHierarchy(userId){
+        try{
+            const url = `${this.baseURL}/hierarchy/${userId}`;
+			let headers = {}
+			if (this.token) {
+				headers = {
+                    Authorization: `Bearer ${this.token}`
+                }
+			}
+
+            const options = {
+                method: "GET",
+                headers: headers,
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            return null; // or return some default value
+        }
+    }
+
+	async setTransactionInfo(product, transactionInfo, buyerAddress){
+        try{
+            const url = `${this.baseURL}/transaction`;
+			let headers = {}
+			if (this.token) {
+				headers = {
+					"Content-Type": "application/json",
+                    Authorization: `Bearer ${this.token}`
+                }
+			}
+
+			const body = {
+				product: product,
+				transactionInfo: transactionInfo,
+				buyerAddress: buyerAddress
+			};
+
+            const options = {
+                method: "POST",
+                headers: headers,
+				body: JSON.stringify(body)
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+			console.log(error);
+            return null; // or return some default value
+        }
+    }
 }

@@ -14,6 +14,7 @@ import vendorDashboardApi from "../../api/vendorDashboardApi";
 import MessageComponent from "../../components/message";
 import { MessageContext } from "../../context/message";
 import { Attachment } from "../../components/input/input";
+import { Link } from "react-router-dom";
 import { useContext } from "react";
 
 const ProductBody = () => {
@@ -138,11 +139,8 @@ const ProductBody = () => {
 				<div className={styles.row}>
 					{products.map((product, index) => (
 						<Card
-							key={product.id}
-							title={product.name}
-							description={product.description}
-							price={product.price + " $"}
-							image={signedImagePaths[index]}
+							product={product}
+							imageSource={signedImagePaths[index]}
 							onClickEdit={() =>
 								showModal(product.id)
 							}
@@ -231,7 +229,7 @@ const ProductBody = () => {
 
 export default ProductBody;
 
-const Card = ({ title, description, image, price, onClickEdit, onClickDelete }) => {
+const Card = ({ product, imageSource, onClickEdit, onClickDelete }) => {
   return (
     <div className={`card ${styles.card}`}>
       <div className={styles.imageWrapper}>
@@ -239,19 +237,21 @@ const Card = ({ title, description, image, price, onClickEdit, onClickDelete }) 
           <img src={Edit} alt="Edit product" onClick={onClickEdit} />
           <img src={Delete} alt="Delete product" onClick={onClickDelete} />
         </div>
-        {image &&
-			<img src={image} alt={title} className={styles.image} />
+        {imageSource &&
+			<img src={imageSource} alt={product.title} className={styles.image} />
 		}
       </div>
 
       <div className={styles.body}>
-        <h4>{title}</h4>
+        <h4>{product.title}</h4>
 
-        <p className={styles.description}>{description}</p>
+        <p className={styles.description}>{product.description}</p>
 
-        <p className={styles.price}>{price}</p>
+        <p className={styles.price}>{product.price} USD</p>
 
-        <div className={styles.buttonMain}>Watch</div>
+        <div className={styles.buttonMain}>
+			<Link to={`/product/${product.link}`}>Watch</Link>
+		</div>
       </div>
     </div>
   );
