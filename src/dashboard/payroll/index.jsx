@@ -6,7 +6,7 @@ import styles from "./payroll.module.css";
 
 import Bitcoin from "../../assets/icon/crypto/bitcoin.svg";
 import Cardano from "../../assets/icon/crypto/cardano.svg";
-import Etherium from "../../assets/icon/crypto/etherium.svg";
+import Etherium from "../../assets/icon/crypto/ethereum.svg";
 import Polygon from "../../assets/icon/crypto/polygon.svg";
 
 import Profile from "../../assets/image/reviews/image3.png";
