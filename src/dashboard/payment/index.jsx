@@ -1,52 +1,102 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import QRCode from "react-qr-code";
 import { Options } from "../../components/input/input";
 import Header from "../header/header";
 import Input from "../../components/input/input";
+import Table from "../../components/table";
+import Button from "../../components/button/button";
+import CopyValue from "../copyValue";
 import styles from "./payment.module.css";
-
 import Checkmark from "../../assets/icon/checkmark.svg";
-
+import backendAPI from "../../api/backendAPI";
+import vendorDashboardApi from "../../api/vendorDashboardApi";
 import QR from "../../assets/image/qr.svg";
 import TopInfo from "../topInfo/topInfo";
 import ModalOverlay from "../modal/modalOverlay";
+import useInternalWallet from "../../hooks/internalWallet";
+import { MessageContext } from "../../context/message";
+import inputStyles from "../../components/input/input.module.css";
+
+import { useConnect, useDisconnect, metamaskWallet, useConnectionStatus, useAddress } from "@thirdweb-dev/react";
+import MessageComponent from "../../components/message";
 
 const PaymentBody = () => {
-  const [value, setValue] = useState("Choose one");
+	const [address, setAddress] = useState("");
+	const [amount, setAmount] = useState("");
+	const [wallet, setWallet] = useState(undefined);
+	const { setInfoMessage, setErrorMessage } = useContext(MessageContext);
 
-  const [successfulModal, setSuccessfulModal] = useState(false);
+	let internalWallet = useInternalWallet();
+	const metamask = {
+			connect: useConnect(),
+			disconnect: useDisconnect(),
+			config: metamaskWallet(),
+			address: useAddress(),
+			status: useConnectionStatus()
+		}
+	const walletOptions = [];
+	if (internalWallet) {
+		walletOptions.push("Nefentus Wallet");
+	}
+	if (metamask.address) {
+		walletOptions.push("Metamask Wallet");
+	}
 
-  const [qrModal, setQRModal] = useState(false);
+	const [successfulModal, setSuccessfulModal] = useState(false);
+	const [qrModalOpen, setQRModalOpen] = useState(false);
+	const [qrValue, setQRValue] = useState("");
+
+	const vendorAPI = new vendorDashboardApi();
+
+
+	async function createInvoice() {
+		// Check data
+		if (!amount) {
+			setErrorMessage("Please enter a valid amount");
+			return;
+		}
+		if (!wallet) {
+			setWallet(walletOptions[0]);
+		}
+
+		// Create invoice
+		const invoiceLinkPart = await vendorAPI.createInvoice(amount, wallet);
+
+		if (invoiceLinkPart) {
+			const invoiceLink = window.location.origin + "/pay/" + invoiceLinkPart;
+			setQRValue(invoiceLink);
+			setQRModalOpen(true);
+		} else {
+			setErrorMessage("Could not create an invoice!");
+		}
+	}
 
   return (
     <>
       <div>
-        <Header title={"Payment"} />
+        <Header title={"Receive payment"} />
+
+		<MessageComponent />
 
         <TopInfo
-          title={"Make the payment"}
-          description="To make a payment you need to choose payment options and enter valid email."
+          title={"Create an invoice"}
+          description="To receive a payment you can create a custom invoice for a specific client."
         />
 
         <div className={`card ${styles.card}`}>
-          <div className={styles.title}>Payment details</div>
+          <div className={styles.title}>Details</div>
 
           <div className={styles.body}>
             <div className={styles.inputWrapper}>
-              <Input dashboard label={"Email"} placeholder={"Enter email"} />
-              <Options
-                label="Currency options"
-                value={value}
-                options={[
-                  "Bitcoin",
-                  "Bitcoin",
-                  "Bitcoin",
-                  "Bitcoin",
-                  "Bitcoin",
-                ]}
+              {/* <Input dashboard setState={setAddress} label={"Recipient email"} placeholder={"Enter email"} value={address} /> */}
+              <Input setState={setAmount} label={"Amout in USD"} placeholder={"Enter amount"} dashboard value={amount} />
+			  <Options
+                label="Wallet"
+                value={wallet ? wallet : walletOptions[0]}
+                options={walletOptions}
                 dashboard
-                setValue={setValue}
+                setValue={setWallet}
               />
-              <Input label={"Amout"} placeholder={"Enter amount"} dashboard />
             </div>
 
             <div className={styles.bill}>
@@ -80,8 +130,8 @@ const PaymentBody = () => {
               </div>
             </div>
 
-            <div className={styles.button} onClick={() => setQRModal(true)}>
-              Pay now
+            <div className={styles.button} onClick={createInvoice}>
+				Create invoice
             </div>
           </div>
         </div>
@@ -122,20 +172,12 @@ const PaymentBody = () => {
         </Modal>
       )}
 
-      {qrModal && (
+      {qrModalOpen && (
         <Modal
-          title={"Scan QR code"}
-          info={
-            <>
-              You've to pay <span>0.00003BTC</span>
-            </>
-          }
-          close={() => setQRModal(false)}
-        >
-          <div className={styles.modalBody}>
-            <img src={QR} alt="" />
-          </div>
-        </Modal>
+			amount={amount}
+			qrValue={qrValue}
+			onClose={() => setQRModalOpen(false)}
+		/>
       )}
     </>
   );
@@ -143,21 +185,41 @@ const PaymentBody = () => {
 
 export default PaymentBody;
 
-const Modal = ({ title, info, successful, children, close }) => {
-  return (
-    <ModalOverlay style={{ width: "100%", maxWidth: "38.2rem" }}>
-      {successful && (
-        <img className={styles.modalImage} src={Checkmark} alt="" />
-      )}
-      {!successful && (
-        <p className={styles.close} onClick={close}>
-          X
-        </p>
-      )}
+const Modal = ({ amount, qrValue, onClose }) => {
+	const { setInfoMessage } = useContext(MessageContext);
 
-      <div className={styles.modalTitle}>{title}</div>
-      <div className={styles.modalInfo}>{info}</div>
-      {children}
-    </ModalOverlay>
-  );
+	return (
+		<ModalOverlay>
+			<div className={styles.modal}>
+				<MessageComponent />
+				<TopInfo
+					title={"Invoice"}
+					description={`Please scan the QR code below to pay the invoice`}
+				/>
+
+				<Table 
+					data={[
+						["Amount:", `${amount} USD`],
+						["Link:", <CopyValue value={qrValue} onCopy={() => setInfoMessage("Payment link copied to clipboard!")} />]
+					]} 
+					colSizes={[1, 3]}
+				/>
+
+				<div className={styles.qrWrapper}>
+					<QRCode
+						size={256}
+						style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+						value={qrValue}
+						viewBox={`0 0 256 256`}
+					/>
+				</div>
+
+				<div className={styles.modalButtons}>
+					<Button onClick={onClose} color="white">
+						Close
+					</Button>
+				</div>
+			</div>
+		</ModalOverlay>
+	);
 };

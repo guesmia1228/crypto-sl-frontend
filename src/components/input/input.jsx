@@ -81,15 +81,15 @@ export const Options = ({
           <div className={`card ${styles.body}`}>
             {options.length > 0 ? (
               options.map((item) => (
-                <p onClick={() => setValue(item)}>{item}</p>
+                <p key={item} onClick={() => setValue(item)}>{item}</p>
               ))
             ) : (
               <>
-                <p onClick={() => setValue("Vendor")}>{t("signUp.option1")}</p>
-                <p onClick={() => setValue("Affiliate")}>
+                <p key={"vendor"} onClick={() => setValue("Vendor")}>{t("signUp.option1")}</p>
+                <p key={"affiliate"} onClick={() => setValue("Affiliate")}>
                   {t("signUp.option2")}
                 </p>
-                <p onClick={() => setValue("Vendor / Affiliate")}>
+                <p key={"vendoraffiliate"} onClick={() => setValue("Vendor / Affiliate")}>
                   {t("signUp.option1")} / {t("signUp.option2")}
                 </p>
               </>

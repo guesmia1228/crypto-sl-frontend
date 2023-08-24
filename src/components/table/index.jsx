@@ -27,18 +27,18 @@ const Table = ({ headers, data, colSizes, colColored, colHighlighted, striped, c
 				<div className={styles.tableHead}>
 					<ul style={{gridTemplateColumns: colSizes}}>
 						{headers.map((header) => (
-							<li>{header}</li>
+							<li key={"header"+header}>{header}</li>
 						))}
 					</ul>
 				</div>
 			)}
 			<div className={styles.tableBody}>
-				{data.map((items) => (
+				{data.map((items, rowIndex) => (
 				<ul style={{gridTemplateColumns: colSizes}}>
-					{items.map((item, index) => (
-						<li className={classNames({
-							[styles.colored]: colColored.includes(index),
-							[styles.highlighted]: colHighlighted.includes(index),
+					{items.map((item, colIndex) => (
+						<li key={rowIndex+"_"+colIndex} className={classNames({
+							[styles.colored]: colColored.includes(colIndex),
+							[styles.highlighted]: colHighlighted.includes(colIndex),
 						}) }>{item}</li>
 					))}
 				</ul>

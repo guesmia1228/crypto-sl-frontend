@@ -11,7 +11,7 @@ function useBalances(metamask) {
 
 	async function fetchPrices() {
 		let providerSource = "thirdweb";
-		if (metamask.status === "connected") {
+		if (metamask.status === "connected" && metamask.address) {
 			providerSource = "metamask";
 		}
 		const uniswapAPi = new uniswapApi(providerSource);

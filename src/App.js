@@ -22,6 +22,7 @@ import Privacy from "./pages/Privacy";
 import Imprint from "./pages/Imprint";
 import PasswordForgot from "./pages/PasswordForgot";
 import Product from "./pages/Product";
+import Pay from "./pages/Pay";
 import { useEffect, useState } from "react";
 import AffiliateDashboard from "./dashboard/Affiliate";
 import Settings from "./dashboard/Settings";
@@ -278,6 +279,17 @@ function App() {
 						<Navigation />
 						
 						<Product />
+						<Footer />
+				  	</>
+				}
+			  />
+			<Route 
+			  	path="/pay/:payLink"
+			  	element={
+					<>
+						<Navigation />
+						
+						<Pay />
 						<Footer />
 				  	</>
 				}

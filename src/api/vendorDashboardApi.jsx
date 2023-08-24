@@ -243,4 +243,32 @@ export default class vendorDashboardApi {
             return null;
         }
     }
+	
+	async createInvoice(amountUSD, walletAddress){
+        try{
+            const url = `${this.baseURL}/invoice`;
+			const requestBody = {
+				amountUSD: amountUSD,
+				walletAddress: walletAddress
+			}
+            const options = {
+                method: "POST",
+                headers: {
+					"Content-Type": "application/json",
+                    Authorization: `Bearer ${this.token}`
+                },
+				body: JSON.stringify(requestBody)
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+			console.log(response);
+            const data = await response.text();
+            return data;
+        } catch (error) {
+			console.log(error);
+            return null; // or return some default value
+        }
+    }
 }

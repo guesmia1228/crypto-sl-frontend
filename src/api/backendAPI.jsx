@@ -651,7 +651,7 @@ export default class backendAPI {
         }
     }
 
-	async setTransactionInfo(product, transactionInfo, buyerAddress){
+	async setTransactionInfo(transactionInfo, buyerAddress, productOrInvoiceId){
         try{
             const url = `${this.baseURL}/transaction`;
 			let headers = {}
@@ -663,9 +663,9 @@ export default class backendAPI {
 			}
 
 			const body = {
-				product: product,
 				transactionInfo: transactionInfo,
-				buyerAddress: buyerAddress
+				buyerAddress: buyerAddress,
+				...productOrInvoiceId
 			};
 
             const options = {
@@ -684,4 +684,65 @@ export default class backendAPI {
             return null; // or return some default value
         }
     }
+
+	async getInvoice(invoiceLink){
+        try{
+            const url = `${this.baseURL}/invoice/${invoiceLink}`;
+			let headers = {}
+			if (this.token) {
+				headers = {
+                    Authorization: `Bearer ${this.token}`
+                }
+			}
+
+            const options = {
+                method: "GET",
+                headers: headers,
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            return null; // or return some default value
+        }
+    }
+
+	async makePayment(currencyAddress, amount, quantity, password, stablecoinAddress, transInfoArg) {
+		try{
+            const url = `${this.baseURL}/payment`;
+			let headers = {}
+			if (this.token) {
+				headers = {
+					"Content-Type": "application/json",
+                    Authorization: `Bearer ${this.token}`
+                }
+			}
+
+			const body = {
+				currencyAddress: currencyAddress,
+				stablecoinAddress: stablecoinAddress,
+				amount: amount,
+				quantity: quantity,
+				password: password,
+				...transInfoArg
+			};
+
+            const options = {
+                method: "POST",
+                headers: headers,
+				body: JSON.stringify(body)
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            return null; // or return some default value
+        }
+	}
 }

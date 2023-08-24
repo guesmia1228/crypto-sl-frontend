@@ -34,22 +34,16 @@ export class uniswapApi {
 	 * @param {*} Decimal1 The decimal of token1
 	 * @returns The price of one token0 in token1
 	 */
-	calculatePoolPrice(sqrtPriceX96, Decimal0, Decimal1){
-    	const buyOneOfToken0 = ((sqrtPriceX96 / 2**96)**2) / (10**(Decimal0 - Decimal1));
-		const buyOneOfToken1 = 1 / buyOneOfToken0;
-
-		/*
-		console.log("price of token0 in value of token1 : " + buyOneOfToken0.toString());
-		console.log("price of token1 in value of token0 : " + buyOneOfToken1.toString());
-		console.log("");
-		// Convert to wei
-		const buyOneOfToken0Wei =(Math.floor(buyOneOfToken0 * (10**Decimal1))).toLocaleString('fullwide', {useGrouping:false});
-		const buyOneOfToken1Wei =(Math.floor(buyOneOfToken1 * (10**Decimal0))).toLocaleString('fullwide', {useGrouping:false});
-		console.log("price of token0 in value of token1 in lowest decimal : " + buyOneOfToken0Wei);
-		console.log("price of token1 in value of token1 in lowest decimal : " + buyOneOfToken1Wei);
-		console.log("");
-		*/
-		return buyOneOfToken1;
+	calculatePoolPrice(sqrtPriceX96, tokenAddress0, tokenAddress1, Decimal0, Decimal1){
+    	let buyOneOfToken0 = (sqrtPriceX96 / 2**96)**2;
+		
+		if (parseInt(tokenAddress0) < parseInt(tokenAddress1)) {
+			buyOneOfToken0 = buyOneOfToken0*(10**(Decimal0 - Decimal1));
+			return buyOneOfToken0;
+		} else {
+			buyOneOfToken0 = buyOneOfToken0/(10**(Decimal0 - Decimal1));
+			return 1/buyOneOfToken0;
+		}
 	}
 
 	/**
@@ -88,7 +82,7 @@ export class uniswapApi {
 			]);
 		}
 
-		const price = this.calculatePoolPrice(sqrtPriceX96, decimalsToken0, decimalsToken1);
+		const price = this.calculatePoolPrice(sqrtPriceX96, tokenAddress, USDC_CONTRACT_ADDRESS, decimalsToken0, decimalsToken1);
 		return price;
 	}
 }
@@ -161,7 +155,7 @@ export class web3Api {
 		const priceConvert = await uniswap.getUSDCPriceForToken(uniswap.WETH_CONTRACT_ADDRESS, decimalsIn, stablecoinDecimals);
 		// Amount in token
 		const amountIn = price / priceConvert;
-		const amountInInt = Math.floor(amountIn * (10**decimalsIn));
+		const amountInInt = Math.ceil(amountIn * (10**decimalsIn));
 		// Amount in USD stablecoin
 		const minAmountOut = price*0.98*(10**stablecoinDecimals);
 
@@ -174,10 +168,9 @@ export class web3Api {
 		const contractInfo = contractDeposits[contractDeposits.length-1];
 		const signer = this.provider.getSigner();
 		const contract = new ethers.Contract(contractInfo.address, contractInfo.abi, signer);
-		const poolFee = 3000;
 
 		const timestampSent = Date.now();
-		const txRequest = await contract.deposit(sellerAddress, affiliateAddress, brokerAddress, leaderAddress, stablecoinAddress, minAmountOut, poolFee, {value: amountInInt});
+		const txRequest = await contract.deposit(sellerAddress, affiliateAddress, brokerAddress, leaderAddress, stablecoinAddress, minAmountOut, POOL_FEES, {value: amountInInt});
 		const txReceipt = await txRequest.wait();
 		const timestampMined = Date.now();
 		// const transaction = await this.provider.getTransaction(txReceipt.transactionHash);

@@ -8,7 +8,7 @@ import TopInfo from "../topInfo/topInfo";
 import ModalOverlay from "../modal/modalOverlay";
 import Table from "../../components/table";
 import copyClipboard from "../../assets/icon/copyClipboard.svg";
-
+import CopyValue from "../copyValue";
 import styles from "./wallet.module.css";
 import Input, { Options } from "./../../components/input/input";
 import { useState } from "react";
@@ -44,7 +44,12 @@ const WalletBody = () => {
 	useEffect(() => {
 		fetchPrices();
 		fetchBalances();
+		console.log("Metamask status changed: " + metamask.status + ", address: " + metamask.address);
 	}, [metamask.status, metamask.address]);
+
+	console.log(metamask.address);
+	console.log(balances);
+	console.log(prices);
 
   	return (
 		<div className="dashboard-body">
@@ -210,7 +215,7 @@ const Balances = ({balances, prices, metamask, walletAddress, fetchBalances}) =>
 		}
 	}
 
-	if (isMetaMask && metamask.status !== "connected") {
+	if (isMetaMask && !(metamask.status === "connected" && metamask.address)) {
 		return (
 			<div className={`${styles.tabContent} ${styles.tabContentMetaMask}`}>
 				<div className={styles.center}>
@@ -327,19 +332,7 @@ const Balances = ({balances, prices, metamask, walletAddress, fetchBalances}) =>
 											Wallet address
 											</p>
 
-											<div className={styles.walletAddressWrapper}>
-												<input
-													className={`${inputStyles.input} ${inputStyles.dashboardInput}`}
-													type={"text"}
-													value={walletAddress}
-													disabled={true}
-												/>
-												<CopyToClipboard text={walletAddress} onCopy={() => setInfoMessage("Wallet address copied!")}>
-													<Button color="white" className={styles.clipboardButton}>
-														<img src={copyClipboard} className={styles.copyClipboard} alt="Copy to clipboard" />
-													</Button>
-												</CopyToClipboard>
-											</div>
+											<CopyValue value={walletAddress} onCopy={() => setInfoMessage("Wallet address copied!")} />
 										</div>
 									</div>
 

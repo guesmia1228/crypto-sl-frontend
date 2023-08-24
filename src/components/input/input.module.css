@@ -1,4 +1,4 @@
-.inputWrapper .input, .textareaWrapper .textarea, .attachmentWrapper .attachment {
+.input, .textarea, .attachment {
   width: 100%;
   background-color: transparent;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -9,7 +9,7 @@
   font-family: 'Euclid';
 }
 
-.inputWrapper input::placeholder, .textareaWrapper textarea::placeholder, .attachmentWrapper .attachment::placeholder {
+input::placeholder, textarea::placeholder, .attachment::placeholder {
   color: var(--gray-color);
 }
 

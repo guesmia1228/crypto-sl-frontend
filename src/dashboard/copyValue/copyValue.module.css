@@ -1,0 +1,15 @@
+.copyValueWrapper {
+	display: flex;
+	gap: 1rem;
+}
+
+.copyValueWrapper img {
+	margin-top: auto;
+	margin-bottom: auto;
+	height: max-content;
+}
+
+.clipboardButton {
+	height: 100%;
+	padding: 2px;
+}

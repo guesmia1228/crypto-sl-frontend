@@ -13,7 +13,7 @@ function useBalances(metamask) {
 
 	async function fetchBalances() {
 		let providerSource = "thirdweb";
-		if (metamask.status === "connected") {
+		if (metamask.status === "connected" && metamask.address) {
 			providerSource = "metamask";
 		}
 		const web3API = new web3Api(providerSource);
@@ -28,10 +28,6 @@ function useBalances(metamask) {
 		const balances_list = await Promise.all(currency_addresses.map((address) => web3API.getBalanceToken(address, walletAddress)));
 		return balances_list;
 	}
-
-	useEffect(() => {
-		fetchBalances();
-	}, []);
 
 	useEffect(() => {
 		fetchBalances();
