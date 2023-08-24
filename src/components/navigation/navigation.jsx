@@ -5,18 +5,120 @@ import Logo from "../../assets/logo/logo.svg";
 import Hamburger from "../../assets/icon/hamburger.svg";
 import Button from "../button/button";
 import Languages from "./languages.jsx/languages";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 import QR from "../../assets/icon/qrcode.svg";
-
 import { Link } from "react-router-dom";
-
 import { useTranslation } from "react-i18next";
+import backend_API from "../../api/backendAPI";
 
 const Navigation = () => {
-  const { t } = useTranslation();
+	const { t } = useTranslation();
+  	const [openMenu, setOpenMenu] = useState(false);
+  	const [profile, setProfile] = useState({});
 
-  const [openMenu, setOpenMenu] = useState(false);
+	const backendAPI = new backend_API();
+
+	async function getProfile() {
+		const jwtIsValid = await backendAPI.checkJwt();
+		if (jwtIsValid) {
+			const roles = localStorage.getItem("roles");
+			const roleArray = roles.split(","); // Konvertiert den String in ein Array von Strings
+			const isAdmin = roleArray.includes("ROLE_ADMIN"); // Überprüft, ob "ROLE_ADMIN" im Array enthalten ist
+			const isVendor = roleArray.includes("ROLE_VENDOR"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
+			const isAffiliate = roleArray.includes("ROLE_AFFILIATE"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
+			const isDiamond = roleArray.includes("ROLE_DIAMOND_PARTNER"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
+			const isGold = roleArray.includes("ROLE_GOLD_PARTNER"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
+			const isIbLeader = roleArray.includes("ROLE_IB_LEADER"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
+	
+			let dashboardLink = "";
+			if (isAdmin) { dashboardLink = "/dashboard/admin"; }
+			else if (isAffiliate) { dashboardLink = "/dashboard/affiliate"; }
+			else if (isVendor) { dashboardLink = "/dashboard/vendor"; }
+			else if (isGold) { dashboardLink = "/dashboard/gold"; }
+			else if (isIbLeader) { dashboardLink = "/dashboard/ib-leader"; }
+			else if (isDiamond) { dashboardLink = "/dashboard/diamond"; }
+
+			const newProfile = {
+				email: localStorage.getItem("email"),
+				firstName: localStorage.getItem("firstName"),
+				lastName: localStorage.getItem("lastName"),
+				dashboardLink: dashboardLink
+			}
+			setProfile(newProfile);
+		}
+	}
+
+	useEffect(() => {
+		getProfile();
+	}, []);
+
+	function loginAndSignupWeb() {
+		if (profile.email) {
+			return (
+				<>
+					<div className={styles.button}>
+						<Link to={profile.dashboardLink}>Dashboard: {profile.firstName} {profile.lastName}</Link>
+					</div>
+				</>
+			);
+		} else {
+			return (
+				<>
+					<p className="">
+						<Link to="/login">{t("navigation.login")}</Link>
+					</p>
+					<div className={styles.button}>
+						<Link to="/signup">{t("navigation.signUp")}</Link>
+					</div>
+					<img className={styles.qrcode} src={QR} alt="" />
+				</>
+			);
+		}
+	}
+
+	function loginAndSignupTopButtons() {
+		if (profile.email) {
+			return (
+				<Link to={profile.dashboardLink}>
+					<div className={styles.mobButton}>Dashboard: {profile.firstName} {profile.lastName}</div>
+				</Link>
+			);
+		} else {
+			return (
+				<>
+					<Link to="/login">
+						<div className={styles.mobButton}>{t("navigation.login")}</div>
+					</Link>
+					<Link to="/signup">
+						<div className={styles.mobButton}>{t("navigation.signUp")}</div>
+					</Link>
+				</>
+			);
+		}
+	}
+
+	function loginAndSignupMobile() {
+		if (profile.email) {
+			return (
+				<div>
+					<Button link={profile.dashboardLink} onClick={() => setOpenMenu(false)}>
+						Dashboard: {profile.firstName} {profile.lastName}
+					</Button>
+				</div>
+			);
+		} else {
+			return (
+				<div>
+					<Button link="/login" onClick={() => setOpenMenu(false)}>
+						{t("navigation.login")}
+					</Button>
+					<Button color="white" onClick={() => setOpenMenu(false)}>
+						{t("navigation.signUp")}
+					</Button>
+				</div>
+			);
+		}
+	}
 
   return (
     <nav className={`${styles.navigation} load`}>
@@ -43,25 +145,14 @@ const Navigation = () => {
           </ul>
         </div>
         <div className={styles.right}>
-          <p className="">
-            <Link to="/login">{t("navigation.login")}</Link>
-          </p>
-          <div className={styles.button}>
-            <Link to="/signup">{t("navigation.signUp")}</Link>
-          </div>
-          <img className={styles.qrcode} src={QR} alt="" />
+		  {loginAndSignupWeb()}
 
           <Languages />
         </div>
 
         <div className={styles.mobMenu}>
 			<span className={styles.midWidth}>
-				<Link to="/login">
-					<div className={styles.mobButton}>{t("navigation.login")}</div>
-				</Link>
-				<Link to="/signup">
-					<div className={styles.mobButton}>{t("navigation.signUp")}</div>
-				</Link>
+				{loginAndSignupTopButtons()}
 			</span>
 
           <img src={Hamburger} alt="" onClick={() => setOpenMenu(true)} />
@@ -106,14 +197,7 @@ const Navigation = () => {
             </li>
           </ul>
         </div>
-        <div>
-          <Button link="/login" onClick={() => setOpenMenu(false)}>
-            {t("navigation.login")}
-          </Button>
-          <Button color="white" onClick={() => setOpenMenu(false)}>
-            {t("navigation.signUp")}
-          </Button>
-        </div>
+		{loginAndSignupMobile()}
       </div>
     </nav>
   );
