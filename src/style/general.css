@@ -24,12 +24,12 @@
 
 /* General */
 html {
-  font-size: 0.694vw;
+  font-size: 0.48vw; /* 0.694vw;*/
 }
 
 @media (max-width: 1200px) {
   html {
-    font-size: 0.833vw;
+    font-size: 0.576vw;
   }
 }
 
@@ -133,9 +133,11 @@ h2 {
 }
 
 @media (max-width: 900px) {
-  h1,
+  h1 {
+	font-size: 4rem;
+  }
   h2 {
-    font-size: 4rem;
+    font-size: 3.5rem;
   }
 }
 
