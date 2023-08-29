@@ -16,118 +16,86 @@ import ProfileBox from "../profileBox/profileBox";
 import Header from "../header/header";
 import Graph from "../graph/graph";
 import { transformNumber } from "../func/transformNumber";
+import { formatUSDBalance } from "../../utils";
 import vendorDashboardApi from "../../api/vendorDashboardApi";
 
 const VendorBody = () => {
-  const backendAPI = new backend_API();
-  const dashboardApi = new vendorDashboardApi();
+	const backendAPI = new backend_API();
+	const dashboardApi = new vendorDashboardApi();
 
-  const navigate = useNavigate();
+	const navigate = useNavigate();
 
-  const checkPermissions = async () => {
-    try {
-      const response = await backendAPI.checkPermissionVendor();
-      if (response == null) {
-        // navigate("/");
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+	const [cardInfo, setCardInfo] = useState([]);
 
-  /*
-  const [signUps, setSignUps] = useState(0);
-  const [signUpsPercentage, setSignUpsPercentage] = useState(0.0);
-  const [allClicks, setAllClicks] = useState(0);
-  const [allClicksPercentage, setAllClicksPercentage] = useState(0);
-  const [income, setIncome] = useState(0);
-  const [incomePercentage, setIncomePercentage] = useState(0);
-  */
- const [totalIncome, setTotalIncome] = useState(0);
- const [totalIncomePercentage, setTotalIncomePercentage] = useState(0);
- const [incomeLast30Days, setIncomeLast30Days] = useState(0);
- const [incomeLast30DaysPercentage, setIncomeLast30DaysPercentage] = useState(0);
- const [incomeToday, setIncomeToday] = useState(0);
- const [incomeTodayPercentage, setIncomeTodayPercentage] = useState(0);
- const [payments, setPayments] = useState(0);
- const [paymentsPercentage, setPaymentsPercentage] = useState(0);
+	useEffect(() => {
+		fetchData();
+	}, []);
 
-  const cardsContent = [
-    {
-      title: "Income: Today",
-      amount: incomeToday,
-      //percentage: incomeTodayPercentage,
-    },
-    {
-      title: "Income: Last 30 days",
-      amount: incomeLast30Days,
-      //percentage: incomeLast30DaysPercentage,
-    },
-    {
-      title: "Total income",
-      amount: totalIncome,
-      //percentage: totalIncomePercentage,
-    },
-	/*
-    {
-      title: "Employees on Payroll",
-      amount: income,
-      percentage: incomePercentage,
-    },
-    {
-      title: "Expenses this month",
-      amount: allClicks,
-      percentage: allClicksPercentage,
-    },
-	*/
-    {
-      title: "Payments",
-      amount: payments,
-      //percentage: paymentsPercentage,
-    },
-  ];
+	const fetchData = async () => {
+		const result = await dashboardApi.checkPermission();
 
-  useEffect(() => {
-    async function fetchData() {
-      fetchAffData();
-    }
-    fetchData();
-  }, []);
+		if (result !== true) {
+			navigate("/login");
+		} else {
+			const getPromises = [
+				dashboardApi.getSales(),
+				dashboardApi.getNumOrders(),
+				];
+			const [sales, numOrders] = await Promise.all(getPromises);
 
-  const fetchAffData = async () => {
-    const result = await dashboardApi.checkPermission();
-    if (result !== true) {
-      navigate("/login");
-    } else {
-		const getPromises = [
-			dashboardApi.getTotalIncome(),
-			dashboardApi.getIncomeLast30Days(),
-		  ];
-		
-		const [totalIncome, incomeLast30Days] = await Promise.allSettled(getPromises);
-		setTotalIncome(totalIncome.value);
-		setIncomeLast30Days(incomeLast30Days.value);
-    }
-  }
+			console.log(sales);
+			console.log(numOrders);
 
-  return (
-    <div className={`${styles.body}`}>
-      <Header title="Dashboard" />
-      <VendorHeader />
+			const cardsContent = [
+				{
+					title: "Sales: Total",
+					amount: sales.total?.number,
+					percentage: sales.total?.percentage,
+					isIncome: true,
+				},
+				{
+					title: "Payments",
+					amount: numOrders?.number,
+					percentage: numOrders?.percentage,
+					isIncome: false,
+				},
+				{
+					title: "Sales: Last 24 hours",
+					amount: sales.last24Hours?.number,
+					percentage: sales.last24Hours?.percentage,
+					isIncome: true,
+				},
+				{
+					title: "Sales: Last 30 days",
+					amount: sales.last30Days?.number,
+					percentage: sales.last30Days?.percentage,
+					isIncome: true,
+				},
+			];
 
-      <div className={styles.row}>
-        {cardsContent.map((item) => (
-          <Card
-            title={item.title}
-            amount={item.amount}
-            percentage={item.percentage}
-          />
-        ))}
-      </div>
+			console.log(cardsContent)
+			setCardInfo(cardsContent);
+		}
+	}
 
-      <Graph />
-    </div>
-  );
+  	return (
+		<div className={`${styles.body}`}>
+			<Header title="Dashboard" />
+
+			<div className={styles.row}>
+				{cardInfo.map((item) => (
+					<Card
+						title={item.title}
+						amount={item.amount}
+						percentage={item.percentage}
+						isIncome={item.isIncome}
+					/>
+				))}
+			</div>
+
+			<Graph className={styles.graph} />
+		</div>
+  	);
 };
 
 export default VendorBody;
@@ -149,27 +117,30 @@ const VendorHeader = () => {
   );
 };
 
-const Card = ({ title, amount, percentage }) => {
+const Card = ({ title, amount, percentage, isIncome }) => {
   const positive = amount > 0 ? true : false;
 
   return (
     <div className={`card ${styles.card}`}>
       <h4>{title}</h4>
       <p className={styles.amount}>
-        {positive ? `+` : ``}
-        {title === "Incomes" ? `$` : ``}
-        {transformNumber(amount)}
+		{isIncome && formatUSDBalance(amount) + " $	"}
+		{!isIncome && amount}
       </p>
 
       <div className={styles.info}>
-        <img src={positive ? Positive : Negative} alt="" />
-        <p className={styles.percentage}>
-          <span style={{ color: positive ? "#23C215" : "#C21515" }}>
-            {positive ? `+` : `-`}
-            {percentage}%
-          </span>{" "}
-          vs last 30 days
-        </p>
+		{ percentage && 
+			<>
+				<img src={positive ? Positive : Negative} alt="" />
+				<p className={styles.percentage}>
+					<span style={{ color: positive ? "#23C215" : "#C21515" }}>
+						{positive ? `+` : `-`}
+						{percentage}%
+					</span>{" "}
+					vs last 30 days
+				</p>
+			</>
+		}
       </div>
     </div>
   );

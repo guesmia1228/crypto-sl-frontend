@@ -28,9 +28,9 @@ export default class vendorDashboardApi {
         }
     }
 
-    async getTotalIncome(){
+    async getSales(){
         try{
-            const url = `${this.baseURL}/income`;
+            const url = `${this.baseURL}/sales`;
             const options = {
                 method: "GET",
                 headers: {
@@ -49,9 +49,9 @@ export default class vendorDashboardApi {
         }
     }
 
-    async getIncomeLast30Days(){
+    async getNumOrders(){
         try{
-            const url = `${this.baseURL}/incomeLast30Days`;
+            const url = `${this.baseURL}/numOrders`;
             const options = {
                 method: "GET",
                 headers: {
