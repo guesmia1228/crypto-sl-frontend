@@ -7,7 +7,7 @@ const Products = () => {
 			<Helmet>
 				<title>Nefentus | Products</title>
 			</Helmet>
-			<ProductBody />;
+			<ProductBody />
 		</>
 	)
 };
