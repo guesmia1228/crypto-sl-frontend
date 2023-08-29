@@ -144,7 +144,7 @@ const LoginBox = () => {
             <div className={styles.checkBox}>
               {checkBox && <img src={CheckBox} alt="" />}
             </div>
-            <p>Remeber me</p>
+            <p>Remember me</p>
           </div>
 
           <Link to="/forgot-password">  <p>{t("login.forgot")}</p></Link>
