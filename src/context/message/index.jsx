@@ -11,6 +11,16 @@ export function MessageContextProvider({children}) {
 	const [infoMessage, setInfoMessage] = useState(undefined);
 	const [errorMessage, setErrorMessage] = useState(undefined);
 
+	function setInfoMessageClear(message) {
+		setErrorMessage(undefined);
+		setInfoMessage(message);
+	}
+
+	function setErrorMessageClear(message) {
+		setInfoMessage(undefined);
+		setErrorMessage(message);
+	}
+
 	function clearMessages() {
 		setInfoMessage(undefined);
 		setErrorMessage(undefined);
@@ -21,8 +31,8 @@ export function MessageContextProvider({children}) {
 			value={{
 				infoMessage: infoMessage,
 				errorMessage: errorMessage,
-				setInfoMessage: setInfoMessage,
-				setErrorMessage: setErrorMessage,
+				setInfoMessage: setInfoMessageClear,
+				setErrorMessage: setErrorMessageClear,
 				clearMessages: clearMessages,
 			}}
 		>
