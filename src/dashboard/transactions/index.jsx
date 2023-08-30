@@ -4,8 +4,9 @@ import Header from "./../header/header";
 import Table from "../../components/table";
 import Search from "../../assets/icon/search.svg";
 import vendorDashboardApi from "../../api/vendorDashboardApi";
+import { formatUSDBalance } from "../../utils";
 
-const headers = ["Updated at", "Product name", "Price (USD)", "Quantity", "Currency", "Stablecoin", "Status"]
+const headers = ["Updated at", "Entity", "Price ($)", "Quantity", "Currency", "Stablecoin", "Status"]
 const colSizes = [1.5, 2.5, 1, 1, 1, 1, 1.5];
 
 const TransactionsBody = () => {
@@ -14,8 +15,9 @@ const TransactionsBody = () => {
 	const dashboardApi = new vendorDashboardApi();
 
 	async function fetchOrders() {
-		const newOrders = await dashboardApi.getOrders();
-		console.log(newOrders)
+		let newOrders = await dashboardApi.getOrders();
+		// Reverse the array
+		newOrders = newOrders.reverse();
 
 		if (newOrders) {
 			const newOrderData = newOrders.map((order) => orderToArray(order));
@@ -28,7 +30,7 @@ const TransactionsBody = () => {
 	function orderToArray(order) {
 		return [
 			new Date(order.updatedAt).toLocaleString(),
-			order.product.name,
+			order.product !== null ? order.product.name : "Custom payment",
 			order.totalPrice,
 			order.quantity,
 			order.currency,
@@ -37,6 +39,14 @@ const TransactionsBody = () => {
 				<span style={{color: order.status === "success" ? "var(--success-color)" : "var(--error-color)"}}>{order.status}</span>
 			),
 		];
+	}
+
+	function orderDataToTotalValue(orderData) {
+		let totalValue = 0;
+		for (const order of orderData) {
+			totalValue += order[2];
+		}
+		return totalValue;
 	}
 
 	useEffect(() => {
@@ -52,8 +62,7 @@ const TransactionsBody = () => {
           <h3>Check all your recent transactions</h3>
 
           <p>
-            Your current gross amount is: <span>$23,335.56</span> and your
-            earnings are: <span>$14,629.68</span>.
+            All your orders have a total value of <span>${formatUSDBalance(orderDataToTotalValue(orderData))}</span>
           </p>
         </div>
 
