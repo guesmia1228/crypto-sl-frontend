@@ -7,14 +7,16 @@ import styles from "./header.module.css";
 import Logo from "../../assets/logo/logo.svg";
 import Logout from "../../assets/icon/logout.svg";
 import Settings from "../../assets/icon/settings.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = ({ title }) => {
   const backendAPI = new backend_API();
+  const navigate = useNavigate();
 
   const logOut = async () => {
     try {
       const data = await backendAPI.signout();
+	  navigate("/");
     } catch (error) {
       console.error(error);
     }
@@ -30,7 +32,7 @@ const Header = ({ title }) => {
             <img src={Settings} alt="" />
             <p>Settings</p>
           </Link>
-          <Link onClick={logOut} to="/" className={styles.logout}>
+          <Link onClick={logOut} to="#" className={styles.logout}>
             <img src={Logout} alt="" />
             <p>Log out</p>
           </Link>
