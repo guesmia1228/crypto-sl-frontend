@@ -24,6 +24,7 @@ const ProductBody = () => {
 	const [price, setPrice] = useState("");
 	const [stock, setStock] = useState("");
 	const [image, setImage] = useState(null);
+	const [imageChanged, setImageChanged] = useState(false);  // Set to true if image changed (was added or deleted))
 	const [productId, setProductId] = useState(null);  // Set to productId if updating product
 	const [products, setProducts] = useState([]);
 	const [signedImagePaths, setSignedImagePaths] = useState([]);
@@ -78,12 +79,15 @@ const ProductBody = () => {
 		const resp1 = await dashboardApi.upsertProduct(productId, name, description, price, stock, image);
 		const imageProductId = resp1.id;
 
-		let resp2 = null;
-		if (image) {
-			console.log("Uploading image for product id: " + imageProductId);
-            resp2 = await dashboardApi.uploadProductImage(imageProductId, image);
-        } else {
-			resp2 = await dashboardApi.deleteProductImage(imageProductId, image);
+		let resp2 = true;
+		if (imageChanged) {
+			if (image) {
+				console.log("Uploading image for product id: " + imageProductId);
+				resp2 = await dashboardApi.uploadProductImage(imageProductId, image);
+			} else {
+				resp2 = await dashboardApi.deleteProductImage(imageProductId, image);
+			}
+			setImageChanged(false);
 		}
 
 		if (resp1 && resp2) {
@@ -162,8 +166,8 @@ const ProductBody = () => {
 							<div className={styles.modalInputs}>
 								<Attachment
 									label="Product image"
-									onUpload={(file) => setImage(file)}
-									onDelete={() => setImage(null)}
+									onUpload={(file) => { setImage(file); setImageChanged(true); }}
+									onDelete={() => { setImage(null); setImageChanged(true); }}
 									value={image}
 									dashboard
 								/>
@@ -243,7 +247,7 @@ const Card = ({ product, imageSource, onClickEdit, onClickDelete }) => {
       </div>
 
       <div className={styles.body}>
-        <h4>{product.title}</h4>
+        <h4>{product.name}</h4>
 
         <p className={styles.description}>{product.description}</p>
 
