@@ -147,7 +147,7 @@ export class web3Api {
 	}
 
 	/* Call deposit smart contract */
-	async callDepositContract(sellerAddress, affiliateAddress, brokerAddress, leaderAddress, stablecoinAddress, price) {
+	async callDepositContract(sellerAddress, affiliateAddress, brokerAddress, seniorBrokerAddress, leaderAddress, stablecoinAddress, price) {
 		// Get min amount out
 		const uniswap = new uniswapApi();
 		const decimalsIn = 18;
@@ -170,8 +170,11 @@ export class web3Api {
 		const contract = new ethers.Contract(contractInfo.address, contractInfo.abi, signer);
 
 		const timestampSent = Date.now();
-		const txRequest = await contract.deposit(sellerAddress, affiliateAddress, brokerAddress, leaderAddress, stablecoinAddress, minAmountOut, POOL_FEES, {value: amountInInt});
+		const txRequest = await contract.deposit(sellerAddress, affiliateAddress, brokerAddress, seniorBrokerAddress, leaderAddress, stablecoinAddress, minAmountOut, POOL_FEES, {value: amountInInt});
+		console.log(txRequest);
 		const txReceipt = await txRequest.wait();
+		console.log(txReceipt);
+
 		const timestampMined = Date.now();
 		// const transaction = await this.provider.getTransaction(txReceipt.transactionHash);
 
@@ -181,6 +184,7 @@ export class web3Api {
 		info.sellerAddress = sellerAddress;
 		info.affiliateAddress = affiliateAddress;
 		info.brokerAddress = brokerAddress;
+		info.seniorBrokerAddress = seniorBrokerAddress;
 		info.leaderAddress = leaderAddress;
 		info.currencyAddress = null;
 		info.stablecoinAddress = stablecoinAddress;
@@ -188,6 +192,15 @@ export class web3Api {
 	}
 
 	parseReceipt(request, receipt) {
+		function bigNumberArgToBigInt(arg) {
+			try {
+				return arg.toBigInt();
+			} catch (error) {
+				console.log(error)
+			}
+			return BigNumber.from(arg.hex).toBigInt();
+		}
+
 		let info = {};
 
 		// Basic info
@@ -202,14 +215,16 @@ export class web3Api {
 		// Amounts distributed
 		for (const event of receipt.events) {
 			if (event.event === "Distributed") {
-				const values = event.args.map((arg) => BigNumber.from(arg.hex).toBigInt());
+				console.log(event);
+				const values = event.args.map((arg) => bigNumberArgToBigInt(arg));
 				// 	event Distributed(uint seller, uint affiliate, uint broker, uint leader, uint owner);
 				info = {...info,
 					sellerAmount: values[0],
 					affiliateAmount: values[1],
 					brokerAmount: values[2],
-					leaderAmount: values[3],
-					ownerAmount: values[4]
+					seniorBrokerAmount: values[3],
+					leaderAmount: values[4],
+					ownerAmount: values[5]
 				};
 			}
 		}

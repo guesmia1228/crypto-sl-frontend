@@ -61,7 +61,7 @@ const WalletBody = () => {
 			/>
 
 			<Tabs
-				tabIds={["metamask", "internal"]}
+				tabIds={["internal", "metamask"]}
 				initActiveTab={"metamask"}
 				getHeader={(tabId) => {
 					if (tabId === "metamask") {

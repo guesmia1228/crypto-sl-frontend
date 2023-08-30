@@ -6,6 +6,7 @@ import Ethereum from "./assets/icon/crypto/ethereum.svg";
 import Tether from "./assets/icon/crypto/tether.svg";
 import USDC from "./assets/icon/crypto/usdc.svg";
 import SwapAndDistribute1 from "./assets/abi/SwapAndDistribute1.json";
+import SwapAndDistribute2 from "./assets/abi/SwapAndDistribute2.json";
 
 export const currencies = [
 	{
@@ -39,4 +40,9 @@ export const contractDeposits = [
 		address: "0xC5a70e940925cBF02F093C8Fb20a7202D7afE2C4",
 		abi: SwapAndDistribute1
 	},
+	{
+		id: 2,
+		address: "0xd577766dd079c123ce677b8a27f9a01e5f4c9905",
+		abi: SwapAndDistribute2
+	}
 ];

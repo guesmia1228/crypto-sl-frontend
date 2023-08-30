@@ -736,6 +736,9 @@ export default class backendAPI {
 				body: JSON.stringify(body)
             };
             const response = await fetch(url, options);
+			if (response.status === 412) {
+				return "insufficientFunds";
+			}
             if (!response.ok) {
                 throw new Error("Network response was not ok");
             }

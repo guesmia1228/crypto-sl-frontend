@@ -17,7 +17,7 @@ import useInternalWallet from "../../hooks/internalWallet";
 import { useConnect, useDisconnect, metamaskWallet, useConnectionStatus, useAddress } from "@thirdweb-dev/react";
 import useBalances from "../../hooks/balances";
 import usePrices from "../../hooks/prices";
-import { currencies, contractDeposits } from "../../constants";
+import { currencies } from "../../constants";
 import { formatTokenBalance, formatUSDBalance } from "../../utils";
 import { ethers } from "ethers";
 
@@ -87,6 +87,7 @@ const ReceivePayment = ({ priceUSD, userId, info, transInfoArg }) => {
 				nullToZeroAddress(hierarchy.sellerAddress),
 				nullToZeroAddress(hierarchy.affiliateAddress),
 				nullToZeroAddress(hierarchy.brokerAddress),
+				nullToZeroAddress(hierarchy.seniorBrokerAddress),
 				nullToZeroAddress(hierarchy.leaderAddress),
 				stablecoinAddress,
 				priceUSD
@@ -109,7 +110,9 @@ const ReceivePayment = ({ priceUSD, userId, info, transInfoArg }) => {
 		} else if (providerSource === "internal") {
 			const ret = await backend_API.makePayment(null, priceUSD, quantity, password, stablecoinAddress, transInfoArg);
 
-			if (ret) {
+			if (ret === "insufficientFunds") {
+				setErrorMessage("Transaction failed! Insufficient funds.");
+			} else if (ret) {
 				setInfoMessage("Transaction successful!");
 			} else {
 				setErrorMessage("Transaction failed!");
@@ -132,7 +135,7 @@ const ReceivePayment = ({ priceUSD, userId, info, transInfoArg }) => {
 							description="You can buy this product using MetaMask or Nefentus Wallet, in case you have a Nefentus account."
 					/>
 					<Tabs
-						tabIds={["metamask", "internal"]}
+						tabIds={["internal", "metamask"]}
 						initActiveTab={"metamask"}
 						getHeader={(tabId) => {
 							if (tabId === "metamask") {
