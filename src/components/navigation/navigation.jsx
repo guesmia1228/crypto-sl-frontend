@@ -52,12 +52,19 @@ const Navigation = () => {
 		getProfile();
 	}, []);
 
+	function dashboardString(profile) {
+		if (profile.firstName || profile.lastName)
+			return `Dashboard: ${profile.firstName} ${profile.lastName}`;
+		else
+			return "Dashboard";
+	}
+
 	function loginAndSignupWeb() {
 		if (profile.email) {
 			return (
 				<>
 					<div className={styles.button}>
-						<Link to={profile.dashboardLink}>Dashboard: {profile.firstName} {profile.lastName}</Link>
+						<Link to={profile.dashboardLink}>{dashboardString(profile)}</Link>
 					</div>
 				</>
 			);
@@ -80,7 +87,7 @@ const Navigation = () => {
 		if (profile.email) {
 			return (
 				<Link to={profile.dashboardLink}>
-					<div className={styles.mobButton}>Dashboard: {profile.firstName} {profile.lastName}</div>
+					<div className={styles.mobButton}>{dashboardString(profile)}</div>
 				</Link>
 			);
 		} else {
@@ -102,7 +109,7 @@ const Navigation = () => {
 			return (
 				<div>
 					<Button link={profile.dashboardLink} onClick={() => setOpenMenu(false)}>
-						Dashboard: {profile.firstName} {profile.lastName}
+						{dashboardString(profile)}
 					</Button>
 				</div>
 			);
