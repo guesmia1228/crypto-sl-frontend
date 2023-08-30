@@ -85,6 +85,7 @@ const VendorBody = () => {
 			<div className={styles.row}>
 				{cardInfo.map((item) => (
 					<Card
+						key={item.title}
 						title={item.title}
 						amount={item.amount}
 						percentage={item.percentage}

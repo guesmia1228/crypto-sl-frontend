@@ -34,7 +34,7 @@ const Table = ({ headers, data, colSizes, colColored, colHighlighted, striped, c
 			)}
 			<div className={styles.tableBody}>
 				{data.map((items, rowIndex) => (
-				<ul style={{gridTemplateColumns: colSizes}}>
+				<ul key={rowIndex} style={{gridTemplateColumns: colSizes}}>
 					{items.map((item, colIndex) => (
 						<li key={rowIndex+"_"+colIndex} className={classNames({
 							[styles.colored]: colColored.includes(colIndex),

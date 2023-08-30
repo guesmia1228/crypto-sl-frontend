@@ -3,7 +3,7 @@ import VendorBody from "./vendor/index";
 
 const Vendor = () => {
 	return (
-		<div style={{ height: "100vh" }}>
+		<div>
 			<Helmet>
 				<title>Nefentus | Vendor Dashboard</title>
 			</Helmet>
