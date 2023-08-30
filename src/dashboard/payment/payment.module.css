@@ -14,7 +14,7 @@
 
 .body {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr;
   position: relative;
 }
 
@@ -166,6 +166,11 @@
   color: black;
   background-color: white;
   border-color: white;
+}
+
+.qr {
+	height: 2rem;
+	cursor: pointer;
 }
 
 @media (max-width: 900px) {

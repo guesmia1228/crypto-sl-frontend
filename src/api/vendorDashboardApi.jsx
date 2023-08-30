@@ -221,7 +221,7 @@ export default class vendorDashboardApi {
 		}
 	}
 
-	async getOrders(productId) {
+	async getOrders() {
         try {
 			const url = `${this.baseURL}/orders`;
 			const options = {
@@ -243,13 +243,35 @@ export default class vendorDashboardApi {
             return null;
         }
     }
+
+	async getInvoices() {
+        try {
+			const url = `${this.baseURL}/invoices`;
+			const options = {
+				method: "GET",
+				headers: {
+					Authorization: `Bearer ${this.token}`
+				}
+			};
+			const response = await fetch(url, options);
+
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error("There was an error getting the orders", error);
+            return null;
+        }
+    }
 	
-	async createInvoice(amountUSD, walletAddress){
+	async createInvoice(amountUSD){
         try{
             const url = `${this.baseURL}/invoice`;
 			const requestBody = {
-				amountUSD: amountUSD,
-				walletAddress: walletAddress
+				amountUSD: amountUSD
 			}
             const options = {
                 method: "POST",

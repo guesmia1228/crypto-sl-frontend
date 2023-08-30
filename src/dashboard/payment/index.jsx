@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import QRCode from "react-qr-code";
 import { Options } from "../../components/input/input";
 import Header from "../header/header";
@@ -10,37 +10,23 @@ import styles from "./payment.module.css";
 import Checkmark from "../../assets/icon/checkmark.svg";
 import backendAPI from "../../api/backendAPI";
 import vendorDashboardApi from "../../api/vendorDashboardApi";
-import QR from "../../assets/image/qr.svg";
+import QR from "../../assets/icon/qrcode.svg";
 import TopInfo from "../topInfo/topInfo";
 import ModalOverlay from "../modal/modalOverlay";
 import useInternalWallet from "../../hooks/internalWallet";
 import { MessageContext } from "../../context/message";
 import inputStyles from "../../components/input/input.module.css";
-
+import { formatUSDBalance } from "../../utils";
 import { useConnect, useDisconnect, metamaskWallet, useConnectionStatus, useAddress } from "@thirdweb-dev/react";
 import MessageComponent from "../../components/message";
 
-const PaymentBody = () => {
-	const [address, setAddress] = useState("");
-	const [amount, setAmount] = useState("");
-	const [wallet, setWallet] = useState(undefined);
-	const { setInfoMessage, setErrorMessage } = useContext(MessageContext);
+const headers = ["Created at", "Price ($)", "Status", "QR code"]
+const colSizes = [1.5, 1, 1.5, 1.5];
 
-	let internalWallet = useInternalWallet();
-	const metamask = {
-			connect: useConnect(),
-			disconnect: useDisconnect(),
-			config: metamaskWallet(),
-			address: useAddress(),
-			status: useConnectionStatus()
-		}
-	const walletOptions = [];
-	if (internalWallet) {
-		walletOptions.push("Nefentus Wallet");
-	}
-	if (metamask.address) {
-		walletOptions.push("Metamask Wallet");
-	}
+const PaymentBody = () => {
+	const [amount, setAmount] = useState("");
+	const [invoiceData, setInvoiceData] = useState([]);
+	const { setInfoMessage, setErrorMessage } = useContext(MessageContext);
 
 	const [successfulModal, setSuccessfulModal] = useState(false);
 	const [qrModalOpen, setQRModalOpen] = useState(false);
@@ -48,19 +34,15 @@ const PaymentBody = () => {
 
 	const vendorAPI = new vendorDashboardApi();
 
-
 	async function createInvoice() {
 		// Check data
 		if (!amount) {
 			setErrorMessage("Please enter a valid amount");
 			return;
 		}
-		if (!wallet) {
-			setWallet(walletOptions[0]);
-		}
 
 		// Create invoice
-		const invoiceLinkPart = await vendorAPI.createInvoice(amount, wallet);
+		const invoiceLinkPart = await vendorAPI.createInvoice(amount);
 
 		if (invoiceLinkPart) {
 			const invoiceLink = window.location.origin + "/pay/" + invoiceLinkPart;
@@ -71,6 +53,45 @@ const PaymentBody = () => {
 		}
 	}
 
+	// List of invoices
+
+	async function fetchInvoices() {
+		let newInvoices = await vendorAPI.getInvoices();
+		// Reverse the array
+		newInvoices = newInvoices.reverse();
+		console.log(newInvoices)
+
+		if (newInvoices) {
+			const newInvoiceData = newInvoices.map((item) => invoiceToArray(item));
+			setInvoiceData(newInvoiceData);
+		}
+	}
+
+	function invoiceToArray(invoice) {
+		return [
+			new Date(invoice.createdAt).toLocaleString(),
+			invoice.price,
+			(
+				<span style={{color: invoice.paidAt ? "var(--success-color)" : "var(--error-color)"}}>{invoice.paidAt ? "paid" : "open"}</span>
+			),
+			(
+				<img className={styles.qr} src={QR} alt="QR" onClick={() => { setQRValue(window.location.origin + "/pay/" + invoice.link); setQRModalOpen(true) }} />
+			)
+		];
+	}
+
+	function invoiceDataToTotalValue(invoiceData) {
+		let totalValue = 0;
+		for (const invoice of invoiceData) {
+			totalValue += invoice[1];
+		}
+		return totalValue;
+	}
+
+	useEffect(() => {
+		fetchInvoices();
+	}, []);
+
   return (
     <>
       <div>
@@ -79,62 +100,36 @@ const PaymentBody = () => {
 		<MessageComponent />
 
         <TopInfo
-          title={"Create an invoice"}
-          description="To receive a payment you can create a custom invoice for a specific client."
+          title={"Invoices"}
+          description={
+			<>
+				You have <span>{invoiceData.length}</span> invoices with a total value of <span>{formatUSDBalance(invoiceDataToTotalValue(invoiceData))} $</span>!
+			</>
+		  }
         />
 
         <div className={`card ${styles.card}`}>
-          <div className={styles.title}>Details</div>
+          <div className={styles.title}>Create a new invoice</div>
 
           <div className={styles.body}>
             <div className={styles.inputWrapper}>
               {/* <Input dashboard setState={setAddress} label={"Recipient email"} placeholder={"Enter email"} value={address} /> */}
               <Input setState={setAmount} label={"Amout in USD"} placeholder={"Enter amount"} dashboard value={amount} />
-			  <Options
-                label="Wallet"
-                value={wallet ? wallet : walletOptions[0]}
-                options={walletOptions}
-                dashboard
-                setValue={setWallet}
-              />
             </div>
 
-            <div className={styles.bill}>
-              <div className={styles.label}>You’ve to pay</div>
-              <div className={styles.price}>0.000035BTC</div>
-
-              <div className={styles.item}>
-                <div className={styles.itemTitle}>
-                  <img src={Checkmark} alt="" />
-
-                  <p>Payment & Invoice</p>
-                </div>
-
-                <div className={styles.itemDescription}>
-                  We'll worry about all the transactions and payment. You can
-                  sit back and relax while you make your clients happy.
-                </div>
-              </div>
-
-              <div className={styles.item}>
-                <div className={styles.itemTitle}>
-                  <img src={Checkmark} alt="" />
-
-                  <p>Transactions</p>
-                </div>
-
-                <div className={styles.itemDescription}>
-                  You can easily view a list of all your transactions at any
-                  time, giving you a clear overview of your finances.
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.button} onClick={createInvoice}>
+			<div className={styles.button} onClick={createInvoice}>
 				Create invoice
-            </div>
+			</div>
           </div>
         </div>
+
+		<Table 
+	  		headers={headers} 
+	  		data={invoiceData}
+			colSizes={colSizes}
+			colHighlighted={[4, 5]} 
+			striped 
+		/>
       </div>
 
       {successfulModal && (
@@ -176,7 +171,7 @@ const PaymentBody = () => {
         <Modal
 			amount={amount}
 			qrValue={qrValue}
-			onClose={() => setQRModalOpen(false)}
+			onClose={() => { setQRModalOpen(false); fetchInvoices() } }
 		/>
       )}
     </>
