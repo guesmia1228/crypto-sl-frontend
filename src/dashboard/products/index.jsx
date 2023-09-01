@@ -136,7 +136,7 @@ const ProductBody = () => {
 						color="white"
 						onClick={() => showModal(null) }
 					>
-						Create New product
+						Create new product
 					</Button>
 				</TopInfo>
 
