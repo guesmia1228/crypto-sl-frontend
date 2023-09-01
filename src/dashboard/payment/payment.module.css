@@ -73,12 +73,17 @@
 .button {
   background-color: white;
   padding: 1.4rem 10rem;
-  width: max-content;
+  width: 100%;
   color: var(--black-color);
   font-size: 1.6rem;
-  margin-top: 3rem;
   cursor: pointer;
   border-radius: 1rem;
+}
+
+.columns {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 2rem;
 }
 
 .modalImage {

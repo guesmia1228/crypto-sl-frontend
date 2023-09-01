@@ -27,7 +27,6 @@ const PaymentBody = () => {
 	const [amount, setAmount] = useState("");
 	const [invoiceData, setInvoiceData] = useState([]);
 	const { setInfoMessage, setErrorMessage } = useContext(MessageContext);
-
 	const [successfulModal, setSuccessfulModal] = useState(false);
 	const [qrModalOpen, setQRModalOpen] = useState(false);
 	const [qrValue, setQRValue] = useState("");
@@ -68,6 +67,12 @@ const PaymentBody = () => {
 	}
 
 	function invoiceToArray(invoice) {
+		function openModalWithInvoiceData() {
+			setQRValue(window.location.origin + "/pay/" + invoice.link);
+			setAmount(invoice.price);
+			setQRModalOpen(true);
+		}
+
 		return [
 			new Date(invoice.createdAt).toLocaleString(),
 			invoice.price,
@@ -75,7 +80,7 @@ const PaymentBody = () => {
 				<span style={{color: invoice.paidAt ? "var(--success-color)" : "var(--error-color)"}}>{invoice.paidAt ? "paid" : "open"}</span>
 			),
 			(
-				<img className={styles.qr} src={QR} alt="QR" onClick={() => { setQRValue(window.location.origin + "/pay/" + invoice.link); setQRModalOpen(true) }} />
+				<img className={styles.qr} src={QR} alt="QR" onClick={openModalWithInvoiceData} />
 			)
 		];
 	}
@@ -112,13 +117,12 @@ const PaymentBody = () => {
           <div className={styles.title}>Create a new invoice</div>
 
           <div className={styles.body}>
-            <div className={styles.inputWrapper}>
-              {/* <Input dashboard setState={setAddress} label={"Recipient email"} placeholder={"Enter email"} value={address} /> */}
-              <Input setState={setAmount} label={"Amout in USD"} placeholder={"Enter amount"} dashboard value={amount} />
-            </div>
+			<div className={styles.columns}>
+					<Input setState={setAmount} placeholder={"Enter amount in $"} dashboard value={amount} />
 
-			<div className={styles.button} onClick={createInvoice}>
-				Create invoice
+					<div className={styles.button} onClick={createInvoice}>
+						<center>Create invoice</center>
+					</div>
 			</div>
           </div>
         </div>
