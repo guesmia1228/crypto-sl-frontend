@@ -8,6 +8,15 @@ import USDC from "./assets/icon/crypto/usdc.svg";
 import SwapAndDistribute1 from "./assets/abi/SwapAndDistribute1.json";
 import SwapAndDistribute2 from "./assets/abi/SwapAndDistribute2.json";
 
+export const ROLE_TO_NAME = {
+	"vendor": "Vendor",
+	"affiliate": "Affiliate",
+	"broker": "Broker",
+	"seniorbroker": "Senior Broker",
+	"leader": "Leader",
+	"admin": "Admin",
+}
+
 export const currencies = [
 	{
 		icon: Ethereum,

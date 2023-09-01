@@ -1,13 +1,14 @@
+import AdminBody from "./admin/index";
 import AffiliateBody from "./affiliate/index";
 import { Helmet } from "react-helmet";
 
 const Affiliate = () => {
   return (
-    <div>
+    <div className="container">
       <Helmet>
-        <title>Nefentus | Affiliate</title>
+        <title>Nefentus | Dashboard</title>
       </Helmet>
-      <AffiliateBody />
+      <AdminBody type={"affiliate"} />
     </div>
   );
 };

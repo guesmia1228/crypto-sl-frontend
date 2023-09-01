@@ -1,11 +1,10 @@
 import Cookies from "js-cookie";
 export default class adminDashboardApi {
-    constructor() {
+    constructor(type) {
         //LAUNCH
         //this.baseURL = "https://nefentus.com:8443/api/dashboard/admin";
         //DEV
-        this.baseURL = process.env.REACT_APP_BASE_ENDPOINT_API +"/dashboard/admin";
-
+        this.baseURL = process.env.REACT_APP_BASE_ENDPOINT_API + `/dashboard/${type}`;
         this.token = Cookies.get("token");
     }
     async checkPermission(){

@@ -4,7 +4,7 @@ import copyClipboard from "../../assets/icon/copyClipboard.svg";
 import Button from "../../components/button/button";
 import inputStyles from "../../components/input/input.module.css";
 
-const CopyValue = ({ value, onCopy }) => {
+const CopyValue = ({ value, onCopy, inputStyle, buttonStyle }) => {
 	return (
 		<div className={styles.copyValueWrapper}>
 			<input
@@ -12,9 +12,10 @@ const CopyValue = ({ value, onCopy }) => {
 				type={"text"}
 				value={value}
 				disabled={true}
+				style={inputStyle}
 			/>
 			<CopyToClipboard text={value} onCopy={onCopy}>
-				<Button color="white" className={styles.clipboardButton}>
+				<Button color="white" className={styles.clipboardButton} style={buttonStyle}>
 					<img src={copyClipboard} className={styles.copyClipboard} alt="Copy to clipboard" />
 				</Button>
 			</CopyToClipboard>

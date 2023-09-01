@@ -22,6 +22,24 @@ const LoginBox = () => {
   const { t } = useTranslation();
   const [checkBox, setCheckBox] = useState(false);
 
+  function navigateDashboard() {
+	const roles = localStorage.getItem("roles");
+	const roleArray = roles.split(",");
+	const isVendor = roleArray.includes("ROLE_VENDOR");
+	const isAffiliate = roleArray.includes("ROLE_AFFILIATE");
+	const isBroker = roleArray.includes("ROLE_BROKER");
+	const isSeniorBroker = roleArray.includes("ROLE_SENIOR_BROKER");
+	const isLeader = roleArray.includes("ROLE_LEADER"); 
+	const isAdmin = roleArray.includes("ROLE_ADMIN");
+
+	if (isAdmin) { navigate("/dashboard/admin"); }
+	else if (isVendor) { navigate("/dashboard/vendor"); }
+	else if (isAffiliate) { navigate("/dashboard/affiliate"); }
+	else if (isBroker) { navigate("/dashboard/broker"); }
+	else if (isSeniorBroker) { navigate("/dashboard/seniorbroker"); }
+	else if (isLeader) { navigate("/dashboard/leader"); }
+  }
+
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has("token")) {
@@ -33,25 +51,7 @@ const LoginBox = () => {
     async function checkJwtAndNavigate() {
       const jwtIsValid = await backendAPI.checkJwt();
       if (jwtIsValid) {
-        const roles = localStorage.getItem("roles");
-        const roleArray = roles.split(","); // Konvertiert den String in ein Array von Strings
-        const isAdmin = roleArray.includes("ROLE_ADMIN"); // Überprüft, ob "ROLE_ADMIN" im Array enthalten ist
-        const isVendor = roleArray.includes("ROLE_VENDOR"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
-        const isAffiliate = roleArray.includes("ROLE_AFFILIATE"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
-        const isDiamond = roleArray.includes("ROLE_DIAMOND_PARTNER"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
-        const isGold = roleArray.includes("ROLE_GOLD_PARTNER"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
-        const isIbLeader = roleArray.includes("ROLE_IB_LEADER"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
-
-
-        if (isAdmin) { navigate("/dashboard/admin"); }
-        else if (isAffiliate) { navigate("/dashboard/affiliate"); }
-        else if (isVendor) { navigate("/dashboard/vendor"); }
-        else if (isGold) { navigate("/dashboard/gold"); }
-        else if (isIbLeader) { navigate("/dashboard/ib-leader"); }
-        else if (isDiamond) { navigate("/dashboard/diamond"); }
-        
-        
-
+		navigateDashboard();
       }
     }
 
@@ -65,23 +65,10 @@ const LoginBox = () => {
     try {
       const response = await backendAPI.login(username1, password1, checkbox);
       if (response == null) {
-        setErrorMessage("Invalid Login data");
+        setErrorMessage("Invalid login data");
         return;
       }
-      const roles = localStorage.getItem("roles");
-      const roleArray = roles.split(","); // Konvertiert den String in ein Array von Strings
-      const isAdmin = roleArray.includes("ROLE_ADMIN"); // Überprüft, ob "ROLE_ADMIN" im Array enthalten ist
-      const isVendor = roleArray.includes("ROLE_VENDOR"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
-      const isAffiliate = roleArray.includes("ROLE_AFFILIATE"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
-      const isDiamond = roleArray.includes("ROLE_DIAMOND_PARTNER"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
-      const isGold = roleArray.includes("ROLE_GOLD_PARTNER"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
-      const isIbLeader = roleArray.includes("ROLE_IB_LEADER");
-      if (isAdmin) { navigate("/dashboard/admin"); }
-        else if (isAffiliate) { navigate("/dashboard/affiliate"); }
-        else if (isVendor) { navigate("/dashboard/vendor"); }
-        else if (isGold) { navigate("/dashboard/gold"); }
-        else if (isDiamond) { navigate("/dashboard/diamond"); }
-        else if (isIbLeader) { navigate("/dashboard/ib-leader"); }
+      navigateDashboard();
     } catch (error) {
       setErrorMessage("There was an error logging in");
     }

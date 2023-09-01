@@ -11,5 +11,11 @@
 
 .clipboardButton {
 	height: 100%;
-	padding: 2px;
+	padding: 1px;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.clipboardButton div {
+	padding: 0.5rem 0.9rem;
 }

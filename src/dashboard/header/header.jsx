@@ -9,7 +9,7 @@ import Logout from "../../assets/icon/logout.svg";
 import Settings from "../../assets/icon/settings.svg";
 import { Link, useNavigate } from "react-router-dom";
 
-const Header = ({ title }) => {
+const Header = ({ title, logo }) => {
   const backendAPI = new backend_API();
   const navigate = useNavigate();
 
@@ -24,7 +24,13 @@ const Header = ({ title }) => {
 
   return (
     <div className={styles.navigation}>
-      <h2>{title}</h2>
+		{ logo && (
+			<img src={Logo} alt="Nefentus payment solutions" />
+		)}
+
+	    { title && (
+			<h2>{title}</h2>
+		)}
 
       <div className={styles.right}>
         <div className={`${styles.settingsBody} card`}>

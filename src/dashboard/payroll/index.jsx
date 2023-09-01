@@ -1,5 +1,5 @@
 import Button from "../../components/button/button";
-import Card from "../card/card";
+import StatsCard from "../statsCard/statsCard";
 import Header from "../header/header";
 import TopInfo from "../topInfo/topInfo";
 import styles from "./payroll.module.css";
@@ -122,7 +122,7 @@ const PayrollBody = () => {
 
         <div className={styles.cards}>
           {cardsContent.map((item) => (
-            <Card
+            <StatsCard
               title={item.title}
               amount={item.amount}
               percentage={item.percentage}

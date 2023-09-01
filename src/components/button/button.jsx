@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./button.module.css";
 
-const Button = ({ children, className, color, link, onClick }) => {
+const Button = ({ children, className, color, link, onClick, style }) => {
 	let backgroundColor = "linear-gradient(94.15deg, #0784B5 -27.47%, #66BFDE 118.26%)";
 	if (color === "white") {
 		backgroundColor = "#fff";
@@ -26,6 +26,7 @@ const Button = ({ children, className, color, link, onClick }) => {
       className={`${styles.button} ${className}`}
       onClick={onClick}
       style={{
+		...style,
         background: backgroundColor,
 		border: border,
       }}
@@ -37,7 +38,7 @@ const Button = ({ children, className, color, link, onClick }) => {
           </div>
         </Link>
       ) : (
-        <div style={{ color: fontColor }}>
+        <div style={{...style, color: fontColor }}>
           {children}
         </div>
       )}

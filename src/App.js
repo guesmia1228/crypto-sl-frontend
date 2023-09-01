@@ -228,28 +228,28 @@ function App() {
               />
 
               <Route
-                path="/dashboard/diamond"
+                path="/dashboard/seniorbroker"
                 element={
                   <>
-                    <Admin type={"diamond"} />
+                    <Admin type={"seniorbroker"} />
                   </>
                 }
               />
 
               <Route
-                path="/dashboard/gold"
+                path="/dashboard/broker"
                 element={
                   <>
-                    <Admin type={"gold"} />
+                    <Admin type={"broker"} />
                   </>
                 }
               />
 
             <Route
-                path="/dashboard/ib-leader"
+                path="/dashboard/leader"
                 element={
                     <>
-                        <Admin type={"ib_leader"} />
+                        <Admin type={"leader"} />
                     </>
                 }
             />

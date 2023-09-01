@@ -1,18 +1,57 @@
 .body {
-  margin-bottom: 5rem;
+  margin-bottom: 15rem;
+}
+
+.topButtonWrapper {
+	display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.affiliateLink {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	margin-bottom: 3rem;
+}
+  
+.linkBox {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	/* width: 50px; */
+}
+  
+.affiliateLabel {
+	font-size: 1.6rem;
+	color: var(--gray-color);
+}
+  
+.affiliateLink .url {
+	font-size: 1.6rem;
+	color: var(--white-color) !important;
+	font-weight: 500;
+  
+	display: flex;
+  
+	transition: 0.3s ease;
+	cursor: pointer;
+}
+  
+.affiliateLink img {
+	width: 2rem;
+	cursor: pointer;
+}
+  
+.affiliateLink .url:hover {
+	opacity: 0.8;
 }
 
 .rows {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-areas: ". . ." "graph graph .";
   grid-template-rows: max-content 1fr;
   gap: 2rem;
   margin-top: 2rem;
-}
-
-.rows > div:nth-child(4) {
-  grid-area: graph;
 }
 
 .registration {
@@ -33,34 +72,45 @@
   margin-top: 2rem;
 }
 
-.barItem {
+.bar > div {
   height: 100%;
   width: 100%;
+  top: 1px;
 }
 
-.barItem:nth-child(1),
-.leftLine:nth-child(1) .lineBox {
-  background-color: #1595c2;
+.barVendor,
+.lineBoxVendor {
+  background-color: #1595c2 !important;
 }
 
-.barItem:nth-child(2),
-.leftLine:nth-child(2) .lineBox {
+.barAffiliate,
+.lineBoxAffiliate {
   background-color: #ffa600;
 }
 
-.barItem:nth-child(3),
-.leftLine:nth-child(3) .lineBox {
+.barBroker,
+.lineBoxBroker {
   background-color: #23c215;
 }
 
-.barItem:nth-child(4),
-.leftLine:nth-child(4) .lineBox {
+.barSeniorBroker,
+.lineBoxSeniorBroker {
   background-color: #c21515;
 }
 
-.barItem:nth-child(5),
-.leftLine:nth-child(5) .lineBox {
+.barLeader,
+.lineBoxLeader {
   background-color: #7715c2;
+}
+
+.barOthers,
+.lineBoxOthers {
+  background-color: grey;
+}
+
+.leftLine > div:first-child {
+	height: 8px;
+	width: 8px;
 }
 
 .percentageLabel {
@@ -146,6 +196,12 @@
   width: max-content;
 }
 
+.box {
+	padding: 0.3rem 1rem !important;
+    border-radius: 0.2rem;
+    width: max-content;
+}
+
 .approved {
   background-color: rgba(35, 194, 21, 0.1);
   color: #23c215;
@@ -154,6 +210,12 @@
 .pending {
   background-color: rgba(194, 21, 21, 0.1);
   color: #c21515;
+}
+
+.activateLink {
+	text-decoration: underline;
+	color: #1595c2;
+	cursor: pointer;
 }
 
 .tableBody li:last-child {
@@ -176,11 +238,8 @@
 }
 
 .inputs {
-  display: grid;
-  grid-template-columns: 25rem 19rem;
-
-  grid-template-rows: 1fr;
-  gap: 2rem;
+	margin-bottom: 1rem;
+	width: 300px;
 }
 
 .inputs input {

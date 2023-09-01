@@ -15,6 +15,7 @@ import { unstable_renderSubtreeIntoContainer } from "react-dom";
 import ProfileBox from "../profileBox/profileBox";
 import Header from "../header/header";
 import Graph from "../graph/graph";
+import StatsCard from "../statsCard/statsCard";
 import { transformNumber } from "../func/transformNumber";
 import { formatUSDBalance } from "../../utils";
 import vendorDashboardApi from "../../api/vendorDashboardApi";
@@ -26,6 +27,7 @@ const VendorBody = () => {
 	const navigate = useNavigate();
 
 	const [cardInfo, setCardInfo] = useState([]);
+	const [graphData, setGraphData] = useState([]);
 
 	useEffect(() => {
 		fetchData();
@@ -34,14 +36,17 @@ const VendorBody = () => {
 	const fetchData = async () => {
 		const result = await dashboardApi.checkPermission();
 
+		console.log("Vendor permission: ", result)
+
 		if (result !== true) {
 			navigate("/login");
 		} else {
 			const getPromises = [
-				dashboardApi.getSales(),
+				dashboardApi.getTotalIncome(),
 				dashboardApi.getNumOrders(),
-				];
-			const [sales, numOrders] = await Promise.all(getPromises);
+				dashboardApi.getTotalIncomesPerDay()
+			];
+			const [sales, numOrders, totalPricePerDate] = await Promise.all(getPromises);
 
 			console.log(sales);
 			console.log(numOrders);
@@ -75,6 +80,9 @@ const VendorBody = () => {
 
 			console.log(cardsContent)
 			setCardInfo(cardsContent);
+
+			console.log(totalPricePerDate)
+			setGraphData(totalPricePerDate);
 		}
 	}
 
@@ -84,17 +92,17 @@ const VendorBody = () => {
 
 			<div className={styles.row}>
 				{cardInfo.map((item) => (
-					<Card
+					<StatsCard
 						key={item.title}
 						title={item.title}
 						amount={item.amount}
 						percentage={item.percentage}
-						isIncome={item.isIncome}
+						isMonetary={item.isIncome}
 					/>
 				))}
 			</div>
 
-			<Graph className={styles.graph} />
+			<Graph data={graphData} />
 		</div>
   	);
 };
@@ -113,35 +121,6 @@ const VendorHeader = () => {
             You’ve earned <span>0$</span> this month
           </p>
         </div>
-      </div>
-    </div>
-  );
-};
-
-const Card = ({ title, amount, percentage, isIncome }) => {
-  const positive = amount > 0 ? true : false;
-
-  return (
-    <div className={`card ${styles.card}`}>
-      <h4>{title}</h4>
-      <p className={styles.amount}>
-		{isIncome && formatUSDBalance(amount) + " $	"}
-		{!isIncome && amount}
-      </p>
-
-      <div className={styles.info}>
-		{ percentage && 
-			<>
-				<img src={positive ? Positive : Negative} alt="" />
-				<p className={styles.percentage}>
-					<span style={{ color: positive ? "#23C215" : "#C21515" }}>
-						{positive ? `+` : `-`}
-						{percentage}%
-					</span>{" "}
-					vs last 30 days
-				</p>
-			</>
-		}
       </div>
     </div>
   );
