@@ -136,7 +136,7 @@ const ReceivePayment = ({ priceUSD, userId, info, transInfoArg }) => {
 					/>
 					<Tabs
 						tabIds={["internal", "metamask"]}
-						initActiveTab={"metamask"}
+						initActiveTab={"internal"}
 						getHeader={(tabId) => {
 							if (tabId === "metamask") {
 								return (
