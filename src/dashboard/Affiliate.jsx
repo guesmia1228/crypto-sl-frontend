@@ -1,5 +1,4 @@
 import AdminBody from "./admin/index";
-import AffiliateBody from "./affiliate/index";
 import { Helmet } from "react-helmet";
 
 const Affiliate = () => {

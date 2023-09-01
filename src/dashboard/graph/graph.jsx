@@ -116,7 +116,7 @@ export const options = {
       ticks: {
         // Include a eur sign in the ticks
         callback: function (value, index, ticks) {
-          return value + "K €";
+          return value + " $";
         },
         // beginAtZero: true,
         beginAtZero: true,
@@ -149,24 +149,24 @@ export const options = {
   },
 };
 
-const Graph = (totalPrices) => {
+const Graph = ({data, style}) => {
   return (
-    <div className={`card ${styles.graphCard}`}>
+    <div className={`card ${styles.graphCard}`} style={style}>
       <div className={styles.info}>
         <div className={styles.left}>
           <div className={styles.label}>Income</div>
-          <div className={styles.graphAmount}>{getTotalIncome(totalPrices.data)}</div>
+          <div className={styles.graphAmount}>{getTotalIncome(data)}</div>
         </div>
 
         <div className={styles.datePicker}>
-          <p>{getStartDate(totalPrices.data)}</p>
+          <p>{getStartDate(data)}</p>
           <p> - </p>
-          <p>{getEndDate(totalPrices.data)}</p>
+          <p>{getEndDate(data)}</p>
         </div>
       </div>
 
       <div className={styles.chartContainer}>
-        <Line options={options} data={populateGraph(totalPrices.data)} />
+        <Line options={options} data={populateGraph(data)} />
       </div>
     </div>
   );
