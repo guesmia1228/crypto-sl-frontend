@@ -4,6 +4,7 @@ import { contractDeposits, currencies } from "../constants";
 import IUniswapV3PoolABI from '@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json'
 import IUniswapV3FactoryABI from '@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Factory.sol/IUniswapV3Factory.json'
 import ERC20_ABI from "../assets/abi/ERC20_ABI.json"
+import { zeroAddressToNull, toChecksumAddress } from "../utils";
 
 const FACTORY_CONTRACT_ADDRESS = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
 const USDC_CONTRACT_ADDRESS = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48";
@@ -178,16 +179,19 @@ export class web3Api {
 		const timestampMined = Date.now();
 		// const transaction = await this.provider.getTransaction(txReceipt.transactionHash);
 
+		// Create transaction info
+		// 1. 0x000 to null  2. Make checksum addresses
 		const info = this.parseReceipt(txRequest, txReceipt);
 		info.timestampSent = timestampSent;
 		info.timestampMined = timestampMined;
-		info.sellerAddress = sellerAddress;
-		info.affiliateAddress = affiliateAddress;
-		info.brokerAddress = brokerAddress;
-		info.seniorBrokerAddress = seniorBrokerAddress;
-		info.leaderAddress = leaderAddress;
+		info.sellerAddress = zeroAddressToNull(toChecksumAddress(sellerAddress));
+		info.affiliateAddress = zeroAddressToNull(toChecksumAddress(affiliateAddress));
+		info.brokerAddress = zeroAddressToNull(toChecksumAddress(brokerAddress));
+		info.seniorBrokerAddress = zeroAddressToNull(toChecksumAddress(seniorBrokerAddress));
+		info.leaderAddress = zeroAddressToNull(toChecksumAddress(leaderAddress));
 		info.currencyAddress = null;
-		info.stablecoinAddress = stablecoinAddress;
+		info.stablecoinAddress = toChecksumAddress(stablecoinAddress);
+		info.transactionHash = txReceipt.transactionHash;
 		return info;
 	}
 
@@ -204,7 +208,7 @@ export class web3Api {
 		let info = {};
 
 		// Basic info
-		info.contractAddress = request.to;
+		info.contractAddress = toChecksumAddress(request.to);
 		info.status = receipt.status;
 
 		// Gas & value

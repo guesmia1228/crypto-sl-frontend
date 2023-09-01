@@ -19,7 +19,7 @@ import useBalances from "../../hooks/balances";
 import usePrices from "../../hooks/prices";
 import { currencies } from "../../constants";
 import { formatTokenBalance, formatUSDBalance } from "../../utils";
-import { ethers } from "ethers";
+import { nullToZeroAddress } from "../../utils";
 
 
 const ReceivePayment = ({ priceUSD, userId, info, transInfoArg }) => {
@@ -56,12 +56,6 @@ const ReceivePayment = ({ priceUSD, userId, info, transInfoArg }) => {
 	}, [metamask.status, metamask.address]);
 
 	async function handleBuy(providerSource, currencyIdx) {
-		function nullToZeroAddress(address) {
-			if (address === null)
-				return ethers.constants.AddressZero;
-			return address;
-		}
-
 		// Checks
 		if (!(priceUSD > 0.0)) {
 			setErrorMessage("Invalid price!");
