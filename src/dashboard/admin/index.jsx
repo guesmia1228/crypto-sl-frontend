@@ -94,6 +94,7 @@ const AdminBody = ({ type }) => {
     
 			updateUsers(dataUsers);
 
+			console.log(reportResp);
 			setBarContent(reportResp);
 
 			setGraphData(totalPricePerDate);
@@ -120,7 +121,7 @@ const AdminBody = ({ type }) => {
 			const newDataUsers = dataUsers.map(user => [
 				user.fullname,
 				user.email,
-				user.roles.join(', '),
+				user.roles.map(role => ROLE_TO_NAME[role.replace(" ", "")]).join(', '),
 				(
 					<span className={`${styles.box} ${user.activated ? styles.approved : styles.pending}`}>{user.activated ? "active" : "not active"}</span>
 				),
@@ -221,7 +222,7 @@ const AdminBody = ({ type }) => {
               {barContent.map((item) => (
                 <div
 				    key={item.role}
-					className={styles["bar" + item.role.replace(" ", "")]}
+					className={styles["bar" + ROLE_TO_NAME[item.role].replace(" ", "")]}
                 ></div>
               ))}
             </div>
@@ -246,8 +247,8 @@ const AdminBody = ({ type }) => {
                 <div className={styles.left}>
                   {barContent.map((item) => (
                     <div key={item.role} className={styles.leftLine}>
-                      <div className={styles["lineBox" + item.role.replace(" ", "")]}></div>
-                      <div className={styles.name}>{item.role}</div>
+                      <div className={styles["lineBox" + ROLE_TO_NAME[item.role].replace(" ", "")]}></div>
+                      <div className={styles.name}>{ROLE_TO_NAME[item.role]}</div>
                     </div>
                   ))}
                 </div>
