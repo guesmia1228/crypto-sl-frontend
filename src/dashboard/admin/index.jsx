@@ -15,7 +15,6 @@ import { useNavigate } from "react-router-dom";
 import Table from "../../components/table";
 import { formatUSDBalance } from "../../utils";
 import { ROLE_TO_NAME } from "../../constants";
-import Footer from "../../components/footer/footer";
 import CopyValue from "../copyValue";
 import { MessageContext } from "../../context/message";
 import MessageComponent from "../../components/message";
@@ -372,8 +371,6 @@ const AdminBody = ({ type }) => {
           </ModalOverlay>
         )}
       </div>
-
-	  <Footer />
     </>
   );
 };
