@@ -182,6 +182,7 @@ const Sidebar = () => {
             <div className={styles.items}>
               {items.map((item, index) => (
                 <Link
+				  key={index}
                   to={item.link}
                   className={`${styles.item} ${
                     active === index ? styles.active : ""
