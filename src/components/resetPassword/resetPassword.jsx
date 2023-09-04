@@ -81,10 +81,10 @@ const ResetPassword = () => {
           placeholder={t("signUp.passwordPlaceholder")}
           secure
         />
-        <Button link={null} onClick={handleClick}>{t("reset-password.button")}</Button>
+        <Button link={null} onClick={handleClick}>Reset password</Button>
         <div className={styles.info}>
           <p>
-            {t("reset-password.info")}
+		  	Don't want to reset your password? <Link to="/login">Login</Link> instead.
           </p>
         </div>
       </div>

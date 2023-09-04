@@ -3,11 +3,11 @@ import { Helmet } from "react-helmet";
 
 const ResetPassword = () => {
     return (
-        <div>
+        <div className="dashboardFont">
             <Helmet>
                 <title>Nefentus | Password-forgot</title>
             </Helmet>
-            <ResetPasswords className="dashboardFont" />
+            <ResetPasswords />
         </div>
     );
 };

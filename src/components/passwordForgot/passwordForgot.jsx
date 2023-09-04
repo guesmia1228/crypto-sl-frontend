@@ -63,7 +63,9 @@ const PasswordForgot = () => {
           label={t("signUp.emailLabel")}
           placeholder={t("signUp.emailPlaceholder")}
         />
+		<div className={styles.buttonWrapper}>
         <Button link={null} onClick={handleClick}>{t("forgot-password.button")}</Button>
+		</div>
         <div className={styles.info}>
           <p>
             {t("forgot-password.info")}
