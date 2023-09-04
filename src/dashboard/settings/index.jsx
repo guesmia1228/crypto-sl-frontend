@@ -118,8 +118,8 @@ const SettingsBody = ({ type }) => {
                 </>
             )}
 
-            <div className={styles.profile}>
-                <div className={styles.avatar}>
+            <div className={styles.profile} style={{justifyContent: type === "vendor" ? "start" : "end"}}>
+                <div className={styles.avatar} style={{width: type === "vendor" ? "10rem" : "7rem", "height": type === "vendor" ? "10rem" : "7rem"}}>
                     <BlobPicture />
                 </div>
 
@@ -186,11 +186,8 @@ export default SettingsBody;
 
 const ProfileBody = () => {
     const [file, setFile] = useState(null);
-    const [fullName, setFullName] = useState(
-        localStorage.getItem("firstName") +
-            " " +
-            localStorage.getItem("lastName")
-    );
+	const [firstName, setFirstName] = useState(localStorage.getItem("firstName"));
+	const [lastName, setLastName] = useState(localStorage.getItem("lastName"));
     const [business, setBusiness] = useState(localStorage.getItem("business"));
     const [phoneNumber, setPhoneNumber] = useState(
         localStorage.getItem("phoneNumber")
@@ -201,10 +198,16 @@ const ProfileBody = () => {
 
     const profileContent = [
         {
-            label: "Full Name",
+            label: "First Name",
             type: "text",
-            value: fullName,
-            onChange: setFullName,
+            value: firstName,
+            onChange: setFirstName,
+        },
+		{
+            label: "Last Name",
+            type: "text",
+            value: lastName,
+            onChange: setLastName,
         },
         {
             label: "Email Address",
@@ -233,8 +236,13 @@ const ProfileBody = () => {
     };
 
     const checkErrors = () => {
-        if (!fullName || !fullName.trim()) {
-            setErrorMessage("Full name is required.");
+        if (!firstName) {
+            setErrorMessage("First name is required.");
+            return null;
+        }
+
+		if (!lastName) {
+            setErrorMessage("Last name is required.");
             return null;
         }
 
@@ -263,8 +271,9 @@ const ProfileBody = () => {
         setErrorMessage(null);
 
         const requestData = {
-            fullName: fullName,
-            phoneNumber: phoneNumber,
+			firstName: firstName,
+			lastName: lastName,
+			phoneNumber: phoneNumber,
             email: email,
             business: business,
         };
@@ -286,11 +295,8 @@ const ProfileBody = () => {
     };
 
     const resetValues = () => {
-        setFullName(
-            localStorage.getItem("firstName") +
-                " " +
-                localStorage.getItem("lastName")
-        );
+		setFirstName(localStorage.getItem("firstName"));
+		setLastName(localStorage.getItem("lastName"));
         setBusiness(localStorage.getItem("business"));
         setPhoneNumber(localStorage.getItem("phoneNumber"));
         setEmail(localStorage.getItem("email"));
