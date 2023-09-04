@@ -61,13 +61,14 @@ const AdminBody = ({ type }) => {
 			const getPromises = [
 				adminApi.getTotalRegistrations(),
 				adminApi.getTotalClicks(),
+				adminApi.getNumOrders(),
 				adminApi.getTotalIncome(),
 				adminApi.getUsers(),
 				adminApi.getRoleReport(),
 				adminApi.getTotalIncomesPerDay()
 			]
       
-        	const [dataReg, dataClick, dataInc, dataUsers, reportResp, totalPricePerDate] = await Promise.all(getPromises);
+        	const [dataReg, dataClick, dataOrders, dataInc, dataUsers, reportResp, totalPricePerDate] = await Promise.all(getPromises);
 
 			const cardsContent = [
 				{
@@ -89,6 +90,15 @@ const AdminBody = ({ type }) => {
 					isMonetary: false,
 				},
 			];
+			if (type === "admin" || type === "leader" || type === "seniorbroker" || type === "broker") {
+				cardsContent[1] = {
+					title: "Orders",
+					amount: dataOrders.number,
+					percentage: dataOrders.percentage,
+					isMonetary: false,
+				};
+			}
+			
 			console.log(cardsContent)
 			setCardInfo(cardsContent);
     
