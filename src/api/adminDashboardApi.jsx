@@ -4,7 +4,9 @@ export default class adminDashboardApi {
         //LAUNCH
         //this.baseURL = "https://nefentus.com:8443/api/dashboard/admin";
         //DEV
-        this.baseURL = process.env.REACT_APP_BASE_ENDPOINT_API + `/dashboard/${type}`;
+		if (type !== "admin")
+        	type = "partner";
+		this.baseURL = process.env.REACT_APP_BASE_ENDPOINT_API + `/dashboard/${type}`;
         this.token = Cookies.get("token");
     }
     async checkPermission(){
