@@ -26,7 +26,7 @@ const colSizes = [1.5, 1, 1.5, 1.5];
 const PaymentBody = () => {
 	const [amount, setAmount] = useState("");
 	const [invoiceData, setInvoiceData] = useState([]);
-	const { setInfoMessage, setErrorMessage } = useContext(MessageContext);
+	const { clearMessages, setErrorMessage } = useContext(MessageContext);
 	const [successfulModal, setSuccessfulModal] = useState(false);
 	const [qrModalOpen, setQRModalOpen] = useState(false);
 	const [qrValue, setQRValue] = useState("");
@@ -102,7 +102,7 @@ const PaymentBody = () => {
       <div>
         <Header title={"Receive payment"} />
 
-		<MessageComponent />
+		<MessageComponent hide={qrModalOpen} />
 
         <TopInfo
           title={"Invoices"}
@@ -175,7 +175,7 @@ const PaymentBody = () => {
         <Modal
 			amount={amount}
 			qrValue={qrValue}
-			onClose={() => { setQRModalOpen(false); fetchInvoices() } }
+			onClose={() => { setQRModalOpen(false); clearMessages(); fetchInvoices() } }
 		/>
       )}
     </>

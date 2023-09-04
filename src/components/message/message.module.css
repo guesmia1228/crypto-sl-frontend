@@ -44,3 +44,7 @@
 .closeButton > div {
 	padding: 0;
 }
+
+.hide {
+	display: none;
+}

@@ -3,8 +3,9 @@ import { MessageContext } from "../../context/message";
 import styles from "./message.module.css";
 import Icon from "../../assets/icon/close.svg";
 import Button from "../button/button";
+import classNames from "classnames";
 
-const MessageComponent = () => {
+const MessageComponent = ({hide}) => {
 	const { infoMessage, errorMessage, setInfoMessage, setErrorMessage } = useContext(MessageContext);
 
 	function closeInfo() {
@@ -15,8 +16,11 @@ const MessageComponent = () => {
 		setErrorMessage(undefined);
 	};
 
+	if (!hide)
+		hide = false;
+
 	return (
-		<div className={styles.messagewrapper}>
+		<div className={classNames({[styles.messagewrapper]: true, [styles.hide]: hide})}>
 			{errorMessage && (
 			<div className={styles.errormessagecontainer}>
 				<p>{errorMessage}</p>
