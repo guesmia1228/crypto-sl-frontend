@@ -36,7 +36,7 @@ export function toChecksumAddress (address) {
 	return ethers.utils.getAddress(address);
 }
 
-export function dashboardLink(localStorage) {
+export function getRole(localStorage) {
 	const roles = localStorage.getItem("roles");
 	const roleArray = roles.split(",");
 	const isVendor = roleArray.includes("ROLE_VENDOR");
@@ -47,16 +47,20 @@ export function dashboardLink(localStorage) {
 	const isAdmin = roleArray.includes("ROLE_ADMIN");
 
 	if (isAdmin) {
-		return "/dashboard/admin";
+		return "admin";
 	} else if (isVendor) {
-		return "/dashboard/vendor";
+		return "vendor";
 	} else if (isAffiliate) {
-		return "/dashboard/affiliate";
+		return "affiliate";
 	} else if (isBroker) {
-		return "/dashboard/broker";
+		return "broker";
 	} else if (isSeniorBroker) {
-		return "/dashboard/seniorbroker";
+		return "seniorbroker";
 	} else if (isLeader) {
-		return "/dashboard/leader";
+		return "leader";
 	}
+}
+
+export function dashboardLink(localStorage) {
+	return "/dashboard/" + getRole(localStorage);
 }
