@@ -158,9 +158,11 @@ export default class adminDashboardApi {
         }
     }
 
-    async addUser(email, password, roles){
+    async addUser(firstName, lastName, email, password, roles){
         try{
             const request = {
+				firstName: firstName,
+				lastName: lastName,
                 email: email,
                 password: password,
                 roles: [roles]

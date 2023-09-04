@@ -39,6 +39,8 @@ const AdminBody = ({ type }) => {
 	const [graphData, setGraphData] = useState([]);
 	const [value, setValue] = useState("");
 	const [barContent, setBarContent] = useState([]);
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
 	const [password, setPassword] = useState("");
 	const [email, setEmail] = useState("");
 	const [openModal, setOpenModal] = useState(false);
@@ -98,7 +100,7 @@ const AdminBody = ({ type }) => {
 					isMonetary: false,
 				};
 			}
-			
+
 			console.log(cardsContent)
 			setCardInfo(cardsContent);
     
@@ -160,7 +162,7 @@ const AdminBody = ({ type }) => {
 
   	const addUser = async () => {
 		if (type === "admin") {
-			const resp = await adminApi.addUser(email, password, value);
+			const resp = await adminApi.addUser(firstName, lastName, email, password, value);
 			if (resp === true) {
 				setOpenModal(false);
 				fetchAdminData();
@@ -312,6 +314,8 @@ const AdminBody = ({ type }) => {
               <h4>Create User</h4>
 
               <div className={styles.modalInputs}>
+				<Input dashboard label="First name" placeholder={"Enter first name"} value={firstName} setState={setFirstName} />
+				<Input dashboard label="Last name" placeholder={"Enter last name"} value={lastName} setState={setLastName} />
                 <Input dashboard label="Email" placeholder={"Enter email"} value={email} setState={setEmail} />
                 <Input
                   dashboard
