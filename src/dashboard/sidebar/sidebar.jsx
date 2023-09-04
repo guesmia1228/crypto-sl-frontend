@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import Hamburger from "../../assets/icon/hamburger.svg";
+import Button from "../../components/button/button";
+import { dashboardLink, getRole } from "../../utils";
+import { ROLE_TO_NAME } from "../../constants";
 
 const items = [
   {
@@ -127,6 +130,8 @@ const Sidebar = () => {
   const [open, setOpen] = useState(window.innerWidth < 900 ? false : true);
 
   const query = useLocation();
+  const role = getRole(localStorage);
+  const roleName = ROLE_TO_NAME[role];
 
   useEffect(() => {
     if (query.pathname === "/dashboard/settings") {
@@ -201,22 +206,14 @@ const Sidebar = () => {
               ))}
             </div>
           </div>
-          <div className={styles.logout}>
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M15.707 8.45819C16.0977 8.06999 16.0977 7.43956 15.707 7.05136L11.7068 3.0762C11.3162 2.688 10.6818 2.688 10.2911 3.0762C9.90048 3.4644 9.90048 4.09484 10.2911 4.48303L12.585 6.76254H6.00029C5.44714 6.76254 5.00024 7.20664 5.00024 7.75633C5.00024 8.30601 5.44714 8.75011 6.00029 8.75011H12.585L10.2911 11.0296C9.90048 11.4178 9.90048 12.0483 10.2911 12.4364C10.6818 12.8246 11.3162 12.8246 11.7068 12.4364L15.707 8.46129V8.45819ZM5.00024 2.78738C5.5534 2.78738 6.00029 2.34328 6.00029 1.79359C6.00029 1.2439 5.5534 0.799805 5.00024 0.799805H3.00015C1.34382 0.799805 0 2.13521 0 3.78117V11.7315C0 13.3774 1.34382 14.7128 3.00015 14.7128H5.00024C5.5534 14.7128 6.00029 14.2687 6.00029 13.7191C6.00029 13.1694 5.5534 12.7253 5.00024 12.7253H3.00015C2.44699 12.7253 2.0001 12.2812 2.0001 11.7315V3.78117C2.0001 3.23148 2.44699 2.78738 3.00015 2.78738H5.00024Z"
-                fill="#C4C4C4"
-              />
-            </svg>
 
-            <p>Log out</p>
-          </div>
+		  {(role === "admin" || role === "leader" || role === "seniorbroker" || role === "broker") && (
+			<div>
+				<Button link={dashboardLink(localStorage)} color={"white"}>
+					To {roleName} Dashboard
+				</Button>
+			</div>
+		  )}
         </div>
       </div>
     </>
