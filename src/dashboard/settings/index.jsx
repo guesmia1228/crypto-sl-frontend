@@ -455,11 +455,12 @@ const PasswordBody = () => {
                     />
                 </div>
             ))}
+			{/*
             <Authentificator
                 placeholder={"Google Authentificator"}
                 connected={true}
                 handleClick={() => {}}
-            />
+			/>*/}
             <Buttons
                 functions={["", handleConfirm]}
                 buttons={["Reset", "Confirm"]}
