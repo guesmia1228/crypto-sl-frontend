@@ -31,7 +31,7 @@ const Footer = () => {
 				))}
 			</ul>
 
-			<p>© 2023 Nefentus. All rights reserved. | Minerian Agency.</p>
+			<p>© 2023 Nefentus. All rights reserved.</p>
 		</div>
 	);
 };
