@@ -457,7 +457,7 @@ export default class backendAPI {
 
     async countAffiliate(affiliate) {
         try {
-            const url = `${this.baseURL}/clicks/?affLink=${affiliate}`;
+            const url = `${this.baseURL}/clicks/${affiliate}`;
             const options = {
                 method: "GET",
                 headers: {

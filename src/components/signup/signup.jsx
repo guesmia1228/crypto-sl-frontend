@@ -248,7 +248,7 @@ const Signup = () => {
       password: Password,
       roles: [UseOption],
       country: CountryOption,
-      affiliate: localStorage.getItem("affiliateJoined"),
+      affiliateLink: localStorage.getItem("affiliateJoined"),
     };
     resetForm();
 

@@ -190,7 +190,7 @@ const AdminBody = ({ type }) => {
 				<p className={styles.affiliateLabel}>Affiliate link: </p>
 
 				<CopyValue 
-					value={`https://nefentus.com/?affiliate=${localStorage.getItem("affiliateLink")}`}
+					value={`${window.location.origin}/?affiliate=${localStorage.getItem("affiliateLink")}`}
 					onCopy={() => affiliateLinkCopied(true)}
 					inputStyle={{width: "400px"}}
 					buttonStyle={{padding: "100px !important"}}
