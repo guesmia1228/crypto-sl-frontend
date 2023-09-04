@@ -37,15 +37,24 @@ const WalletBody = () => {
 		address: useAddress(),
 		status: useConnectionStatus()
 	}
+	const backend_API = new backendAPI();
 
 	const { balances, fetchBalances } = useBalances(metamask);
 	const { prices, fetchPrices } = usePrices(metamask);
 
 	useEffect(() => {
+		console.log("Metamask status changed: " + metamask.status + ", address: " + metamask.address);
 		fetchPrices();
 		fetchBalances();
-		console.log("Metamask status changed: " + metamask.status + ", address: " + metamask.address);
+
+		if (metamask.status === "connected" && metamask.address) {
+			registerWallet();
+		}
 	}, [metamask.status, metamask.address]);
+
+	async function registerWallet() {
+		const result = await backend_API.registerWalletAddress(metamask.address);
+	}
 
 	console.log(metamask.address);
 	console.log(balances);

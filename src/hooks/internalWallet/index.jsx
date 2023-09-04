@@ -9,7 +9,10 @@ function useInternalWallet() {
 	async function fetchInternalWalletAddresses() {
 		const newWalletList = await backend_Api.getWalletAddresses();
 		if (newWalletList) {
-			setWalletList(newWalletList);
+			console.log(newWalletList);
+			const newAddresses = newWalletList.filter((wallet) => wallet.internal).map((wallet) => wallet.address);
+			console.log(newAddresses);
+			setWalletList(newAddresses);
 		}
 	}
 

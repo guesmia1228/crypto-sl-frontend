@@ -53,7 +53,15 @@ const ReceivePayment = ({ priceUSD, userId, info, transInfoArg }) => {
 	useEffect(() => {
 		fetchPrices();
 		fetchBalances();
+
+		if (metamask.status === "connected" && metamask.address) {
+			registerWallet();
+		}
 	}, [metamask.status, metamask.address]);
+
+	async function registerWallet() {
+		const result = await backend_API.registerWalletAddress(metamask.address);
+	}
 
 	async function handleBuy(providerSource, currencyIdx) {
 		// Checks
