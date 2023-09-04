@@ -20,17 +20,29 @@
   --linear-color: linear-gradient(90deg, #1595c2 0%, #66bfde 100%);
   --success-color: #23c215;
   --error-color: rgb(228, 46, 0);
+  --font-size: 0.694vw;
+  --dashboard-font-size: 0.48vw;
+  --font-size-small: 0.833vw;
+  --dashboard-font-size-small: 0.576vw;
 }
 
 /* General */
-html {
-  font-size: 0.48vw; /* 0.694vw;*/
+html:not(:has(.dashboardFont)) {
+ 	font-size: var(--font-size);
+}
+
+html:has(.dashboardFont) {
+	font-size: var(--dashboard-font-size);
 }
 
 @media (max-width: 1200px) {
-  html {
-    font-size: 0.576vw;
-  }
+	html:not(:has(.dashboardFont)) {
+		font-size: var(--font-size-small);
+	}
+
+	html:has(.dashboardFont) {
+		font-size: var(--dashboard-font-size-small);
+	}
 }
 
 @media (max-width: 900px) {

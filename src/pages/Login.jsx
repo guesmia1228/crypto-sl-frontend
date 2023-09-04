@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 
 const Login = () => {
   return (
-    <div>
+    <div className="dashboardFont">
       <Helmet>
         <title>Nefentus | Login</title>
       </Helmet>

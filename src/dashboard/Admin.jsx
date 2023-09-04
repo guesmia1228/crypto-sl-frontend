@@ -5,7 +5,7 @@ import Footer from "../components/footer/footer";
 const Admin = ({ type }) => {
   return (
 	<>
-		<div className="container">
+		<div className="container dashboardFont">
 		<Helmet>
 			<title>Nefentus | Dashboard</title>
 		</Helmet>

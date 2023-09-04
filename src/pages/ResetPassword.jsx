@@ -7,7 +7,7 @@ const ResetPassword = () => {
             <Helmet>
                 <title>Nefentus | Password-forgot</title>
             </Helmet>
-            <ResetPasswords />
+            <ResetPasswords className="dashboardFont" />
         </div>
     );
 };
