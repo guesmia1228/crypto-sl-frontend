@@ -12,6 +12,7 @@ import Header from "../header/header";
 import BlobPicture from "../../components/blobPicture/blobPicture";
 import { KYC } from "./components/KYC";
 import { Buttons } from "./components/buttons";
+import { dashboardLink } from "../../utils";
 
 const nav = [
     "Profile",
@@ -64,21 +65,8 @@ const SettingsBody = ({ type }) => {
         async function checkJwtAndNavigate() {
             const jwtIsValid = await backendapi.checkJwt();
             if (jwtIsValid) {
-                const roles = localStorage.getItem("roles");
-                const roleArray = roles.split(","); // Konvertiert den String in ein Array von Strings
-                const isAdmin = roleArray.includes("ROLE_ADMIN"); // Überprüft, ob "ROLE_ADMIN" im Array enthalten ist
-                const isVendor = roleArray.includes("ROLE_VENDOR"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
-                const isAffiliate = roleArray.includes("ROLE_AFFILIATE"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
-
-                console.log(requireKyc)
-
-                if (isAdmin) {
-                    setLink("/dashboard/admin");
-                } else if (isAffiliate) {
-                    setLink("/dashboard/affiliate");
-                } else if (isVendor) {
-                    setLink("/dashboard/vendor");
-                }
+				const newLink = dashboardLink(localStorage);
+				setLink(newLink);
             } else {
                 navigate("/login");
             }
@@ -111,7 +99,7 @@ const SettingsBody = ({ type }) => {
 
                         <div className={styles.button}>
                             <Link to={link} color="white">
-                                Back to dashboard
+                                To Dashboard
                             </Link>
                         </div>
                     </div>
@@ -291,7 +279,8 @@ const ProfileBody = () => {
             setErrorMessage("Error on updating data");
             return;
         }
-        window.location.reload();
+        
+		resetValues();
     };
 
     const resetValues = () => {

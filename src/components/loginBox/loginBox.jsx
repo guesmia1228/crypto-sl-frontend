@@ -6,6 +6,7 @@ import Button from "./../button/button";
 import { useState, useEffect } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { dashboardLink } from "../../utils";
 
 import backend_API from "../../api/backendAPI";
 
@@ -23,21 +24,8 @@ const LoginBox = () => {
   const [checkBox, setCheckBox] = useState(false);
 
   function navigateDashboard() {
-	const roles = localStorage.getItem("roles");
-	const roleArray = roles.split(",");
-	const isVendor = roleArray.includes("ROLE_VENDOR");
-	const isAffiliate = roleArray.includes("ROLE_AFFILIATE");
-	const isBroker = roleArray.includes("ROLE_BROKER");
-	const isSeniorBroker = roleArray.includes("ROLE_SENIOR_BROKER");
-	const isLeader = roleArray.includes("ROLE_LEADER"); 
-	const isAdmin = roleArray.includes("ROLE_ADMIN");
-
-	if (isAdmin) { navigate("/dashboard/admin"); }
-	else if (isVendor) { navigate("/dashboard/vendor"); }
-	else if (isAffiliate) { navigate("/dashboard/affiliate"); }
-	else if (isBroker) { navigate("/dashboard/broker"); }
-	else if (isSeniorBroker) { navigate("/dashboard/seniorbroker"); }
-	else if (isLeader) { navigate("/dashboard/leader"); }
+	const link = dashboardLink(localStorage);
+	navigate(link);
   }
 
   useEffect(() => {
