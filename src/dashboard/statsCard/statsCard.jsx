@@ -16,7 +16,7 @@ const StatsCard = ({ title, amount, percentage, isMonetary }) => {
 		percChange = (
 			<>
 				<span style={{ color: color}}>
-					{(positive ? `+` : ``) + percentage + "%"}
+					{(positive ? `+` : ``) + parseFloat(percentage).toFixed(0) + "%"}
 				</span>{" "}
 				vs last 30 days
 			</>
