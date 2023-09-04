@@ -196,6 +196,11 @@
   color: var(--white-color);
 }
 
+.dashboardButton {
+	font-size: 1rem;
+	padding: 0.4rem 0.8rem;
+}
+
 .mobMenu {
   display: none !important;
 }

@@ -10,6 +10,7 @@ import QR from "../../assets/icon/qrcode.svg";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import backend_API from "../../api/backendAPI";
+import { dashboardLink } from "../../utils";
 
 const Navigation = () => {
 	const { t } = useTranslation();
@@ -21,28 +22,14 @@ const Navigation = () => {
 	async function getProfile() {
 		const jwtIsValid = await backendAPI.checkJwt();
 		if (jwtIsValid) {
-			const roles = localStorage.getItem("roles");
-			const roleArray = roles.split(","); // Konvertiert den String in ein Array von Strings
-			const isAdmin = roleArray.includes("ROLE_ADMIN"); // Überprüft, ob "ROLE_ADMIN" im Array enthalten ist
-			const isVendor = roleArray.includes("ROLE_VENDOR"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
-			const isAffiliate = roleArray.includes("ROLE_AFFILIATE"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
-			const isDiamond = roleArray.includes("ROLE_DIAMOND_PARTNER"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
-			const isGold = roleArray.includes("ROLE_GOLD_PARTNER"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
-			const isIbLeader = roleArray.includes("ROLE_IB_LEADER"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
-	
-			let dashboardLink = "";
-			if (isAdmin) { dashboardLink = "/dashboard/admin"; }
-			else if (isAffiliate) { dashboardLink = "/dashboard/affiliate"; }
-			else if (isVendor) { dashboardLink = "/dashboard/vendor"; }
-			else if (isGold) { dashboardLink = "/dashboard/gold"; }
-			else if (isIbLeader) { dashboardLink = "/dashboard/ib-leader"; }
-			else if (isDiamond) { dashboardLink = "/dashboard/diamond"; }
+			const link = dashboardLink(localStorage);
+			console.log(link);
 
 			const newProfile = {
 				email: localStorage.getItem("email"),
 				firstName: localStorage.getItem("firstName"),
 				lastName: localStorage.getItem("lastName"),
-				dashboardLink: dashboardLink
+				dashboardLink: link
 			}
 			setProfile(newProfile);
 		}
@@ -63,7 +50,7 @@ const Navigation = () => {
 		if (profile.email) {
 			return (
 				<>
-					<div className={styles.button}>
+					<div className={`${styles.button} ${styles.dashboardButton}`}>
 						<Link to={profile.dashboardLink}>{dashboardString(profile)}</Link>
 					</div>
 				</>
