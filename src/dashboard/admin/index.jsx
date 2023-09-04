@@ -171,7 +171,7 @@ const AdminBody = ({ type }) => {
           title="Overview"
           description="Check information on income, clicks, and registrations."
         >
-			<div className={styles.topButtonWrapper}>
+			<div className={styles.topButtonWrapper} style={{gridTemplateColumns: !affiliate ? "1fr 1fr" : "1fr"}}>
 				{!affiliate && (
 					<Button onClick={() => setOpenModal(true)}>
 						Add User
