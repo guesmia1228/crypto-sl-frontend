@@ -2,6 +2,7 @@ import Sidebar from "../sidebar/sidebar";
 import Countdown from "../countdown/countdown";
 import Header from "../header/header";
 import Footer from "../footer";
+import styles from "./dashboardLayout.module.css";
 
 const DashboardLayout = ({ children }) => {
 	const roles = localStorage.getItem("roles");
@@ -13,7 +14,7 @@ const DashboardLayout = ({ children }) => {
 			<>
 				<div className="dashboard dashboardFont">
 					<Sidebar />
-					<div>
+					<div className={styles.content}>
 						{children}
 						<Footer />
 					</div>
