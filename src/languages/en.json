@@ -213,7 +213,7 @@
     ]
   },
   "forgot-password": {
-    "title": "Forgot Password",
+    "title": "Password forgotten",
     "button": "Send email",
     "info": "Dont know your email please contact the support! "
   },
