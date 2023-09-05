@@ -3,7 +3,7 @@ import styles from "./input.module.css";
 import AttachmentImage from "../../assets/icon/attachment.svg";
 import { useRef, useState } from "react";
 
-const Input = ({ label, placeholder, type = "text", setState, value }) => {
+const Input = ({ label, placeholder, type = "text", setState, value, disabled }) => {
 
   const handleChange = (e) => {
     setState(e.target.value);
@@ -13,7 +13,7 @@ const Input = ({ label, placeholder, type = "text", setState, value }) => {
     <div className={styles.input}>
       <p>{label}</p>
 
-      <input type={type} name="" id="" value={value} placeholder={placeholder} onChange={handleChange}/>
+      <input type={type} name="" id="" value={value} placeholder={placeholder} onChange={handleChange} disabled={disabled === true}/>
     </div>
   );
 };

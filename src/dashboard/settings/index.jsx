@@ -1,6 +1,6 @@
 import { Attachment, Authentificator } from "../input/input";
 import styles from "./settings.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 
 import Logo from "../../assets/logo/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,9 +13,16 @@ import BlobPicture from "../../components/blobPicture/blobPicture";
 import { KYC } from "./components/KYC";
 import { Buttons } from "./components/buttons";
 import { dashboardLink } from "../../utils";
+import MessageComponent from "../../components/message";
+import { MessageContext } from "../../context/message";
 
-const nav = [
+let nav = [
     "Profile",
+    "Change Password",
+];
+
+const nav_kyc = [
+	"Profile",
     "Change Password",
     <div>
         <span className={styles.rest}>Know Your Customer(</span>KYC
@@ -23,16 +30,11 @@ const nav = [
     </div>,
 ];
 
-const nav_kyc = [
-    "Profile",
-    "Change Password"
-];
-
 const instruction = [
     {
         title: "Personal information",
         description:
-            "Some of fields can’t be changed here. Please contact our support for that.",
+            "Change your personal information in the fields below.",
     },
     {
         title: "Password",
@@ -49,12 +51,14 @@ const instruction = [
 const SettingsBody = ({ type }) => {
     const backendapi = new backendAPI();
     const [active, setActive] = useState(0);
-    const [requireKyc, setRequireKyc] = useState(localStorage.getItem("requireKyc"))
+    const [requireKyc, setRequireKyc] = useState(localStorage.getItem("requireKyc"));
     const [profilePicUrl, setProfilePicUrl] = useState(
         localStorage.getItem("profile_pic")
     );
     const [counter, setCounter] = useState(0);
     const navigate = useNavigate();
+	const { clearMessages } = useContext(MessageContext);
+
     useEffect(() => {
         const handleStorageChange = () => {
             setProfilePicUrl(localStorage.getItem("profile_pic"));
@@ -80,6 +84,12 @@ const SettingsBody = ({ type }) => {
             window.removeEventListener("storage", handleStorageChange);
         };
     }, [counter]);
+
+	useEffect(() => {
+		if (requireKyc === "true") {
+			nav = nav_kyc;
+		}
+	}, [requireKyc]);
 
     const cookies = new Cookies();
     const [link, setLink] = useState("");
@@ -125,10 +135,11 @@ const SettingsBody = ({ type }) => {
 
             <div className={`${styles.settingsBody} card`}>
             <div className={styles.settingsNav}>
-                    {requireKyc === "true" && nav.map((item, index) => (
+                    {nav.map((item, index) => (
                         <div
+							key={index}
                             className={styles.item}
-                            onClick={() => setActive(index)}
+                            onClick={() => {clearMessages(); setActive(index); }}
                             style={{
                                 borderColor:
                                     active === index ? "#fff" : "transparent",
@@ -138,30 +149,12 @@ const SettingsBody = ({ type }) => {
                             {item}
                         </div>
                     ))}
-                    {requireKyc === "false" && nav_kyc.map((item, index) => (
-                        <div
-                            className={styles.item}
-                            onClick={() => setActive(index)}
-                            style={{
-                                borderColor:
-                                    active === index ? "#fff" : "transparent",
-                                color: active === index ? "#fff" : "#c4c4c4",
-                            }}
-                        >
-                            {item}
-                        </div>
-                    ))}
-                </div>
-
-                <div className={styles.info}>
-                    <h4>{instruction[active].title}</h4>
-                    <p>{instruction[active].description}</p>
                 </div>
 
                 {active === 0 ? (
-                    <ProfileBody afterUpdateSettings={() => setProfilePicUrl(localStorage.getItem("profile_pic"))} />
+                    <ProfileBody active={active} afterUpdateSettings={() => setProfilePicUrl(localStorage.getItem("profile_pic"))} />
                 ) : active === 1 ? (
-                    <PasswordBody />
+                    <PasswordBody active={active} />
                 ) : (
                     <KYC />
                 )}
@@ -172,7 +165,7 @@ const SettingsBody = ({ type }) => {
 
 export default SettingsBody;
 
-const ProfileBody = ({afterUpdateSettings}) => {
+const ProfileBody = ({afterUpdateSettings, active}) => {
     const [file, setFile] = useState(null);
 	const [firstName, setFirstName] = useState(localStorage.getItem("firstName"));
 	const [lastName, setLastName] = useState(localStorage.getItem("lastName"));
@@ -181,8 +174,7 @@ const ProfileBody = ({afterUpdateSettings}) => {
         localStorage.getItem("phoneNumber")
     );
     const [email, setEmail] = useState(localStorage.getItem("email"));
-    const [errorMessage, setErrorMessage] = useState(null);
-    const [message, setMessage] = useState(null);
+	const { setErrorMessage, setInfoMessage } = useContext(MessageContext);
 
     const profileContent = [
         {
@@ -197,13 +189,6 @@ const ProfileBody = ({afterUpdateSettings}) => {
             type: "text",
             value: lastName,
             onChange: setLastName,
-			required: true,
-        },
-        {
-            label: "Email Address",
-            type: "text",
-            value: email,
-            onChange: setEmail,
 			required: true,
         },
         {
@@ -261,22 +246,25 @@ const ProfileBody = ({afterUpdateSettings}) => {
             business: business,
         };
 
+		let response = 1;
         if (file) {
             const response = await backendAPI.uploadFile(file);
             if (response == null) {
                 setErrorMessage("Error on uploading the profile picture");
-                return;
             }
         }
 
         const response2 = await backendAPI.update(requestData);
         if (response2 == null) {
             setErrorMessage("Error on updating data");
-            return;
         }
         
 		resetValues();
 		afterUpdateSettings();
+
+		if (response !== null && response2 !== null) {
+			setInfoMessage("Settings updated successfully!");
+		}
     };
 
     const resetValues = () => {
@@ -289,18 +277,13 @@ const ProfileBody = ({afterUpdateSettings}) => {
 
     return (
         <div>
-            <div>
-                {errorMessage && (
-                    <div className={styles.errormessagecontainer}>
-                        <p style={{ color: "red" }}> {errorMessage}</p>
-                    </div>
-                )}
-                {message && (
-                    <div className={styles.messagecontainer}>
-                        <p style={{ color: "green" }}>{message}</p>
-                    </div>
-                )}
-            </div>
+            <MessageComponent />
+
+			<div className={styles.info}>
+				<h4>{instruction[active].title}</h4>
+				<p>{instruction[active].description}</p>
+			</div>
+
             {profileContent.map((item) => (
                 <div>
                     <InputComponent
@@ -312,6 +295,16 @@ const ProfileBody = ({afterUpdateSettings}) => {
                     />
                 </div>
             ))}
+
+			<div>
+				<InputComponent
+					disabled
+					label={"Email Address"}
+					placeholder={email}
+					type={"text"}
+					value={email}
+				/>
+			</div>
 
             <Attachment label="Upload logo image" onUpload={handleUpload} />
 
