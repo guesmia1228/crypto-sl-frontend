@@ -29,6 +29,7 @@ const ProductBody = ({ product }) => {
 			priceUSD={product.price}
 			userId={product.user? product.user.id : null}
 			transInfoArg={{productId: product.id}}
+			disabled={product.stock === 0}
 			info={
 				<div className={styles.productWrapper}>
 					<div className={`card ${styles.productInfo}`}>
@@ -40,7 +41,7 @@ const ProductBody = ({ product }) => {
 
 							<p className={styles.price}><span>Price:</span> <span>{product.price} USD</span></p>
 
-							<p className={styles.stock}><span>Stock:</span> <span>{product.stock}</span></p>
+							<p className={styles.stock}><span>Stock:</span> <span>{product.stock >= 0 ? product.stock : "Unlimited"}</span></p>
 						</div>
 					</div>
 					<div className={`card ${styles.productImage}`}>

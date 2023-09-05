@@ -88,6 +88,11 @@ const ProductBody = () => {
 			setErrorMessage("Price is required!");
 			return;
 		}
+		let priceAsFloat = null;
+		priceAsFloat = parseFloat(price);
+		if (!priceAsFloat) {
+			setErrorMessage("Price must be a number!");
+		}
 
 		const resp1 = await dashboardApi.upsertProduct(productId, name, description, price, stock, image);
 		const imageProductId = resp1.id;

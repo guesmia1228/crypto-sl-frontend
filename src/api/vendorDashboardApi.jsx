@@ -117,7 +117,7 @@ export default class vendorDashboardApi {
 	 */
 	async upsertProduct(productId, name, description, price, stock) {
 		try {
-			let stockInt = null;
+			let stockInt = -1;
 			try {
 				stockInt = parseInt(stock);
 			} catch (error) {
