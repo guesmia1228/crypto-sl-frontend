@@ -29,7 +29,7 @@ const ProductBody = () => {
 	const [products, setProducts] = useState([]);
 	const [signedImagePaths, setSignedImagePaths] = useState([]);
 
-	const { setInfoMessage, setErrorMessage } = useContext(MessageContext);
+	const { setInfoMessage, setErrorMessage, clearMessages } = useContext(MessageContext);
 
 	const dashboardApi = new vendorDashboardApi();
 
@@ -76,6 +76,19 @@ const ProductBody = () => {
 	}
 
 	const addOrUpdateProduct = async () => {
+		if (!name) {
+			setErrorMessage("Name is required!");
+			return;
+		}
+		if (!description) {
+			setErrorMessage("Description is required!");
+			return;
+		}
+		if (!price) {
+			setErrorMessage("Price is required!");
+			return;
+		}
+
 		const resp1 = await dashboardApi.upsertProduct(productId, name, description, price, stock, image);
 		const imageProductId = resp1.id;
 
@@ -122,7 +135,7 @@ const ProductBody = () => {
 			<div className={`dashboard-body`}>
 				<Header title="Products" />
 
-				<MessageComponent />
+				<MessageComponent hide={openModal} />
 
 				<TopInfo
 					title="Total"
@@ -163,6 +176,8 @@ const ProductBody = () => {
 								Product
 							</h4>
 
+							<MessageComponent />
+
 							<div className={styles.modalInputs}>
 								<Attachment
 									label="Product image"
@@ -173,42 +188,41 @@ const ProductBody = () => {
 								/>
 								<Input
 									dashboard
-									label="Name"
+									label="Name*"
 									placeholder="Enter name"
 									value={name}
 									setState={setName}
 								/>
 								<Textarea
 									dashboard
-									label="Description"
+									label="Description*"
 									placeholder="Enter description"
 									value={description}
 									setState={setDescription}
 									rows={2}
 								/>
-								<div className={styles.inputRow}>
-									<Input
-										dashboard
-										label="Price"
-										placeholder="Enter price"
-										value={price}
-										setState={setPrice}
-										number
-									/>
-									<Input
-										dashboard
-										label="Stock"
-										placeholder="Enter stock"
-										value={stock}
-										setState={setStock}
-										number
-									/>
-								</div>
+								<Input
+									dashboard
+									label="Price*"
+									placeholder="Enter price"
+									value={price}
+									setState={setPrice}
+									number
+								/>
+								<Input
+									dashboard
+									label="Stock"
+									placeholder="Enter stock if limited stock"
+									value={stock}
+									setState={setStock}
+									number
+								/>
 							</div>
 							<div className={styles.modalButtons}>
 								<div
 									className={styles.button}
 									onClick={() => {
+										clearMessages();
 										setOpenModal(false);
 										setProductId(null);
 									}}
