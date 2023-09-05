@@ -159,7 +159,7 @@ const SettingsBody = ({ type }) => {
                 </div>
 
                 {active === 0 ? (
-                    <ProfileBody />
+                    <ProfileBody afterUpdateSettings={() => setProfilePicUrl(localStorage.getItem("profile_pic"))} />
                 ) : active === 1 ? (
                     <PasswordBody />
                 ) : (
@@ -172,7 +172,7 @@ const SettingsBody = ({ type }) => {
 
 export default SettingsBody;
 
-const ProfileBody = () => {
+const ProfileBody = ({afterUpdateSettings}) => {
     const [file, setFile] = useState(null);
 	const [firstName, setFirstName] = useState(localStorage.getItem("firstName"));
 	const [lastName, setLastName] = useState(localStorage.getItem("lastName"));
@@ -190,30 +190,35 @@ const ProfileBody = () => {
             type: "text",
             value: firstName,
             onChange: setFirstName,
+			required: true,
         },
 		{
             label: "Last Name",
             type: "text",
             value: lastName,
             onChange: setLastName,
+			required: true,
         },
         {
             label: "Email Address",
             type: "text",
             value: email,
             onChange: setEmail,
+			required: true,
         },
         {
             label: "Business",
             type: "text",
             value: business,
             onChange: setBusiness,
+			required: false
         },
         {
             label: "Phone Number",
             type: "text",
             value: phoneNumber,
             onChange: setPhoneNumber,
+			required: false
         },
     ];
 
@@ -231,16 +236,6 @@ const ProfileBody = () => {
 
 		if (!lastName) {
             setErrorMessage("Last name is required.");
-            return null;
-        }
-
-        if (!business || !business.trim()) {
-            setErrorMessage("Business name is required.");
-            return null;
-        }
-
-        if (!phoneNumber || !phoneNumber.trim()) {
-            setErrorMessage("Phone number is required.");
             return null;
         }
 
@@ -281,6 +276,7 @@ const ProfileBody = () => {
         }
         
 		resetValues();
+		afterUpdateSettings();
     };
 
     const resetValues = () => {
@@ -308,7 +304,7 @@ const ProfileBody = () => {
             {profileContent.map((item) => (
                 <div>
                     <InputComponent
-                        label={item.label}
+                        label={item.label + (item.required ? "*" : "")}
                         placeholder={item.placeholder}
                         type={item.type}
                         value={item.value}
@@ -346,6 +342,7 @@ const PasswordBody = () => {
             type: "password",
             value: currentPassword,
             onChange: setCurrentPassword,
+			required: true
         },
         {
             label: "New Password",
@@ -353,6 +350,7 @@ const PasswordBody = () => {
             type: "password",
             value: newPassword,
             onChange: setNewPassword,
+			required: true
         },
         {
             label: "Confirm Password",
@@ -360,6 +358,7 @@ const PasswordBody = () => {
             type: "password",
             value: confirmPassword,
             onChange: setConfirmPassword,
+			required: true
         },
     ];
 
@@ -441,7 +440,7 @@ const PasswordBody = () => {
             {passwordContent.map((item) => (
                 <div>
                     <InputComponent
-                        label={item.label}
+                        label={item.label + (item.required ? "*" : "")}
                         placeholder={item.placeholder}
                         type={item.type}
                         setState={item.onChange}

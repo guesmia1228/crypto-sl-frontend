@@ -193,7 +193,7 @@ export default class backendAPI {
 
             const data = await response.json();
             localStorage.setItem("profile_pic", data.message);
-            return response;
+            return data.message;
         } catch (error) {
             console.error("There was an error uploading the file:", error);
             return null;

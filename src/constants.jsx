@@ -5,8 +5,11 @@ import Binance from "./assets/icon/crypto/binance.svg";
 import Ethereum from "./assets/icon/crypto/ethereum.svg";
 import Tether from "./assets/icon/crypto/tether.svg";
 import USDC from "./assets/icon/crypto/usdc.svg";
+import Ripple from "./assets/icon/crypto/xrp.svg";
+import DAI from "./assets/icon/crypto/dai.svg";
 import SwapAndDistribute1 from "./assets/abi/SwapAndDistribute1.json";
 import SwapAndDistribute2 from "./assets/abi/SwapAndDistribute2.json";
+import { ethers } from "ethers";
 
 export const ROLE_TO_NAME = {
 	"vendor": "Vendor",
@@ -38,7 +41,42 @@ export const currencies = [
 		abbr: "USDC",
 		address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
 		decimals: 6
-	  },
+	},
+	{
+		icon: Bitcoin,
+		name: "Bitcoin",
+		abbr: "BTC",
+		address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+		decimals: 18
+	},
+	{
+		icon: Binance,
+		name: "Binance Coin",
+		abbr: "BNB",
+		address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+		decimals: 18
+	},
+	{
+		icon: Ripple,
+		name: "Ripple",
+		abbr: "XRP",
+		address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+		decimals: 18
+	},
+	{
+		icon: DAI,
+		name: "DAI",
+		abbr: "DAI",
+		address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+		decimals: 18
+	},
+	{
+		icon: Polygon,
+		name: "Polygon",
+		abbr: "MATIC",
+		address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+		decimals: 18
+	},
 ];
 
 export const ownerAddress = "0xBE011f8F08d05feCc83abeabb6C38b987B9bdD45";
