@@ -236,10 +236,27 @@ const Signup = () => {
     setEmail("");
     setPassword("");
     setUseOption("Choose Options");
-    setCountryOption("Choose Country")
+    setCountryOption("Choose Country*")
   };
 
   async function submitForm() {
+	if (FirstName === "") {
+		setErrorMessage("Please enter your first name");
+		return;
+	} else if (LastName === "") {
+		setErrorMessage("Please enter your last name");
+		return;
+	} else if (Email === "") {
+		setErrorMessage("Please enter your email");
+		return;
+	} else if (Password === "") {
+		setErrorMessage("Please enter your password");
+		return;
+	} else if (CountryOption === "Choose Country*") {
+		setErrorMessage("Please choose a country");
+		return;
+	}
+
     const requestData = {
       firstName: FirstName,
       lastName: LastName,
@@ -299,13 +316,13 @@ const Signup = () => {
         )}
         <div className={styles.row}>
           <Input
-            label={t("signUp.firstNameLabel")}
+            label={t("signUp.firstNameLabel") + "*"}
             placeholder={t("signUp.firstNamePlaceholder")}
             value={FirstName}
             setState={setFirstName}
           />
           <Input
-            label={t("signUp.lastNameLabel")}
+            label={t("signUp.lastNameLabel") + "*"}
             placeholder={t("signUp.lastNamePlaceholder")}
             value={LastName}
             setState={setLastName}
@@ -318,13 +335,13 @@ const Signup = () => {
           setState={setTelefon}
         />
         <Input
-          label={t("signUp.emailLabel")}
+          label={t("signUp.emailLabel") + "*"}
           placeholder={t("signUp.emailPlaceholder")}
           value={Email}
           setState={setEmail}
         />
         <Input
-          label={t("signUp.passwordLabel")}
+          label={t("signUp.passwordLabel") + "*"}
           placeholder={t("signUp.passwordPlaceholder")}
           value={Password}
           setState={setPassword}
