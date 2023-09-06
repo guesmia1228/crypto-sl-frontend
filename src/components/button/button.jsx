@@ -33,7 +33,7 @@ const Button = ({ children, className, color, link, onClick, style }) => {
     >
       {link ? (
         <Link to={link}>
-          <div style={{ color: fontColor}}>
+          <div style={{...style, color: fontColor}}>
             {children}
           </div>
         </Link>

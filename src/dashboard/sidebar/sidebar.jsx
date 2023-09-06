@@ -209,7 +209,7 @@ const Sidebar = () => {
 
 		  {(role === "admin" || role === "leader" || role === "seniorbroker" || role === "broker") && (
 			<div>
-				<Button link={dashboardLink(localStorage)} color={"white"}>
+				<Button link={dashboardLink(localStorage)} color={"white"} style={{padding: "0.3rem 0.5rem"}}>
 					To {roleName} Dashboard
 				</Button>
 			</div>
