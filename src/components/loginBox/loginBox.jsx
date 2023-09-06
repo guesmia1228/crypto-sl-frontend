@@ -75,67 +75,72 @@ const LoginBox = () => {
     }
   };
 
-  function handleClick() {
+  function handleClick(e) {
+	e.preventDefault();
     loginUser(Username, Password, checkBox);
   }
 
   return (
     <div className={styles.login}>
       <div className={styles.card}>
-        <div className={styles.top}>
-          <img src={Logo} alt="" />
+		<div className={styles.top}>
+			<img src={Logo} alt="" />
 
-          <h3>{t("login.title")}</h3>
-          <div>
-            {errorMessage && (
-              <div className={styles.errormessagecontainer}>
-                <p style={{ color: "red" }}> {errorMessage}</p>
-              </div>
-            )}
-            {message && (
-              <div className={styles.messagecontainer}>
-                <p style={{ color: "green" }}>{message}</p>
-              </div>
-            )}
-          </div>
-        </div>
+			<h3>{t("login.title")}</h3>
+			<div>
+				{errorMessage && (
+				<div className={styles.errormessagecontainer}>
+					<p style={{ color: "red" }}> {errorMessage}</p>
+				</div>
+				)}
+				{message && (
+				<div className={styles.messagecontainer}>
+					<p style={{ color: "green" }}>{message}</p>
+				</div>
+				)}
+			</div>
+		</div>
 
-        <Input
-          value={Username}
-          setState={setUsername}
-          label={t("signUp.emailLabel")}
-          placeholder={t("signUp.emailPlaceholder")}
-        />
-        <Input
-          value={Password}
-          setState={setPassword}
-          label={t("signUp.passwordLabel")}
-          placeholder={t("signUp.passwordPlaceholder")}
-          secure
-        />
+		<form onSubmit={handleClick}>
+			<Input
+			value={Username}
+			setState={setUsername}
+			label={t("signUp.emailLabel")}
+			placeholder={t("signUp.emailPlaceholder")}
+			/>
+			<Input
+			value={Password}
+			setState={setPassword}
+			label={t("signUp.passwordLabel")}
+			placeholder={t("signUp.passwordPlaceholder")}
+			secure
+			/>
 
-        <div className={styles.remeberInfo}>
-          <div onClick={() => setCheckBox((prev) => !prev)}>
-            <div className={styles.checkBox}>
-              {checkBox && <img src={CheckBox} alt="" />}
-            </div>
-            <p>Remember me</p>
-          </div>
+			<div className={styles.remeberInfo}>
+			<div onClick={() => setCheckBox((prev) => !prev)}>
+				<div className={styles.checkBox}>
+				{checkBox && <img src={CheckBox} alt="" />}
+				</div>
+				<p>Remember me</p>
+			</div>
 
-          <Link to="/forgot-password">  <p>{t("login.forgot")}</p></Link>
-        </div>
+			<Link to="/forgot-password">  <p>{t("login.forgot")}</p></Link>
+			</div>
 
-        <Button link={null} onClick={handleClick}>
-          {t("login.button")}
-        </Button>
-        <div className={styles.info}>
-          <p>
-            {t("login.info")}
-            <u>
-              <Link to="/signUp">{t("login.infoButton")}</Link>
-            </u>
-          </p>
-        </div>
+			<Button link={null} onClick={handleClick} style={{width: "100%"}}>
+				{t("login.button")}
+			</Button>
+			<div className={styles.info}>
+			<p>
+				{t("login.info")}
+				<u>
+				<Link to="/signUp">{t("login.infoButton")}</Link>
+				</u>
+			</p>
+			</div>
+
+			<button type="submit" hidden />
+		</form>
       </div>
     </div>
   );

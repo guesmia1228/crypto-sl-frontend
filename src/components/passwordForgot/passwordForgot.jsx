@@ -32,7 +32,8 @@ const PasswordForgot = () => {
   }
 
 
-  function handleClick() {
+  function handleClick(e) {
+	e.preventDefault();
     sendResetMail(Username);
   }
 
@@ -57,20 +58,24 @@ const PasswordForgot = () => {
           </div>
         </div>
 
-        <Input
-          value={Username}
-          setState={setUsername}
-          label={t("signUp.emailLabel")}
-          placeholder={t("signUp.emailPlaceholder")}
-        />
-		<div className={styles.buttonWrapper}>
-        <Button link={null} onClick={handleClick}>{t("forgot-password.button")}</Button>
-		</div>
-        <div className={styles.info}>
-          <p>
-            {t("forgot-password.info")}
-          </p>
-        </div>
+		<form onSubmit={handleClick}>
+			<Input
+			value={Username}
+			setState={setUsername}
+			label={t("signUp.emailLabel")}
+			placeholder={t("signUp.emailPlaceholder")}
+			/>
+			<div className={styles.buttonWrapper}>
+				<Button link={null} onClick={handleClick}>{t("forgot-password.button")}</Button>
+			</div>
+			<div className={styles.info}>
+			<p>
+				{t("forgot-password.info")}
+			</p>
+			</div>
+
+			<button type="submit" hidden />
+		</form>
       </div>
     </div>
   );

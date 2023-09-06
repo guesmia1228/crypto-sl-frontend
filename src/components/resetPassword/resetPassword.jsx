@@ -43,7 +43,8 @@ const ResetPassword = () => {
     }
   }
 
-  function handleClick() {
+  function handleClick(e) {
+	e.preventDefault();
     ResetPassword(token, CPassword, Password);
   }
 
@@ -67,26 +68,33 @@ const ResetPassword = () => {
             )}
           </div>
         </div>
-        <Input
-          value={Password}
-          setState={setPassword}
-          label={t("signUp.passwordLabel")}
-          placeholder={t("signUp.passwordPlaceholder")}
-          secure
-        />
-        <Input
-          value={CPassword}
-          setState={setCPassword}
-          label={t("reset-password.button-label-confirm")}
-          placeholder={t("signUp.passwordPlaceholder")}
-          secure
-        />
-        <Button link={null} onClick={handleClick}>Reset password</Button>
-        <div className={styles.info}>
-          <p>
-		  	Don't want to reset your password? <Link to="/login">Login</Link> instead.
-          </p>
-        </div>
+
+		<form onSubmit={handleClick}>
+			<Input
+			value={Password}
+			setState={setPassword}
+			label={t("signUp.passwordLabel")}
+			placeholder={t("signUp.passwordPlaceholder")}
+			secure
+			/>
+			<Input
+			value={CPassword}
+			setState={setCPassword}
+			label={t("reset-password.button-label-confirm")}
+			placeholder={t("signUp.passwordPlaceholder")}
+			secure
+			/>
+			<div className={styles.buttonWrapper}>
+				<Button link={null} onClick={handleClick}>Reset password</Button>
+			</div>			
+			<div className={styles.info}>
+			<p>
+				Don't want to reset your password? <Link to="/login">Login</Link> instead.
+			</p>
+			</div>
+
+			<button type="submit" hidden />
+		</form>
       </div>
     </div>
   );

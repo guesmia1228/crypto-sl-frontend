@@ -48,7 +48,7 @@
 
 .remeberInfo {
   margin-top: 2rem;
-
+	margin-bottom: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -103,6 +103,10 @@
 .login > div:last-child p {
   font-size: 1.2rem;
   color: var(--white-color);
+}
+
+.info {
+	margin-top: 2rem;
 }
 
 .info p {
