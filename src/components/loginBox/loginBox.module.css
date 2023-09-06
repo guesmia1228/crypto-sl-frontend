@@ -47,7 +47,6 @@
 }
 
 .remeberInfo {
-  margin-top: 2rem;
 	margin-bottom: 2rem;
   display: flex;
   justify-content: space-between;
@@ -92,6 +91,10 @@
 .card > div:last-child {
   display: flex;
   justify-content: space-between;
+}
+
+.card input {
+	margin-bottom: 2rem;
 }
 
 .top {
