@@ -178,6 +178,12 @@
 	cursor: pointer;
 }
 
+.deleteLink {
+	text-decoration: underline;
+	color: #1595c2;
+	cursor: pointer;
+}
+
 @media (max-width: 900px) {
   .body {
     grid-template-columns: 1fr;

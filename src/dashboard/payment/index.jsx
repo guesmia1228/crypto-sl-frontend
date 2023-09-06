@@ -20,13 +20,13 @@ import { formatUSDBalance } from "../../utils";
 import { useConnect, useDisconnect, metamaskWallet, useConnectionStatus, useAddress } from "@thirdweb-dev/react";
 import MessageComponent from "../../components/message";
 
-const headers = ["Created at", "Price ($)", "Status", "QR code"]
-const colSizes = [1.5, 1, 1.5, 1.5];
+const headers = ["Created at", "Price ($)", "Status", "QR code", "Actions"]
+const colSizes = [1.5, 1, 1.5, 1.5, 1.5];
 
 const PaymentBody = () => {
 	const [amount, setAmount] = useState("");
 	const [invoiceData, setInvoiceData] = useState([]);
-	const { clearMessages, setErrorMessage } = useContext(MessageContext);
+	const { clearMessages, setErrorMessage, setInfoMessage } = useContext(MessageContext);
 	const [successfulModal, setSuccessfulModal] = useState(false);
 	const [qrModalOpen, setQRModalOpen] = useState(false);
 	const [qrValue, setQRValue] = useState("");
@@ -81,6 +81,9 @@ const PaymentBody = () => {
 			),
 			(
 				<img className={styles.qr} src={QR} alt="QR" onClick={openModalWithInvoiceData} />
+			),
+			(
+				<span className={styles.deleteLink} onClick={() => deleteInvoice(invoice.link)}>Delete</span>
 			)
 		];
 	}
@@ -91,6 +94,17 @@ const PaymentBody = () => {
 			totalValue += invoice[1];
 		}
 		return totalValue;
+	}
+
+	async function deleteInvoice(link) {
+		const result = await vendorAPI.deleteInvoice(link);
+		if (result) {
+			fetchInvoices();
+			setInfoMessage("Invoice deleted!");
+		} else {
+			fetchInvoices();
+			setErrorMessage("Could not delete invoice!");
+		}
 	}
 
 	useEffect(() => {
@@ -131,7 +145,6 @@ const PaymentBody = () => {
 	  		headers={headers} 
 	  		data={invoiceData}
 			colSizes={colSizes}
-			colHighlighted={[4, 5]} 
 			striped 
 		/>
       </div>
