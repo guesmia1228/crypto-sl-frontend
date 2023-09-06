@@ -53,6 +53,7 @@ const AdminBody = ({ type }) => {
 
 	useEffect(() => {
 		fetchAdminData();
+		clearMessages();
 	}, []); 
 
 	const fetchAdminData = async () => {
