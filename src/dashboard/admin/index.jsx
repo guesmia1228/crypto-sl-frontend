@@ -37,7 +37,7 @@ const AdminBody = ({ type }) => {
 	const [filteredData, setFilteredData] = useState([]);
 	const [searchText, setSearchText] = useState("");
 	const [graphData, setGraphData] = useState([]);
-	const [value, setValue] = useState("");
+	const [role, setRole] = useState("");
 	const [barContent, setBarContent] = useState([]);
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
@@ -45,7 +45,7 @@ const AdminBody = ({ type }) => {
 	const [email, setEmail] = useState("");
 	const [openModal, setOpenModal] = useState(false);
 
-	const { setInfoMessage, setErrorMessage } = useContext(MessageContext);
+	const { setInfoMessage, setErrorMessage, clearMessages } = useContext(MessageContext);
 
 	const navigate = useNavigate();
 	const adminApi = new adminDashboardApi(type);
@@ -186,12 +186,31 @@ const AdminBody = ({ type }) => {
 	}
 
   	const addUser = async () => {
-		if (type === "admin") {
-			const resp = await adminApi.addUser(firstName, lastName, email, password, value);
-			if (resp === true) {
-				setOpenModal(false);
-				fetchAdminData();
-			}
+		if (firstName === "") {
+			setErrorMessage("First name is required");
+			return;
+		}
+		if (lastName === "") {
+			setErrorMessage("Last name is required");
+			return;
+		}
+		if (email === "") {
+			setErrorMessage("Email is required");
+			return;
+		}
+		if (password === "") {
+			setErrorMessage("Password is required");
+			return;
+		}
+		if (role === "") {
+			setErrorMessage("Role is required");
+			return;
+		}
+
+		const resp = await adminApi.addUser(firstName, lastName, email, password, role);
+		if (resp === true) {
+			setOpenModal(false);
+			fetchAdminData();
 		}
  	};
 
@@ -220,7 +239,7 @@ const AdminBody = ({ type }) => {
 			</div>
         </TopInfo>
 
-		<MessageComponent />
+		<MessageComponent hide={openModal} />
 
 		{affiliate && (
 			<div className={styles.affiliateLink}>
@@ -336,15 +355,17 @@ const AdminBody = ({ type }) => {
         {openModal && (
           <ModalOverlay>
             <div className={styles.modal}>
+				<MessageComponent />
+
               <h4>Create User</h4>
 
               <div className={styles.modalInputs}>
-				<Input dashboard label="First name" placeholder={"Enter first name"} value={firstName} setState={setFirstName} />
-				<Input dashboard label="Last name" placeholder={"Enter last name"} value={lastName} setState={setLastName} />
-                <Input dashboard label="Email" placeholder={"Enter email"} value={email} setState={setEmail} />
+				<Input dashboard label="First name*" placeholder={"Enter first name"} value={firstName} setState={setFirstName} />
+				<Input dashboard label="Last name*" placeholder={"Enter last name"} value={lastName} setState={setLastName} />
+                <Input dashboard label="Email*" placeholder={"Enter email"} value={email} setState={setEmail} />
                 <Input
                   dashboard
-                  label="Password"
+                  label="Password*"
                   placeholder={"Enter password"}
                   setState={setPassword}
                   value={password}
@@ -352,8 +373,8 @@ const AdminBody = ({ type }) => {
                 />
 
                 {type === "admin" && <Options
-                  label="Roles"
-                  value={value}
+                  label="Role*"
+                  value={role}
                   options={[
                     "Vendor",
                     "Affiliate",
@@ -362,11 +383,11 @@ const AdminBody = ({ type }) => {
                     "Leader",
                   ]}
                   dashboard
-                  setValue={setValue}
+                  setValue={setRole}
                 />}
 				{type === "leader" && <Options
-                    label="Roles"
-                    value={value}
+                    label="Role*"
+                    value={role}
                     options={[
                       "Vendor",
                       "Affiliate",
@@ -374,34 +395,34 @@ const AdminBody = ({ type }) => {
                       "Senior Broker",
                     ]}
                     dashboard
-                    setValue={setValue}
+                    setValue={setRole}
                 />}
                 {type === "seniorbroker" && <Options
-                  label="Roles"
-                  value={value}
+                  label="Role*"
+                  value={role}
                   options={[
                     "Vendor",
                     "Affiliate",
                     "Broker"
                   ]}
                   dashboard
-                  setValue={setValue}
+                  setValue={setRole}
                 />}
 				{type === "broker" && <Options
-                  label="Roles"
-                  value={value}
+                  label="Role*"
+                  value={role}
                   options={[
                     "Vendor",
                     "Affiliate"
                   ]}
                   dashboard
-                  setValue={setValue}
+                  setValue={setRole}
                 />}
               </div>
               <div className={styles.modalButtons}>
                 <div
                   className={styles.button}
-                  onClick={() => setOpenModal(false)}
+                  onClick={() => { clearMessages(); setOpenModal(false)}}
                 >
                   Cancel
                 </div>
