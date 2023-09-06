@@ -26,7 +26,7 @@ const header = [
 	"Status",
 	"Income ($)",
 	"Joined on",
-	"Action",
+	"Actions",
 ];
 
 const colSizes = [2, 2, 1, 1, 1, 1, 1];
@@ -139,7 +139,7 @@ const AdminBody = ({ type }) => {
 				),
 				formatUSDBalance(user.income),
 				new Date(user.createdAt).toLocaleString(),
-				!user.activated ? ( <span className={styles.activateLink} onClick={() => activateUser(user.email)}>Activate</span> ) : ""
+				makeActionsColumn(user)
 
 			]);
 			console.log(newDataUsers);
@@ -147,8 +147,33 @@ const AdminBody = ({ type }) => {
   		}
 	}
 
+	function makeActionsColumn(user) {
+		return (
+			<div className={styles.linkWrapper}>
+				{!user.activated ? ( <span className={styles.actionsLink} onClick={() => activateUser(user.email)}>Activate</span> ) : (<span className={styles.actionsLink} onClick={() => deactivateUser(user.email)}>Deactivate</span>) }
+				<span className={styles.deleteLink} onClick={() => deleteUser(user.email)}>Delete</span>
+			</div>
+		);
+	}
+
 	const activateUser = async (userEmail) => {
 		const resp = await adminApi.patchStatus(userEmail);
+		if (resp) {
+			const newUserData = await adminApi.getUsers();
+			updateUsers(newUserData);
+		}
+	};
+
+	const deactivateUser = async (userEmail) => {
+		const resp = await adminApi.deactivateUser(userEmail);
+		if (resp) {
+			const newUserData = await adminApi.getUsers();
+			updateUsers(newUserData);
+		}
+	};
+
+	const deleteUser = async (userEmail) => {
+		const resp = await adminApi.deleteUser(userEmail);
 		if (resp) {
 			const newUserData = await adminApi.getUsers();
 			updateUsers(newUserData);

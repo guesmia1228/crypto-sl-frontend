@@ -216,9 +216,21 @@
   color: #c21515;
 }
 
-.activateLink {
+.linkWrapper {
+	display: flex;
+  	gap: 1rem;
+	justify-content: space-between;
+}
+
+.actionsLink {
 	text-decoration: underline;
 	color: #1595c2;
+	cursor: pointer;
+}
+
+.deleteLink {
+	text-decoration: underline;
+	color: var(--error-color);
 	cursor: pointer;
 }
 

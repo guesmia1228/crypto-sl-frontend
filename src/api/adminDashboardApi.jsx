@@ -158,6 +158,44 @@ export default class adminDashboardApi {
         }
     }
 
+	async deactivateUser(email){
+        try{           
+            const url = `${this.baseURL}/users/deactivate/${email}`;
+            const options = {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${this.token}`
+                },
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return true;
+        } catch (error) {
+            return null; // or return some default value
+        }
+    }
+
+	async deleteUser(email){
+        try{           
+            const url = `${this.baseURL}/users/delete/${email}`;
+            const options = {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${this.token}`
+                },
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return true;
+        } catch (error) {
+            return null; // or return some default value
+        }
+    }
+
     async addUser(firstName, lastName, email, password, roles){
         try{
             const request = {
