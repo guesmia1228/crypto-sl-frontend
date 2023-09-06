@@ -263,7 +263,7 @@
 }
 
 .modalWrapper > div > div {
-  width: 38.5rem;
+  width: 50rem;
 }
 
 .modal {
@@ -305,6 +305,26 @@
 
   font-size: 1.6rem;
   border-radius: 1rem;
+}
+
+.passwordWrapper {
+	display: grid;
+	grid-template-columns: 1fr 30px;
+	grid-gap: 2rem;
+}
+
+.iconEye {
+	height: 100%;
+	width: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.iconEye svg {
+	margin-top: auto;
+	margin-bottom: auto;
 }
 
 @media (max-width: 900px) {
