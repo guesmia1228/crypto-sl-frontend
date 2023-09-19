@@ -1,19 +1,25 @@
 /* Import fonts */
 @font-face {
-  font-family: Euclid;
-  src: url(../assets/fonts/Euclid-Regular.ttf);
+  font-family: Axiforma;
+  src: url(../assets/fonts/Axiforma-Regular.ttf);
   font-weight: 400;
 }
 
 @font-face {
-  font-family: Euclid;
-  src: url(../assets/fonts/Euclid-Medium.ttf);
+  font-family: Axiforma;
+  src: url(../assets/fonts/Axiforma-Medium.ttf);
   font-weight: 500;
+}
+
+@font-face {
+  font-family: Axiforma;
+  src: url(../assets/fonts/Axiforma-SemiBold.ttf);
+  font-weight: 600;
 }
 
 /* Variable */
 :root {
-  --black-color: #000;
+  --black-color: #090909;
   --white-color: #fff;
   --gray-color: #c4c4c4;
   --blue-color: #0784b5;
@@ -34,21 +40,33 @@ html {
 @media (max-width: 900px) {
   html {
     font-size: 10px;
+    display: none;
+  }
+}
+
+@media (min-width: 1600px) {
+  html {
+    font-size: 11.1px;
   }
 }
 
 * {
   margin: 0px;
-  padding: 0;
+  padding: 0px;
   box-sizing: border-box;
 }
 
 body {
   background-color: var(--black-color);
   color: var(--white-color);
-  font-family: Euclid;
+  font-family: Axiforma;
   overflow-x: hidden;
   width: 100vw;
+
+  background-image: url("https://uploads-ssl.webflow.com/6408bea3de5aef58b7e197d4/6438c3059d443cd7a78762eb_stars-bg.png");
+
+  background-position: 50%;
+  background-size: 1090px;
 }
 
 /* Scrollbar */
@@ -73,8 +91,9 @@ body {
 
 /* Container */
 .container {
-  margin-left: 16.5rem;
-  margin-right: 16.5rem;
+  max-width: 111rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (max-width: 1200px) {
@@ -95,8 +114,8 @@ body {
 }
 
 .break {
-  margin-top: 20rem;
-  margin-bottom: 20rem;
+  margin-top: 25rem;
+  margin-bottom: 25rem;
 }
 
 @media (max-width: 550px) {
@@ -114,19 +133,26 @@ body {
 /* Text */
 .standard {
   font-size: 1.6rem;
-  color: var(--gray-color);
-  line-height: 140%;
+  color: rgba(255, 255, 255, 0.42);
+  line-height: 155%;
+  font-weight: 400;
 }
 
 h1 {
-  font-weight: 500;
-  font-size: 5rem;
-  line-height: 115%;
+  font-weight: 600;
+  font-size: 7.7rem;
+  line-height: 105%;
 }
 
 h2 {
   font-weight: 500;
-  font-size: 4rem;
+  font-size: 7.5rem;
+  line-height: 115%;
+}
+
+h3 {
+  font-weight: 500;
+  font-size: 5rem;
   line-height: 115%;
 }
 
@@ -159,7 +185,7 @@ h2 {
 
 .card {
   background-color: #101010;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.01);
   border-radius: 2.5rem;
 }
 
@@ -209,6 +235,13 @@ a {
   }
 }
 
+@keyframes slide {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 @keyframes scaleUp {
   from {
     transform: scale(0);
@@ -246,7 +279,7 @@ nav {
 .scrollAnimation {
   animation-name: move;
   animation-duration: 0.5s;
-  animation-timing-function: ease;
+  animation-timing-function: ease-in;
   animation-fill-mode: forwards;
 }
 
@@ -254,6 +287,23 @@ nav {
   animation-name: initial !important;
   opacity: 1;
   transform: translateY(0);
+}
+
+.slide-left {
+  opacity: 0;
+  transform: translateX(25%);
+}
+
+.slide-right {
+  opacity: 0;
+  transform: translateX(-25%);
+}
+
+.slideAnimation {
+  animation-name: slide;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
 }
 
 @media (max-width: 600px) {

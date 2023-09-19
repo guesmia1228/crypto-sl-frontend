@@ -7,37 +7,83 @@
 }
 
 .hero {
-  margin-top: 14rem;
-  margin-bottom: 14rem;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 5rem;
+  height: 100vh;
+  max-height: 80rem;
 }
 
 .layout > div {
-  width: 51rem;
+  width: 46rem;
+}
+
+.buttonWrapper {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.button {
+  cursor: pointer;
+  font-size: 1.4rem;
+
+  font-size: 1.6rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  padding: 1.9rem 3rem;
+  text-align: center;
+  font-weight: 400;
+  gap: 1rem;
+  transition: 0.2s ease-in;
+}
+
+.button img {
+  height: 1rem;
+  transition: 0.2s ease-in;
+  transform-origin: left;
+  padding-top: 1px;
+}
+
+.imgWrapper {
+  position: relative;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.button:hover img {
+  transform: scale(1.25);
 }
 
 .layout h1,
-.layout h2 {
-  margin-bottom: 2rem;
+.layout h3 {
+  margin-bottom: 1rem;
 }
 
 .layout .description {
   margin-bottom: 4rem;
 }
 
-.store p {
-  margin-top: 3rem;
-  margin-bottom: 1rem;
+.store {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }
 
 .store > div {
   display: flex;
   width: max-content;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .store img {
   width: auto;
-  height: 4rem;
+  height: 2rem;
 }
 
 .layout > img,
@@ -92,7 +138,7 @@
   }
 
   .layout h1,
-  .layout h2 {
+  .layout h3 {
     margin-bottom: 1rem;
   }
 }

@@ -41,16 +41,24 @@ function App() {
   useEffect(() => {
     window.addEventListener("scroll", () => {
       const scrollElement = document.querySelectorAll(".scroll");
+      const slideElement = document.querySelectorAll(".slide-left");
+      const slideElement2 = document.querySelectorAll(".slide-right");
 
-      for (let i = 0; i < scrollElement.length; i++) {
-        const sectionTop = scrollElement[i].offsetTop;
+      const addClass = (element, className) => {
+        for (let i = 0; i < element.length; i++) {
+          const sectionTop = element[i].offsetTop;
 
-        const scrollPosition = window.scrollY;
+          const scrollPosition = window.scrollY;
 
-        if (scrollPosition + window.innerHeight * 0.6 >= sectionTop) {
-          scrollElement[i].classList.add("scrollAnimation");
+          if (scrollPosition + window.innerHeight * 0.6 >= sectionTop) {
+            element[i].classList.add(className);
+          }
         }
-      }
+      };
+
+      addClass(scrollElement, "scrollAnimation");
+      addClass(slideElement, "slideAnimation");
+      addClass(slideElement2, "slideAnimation");
     });
   }, []);
 
@@ -241,14 +249,14 @@ function App() {
                 }
               />
 
-            <Route
+              <Route
                 path="/dashboard/ib-leader"
                 element={
-                    <>
-                        <Admin type={"ib_leader"} />
-                    </>
+                  <>
+                    <Admin type={"ib_leader"} />
+                  </>
                 }
-            />
+              />
 
               <Route
                 path="/dashboard/kyc"
@@ -270,9 +278,9 @@ function App() {
             </Route>
           </Routes>
         </ScrollToTop>
-        
+
         {/* COOKIE BANNER */}
-        {!ck  && <CookieBanner close={() => setCK(true)} />}
+        {!ck && <CookieBanner close={() => setCK(true)} />}
       </BrowserRouter>
     </div>
   );

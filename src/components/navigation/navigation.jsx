@@ -13,8 +13,6 @@ import QR from "../../assets/icon/qrcode.svg";
 import Payment from "../../assets/icon/money.svg";
 import Cash from "../../assets/icon/cash.svg";
 
-import PaymentW from "../../assets/icon/moneyW.svg";
-import CashW from "../../assets/icon/cashW.svg";
 import { Link } from "react-router-dom";
 
 import Arrow from "../../assets/icon/blueArrow.svg";
@@ -31,37 +29,49 @@ const Navigation = () => {
   return (
     <nav className={`${styles.navigation} load`}>
       <div className={`container ${styles.content}`}>
-        <div>
-          <Link to="/">
-            <img className={styles.logo} src={Logo} alt="" />
-          </Link>
-          <ul>
-            <li className="standard">
-              <Link to="/">{t("navigation.home")}</Link>
-            </li>
-            <li className={`standard ${styles.hover}`}>
-              <div className={styles.menu}>
-                <Link to="/payment">{t("navigation.solutions")}</Link>
-              </div>
-            </li>
-            <li className="standard">
-              <Link to="/support">{t("navigation.resources")}</Link>
-            </li>
-            <li className="standard">
-              <Link to="/affiliate">{t("navigation.affiliate")}</Link>
-            </li>
-          </ul>
-        </div>
+        <Link className={styles.logoWrapper} to="/">
+          <img className={styles.logo} src={Logo} alt="" />
+        </Link>
+
+        <ul className={styles.navList}>
+          <li className="standard">
+            <Link to="/">
+              <p>{t("navigation.home")}</p>
+              <p className={styles.fake}>{t("navigation.home")}</p>
+            </Link>
+          </li>
+          <li className="standard">
+            <Link to="/payment">
+              <p>{t("navigation.solutions")}</p>
+              <p className={styles.fake}>{t("navigation.solutions")}</p>
+            </Link>
+          </li>
+          <li className="standard">
+            <Link to="/affiliate">
+              <p>{t("navigation.affiliate")}</p>
+              <p className={styles.fake}>{t("navigation.affiliate")}</p>
+            </Link>
+          </li>
+          <li className="standard">
+            <Link to="/support">
+              <p>{t("navigation.resources")}</p>
+              <p className={styles.fake}>{t("navigation.resources")}</p>
+            </Link>
+          </li>
+        </ul>
+
         <div className={styles.right}>
-          <p className="">
-            <Link to="/login">{t("navigation.login")}</Link>
+          <Languages />
+
+          <p className={styles.login}>
+            <Link to="/login">
+              <p>{t("navigation.login")}</p>
+              <p className={styles.fake}>{t("navigation.login")}</p>
+            </Link>
           </p>
           <div className={styles.button}>
             <Link to="/signup">{t("navigation.signUp")}</Link>
           </div>
-          <img className={styles.qrcode} src={QR} alt="" />
-
-          <Languages />
         </div>
 
         <div className={styles.mobMenu}>

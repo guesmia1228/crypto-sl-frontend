@@ -40,7 +40,7 @@ const Footer = () => {
   const footerContent = t("footer.content", { returnObjects: true });
 
   return (
-    <footer className={styles.footer}>
+    <footer className={`${styles.footer} card`}>
       <div className={`${styles.top} container`}>
         <img src={Logo} alt="" />
 
@@ -66,9 +66,7 @@ const Footer = () => {
       </div>
 
       <div className={`${styles.copyright} container`}>
-        <p>
-          {t("footer.copyright")} 
-        </p>
+        <p>{t("footer.copyright")}</p>
         <div className={styles.icons}>
           <Link to="https://www.linkedin.com/company/nefentuspay/">
             <img src={Linkedin} alt="" />

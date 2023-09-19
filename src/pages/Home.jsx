@@ -39,18 +39,16 @@ const Home = () => {
       <Helmet>
         <title>Nefentus | Home</title>
       </Helmet>
-      {/* <Circle /> */}
       <Layout
         heading={t("home.heroTitle")}
         description={t("home.heroDescription")}
         button={
           <>
             <p>{t("home.heroButton")}</p>
-            <img src={Arrow} alt="" />
           </>
         }
-        video={HomeHeroVideo}
-        store={true}
+        button2={t("home.heroButton2")}
+        // video={HomeHeroVideo}
       />
 
       <Logos />
@@ -64,7 +62,7 @@ const Home = () => {
         image={Image1}
       />
 
-      <Layout
+      {/* <Layout
         title={
           <>
             {t("home.payrollTitleP1")} <br /> {t("home.payrollTitleP2")}
@@ -75,7 +73,7 @@ const Home = () => {
         subtitle={t("home.payrollSubtitle")}
         reverse={true}
         image={Image2}
-      />
+      /> */}
 
       <About />
 

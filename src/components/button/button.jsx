@@ -7,12 +7,15 @@ const Button = ({ children, className, color, link, onClick }) => {
       className={`${styles.button} ${className}`}
       onClick={onClick}
       style={{
-        background:
-          color === "white"
-            ? "#fff"
-            : "linear-gradient(94.15deg, #0784B5 -27.47%, #66BFDE 118.26%)",
+        border: color === "white" ? "1px solid #fff" : "1px solid #0784B5",
       }}
     >
+      <div
+        className={styles.background}
+        style={{
+          background: color === "white" ? "#ffffff" : "#0784B5",
+        }}
+      ></div>
       {link ? (
         <Link to={link}>
           <div style={{ color: color === "white" ? "#000" : "#fff" }}>

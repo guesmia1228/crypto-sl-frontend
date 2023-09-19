@@ -1,4 +1,4 @@
-import DropDown from "../../../assets/icon/dropdown.svg";
+import Globe from "../../../assets/icon/globe.svg";
 import USA from "../../../assets/icon/flags/usa.svg";
 import DE from "../../../assets/icon/flags/de.svg";
 import ES from "../../../assets/icon/flags/es.svg";
@@ -69,14 +69,7 @@ const Languages = () => {
   return (
     <div className={styles.languages}>
       <div className={styles.menu}>
-        <img
-          src={
-            list.filter((item) => item.code === language.toLowerCase())[0].flag
-          }
-          alt=""
-        />
-        <p className="standard">{language}</p>
-        <img src={DropDown} alt="" />
+        <img src={Globe} alt="" />
       </div>
       <div className={`${styles.dropdown}`}>
         <div className={`${styles.body} card`}>

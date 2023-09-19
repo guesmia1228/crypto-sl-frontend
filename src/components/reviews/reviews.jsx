@@ -90,7 +90,7 @@ const Reviews = () => {
               >
                 <div
                   className={styles.speaker}
-                  style={{ opacity: muted[index] ? 1 : 0.7 }}
+                  style={{ opacity: muted[index] ? 1 : 0.25 }}
                 >
                   <img
                     src={Speaker}
@@ -111,7 +111,7 @@ const Reviews = () => {
             </div>
 
             <div className={styles.body}>
-              <p className={styles.text}>{content[index].message}</p>
+              <p className={styles.text}>“{content[index].message}”</p>
             </div>
           </div>
         ))}

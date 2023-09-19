@@ -1,27 +1,28 @@
 {
   "navigation": {
     "home": "Home",
-    "solutions": "Payment Solutions",
+    "solutions": "Payment",
     "payment": "Payment",
     "paymentDescription": "Experience the future of finance with modern invoicing and payment processes.",
     "payroll": "Payroll",
     "payrollDescription": "Simplify your payroll process with flexible and efficient crypto and FIAT payroll solutions.",
     "resources": "Resources",
-    "affiliate": "Affiliate Program",
+    "affiliate": "Affiliate",
     "login": "Log in",
-    "signUp": "Get started",
+    "signUp": "Sign up",
     "menu": "Registration"
   },
   "home": {
-    "heroTitle": "Level-up Business with Nefentus",
-    "heroDescription": "Our revolutionary state-of-the-art automation and secure crypto checkouts let you focus on your core business while maximizing earnings. Leave manual payments behind and embrace the future of commerce today.",
-    "heroButton": "Start now, it’s free",
-    "heroAvailable": "Available on:",
+    "heroTitle": "Business Level-up Revolution",
+    "heroDescription": "Our revolutionary automation and secure crypto checkouts let you focus on your business while maximizing earnings. Leave manual payments behind today.",
+    "heroButton": "Get Started",
+    "heroButton2": "Download App",
+    "heroAvailable": "Get on:",
     "cardSubtitle": "Your partner for scaling",
-    "cardTitle": "Companies around the world use Nefentus to manage and scale their payment processing.",
+    "cardTitle": "Manage and scale your payment processing",
     "cardList": [
       {
-        "title": "Free onboarding support",
+        "title": "Free Support",
         "description": "Take advantage of our onboarding support to help you get started."
       },
       {
@@ -29,8 +30,8 @@
         "description": "We offer customized solutions that can be tailored to your unique needs."
       },
       {
-        "title": "Benefit from our expertise",
-        "description": "Leverage our deep industry knowledge to drive success within your business."
+        "title": "Benefit from expertise",
+        "description": "Leverage our deep knowledge to drive success within your business."
       }
     ],
     "layoutButton": "Get Started for Free",
@@ -47,11 +48,11 @@
     "aboutCard2Subtitle": "Manage",
     "aboutCard2TitleP1": "Leverage the power",
     "aboutCard2TitleP2": "of our Dashboards",
-    "aboutCard2Description": "Our advanced dashboards enable you to gain deeper insights and make data-driven decisions with ease, improving your productivity and profitability. With powerful data visualization and analysis tools at your fingertips, you can uncover hidden trends, identify key performance indicators, and optimize your operations for peak efficiency.",
+    "aboutCard2Description": "Our advanced dashboards enable you to gain deeper insights and make data-driven decisions with ease, improving your productivity and profitability.",
     "aboutCard3Subtitle": "Integrate",
     "aboutCard3TitleP1": "Effortlessly connect ",
     "aboutCard3TitleP2": "with your other tools",
-    "aboutCard3Description": "Easily integrating your existing financial stack with our platform not only enables you to access over 200 wallets for crypto payments but also allows you to leverage your current infrastructure, reduce the need for additional resources, streamline your financial operations, and gain better control over your business's financial data.",
+    "aboutCard3Description": "Integrating your financial stack with our platform offers access to 200+ crypto wallets, streamlines operations, and enhances financial control.",
     "reviewList": [
       {
         "name": "Stephan Walouch",
@@ -69,7 +70,7 @@
         "message": "Switching to Nefentus was the best decision I made for my payments!"
       }
     ],
-    "reviewTitleP1": "Hear Directly from ",
+    "reviewTitleP1": "Hear Directly From ",
     "reviewTitleP2": "Our Customers",
     "reviewSubtitle": "Reviews"
   },
@@ -341,7 +342,7 @@
     }
   },
   "contact": {
-    "title": "Free Onboarding Call",
+    "title": "Schedule Free Onboarding Support Session Today",
     "description": "At Nefentus, we believe in supporting our clients every step of the way. That's why we offer free onboarding calls to assist with registration and setup. Whether you're a bar owner, consultant, coach, trainer, speaker, or agency owner, we're committed to finding the perfect solution for your unique needs.",
     "button": "Book a call"
   },

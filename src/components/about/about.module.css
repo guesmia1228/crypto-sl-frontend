@@ -8,21 +8,23 @@
 }
 
 .horizontalCard > div {
-  text-align: center;
+  text-align: left;
   align-self: center;
+}
+
+.horizontalCard h3 {
+  line-height: 105% !important;
+  margin-bottom: 1rem;
 }
 
 .horizontalCard img {
   width: 52rem;
-  align-self: flex-end;
+  align-self: center;
+  transform: skewY(-5deg);
+  transition: 0.5s ease-in;
 }
 
-.description {
-  margin-top: 1.5rem;
-  font-size: 1.8rem;
-  color: var(--gray-color);
-  line-height: 140%;
-  font-weight: 400;
+.horizontalCard:hover img {
 }
 
 .cardRow {
@@ -36,7 +38,7 @@
   flex-direction: column;
   justify-content: space-between;
 
-  padding-bottom: 9rem;
+  padding-bottom: 7.5rem;
 }
 
 .verticalCard:first-child img {

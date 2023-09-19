@@ -6,10 +6,12 @@ const Contact = () => {
   const { t } = useTranslation();
 
   return (
-    <div className={styles.contact}>
-      <h2>{t("contact.title")}</h2>
-      <p className={styles.description}>{t("contact.description")}</p>
-      <Button color="white" link="https://calendly.com/nefentus/consulting">
+    <div className={`container ${styles.contact} scroll`}>
+      <h3>{t("contact.title")}</h3>
+      {/* <p className={`standard ${styles.description}`}>
+        {t("contact.description")}
+      </p> */}
+      <Button link="https://calendly.com/nefentus/consulting">
         {t("contact.button")}
       </Button>
     </div>

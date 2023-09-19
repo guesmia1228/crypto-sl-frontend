@@ -2,19 +2,22 @@
   top: -100px;
   /* transform: translateY(-100%); */
   transition: 0.2 ease-in;
-  padding-top: 3.5rem;
-  padding-bottom: 2rem;
+  padding-top: 2.4rem;
+  padding-bottom: 2.4rem;
   position: fixed;
   left: 0;
   right: 0;
   z-index: 10;
   pointer-events: none;
-  background: var(--black-color);
+  background: rgba(9, 9, 9, 0.95);
+  backdrop-filter: blur(10px);
 }
 
 .content {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 
 .content > div {
@@ -22,9 +25,20 @@
   align-items: center;
 }
 
+.navList {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+}
+
+.logoWrapper {
+  line-height: 0%;
+}
+
 .logo {
-  height: 2.4rem;
-  margin-right: 8rem;
+  height: 2.6rem;
   cursor: pointer;
   pointer-events: initial;
 }
@@ -42,6 +56,22 @@
   position: relative;
   transition: 0.2s ease-in;
   font-size: 1.3rem;
+  overflow: hidden;
+  color: white;
+
+  transform: translateY(0%);
+}
+
+.navigation ul li p {
+  transition: 0.2s ease-in;
+}
+
+.navigation ul li:hover p {
+  transform: translateY(-100%);
+}
+
+.navigation .fake {
+  position: absolute;
 }
 
 .menu {
@@ -51,8 +81,8 @@
 }
 
 .menu a {
-	text-wrap: nowrap;
-  }
+  text-wrap: nowrap;
+}
 
 .hover:hover .dropdownMenu {
   transform: translate(-50%, 0);
@@ -162,7 +192,7 @@
 
 .right {
   gap: 3rem;
-  margin-left: 20px;
+  /* margin-left: 20px; */
 }
 
 .right p {
@@ -172,24 +202,35 @@
 }
 
 .right > p {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
 }
 
 .button {
-  background-color: var(--white-color);
-  color: var(--black-color);
-  font-size: 1.3rem;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.09);
+  color: white;
+  font-size: 1.4rem;
   pointer-events: initial;
   cursor: pointer;
-  padding: 0.4rem 2.3rem;
+  padding: 1.8rem 3rem;
   transition: 0.2s ease-in;
-  border: 1px solid rgba(255, 255, 255, 30%);
 }
 
 .button:hover {
-  background-color: transparent;
-  color: var(--white-color);
+  background-color: var(--blue-color);
+}
+
+.login {
+  overflow: hidden;
+  position: relative;
+}
+
+.login p {
+  transition: 0.2s ease-in;
+}
+
+.login:hover p {
+  transform: translateY(-100%);
 }
 
 .mobMenu {
