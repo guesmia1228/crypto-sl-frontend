@@ -168,7 +168,7 @@ h2 {
 
 h3 {
   font-weight: 500;
-  font-size: 5rem;
+  font-size: 4.5rem;
   line-height: 115%;
 }
 
@@ -444,6 +444,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
   .dashboard-table > div:last-child li {
     font-size: 1.4rem;
+  }
+
+  .slideAnimation {
+    animation-name: move;
   }
 }
 

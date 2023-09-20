@@ -96,14 +96,14 @@ const Cards = () => {
         {list.map((item, index) => (
           <div
             className={`${styles.card} card`}
-            onMouseEnter={() => handleEnter(videoRefs[index])}
-            onMouseLeave={() => handleLeave(videoRefs[index])}
+            // onMouseEnter={() => handleEnter(videoRefs[index])}
+            // onMouseLeave={() => handleLeave(videoRefs[index])}
           >
             <video
               ref={videoRefs[index]}
               className="cardVideo"
-              // autoPlay
-              // playsInline
+              autoPlay
+              playsInline
               muted
               loop
               onLoadedData={() => handleLoad(videoRefs[index])}

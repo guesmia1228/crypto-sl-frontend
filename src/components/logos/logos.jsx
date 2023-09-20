@@ -18,10 +18,10 @@ const Logos = () => {
     const line2 = document.querySelector(".line2");
 
     window.onload = () => {
-      console.log("LOAD");
-
-      line1.classList.add("move1");
-      line2.classList.add("move2");
+      setTimeout(() => {
+        line1.classList.add("move1");
+        line2.classList.add("move2");
+      }, 250);
     };
   }, []);
 

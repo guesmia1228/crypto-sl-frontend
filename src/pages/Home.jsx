@@ -47,6 +47,7 @@ const Home = () => {
         }
         button2={t("home.heroButton2")}
         // video={HomeHeroVideo}
+        store
       />
 
       <Logos />

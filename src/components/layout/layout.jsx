@@ -1,8 +1,8 @@
 import styles from "./layout.module.css";
 import Button from "./../button/button";
 
-import Android from "../../assets/icon/android2.svg";
-import Apple from "../../assets/icon/apple2.svg";
+import Android from "../../assets/icon/android.svg";
+import Apple from "../../assets/icon/apple.svg";
 import Chevron from "../../assets/icon/chevron.svg";
 
 import Dummy from "../../assets/image/dummy.png";
@@ -93,7 +93,19 @@ const Layout = ({
         )}
 
         <div className={styles.buttonWrapper}>
-          {/* {store && (
+          {button && <Button link="/signup">{button}</Button>}
+          {button2 && (
+            <div className={styles.button}>
+              <p>{button2}</p>
+              <div className={styles.imgWrapper}>
+                <img src={Chevron} alt="" />
+
+                <div className={styles.buttonLine}></div>
+              </div>
+            </div>
+          )}
+
+          {store && (
             <div className={styles.store}>
               <p className="standard">{t("home.heroAvailable")}</p>
 
@@ -104,18 +116,6 @@ const Layout = ({
                 <Link to="/">
                   <img src={Apple} alt="" />
                 </Link>
-              </div>
-            </div>
-          )} */}
-
-          {button && <Button link="/signup">{button}</Button>}
-          {button2 && (
-            <div className={styles.button}>
-              <p>{button2}</p>
-              <div className={styles.imgWrapper}>
-                <img src={Chevron} alt="" />
-
-                <div className={styles.buttonLine}></div>
               </div>
             </div>
           )}
