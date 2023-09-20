@@ -32,6 +32,8 @@ const Cards = () => {
   const videoRefs = [useRef(null), useRef(null), useRef(null)];
 
   const handleLoad = (videoRef) => {
+    if (window.innerWidth > 900) return;
+
     if (videoRef.current) {
       const playPromise = videoRef.current.play();
       if (playPromise !== undefined) {
@@ -73,8 +75,8 @@ const Cards = () => {
           setTimeout(() => {
             sectionRef.current.children[2].style.transform = "scale(1)";
             sectionRef.current.children[2].style.opacity = 1;
-          }, 500);
-        }, 500);
+          }, 250);
+        }, 250);
       }
     };
 
@@ -104,7 +106,7 @@ const Cards = () => {
               // playsInline
               muted
               loop
-              // onLoadedData={() => handleLoad(videoRefs[index])}
+              onLoadedData={() => handleLoad(videoRefs[index])}
             >
               <source src={item.video} type="video/mp4" />
             </video>

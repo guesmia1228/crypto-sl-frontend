@@ -21,7 +21,7 @@
   width: 52rem;
   align-self: center;
   transform: skewY(-5deg);
-  transition: 0.5s ease-in;
+  transition: 0.5s ease-out;
 }
 
 .horizontalCard:hover img {
@@ -80,6 +80,7 @@
 
   .horizontalCard img {
     width: 100%;
+    transform: skew(0);
   }
 
   .description {

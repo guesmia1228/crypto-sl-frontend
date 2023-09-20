@@ -27,7 +27,7 @@
 }
 
 .button div {
-  padding: 1.9rem 3rem;
+  padding: 1.4rem 3rem;
   width: 100%;
   text-align: center;
   font-weight: 400;
@@ -36,4 +36,11 @@
 .button:hover .background {
   transform: translateY(100%);
   border-radius: 50%;
+}
+
+@media (max-width: 900px) {
+  .button:hover .background {
+    transform: translateY(0%);
+    border-radius: 0%;
+  }
 }

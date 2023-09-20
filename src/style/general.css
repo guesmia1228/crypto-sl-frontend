@@ -19,7 +19,7 @@
 
 /* Variable */
 :root {
-  --black-color: #090909;
+  --black-color: #000;
   --white-color: #fff;
   --gray-color: #c4c4c4;
   --blue-color: #0784b5;
@@ -40,7 +40,6 @@ html {
 @media (max-width: 900px) {
   html {
     font-size: 10px;
-    display: none;
   }
 }
 
@@ -62,8 +61,6 @@ body {
   font-family: Axiforma;
   overflow-x: hidden;
   width: 100vw;
-
-  background-image: url("https://uploads-ssl.webflow.com/6408bea3de5aef58b7e197d4/6438c3059d443cd7a78762eb_stars-bg.png");
 
   background-position: 50%;
   background-size: 1090px;
@@ -114,8 +111,8 @@ body {
 }
 
 .break {
-  margin-top: 25rem;
-  margin-bottom: 25rem;
+  margin-top: 15rem;
+  margin-bottom: 15rem;
 }
 
 @media (max-width: 550px) {
@@ -140,13 +137,32 @@ body {
 
 h1 {
   font-weight: 600;
-  font-size: 7.7rem;
+  font-size: 6.5rem;
   line-height: 105%;
+}
+
+h1 .gradient {
+  background: linear-gradient(to right, #fff 20%, #0784b5 30%, #fff 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  background-size: 500% auto;
+  animation: textShine 5s ease-out-out infinite;
+}
+
+@keyframes textShine {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }
 
 h2 {
   font-weight: 500;
-  font-size: 7.5rem;
+  font-size: 6rem;
   line-height: 115%;
 }
 
@@ -161,11 +177,15 @@ h3 {
   h2 {
     font-size: 4rem;
   }
+
+  h3 {
+    font-size: 3rem;
+  }
 }
 
 @media (max-width: 550px) {
   h1 {
-    font-size: 3.5rem;
+    /* font-size: 3.5rem; */
   }
 
   h2 {
@@ -279,7 +299,7 @@ nav {
 .scrollAnimation {
   animation-name: move;
   animation-duration: 0.5s;
-  animation-timing-function: ease-in;
+  animation-timing-function: ease-out;
   animation-fill-mode: forwards;
 }
 
@@ -302,7 +322,7 @@ nav {
 .slideAnimation {
   animation-name: slide;
   animation-duration: 0.5s;
-  animation-timing-function: ease-in;
+  animation-timing-function: ease-out;
   animation-fill-mode: forwards;
 }
 
@@ -424,5 +444,39 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
   .dashboard-table > div:last-child li {
     font-size: 1.4rem;
+  }
+}
+
+/* LOGOS */
+
+.move1,
+.move2 {
+  animation-name: moveLogo;
+  animation-duration: 50s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.move2 {
+  animation-name: moveLogo2;
+}
+
+@keyframes moveLogo {
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes moveLogo2 {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0%);
   }
 }

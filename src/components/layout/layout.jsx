@@ -59,7 +59,12 @@ const Layout = ({
         {subtitle && (
           <p className={`${styles.subtitle} subtitle`}>{subtitle}</p>
         )}
-        {heading && <h1>{heading}</h1>}
+        {heading && (
+          <h1>
+            {heading.split(" ").slice(0, -1).join(" ")}
+            <div className="gradient">{heading.split(" ").pop()}</div>
+          </h1>
+        )}
         {title && <h3>{title}</h3>}
 
         {description && (

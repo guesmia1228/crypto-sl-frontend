@@ -1,16 +1,19 @@
 .navigation {
   top: -100px;
   /* transform: translateY(-100%); */
-  transition: 0.2 ease-in;
-  padding-top: 2.4rem;
-  padding-bottom: 2.4rem;
+  transition: 0.2 ease-out;
   position: fixed;
   left: 0;
   right: 0;
   z-index: 10;
   pointer-events: none;
+}
+
+.contentWrapper {
   background: rgba(9, 9, 9, 0.95);
   backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 100;
 }
 
 .content {
@@ -18,6 +21,8 @@
   align-items: center;
   justify-content: space-between;
   position: relative;
+  padding-top: 2.4rem;
+  padding-bottom: 2.4rem;
 }
 
 .content > div {
@@ -25,12 +30,8 @@
   align-items: center;
 }
 
-.navList {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-
-  transform: translate(-50%, -50%);
+.left {
+  gap: 10rem;
 }
 
 .logoWrapper {
@@ -38,9 +39,11 @@
 }
 
 .logo {
-  height: 2.6rem;
+  height: 3rem;
   cursor: pointer;
   pointer-events: initial;
+  transform: translateY(-1px);
+  margin-right: -20px;
 }
 
 .navigation ul {
@@ -54,7 +57,7 @@
   cursor: pointer;
   pointer-events: initial;
   position: relative;
-  transition: 0.2s ease-in;
+  transition: 0.2s ease-out;
   font-size: 1.3rem;
   overflow: hidden;
   color: white;
@@ -63,7 +66,9 @@
 }
 
 .navigation ul li p {
-  transition: 0.2s ease-in;
+  transition: 0.2s ease-out;
+
+  line-height: 102%;
 }
 
 .navigation ul li:hover p {
@@ -212,8 +217,8 @@
   font-size: 1.4rem;
   pointer-events: initial;
   cursor: pointer;
-  padding: 1.8rem 3rem;
-  transition: 0.2s ease-in;
+  padding: 1.2rem 3rem;
+  transition: 0.2s ease-out;
 }
 
 .button:hover {
@@ -226,7 +231,7 @@
 }
 
 .login p {
-  transition: 0.2s ease-in;
+  transition: 0.2s ease-out;
 }
 
 .login:hover p {
@@ -237,15 +242,16 @@
   display: none !important;
 }
 
+.content {
+  background: rgba(9, 9, 9, 1);
+  z-index: 5;
+}
+
 .mobileMenu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: var(--black-color);
-  padding: 2rem;
-  transition: 0.2s ease-in;
+  background: rgba(9, 9, 9, 1);
+  backdrop-filter: blur(10px);
+  padding: 2rem 2.5rem;
+  transition: 0.5s ease-out;
 
   display: flex;
   flex-direction: column;
@@ -286,12 +292,12 @@
 .mobileMenu ul {
   flex-direction: column;
   align-items: flex-start;
-  gap: 2rem;
+  gap: 15px;
 }
 
 .mobileMenu ul li {
   width: 100%;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
   border-bottom: 1px solid rgba(255, 255, 255, 15%);
 
   font-size: 1.6rem;
@@ -310,18 +316,16 @@
 }
 
 @media (max-width: 900px) {
-  .navigation > .content ul {
+  .logo {
+    height: 2.4rem;
+  }
+
+  .navigation .content ul {
     display: none;
   }
 
   .right {
     display: none !important;
-  }
-
-  .mobMenu {
-    display: initial !important;
-    cursor: pointer;
-    pointer-events: initial !important;
   }
 
   .dropdownMenu p {
@@ -388,18 +392,57 @@
     transform: translateX(0px);
   }
 
-  .mobButton {
-    font-size: 1.2rem;
-    border: 1px solid var(--white-color);
-    border-radius: 0.5rem;
-    padding: 0.7rem 1.5rem;
-    font-weight: 400;
+  .mobMenu {
+    position: relative;
+    display: initial !important;
+    cursor: pointer;
+    pointer-events: initial !important;
+
+    /* background-color: red; */
+    /* width: 25px;
+    height: 50px; */
   }
 
-  .mobMenu {
-    display: flex !important;
-    align-items: center;
-    gap: 1rem;
+  .lineButton {
+    position: absolute;
+    width: 50px;
+    right: 0;
+    top: 0;
+    transform: translateY(-50%);
+    height: 40px;
+  }
+
+  .line {
+    top: 50%;
+    background-color: white;
+    width: 25px;
+    height: 1.5px;
+    position: absolute;
+    right: 0;
+    transition: 0.2s ease-out;
+    /* transform-origin: left; */
+    transform-origin: center;
+  }
+
+  .line:nth-child(1) {
+    transform: translateY(-7.5px);
+  }
+
+  .line:nth-child(3) {
+    transform: translateY(7.5px);
+  }
+
+  .openLine:nth-child(2) {
+    width: 0px;
+    right: 12.5px;
+  }
+
+  .openLine:nth-child(1) {
+    transform: translateY(0) rotate(45deg);
+  }
+
+  .openLine:nth-child(3) {
+    transform: translateY(0) rotate(-45deg);
   }
 
   .mobMenu img {

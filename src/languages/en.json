@@ -350,64 +350,25 @@
     "copyright": "© 2023 Nefentus. All rights reserved.",
     "content": [
       {
-        "label": "Overview",
-        "links": [
-          {
-            "text": "Home"
-          },
-          {
-            "text": "Payroll"
-          },
-          {
-            "text": "Payment"
-          },
-          {
-            "text": "Resources"
-          },
-          {
-            "text": "Affiliate"
-          }
-        ]
+        "text": "Home"
       },
       {
-        "label": "Join",
-        "links": [
-          {
-            "text": "Log in"
-          },
-          {
-            "text": "Sign up"
-          },
-          {
-            "text": "Play store"
-          },
-          {
-            "text": "App store"
-          }
-        ]
+        "text": "Payment"
       },
       {
-        "label": "Information",
-        "links": [
-          {
-            "text": "Privacy Policy"
-          },
-          {
-            "text": "Imprint"
-          }
-        ]
+        "text": "Resources"
       },
       {
-        "label": "Company",
-        "links": [
-          {
-            "text": "office@nefentus.com"
-          },
-          {
-            "text": "Larnaca, Cyprus"
-          }
-        ]
+        "text": "Affiliate"
+      },
+      {
+        "text": "Play store"
+      },
+      {
+        "text": "App store"
       }
-    ]
+    ],
+    "privacy": "Privacy Policy",
+    "imprint": "Imprint"
   }
 }

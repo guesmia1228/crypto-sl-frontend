@@ -30,8 +30,6 @@ const Home = () => {
       localStorage.setItem("affiliateJoined", paramValue);
       api.countAffiliate(paramValue);
     }
-
-    console.log(cookies.get("profile_pic"));
   }, []);
 
   return (

@@ -82,7 +82,7 @@
   border-left: 1px solid rgba(255, 255, 255, 0.08);
 
   cursor: pointer;
-  translate: 0.2 ease-in;
+  translate: 0.2 ease-out;
   font-size: 1.4rem;
   font-weight: 500;
 }

@@ -28,133 +28,91 @@ const Navigation = () => {
 
   return (
     <nav className={`${styles.navigation} load`}>
-      <div className={`container ${styles.content}`}>
-        <Link className={styles.logoWrapper} to="/">
-          <img className={styles.logo} src={Logo} alt="" />
-        </Link>
+      <div className={` ${styles.contentWrapper}`}>
+        <div className={`container ${styles.content}`}>
+          <div className={styles.left}>
+            <Link className={styles.logoWrapper} to="/">
+              <img className={styles.logo} src={Logo} alt="" />
+            </Link>
 
-        <ul className={styles.navList}>
-          <li className="standard">
-            <Link to="/">
-              <p>{t("navigation.home")}</p>
-              <p className={styles.fake}>{t("navigation.home")}</p>
-            </Link>
-          </li>
-          <li className="standard">
-            <Link to="/payment">
-              <p>{t("navigation.solutions")}</p>
-              <p className={styles.fake}>{t("navigation.solutions")}</p>
-            </Link>
-          </li>
-          <li className="standard">
-            <Link to="/affiliate">
-              <p>{t("navigation.affiliate")}</p>
-              <p className={styles.fake}>{t("navigation.affiliate")}</p>
-            </Link>
-          </li>
-          <li className="standard">
-            <Link to="/support">
-              <p>{t("navigation.resources")}</p>
-              <p className={styles.fake}>{t("navigation.resources")}</p>
-            </Link>
-          </li>
-        </ul>
-
-        <div className={styles.right}>
-          <Languages />
-
-          <p className={styles.login}>
-            <Link to="/login">
-              <p>{t("navigation.login")}</p>
-              <p className={styles.fake}>{t("navigation.login")}</p>
-            </Link>
-          </p>
-          <div className={styles.button}>
-            <Link to="/signup">{t("navigation.signUp")}</Link>
+            <ul className={styles.navList}>
+              <li className="standard">
+                <Link to="/">
+                  <p>{t("navigation.home")}</p>
+                  <p className={styles.fake}>{t("navigation.home")}</p>
+                </Link>
+              </li>
+              <li className="standard">
+                <Link to="/payment">
+                  <p>{t("navigation.solutions")}</p>
+                  <p className={styles.fake}>{t("navigation.solutions")}</p>
+                </Link>
+              </li>
+              <li className="standard">
+                <Link to="/affiliate">
+                  <p>{t("navigation.affiliate")}</p>
+                  <p className={styles.fake}>{t("navigation.affiliate")}</p>
+                </Link>
+              </li>
+              <li className="standard">
+                <Link to="/support">
+                  <p>{t("navigation.resources")}</p>
+                  <p className={styles.fake}>{t("navigation.resources")}</p>
+                </Link>
+              </li>
+            </ul>
           </div>
-        </div>
 
-        <div className={styles.mobMenu}>
-          <Link to="/signup">
-            <div className={styles.mobButton}>{t("navigation.menu")}</div>
-          </Link>
+          <div className={styles.right}>
+            <Languages />
 
-          <img src={Hamburger} alt="" onClick={() => setOpenMenu(true)} />
+            <p className={styles.login}>
+              <Link to="/login">
+                <p>{t("navigation.login")}</p>
+                <p className={styles.fake}>{t("navigation.login")}</p>
+              </Link>
+            </p>
+            <div className={styles.button}>
+              <Link to="/signup">{t("navigation.signUp")}</Link>
+            </div>
+          </div>
+
+          <div className={styles.mobMenu}>
+            <div
+              className={`${styles.line} ${openMenu ? styles.openLine : ""}`}
+            ></div>
+            <div
+              className={`${styles.line} ${openMenu ? styles.openLine : ""}`}
+            ></div>
+            <div
+              className={`${styles.line} ${openMenu ? styles.openLine : ""}`}
+            ></div>
+
+            <div
+              onClick={() => setOpenMenu((prev) => !prev)}
+              className={styles.lineButton}
+            ></div>
+          </div>
         </div>
       </div>
 
       <div
         className={styles.mobileMenu}
-        style={{ transform: openMenu ? "translateX(0%)" : "translateX(100%)" }}
+        style={{
+          transform: openMenu ? "translateY(0%)" : "translateY(-120%)",
+        }}
       >
         <div>
-          <div>
-            <img src={Logo} alt="" />
-
-            <div className={styles.close}>
-              <Languages />
-
-              <p onClick={() => setOpenMenu(false)}>X</p>
-            </div>
-          </div>
-
           <ul>
             <li className="standard">
               <Link to="/" onClick={() => setOpenMenu(false)}>
                 {t("navigation.home")}
               </Link>
             </li>
-            <li
-              className={`standard ${styles.hover} ${styles.mobItem}`}
-              style={{ height: openDrop ? 220 : 30 }}
-            >
-              <div
-                className={styles.menu}
-                onClick={() => setOpenDrop((prev) => !prev)}
-              >
-                {t("navigation.solutions")}{" "}
-                <img
-                  style={{
-                    transform: openDrop ? "rotate(180deg)" : "rotate(0deg)",
-                  }}
-                  src={DropDown}
-                  alt=""
-                />
-              </div>
-              <div className={`${styles.mobDown}`}>
-                <div className={`${styles.mobListContent}`}>
-                  <Link
-                    to="/payment"
-                    className={styles.item}
-                    onClick={() => setOpenMenu(false)}
-                  >
-                    <img src={Payment} alt="" />
-                    <div>
-                      <p className={styles.headline}>
-                        {t("navigation.payment")} <img src={Arrow} alt="" />
-                      </p>
-                      <p className={styles.subheadline}>
-                        {t("navigation.paymentDescription")}
-                      </p>
-                    </div>
-                  </Link>
-                  <Link
-                    to="/payroll"
-                    className={styles.item}
-                    onClick={() => setOpenMenu(false)}
-                  >
-                    <img src={Cash} alt="" />
-                    <div>
-                      <p className={styles.headline}>
-                        {t("navigation.payroll")} <img src={Arrow} alt="" />
-                      </p>
-                      <p className={styles.subheadline}>
-                        {t("navigation.payrollDescription")}
-                      </p>
-                    </div>
-                  </Link>
-                </div>
-              </div>
+            <li className="standard">
+              <Link to="/payment" onClick={() => setOpenMenu(false)}>
+                {t("navigation.payment")}
+              </Link>
             </li>
             <li className="standard">
               <Link to="/support" onClick={() => setOpenMenu(false)}>
@@ -172,7 +130,11 @@ const Navigation = () => {
           <Button link="/login" onClick={() => setOpenMenu(false)}>
             {t("navigation.login")}
           </Button>
-          <Button color="white" onClick={() => setOpenMenu(false)}>
+          <Button
+            link="/signup"
+            color="white"
+            onClick={() => setOpenMenu(false)}
+          >
             {t("navigation.signUp")}
           </Button>
         </div>

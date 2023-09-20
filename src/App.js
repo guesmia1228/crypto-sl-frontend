@@ -66,7 +66,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
+      <HashRouter>
         <ScrollToTop>
           <Routes>
             <Route
@@ -281,7 +281,7 @@ function App() {
 
         {/* COOKIE BANNER */}
         {!ck && <CookieBanner close={() => setCK(true)} />}
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }

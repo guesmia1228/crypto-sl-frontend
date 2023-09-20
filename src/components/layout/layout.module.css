@@ -10,7 +10,7 @@
   margin-top: 0 !important;
   margin-bottom: 0 !important;
   padding-top: 5rem;
-  height: 100vh;
+  min-height: 100vh;
   max-height: 80rem;
 }
 
@@ -38,12 +38,12 @@
   text-align: center;
   font-weight: 400;
   gap: 1rem;
-  transition: 0.2s ease-in;
+  transition: 0.2s ease-out;
 }
 
 .button img {
   height: 1rem;
-  transition: 0.2s ease-in;
+  transition: 0.2s ease-out;
   transform-origin: left;
   padding-top: 1px;
 }
@@ -116,15 +116,18 @@
     flex-direction: column;
     gap: 3rem;
 
-    margin-top: 10rem;
-    margin-bottom: 10rem;
+    margin-top: 10rem !important;
+    margin-bottom: 10rem !important;
   }
 
   .layout > div {
-    order: 2 !important;
     width: 100%;
     display: flex;
     flex-direction: column;
+  }
+
+  .hero > div {
+    order: 2 !important;
   }
 
   .layout:nth-child(3) {
