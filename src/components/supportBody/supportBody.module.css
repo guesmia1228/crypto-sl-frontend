@@ -20,6 +20,7 @@
 
 .section h2 {
   margin-bottom: 3rem;
+  font-size: 4rem;
 }
 
 .body {
@@ -80,11 +81,16 @@
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   border-right: 1px solid rgba(255, 255, 255, 0.08);
   border-left: 1px solid rgba(255, 255, 255, 0.08);
-
+  transition: 0.25s ease-out;
   cursor: pointer;
   translate: 0.2 ease-out;
   font-size: 1.4rem;
   font-weight: 500;
+}
+
+.card p {
+  opacity: 1;
+  transition: 0.25s ease-out;
 }
 
 .card:first-child {
@@ -99,6 +105,14 @@
 .active {
   background-color: var(--white-color) !important;
   color: var(--black-color) !important;
+}
+
+.card:hover {
+  background-color: rgba(255, 255, 255, 0.09);
+}
+
+.card:hover p {
+  opacity: 0.8;
 }
 
 .contact {

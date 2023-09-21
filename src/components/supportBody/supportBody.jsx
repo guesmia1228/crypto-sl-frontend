@@ -44,7 +44,7 @@ const SupportBody = () => {
                     active === index ? styles.active : ""
                   }`}
                 >
-                  {item}
+                  <p>{item}</p>
                 </div>
               ))}
             </div>
