@@ -20,6 +20,18 @@ const Input = ({ label, placeholder, type = "text", setState, value, disabled })
 
 export default Input;
 
+export const RawInput = ({ placeholder, type = "text", setState, value, disabled }) => {
+	const handleChange = (e) => {
+		setState(e.target.value);
+	};
+  
+	return (
+		<div className={`${styles.input} ${styles.inputRaw}`}>
+			<input type={type} name="" id="" value={value} placeholder={placeholder} onChange={handleChange} disabled={disabled === true}/>
+		</div>
+	);
+};
+
 export const Attachment = ({ label, onUpload }) => {
   const inputRef = useRef(null);
 

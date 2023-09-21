@@ -6,25 +6,27 @@ import Logo from "../../assets/logo/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import backend_API from "../../api/backendAPI";
 import Cookies from "universal-cookie";
-import InputComponent from "../input/input";
+import InputComponent, {RawInput} from "../input/input";
 import backendAPI from "../../api/backendAPI";
 import Header from "../header/header";
 import BlobPicture from "../../components/blobPicture/blobPicture";
 import { KYC } from "./components/KYC";
 import { Buttons } from "./components/buttons";
+import Button from "../../components/button/button";
 import { dashboardLink } from "../../utils";
 import MessageComponent from "../../components/message";
 import { MessageContext } from "../../context/message";
 import TopInfo from "../topInfo/topInfo";
+import Tabs from "../../components/tabs/index";
 
 let nav = [
     "Profile",
-    "Change Password",
+    "Change password",
 ];
 
 const nav_kyc = [
 	"Profile",
-    "Change Password",
+    "Change password",
     <div>
         <span className={styles.rest}>Know Your Customer(</span>KYC
         <span className={styles.rest}>)</span>
@@ -136,32 +138,25 @@ const SettingsBody = ({ type }) => {
             </div>
 			)}
 
-            <div className={`${styles.settingsBody} card`}>
-            <div className={styles.settingsNav}>
-                    {nav.map((item, index) => (
-                        <div
-							key={index}
-                            className={styles.item}
-                            onClick={() => {clearMessages(); setActive(index); }}
-                            style={{
-                                borderColor:
-                                    active === index ? "#fff" : "transparent",
-                                color: active === index ? "#fff" : "#c4c4c4",
-                            }}
-                        >
-                            {item}
-                        </div>
-                    ))}
-                </div>
-
-                {active === 0 ? (
-                    <ProfileBody active={active} afterUpdateSettings={() => setProfilePicUrl(localStorage.getItem("profile_pic"))} />
-                ) : active === 1 ? (
-                    <PasswordBody active={active} />
-                ) : (
-                    <KYC />
-                )}
-            </div>
+			<Tabs 
+				tabIds={nav}
+				initActiveTab={nav[active]}
+				getHeader={(tabId) => tabId}
+				getBody={(tabId) => {
+					if (tabId === nav[0])
+						return (
+							<ProfileBody active={active} afterUpdateSettings={() => setProfilePicUrl(localStorage.getItem("profile_pic"))} />
+						);
+					else if (tabId === nav[1])
+						return (
+							<PasswordBody active={active} />
+						);
+					else
+						return (
+							<KYC />
+						);
+				}}
+			/>
         </div>
     );
 };
@@ -279,7 +274,7 @@ const ProfileBody = ({afterUpdateSettings, active}) => {
     };
 
     return (
-        <div>
+        <div className={styles.tabContent}>
             <MessageComponent />
 
 			<TopInfo
@@ -321,13 +316,11 @@ const ProfileBody = ({afterUpdateSettings, active}) => {
 
 const PasswordBody = ({active}) => {
     const [openBox, setOpenBox] = useState(false);
-    const [currentPassword, setCurrentPassword] = useState(null);
-    const [newPassword, setNewPassword] = useState(null);
-    const [confirmPassword, setConfirmPassword] = useState(null);
+    const [currentPassword, setCurrentPassword] = useState("");
+    const [newPassword, setNewPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [verificationCode, setVerificationCode] = useState(null);
-    const [errorMessage, setErrorMessage] = useState(null);
-    const [message, setMessage] = useState(null);
-    const [errorMessageBox, setErrorMessageBox] = useState(null);
+	const { setErrorMessage, setInfoMessage } = useContext(MessageContext);
 
     const backendAPI = new backend_API();
 
@@ -364,7 +357,7 @@ const PasswordBody = ({active}) => {
             return;
         }
 
-        const response = await backendAPI.forgotPasswordDashboard(
+        const response = await backendAPI.changePasswordDashboard(
             newPassword,
             currentPassword
         );
@@ -377,62 +370,64 @@ const PasswordBody = ({active}) => {
     };
 
     const handleConfirmCode = async () => {
-        const response = await backendAPI.resetPasswordDashboard(
+        const response = await backendAPI.changePasswordConfirmDashboard(
             verificationCode
         );
         if (response == null) {
-            setErrorMessageBox("Code is not valid or too old!");
+            setErrorMessage("Code is not valid or too old!");
             return;
         }
-        setErrorMessageBox(null);
-        setMessage("Password succesfully changed!");
+        setInfoMessage("Password succesfully changed!");
         resetValues();
+		setVerificationCode("");
         setOpenBox(false);
     };
 
     const resetValues = () => {
-        setConfirmPassword(null);
-        setCurrentPassword(null);
-        setNewPassword(null);
+        setConfirmPassword("");
+        setCurrentPassword("");
+        setNewPassword("");
     };
 
     const handleClose = () => {
         setOpenBox(false);
+		setVerificationCode("");
     };
 
     return (
-        <div>
+        <div className={styles.tabContent}>
             {openBox && (
                 <div className={styles.modal}>
                     <div className={`${styles.popup} card`}>
-                        <p>Enter verification code:</p>
-                        {errorMessageBox && (
-                            <div className={styles.errormessagecontainer}>
-                                <p style={{ color: "red" }}> {errorMessage}</p>
-                            </div>
-                        )}
-                        <InputComponent
+						<MessageComponent />
+
+                        <p className={styles.modalHeadline}>Enter verification code:</p>
+
+                        <RawInput
                             value={verificationCode}
                             setState={setVerificationCode}
+							type="text"
                         />
 
-                        <Buttons
-                            functions={[handleClose, handleConfirmCode]}
-                            buttons={["Cancel", "Confirm"]}
-                        />
+						<div className={styles.modalButtonRow}>
+							<Button
+								onClick={handleClose}
+								color="black"
+							>
+								Cancel
+							</Button>
+							<Button
+								onClick={handleConfirmCode}
+								color="white"
+							>
+								Confirm
+							</Button>
+						</div>
                     </div>
                 </div>
             )}
-            {errorMessage && (
-                <div className={styles.errormessagecontainer}>
-                    <p style={{ color: "red" }}> {errorMessage}</p>
-                </div>
-            )}
-            {message && (
-                <div className={styles.messagecontainer}>
-                    <p style={{ color: "green" }}>{message}</p>
-                </div>
-            )}
+
+			<MessageComponent hide={openBox} />
 		
 			<TopInfo
 				title={instruction[active].title}

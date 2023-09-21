@@ -7,6 +7,10 @@
   grid-template-columns: 26rem 1fr;
 }
 
+.inputRaw {
+	grid-template-columns: 1fr;
+}
+
 .input p {
   font-size: 1.6rem;
 }
