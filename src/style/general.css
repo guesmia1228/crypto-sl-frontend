@@ -156,7 +156,7 @@ h1 .gradient {
   text-fill-color: transparent;
   background-position: 50% 50%;
   background-size: 500% auto;
-  animation: textShine 5s ease-in-out infinite;
+  animation: textShine 2.5s ease-in-out infinite;
 }
 
 @keyframes textShine {

@@ -4,8 +4,34 @@
   gap: 4rem;
 }
 
-.card {
+.wrapper {
   padding: 3rem 3rem 5rem 3rem;
+  height: 100%;
+  transition: 0.25s ease-out;
+}
+
+.wrapper:hover {
+  border-color: rgba(7, 132, 181, 0.24);
+
+  transform: matrix3d(
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0.98,
+    -0.00165,
+    0,
+    0,
+    24,
+    0.98
+  );
+  box-shadow: 0 0px 48px -16px rgba(255, 255, 255, 0.2);
 }
 
 .top {
@@ -21,6 +47,7 @@
 
 .top h4 {
   font-size: 2.2rem;
+  line-height: 120%;
   font-weight: 500;
 }
 
@@ -63,6 +90,10 @@
 }
 
 @media (max-width: 550px) {
+  .section {
+    gap: 0rem;
+  }
+
   .card {
     padding: 2rem 2rem 4rem 2rem;
   }
@@ -70,8 +101,8 @@
   .top {
     flex-direction: column;
     align-items: flex-start;
-    margin-bottom: 1.5rem;
-    gap: 1rem;
+    margin-bottom: 1rem;
+    gap: 1.5rem;
   }
 
   .top img {

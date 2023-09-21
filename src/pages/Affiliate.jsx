@@ -7,6 +7,7 @@ import Compare from "../components/compare/compare";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Helmet } from "react-helmet";
+import HeroAff from "../components/heroAff/heroAff";
 
 const Affiliate = () => {
   useEffect(() => {
@@ -48,11 +49,12 @@ const Affiliate = () => {
       <Helmet>
         <title>Nefentus | Affiliate</title>
       </Helmet>
+      <HeroAff />
+
       <Layout
         subtitle={t("affiliate.heroSubtitle")}
-        heading={t("affiliate.heroHeading")}
+        title={t("affiliate.heroHeading")}
         description={t("affiliate.heroDescription")}
-        button={<>{t("affiliate.heroButton")}</>}
         image={Image}
         list
       />

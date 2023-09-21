@@ -8,7 +8,7 @@ const IconRow = ({ subtitle, title, description, list }) => {
 
   useEffect(() => {
     const handleScroll = (scrollEvent) => {
-      const minValue = window.innerHeight * 0.4;
+      const minValue = window.innerHeight * 0.2;
       const scrollPos =
         window.innerHeight - sectionRef.current.getBoundingClientRect().top;
 

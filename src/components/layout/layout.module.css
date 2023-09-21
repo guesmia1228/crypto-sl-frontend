@@ -109,6 +109,7 @@
   gap: 1rem;
   align-items: center;
   font-size: 1.4rem;
+  width: max-content;
   color: var(--gray-color);
 }
 

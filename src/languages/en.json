@@ -254,8 +254,10 @@
     "forgot": "Forgot password?"
   },
   "affiliate": {
+    "heroTitle": "Uncover the top 1% of affiliate program.",
+    "heroGradient": "For Free.",
     "heroSubtitle": "Affiliate Program",
-    "heroHeading": "Earn commissions effortlessly ",
+    "heroHeading": "Earn commissions effortlessly",
     "heroDescription": "Sign up for Nefentus' affiliate program for free and start earning commissions on autopilot.",
     "heroButton": "Create your account",
     "affiliateList": [
