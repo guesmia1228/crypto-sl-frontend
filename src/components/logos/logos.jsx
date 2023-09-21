@@ -17,16 +17,17 @@ const Logos = () => {
     const line1 = document.querySelector(".line1");
     const line2 = document.querySelector(".line2");
 
-    window.onload = () => {
-      setTimeout(() => {
-        line1.classList.add("move1");
-        line2.classList.add("move2");
-      }, 250);
-    };
+    setTimeout(() => {
+      line1.classList.add("move1");
+      line2.classList.add("move2");
+    }, 250);
   }, []);
 
   return (
-    <div className={`container ${styles.logos}`}>
+    <div className={` ${styles.logos}`}>
+      <div className={styles.line}>
+        <img src={Line} alt="" />
+      </div>
       <div className={styles.logoImage}>
         <div className={`${styles.line1} line1`}>
           {list.map((logo) => (
@@ -38,6 +39,9 @@ const Logos = () => {
             <img src={logo} />
           ))}
         </div>
+      </div>
+      <div className={styles.line}>
+        <img src={Line} alt="" />
       </div>
     </div>
   );

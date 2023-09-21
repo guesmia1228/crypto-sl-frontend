@@ -28,7 +28,7 @@ const PaymentCards = () => {
       />
 
       <div className={styles.body}>
-        <div className={`${styles.lightCard} ${styles.card}`}>
+        <div className={`${styles.lightCard} card ${styles.card}`}>
           <div>
             <div className={styles.top}>
               <h5>{t("payment.paymentCard1Title")}</h5>
@@ -48,7 +48,8 @@ const PaymentCards = () => {
             {t("payment.paymentButton")}
           </Button>
         </div>
-        <div className={`${styles.boldCard} ${styles.card}`}>
+
+        <div className={`${styles.boldCard} card ${styles.card}`}>
           <div>
             <div className={styles.top}>
               <h5>{t("payment.paymentCard2Title")}</h5>
@@ -64,9 +65,7 @@ const PaymentCards = () => {
             </div>
           </div>
 
-          <Button link="/signup" color="white">
-            {t("payment.paymentButton")}
-          </Button>
+          <Button link="/signup">{t("payment.paymentButton")}</Button>
         </div>
       </div>
     </div>

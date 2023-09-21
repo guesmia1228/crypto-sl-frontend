@@ -75,11 +75,12 @@
     "reviewSubtitle": "Reviews"
   },
   "payment": {
-    "heroHeading": "Accept Crypto in less than 5 minutes",
+    "heroHeading": "Crypto Payments Accepted",
     "heroDescription": "Experience the future of finance by revolutionizing your invoicing and payment processes with our advanced automation tools and secure crypto-based checkouts, simplifying financial management and maximizing revenue potential.",
-    "heroButton": "Start now, it’s free",
+    "heroButton": "Start now",
     "growSubtitle": "Grow",
-    "growTitle": "Supercharge Your Sales",
+    "growTitle": "Boost Your Sales With",
+    "growTitle2": "Modern System",
     "growContent": [
       {
         "title": "Turn Intelligence Into Growth",
@@ -97,7 +98,7 @@
     "iconTitleP1": "Adopt the Payment",
     "iconTitleP2": "that Power the Future",
     "iconSubtitle": "Dont Be Left Behind",
-    "iconDescription": "We offer a diverse range of payment options, including popular cryptocurrencies like Bitcoin, Ethereum, Ripple, and USDT, to help you effortlessly sell your products and services to a global audience. Our platform's flexibility and scalability enable you to customize your payment capabilities and stay ahead of the curve in today's rapidly evolving payment landscape. Join us today and take your business to the next level.",
+    "iconDescription": "We offer a diverse range of payment options, including popular cryptocurrencies like Bitcoin, Ethereum, Ripple, and USDT, to help you effortlessly sell your products and services to a global audience. Our platform's flexibility and scalability enable you to customize your payment capabilities and stay ahead of the curve in today's rapidly evolving payment landscape.",
     "whyTitle": "Why Nefentus?",
     "whyContent": [
       {
@@ -155,7 +156,7 @@
       }
     ],
     "paymentSubtitle": "Cost",
-    "paymentTitleP1": "0€ Upfront Fee, 0€ Monthly Fee ",
+    "paymentTitleP1": "No Monthly Fee,",
     "paymentTitleP2": "Pay Only for Results",
     "paymentCard1Title": "Basic - Vendor",
     "paymentCard1Description": "3.5 % Comission",

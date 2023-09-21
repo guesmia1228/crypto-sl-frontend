@@ -1,10 +1,49 @@
-.card {
+.wrapper {
   padding: 3rem;
+  transition: 0.25s ease-out;
+}
+
+.wrapper:hover {
+  border-color: rgba(7, 132, 181, 0.24);
+
+  transform: matrix3d(
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0.98,
+    -0.00165,
+    0,
+    0,
+    24,
+    0.98
+  );
+  box-shadow: 0 0px 48px -16px rgba(255, 255, 255, 0.2);
 }
 
 .icon {
   width: 3rem;
   margin-bottom: 2rem;
+}
+
+.number {
+  height: 3rem;
+  width: 3rem;
+  background-color: #1a1a1a;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  padding-top: 3px;
+  margin-bottom: 2rem;
+  line-height: 100%;
 }
 
 .title {
@@ -16,7 +55,8 @@
 .description {
   font-size: 1.6rem;
   line-height: 140%;
-  color: var(--gray-color);
+  color: #fff;
+  opacity: 0.42;
   margin-bottom: 5rem;
 }
 

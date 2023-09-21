@@ -113,6 +113,10 @@
 }
 
 @media (max-width: 900px) {
+  .hero {
+    max-height: max-content;
+  }
+
   .layout {
     flex-direction: column;
     gap: 3rem;

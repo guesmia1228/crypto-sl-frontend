@@ -33,17 +33,15 @@ const Payment = () => {
       <Helmet>
         <title>Nefentus | Payment</title>
       </Helmet>
-      <Circle />
+      {/* <Circle /> */}
       <Layout
         heading={t("payment.heroHeading")}
         description={t("payment.heroDescription")}
         button={
           <>
             <p>{t("payment.heroButton")}</p>
-            <img src={Arrow} alt="" />
           </>
         }
-        store={true}
         image={HeroImage}
       />
 

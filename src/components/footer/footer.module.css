@@ -7,14 +7,16 @@
   display: flex;
   justify-content: space-between;
 
-  padding-top: 6rem;
-  padding-bottom: 7.5rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .content {
   gap: 4rem;
+  position: relative;
+  top: 3px;
   align-items: center;
   display: flex;
   justify-content: space-between;
@@ -72,7 +74,7 @@
 }
 
 .footer .icons {
-  margin-left: 5rem;
+  margin-left: 2.5rem;
   display: flex;
   gap: 2rem;
 }

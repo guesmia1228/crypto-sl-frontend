@@ -64,7 +64,13 @@ const Navigation = () => {
           </div>
 
           <div className={styles.right}>
-            <Languages />
+            <div
+              className={`${styles.lang} ${
+                openMenu ? styles.showLanguage : ""
+              }`}
+            >
+              <Languages />
+            </div>
 
             <p className={styles.login}>
               <Link to="/login">
@@ -75,23 +81,23 @@ const Navigation = () => {
             <div className={styles.button}>
               <Link to="/signup">{t("navigation.signUp")}</Link>
             </div>
-          </div>
 
-          <div className={styles.mobMenu}>
-            <div
-              className={`${styles.line} ${openMenu ? styles.openLine : ""}`}
-            ></div>
-            <div
-              className={`${styles.line} ${openMenu ? styles.openLine : ""}`}
-            ></div>
-            <div
-              className={`${styles.line} ${openMenu ? styles.openLine : ""}`}
-            ></div>
+            <div className={styles.mobMenu}>
+              <div
+                className={`${styles.line} ${openMenu ? styles.openLine : ""}`}
+              ></div>
+              <div
+                className={`${styles.line} ${openMenu ? styles.openLine : ""}`}
+              ></div>
+              <div
+                className={`${styles.line} ${openMenu ? styles.openLine : ""}`}
+              ></div>
 
-            <div
-              onClick={() => setOpenMenu((prev) => !prev)}
-              className={styles.lineButton}
-            ></div>
+              <div
+                onClick={() => setOpenMenu((prev) => !prev)}
+                className={styles.lineButton}
+              ></div>
+            </div>
           </div>
         </div>
       </div>

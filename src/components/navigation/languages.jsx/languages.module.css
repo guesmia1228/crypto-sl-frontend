@@ -47,13 +47,13 @@
 }
 
 .item p {
-  pointer-events: none;
+  pointer-events: none !important;
 }
 
 .languages:hover .dropdown {
   opacity: 1;
   transform: translate(-50%, 0rem);
-  pointer-events: initial;
+  pointer-events: initial !important;
 }
 
 .item:hover p {

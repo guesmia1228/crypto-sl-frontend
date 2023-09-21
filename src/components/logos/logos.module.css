@@ -7,7 +7,7 @@
 }
 
 .logos::before {
-  background: linear-gradient(90deg, #090909, rgba(9, 9, 9, 0) 100%);
+  background: linear-gradient(90deg, #000, rgba(9, 9, 9, 0) 100%);
   position: absolute;
   left: 0;
   top: 0;
@@ -20,7 +20,7 @@
 
 .logos::after {
   z-index: 2;
-  background: linear-gradient(-90deg, #090909, rgba(9, 9, 9, 0) 100%);
+  background: linear-gradient(-90deg, #000, rgba(9, 9, 9, 0) 100%);
   position: absolute;
   right: 0;
   pointer-events: none;
@@ -165,10 +165,6 @@
 
 @media (max-width: 400px) {
   .logoImage img {
-    height: 2rem;
-
     margin: 0 3rem;
   }
 }
-
-/* MOVE */

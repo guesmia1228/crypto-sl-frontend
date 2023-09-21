@@ -111,8 +111,8 @@ body {
 }
 
 .break {
-  margin-top: 15rem;
-  margin-bottom: 15rem;
+  margin-top: 10rem;
+  margin-bottom: 10rem;
 }
 
 @media (max-width: 550px) {
@@ -142,13 +142,21 @@ h1 {
 }
 
 h1 .gradient {
-  background: linear-gradient(to right, #fff 20%, #0784b5 30%, #fff 80%);
+  background: linear-gradient(
+    to right,
+    white 20%,
+    #0784b5 40%,
+    #1595c2 60%,
+    white 80%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  width: max-content;
   text-fill-color: transparent;
+  background-position: 50% 50%;
   background-size: 500% auto;
-  animation: textShine 5s ease-out-out infinite;
+  animation: textShine 5s ease-in-out infinite;
 }
 
 @keyframes textShine {
@@ -322,7 +330,7 @@ nav {
 .slideAnimation {
   animation-name: slide;
   animation-duration: 0.5s;
-  animation-timing-function: ease-out;
+  animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1);
   animation-fill-mode: forwards;
 }
 
@@ -483,4 +491,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   to {
     transform: translateX(0%);
   }
+}
+
+.cryptoIconShow img {
+  transform: scale(1) !important;
 }

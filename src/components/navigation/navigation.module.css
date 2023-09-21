@@ -10,7 +10,7 @@
 }
 
 .contentWrapper {
-  background: rgba(9, 9, 9, 0.95);
+  background: rgba(0, 0, 0, 0.95);
   backdrop-filter: blur(10px);
   position: relative;
   z-index: 100;
@@ -21,8 +21,8 @@
   align-items: center;
   justify-content: space-between;
   position: relative;
-  padding-top: 2.4rem;
-  padding-bottom: 2.4rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 
 .content > div {
@@ -31,11 +31,7 @@
 }
 
 .left {
-  gap: 10rem;
-}
-
-.logoWrapper {
-  line-height: 0%;
+  gap: 5rem;
 }
 
 .logo {
@@ -67,8 +63,6 @@
 
 .navigation ul li p {
   transition: 0.2s ease-out;
-
-  line-height: 102%;
 }
 
 .navigation ul li:hover p {
@@ -217,7 +211,7 @@
   font-size: 1.4rem;
   pointer-events: initial;
   cursor: pointer;
-  padding: 1.2rem 3rem;
+  padding: 1rem 3rem;
   transition: 0.2s ease-out;
 }
 
@@ -243,15 +237,16 @@
 }
 
 .content {
-  background: rgba(9, 9, 9, 1);
+  background: rgba(0, 0, 0, 1);
   z-index: 5;
 }
 
 .mobileMenu {
-  background: rgba(9, 9, 9, 1);
+  background: rgba(0, 0, 0, 1);
   backdrop-filter: blur(10px);
   padding: 2rem 2.5rem;
   transition: 0.5s ease-out;
+  /* height: 100%; */
 
   display: flex;
   flex-direction: column;
@@ -320,12 +315,32 @@
     height: 2.4rem;
   }
 
+  .navigation {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: max-content 1fr;
+  }
+
   .navigation .content ul {
     display: none;
   }
 
-  .right {
+  .login,
+  .button {
     display: none !important;
+  }
+
+  .lang {
+    opacity: 0;
+    transition: 0.25s ease-out;
+  }
+
+  .showLanguage {
+    opacity: 1;
+  }
+
+  .right {
+    gap: 5rem;
   }
 
   .dropdownMenu p {

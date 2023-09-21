@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 4rem;
 }
 
 .card {
@@ -16,24 +17,27 @@
 }
 
 .lightCard {
-  background: linear-gradient(
-    359.52deg,
-    rgba(21, 149, 194, 0.2) 0.37%,
-    rgba(102, 191, 222, 0.2) 99.54%
-  );
-  border-radius: 25px 0px 0px 25px;
 }
 
 .boldCard {
-  background: linear-gradient(
-    359.52deg,
-    rgb(21, 149, 194, 0.7) 0.37%,
-    rgba(102, 191, 222, 0.7) 99.54%
-  );
-  border-radius: 25px;
   padding-bottom: 5rem;
-
+  position: relative;
   gap: 6rem;
+}
+
+.boldCard::after {
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  right: -2px;
+  bottom: -2px;
+  background-image: linear-gradient(
+    rgba(216, 213, 209, 0.5),
+    rgba(255, 255, 255, 0.1)
+  );
+  z-index: -1;
+  border-radius: 2.5rem;
 }
 
 .card > div:last-child {

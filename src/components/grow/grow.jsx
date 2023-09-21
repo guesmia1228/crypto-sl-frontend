@@ -27,21 +27,28 @@ const Grow = () => {
   const listContent = t("payment.growContent", { returnObjects: true });
 
   return (
-    <div className="container scroll break">
+    <div className="container break">
       <HeadingCenter
-        noScroll
         subtitle={t("payment.growSubtitle")}
-        title={t("payment.growTitle")}
+        title={
+          <>
+            {t("payment.growTitle")}
+            <br />
+            {t("payment.growTitle2")}
+          </>
+        }
       />
 
       <div className={styles.body}>
         <div className={styles.left}>
           <Card
+            num={1}
             title={listContent[0].title}
             description={listContent[0].description}
             image={content[0].image}
           />
           <Card
+            num={window.innerWidth > 900 ? 3 : 2}
             title={listContent[2].title}
             description={listContent[2].description}
             image={content[2].image}
@@ -49,6 +56,7 @@ const Grow = () => {
         </div>
         <div className={styles.right}>
           <Card
+            num={window.innerWidth > 900 ? 2 : 3}
             title={listContent[1].title}
             description={listContent[1].description}
             image={content[1].image}
