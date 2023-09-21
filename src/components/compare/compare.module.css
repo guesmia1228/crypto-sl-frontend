@@ -90,11 +90,7 @@
 }
 
 @media (max-width: 550px) {
-  .section {
-    gap: 0rem;
-  }
-
-  .card {
+  .wrapper {
     padding: 2rem 2rem 4rem 2rem;
   }
 

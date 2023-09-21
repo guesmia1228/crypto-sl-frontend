@@ -6,7 +6,7 @@ import Hamburger from "../../assets/icon/hamburger.svg";
 import DropDown from "../../assets/icon/dropdown.svg";
 import Button from "../button/button";
 import Languages from "./languages.jsx/languages";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import QR from "../../assets/icon/qrcode.svg";
 
@@ -21,13 +21,28 @@ import { useTranslation } from "react-i18next";
 
 const Navigation = () => {
   const { t, i18n } = useTranslation();
+  const [height, setHeight] = useState("");
 
   const [openMenu, setOpenMenu] = useState(false);
 
   const [openDrop, setOpenDrop] = useState(false);
 
+  useEffect(() => {
+    if (window.innerHeight >= 900) return;
+
+    const changeHeight = () => {
+      setHeight(window.innerHeight);
+    };
+
+    changeHeight();
+
+    window.addEventListener("resize", changeHeight);
+
+    return () => window.removeEventListener("resize", changeHeight);
+  });
+
   return (
-    <nav className={`${styles.navigation} load`}>
+    <nav className={`${styles.navigation} load`} style={{ height }}>
       <div className={` ${styles.contentWrapper}`}>
         <div className={`container ${styles.content}`}>
           <div className={styles.left}>
@@ -110,26 +125,19 @@ const Navigation = () => {
       >
         <div>
           <ul>
-            <li className="standard">
-              <Link to="/" onClick={() => setOpenMenu(false)}>
-                {t("navigation.home")}
-              </Link>
-            </li>
-            <li className="standard">
-              <Link to="/payment" onClick={() => setOpenMenu(false)}>
-                {t("navigation.payment")}
-              </Link>
-            </li>
-            <li className="standard">
-              <Link to="/support" onClick={() => setOpenMenu(false)}>
-                {t("navigation.resources")}
-              </Link>
-            </li>
-            <li className="standard">
-              <Link to="/affiliate" onClick={() => setOpenMenu(false)}>
-                {t("navigation.affiliate")}
-              </Link>
-            </li>
+            <Link to="/" onClick={() => setOpenMenu(false)}>
+              <li className="standard">{t("navigation.home")}</li>
+            </Link>
+            <Link to="/payment" onClick={() => setOpenMenu(false)}>
+              <li className="standard">{t("navigation.payment")}</li>
+            </Link>
+
+            <Link to="/affiliate" onClick={() => setOpenMenu(false)}>
+              <li className="standard">{t("navigation.affiliate")}</li>
+            </Link>
+            <Link to="/support" onClick={() => setOpenMenu(false)}>
+              <li className="standard">{t("navigation.resources")}</li>
+            </Link>
           </ul>
         </div>
         <div>

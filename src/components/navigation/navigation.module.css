@@ -290,6 +290,10 @@
   gap: 15px;
 }
 
+.mobileMenu ul a {
+  width: 100%;
+}
+
 .mobileMenu ul li {
   width: 100%;
   padding-bottom: 15px;
@@ -316,7 +320,6 @@
   }
 
   .navigation {
-    height: 100vh;
     display: grid;
     grid-template-rows: max-content 1fr;
   }

@@ -457,6 +457,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   .slideAnimation {
     animation-name: move;
   }
+
+  .slide-left {
+    transform: initial;
+  }
+
+  .slide-right {
+    transform: initial;
+  }
 }
 
 /* LOGOS */
