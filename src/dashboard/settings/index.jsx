@@ -15,6 +15,7 @@ import { Buttons } from "./components/buttons";
 import { dashboardLink } from "../../utils";
 import MessageComponent from "../../components/message";
 import { MessageContext } from "../../context/message";
+import TopInfo from "../topInfo/topInfo";
 
 let nav = [
     "Profile",
@@ -39,7 +40,7 @@ const instruction = [
     {
         title: "Password",
         description:
-            "Please enter your current password and security code to change your password",
+            "Please enter your current password to change it.",
     },
     {
         title: "Confirm",
@@ -116,6 +117,7 @@ const SettingsBody = ({ type }) => {
                 </>
             )}
 
+			{type !== "vendor" && (
             <div className={styles.profile} style={{justifyContent: type === "vendor" ? "start" : "end"}}>
                 <div className={styles.avatar} style={{width: type === "vendor" ? "10rem" : "7rem", "height": type === "vendor" ? "10rem" : "7rem"}}>
                     <BlobPicture />
@@ -132,6 +134,7 @@ const SettingsBody = ({ type }) => {
                     </p>
                 </div>
             </div>
+			)}
 
             <div className={`${styles.settingsBody} card`}>
             <div className={styles.settingsNav}>
@@ -279,10 +282,10 @@ const ProfileBody = ({afterUpdateSettings, active}) => {
         <div>
             <MessageComponent />
 
-			<div className={styles.info}>
-				<h4>{instruction[active].title}</h4>
-				<p>{instruction[active].description}</p>
-			</div>
+			<TopInfo
+				title={instruction[active].title}
+				description={instruction[active].description}
+			/>
 
             {profileContent.map((item) => (
                 <div>
@@ -316,7 +319,7 @@ const ProfileBody = ({afterUpdateSettings, active}) => {
     );
 };
 
-const PasswordBody = () => {
+const PasswordBody = ({active}) => {
     const [openBox, setOpenBox] = useState(false);
     const [currentPassword, setCurrentPassword] = useState(null);
     const [newPassword, setNewPassword] = useState(null);
@@ -430,6 +433,12 @@ const PasswordBody = () => {
                     <p style={{ color: "green" }}>{message}</p>
                 </div>
             )}
+		
+			<TopInfo
+				title={instruction[active].title}
+				description={instruction[active].description}
+			/>
+
             {passwordContent.map((item) => (
                 <div>
                     <InputComponent
