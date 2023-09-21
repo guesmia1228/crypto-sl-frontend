@@ -27,10 +27,13 @@ const ResetPassword = () => {
     } else {
     }
   }, []);
-  async function ResetPassword(token, confirmPass, pass) {
-    if (confirmPass !== pass) {
+
+  async function resetPassword(token, confirmPass, pass) {
+	if (confirmPass !== pass) {
       setErrorMessage("Passwords are not equal!");
+	  return;
     }
+
     try {
       const response = await backendAPI.resetPassword(pass, token);
       if (response == null) {
@@ -45,7 +48,7 @@ const ResetPassword = () => {
 
   function handleClick(e) {
 	e.preventDefault();
-    ResetPassword(token, CPassword, Password);
+    resetPassword(token, CPassword, Password);
   }
 
   return (

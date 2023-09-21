@@ -5,7 +5,7 @@ const Kyc = () => {
   return (
 	<>
 		<div className="container dashboardFont">
-		<KycBody />
+			<KycBody />
 		</div>
 		<Footer />
 	</>
