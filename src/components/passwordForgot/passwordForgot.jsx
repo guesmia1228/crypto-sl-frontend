@@ -22,10 +22,10 @@ const PasswordForgot = () => {
     try {
       const response = await backendAPI.forgotPassword(username1);
       if(response == null){
-        setErrorMessage("Invalid Email!");
+        setErrorMessage("Invalid email address!");
         return;
       }
-        setMessage("Password reset sent!");
+        setMessage("Email sent to reset password!");
     } catch (error) {
       setErrorMessage("There was an error sending the email!");
     }
