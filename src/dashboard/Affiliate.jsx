@@ -1,6 +1,6 @@
 import AdminBody from "./admin/index";
 import { Helmet } from "react-helmet";
-import Footer from "../components/footer/footer";
+import Footer from "./footer";
 
 const Affiliate = () => {
   return (
