@@ -215,10 +215,7 @@ export default class adminDashboardApi {
                 body: JSON.stringify(request)
             };
             const response = await fetch(url, options);
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
-            }
-            return true;
+            return response;
         } catch (error) {
             return null; // or return some default value
         }

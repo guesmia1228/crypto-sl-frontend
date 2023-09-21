@@ -222,11 +222,20 @@ const AdminBody = ({ type }) => {
 		}
 
 		const resp = await adminApi.addUser(firstName, lastName, email, password, role);
-		if (resp === true) {
-			setOpenModal(false);
-			fetchAdminData();
-			clearAddUserFields();
+		if (resp) {
+			if (resp.ok) {
+				setOpenModal(false);
+				fetchAdminData();
+				clearAddUserFields();
+				setInfoMessage("User added successfully!");
+				return;
+			} else if (resp.status === 409) {
+				setErrorMessage("User already exists!");
+				return;
+			}
 		}
+		
+		setErrorMessage("Could not add user!");
  	};
 
 	const affiliateLinkCopied = async () => {
