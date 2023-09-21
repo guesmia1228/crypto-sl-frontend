@@ -33,12 +33,12 @@ const Button = ({ children, className, color, link, onClick, style }) => {
     >
       {link ? (
         <Link to={link}>
-          <div style={{...style, color: fontColor}}>
+          <div style={{...style, color: fontColor}} className="unselectable">
             {children}
           </div>
         </Link>
       ) : (
-        <div style={{...style, color: fontColor }}>
+        <div style={{...style, color: fontColor }} className="unselectable">
           {children}
         </div>
       )}
