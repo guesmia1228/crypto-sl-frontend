@@ -180,6 +180,8 @@ const AdminBody = ({ type }) => {
 		const resp = await adminApi.deleteUser(userEmail);
 		if (resp) {
 			const newUserData = await adminApi.getUsers();
+
+			newUserData.reverse();
 			updateUsers(newUserData);
 		}
 	};
