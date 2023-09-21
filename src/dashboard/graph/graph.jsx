@@ -1,4 +1,5 @@
 import styles from "./graph.module.css";
+import { formatUSDBalance } from "../../utils";
 
 import {
   Chart as ChartJS,
@@ -66,7 +67,7 @@ function  getTotalIncome(totalPrices){
     const sum = values.reduce(function (prev, currentValue) {
       return prev + currentValue;
     },0)
-    return '$' + sum.toLocaleString()
+    return '$' + formatUSDBalance(sum)
   } else {
     return "$0"
   }
