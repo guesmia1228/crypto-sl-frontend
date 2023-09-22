@@ -57,6 +57,7 @@ const Affiliate = () => {
         description={t("affiliate.heroDescription")}
         image={Image}
         list
+        load
       />
 
       <Why

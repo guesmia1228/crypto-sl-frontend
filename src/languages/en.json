@@ -28,7 +28,7 @@
       },
       {
         "title": "Unlock New Markets:",
-        "description": "Unleash the Power of Growth."
+        "description": "Unleash the Power of Growth and be fit for the future."
       },
       {
         "title": "Streamline Your Workflow:",
@@ -38,13 +38,14 @@
     "layoutButton": "Get Started for Free",
     "simplifySubtitle": "Simplify",
     "simplifyTitle": "Effortless Crypto Transactions with Invoicing",
-    "simplifyDescription": "Experience a seamless and secure transaction environment and automated invoicing with Nefentus. Designed for your business to cater to the diverse needs of businesses and customers.",
+    "simplifyDescription": "Experience a seamless and secure transaction environment and automated invoicing with Nefentus - designed for you to cater to the diverse needs of businesses and customers.",
     "payrollDescription": "Use our streamlined, efficient solution for managing employee compensation, including salary payments and benefit allocations.",
     "payrollSubtitle": "Process Payroll",
     "payrollTitleP1": "Grow with our",
     "payrollTitleP2": "payroll system",
     "aboutCard1Subtitle": "Rapid Adoption",
-    "aboutCard1Title": "Except A Wide Variety Cryptocurrencies Without Risk",
+    "aboutCard1Title": "Accept A Wide Variety Cryptocurrencies",
+    "aboutCard1TitleGradient": "Without Risk",
     "aboutCard1Description": "Our smart contract based technology eliminates cryptocurrency volatility through instantly converting cryptocurrency payments into stable coins in your wallet. Securely accept a range of crypto currencies and offer payment flexibility to your customers.",
     "aboutCard2Subtitle": "Tracking",
     "aboutCard2TitleP1": "Everything You Need",
@@ -95,17 +96,20 @@
     "growContent": [
       {
         "title": "Effortlessly Accept a Wide Range of Cryptos Securely:",
-        "description": "Our smart contract technology is engineered to tackle the roller-coaster ride of cryptocurrency prices. When your customers make payments using cryptocurrencies, our smart contracts swing into action, seamlessly converting those payments into stablecoins. This instant conversion ensures that the value of your received payments remains steady, effectively shielding your business from the unpredictable price fluctuations often associated with the crypto market.",
+        "descriptionP1": "Our smart contract technology is engineered to tackle the roller-coaster ride of cryptocurrency prices. When your customers make payments using cryptocurrencies, our smart contracts swing into action, seamlessly converting those payments into stablecoins.",
+        "descriptionP2": "This instant conversion ensures that the value of your received payments remains steady, effectively shielding your business from the unpredictable price fluctuations often associated with the crypto market.",
         "button": "Get Started"
       },
       {
         "title": "Get Started In Less Than 5 Minutes:",
-        "description": "At Nefentus, we value your time. That's why we've streamlined the process to help you create your account and connect your wallet in less than 5 minutes. For EU residents, a KYC process is required. Don't worry if you don't have a wallet yet! Nefentus automatically creates one for you. However, if you prefer to use your existing wallet, you can easily link it to our system. Start your journey with Nefentus today and experience the freedom and flexibility that cryptocurrencies offer!",
+        "descriptionP1": "At Nefentus, we value your time. That's why we've streamlined the process to help you create your account and connect your wallet in less than 5 minutes. For EU residents, a KYC process is required.",
+        "descriptionP2": "Don't worry if you don't have a wallet yet! Nefentus automatically creates one for you. However, if you prefer to use your existing wallet, you can easily link it to our system. Start your journey with Nefentus today and experience the freedom and flexibility that cryptocurrencies offer!",
         "button": "Get Started"
       },
       {
         "title": "Easy Transaction Management:",
-        "description": "Effortlessly accept payments: generate QR codes or payment links for customers to pay with any of our accepted cryptocurrencies. Track the payment process in real time and benefit from automatically created and sent invoices.",
+        "descriptionP1": "Effortlessly accept payments: generate QR codes or payment links for customers to pay with any of our accepted cryptocurrencies.",
+        "descriptionP2": "Track the payment process in real time and benefit from automatically created and sent invoices.",
         "button": "Get Started"
       }
     ],
@@ -116,81 +120,83 @@
     "whyButton": "Get Started for free",
     "whyContent": [
       {
-        "title": "Made in Europe",
-        "description": "Our in-house team of expert IT specialists continuously develops and improves Nefentus to the highest standards,"
+        "title": "Created in Europe",
+        "description": "Our in-house team of expert IT specialists continuously develops and improves Nefentus to a highest standards,"
       },
       {
-        "title": "GDPR compliant",
+        "title": "GDRP Compliant",
         "description": "We prioritize data protection, adhering to the highest security and privacy standards to ensure the protection of your company and customers' data."
       },
       {
-        "title": "Secure",
-        "description": "With our powerful and secure servers that offer 100% availability, you can trust that your website will always be accessible, and your data will always be safe."
+        "title": "Secure Servers And Smart Contracts",
+        "description": "Our company ensures the highest security standards for your data and payments through the use of Smart Contracts. These self-executing contracts based on blockchain technology provide transparency, tamper resistance, and efficiency."
       }
     ],
     "dataContent": [
       {
-        "title": "3.5% Commission",
-        "description": "Experience unparalleled payment processing, featuring strong conversion rates, popular and intuitive payment methods, and fast, safe transactions.",
+        "title": "3.0% Commission",
+        "description": "Customers are charged a 3% commission solely on real transactions, with no monthly or ongoing fees. We believe in a straightforward fee structure that ensures transparency and fairness.",
         "list": [
-          "Strong conversion rates",
-          "Popular payment methods",
+          "No hidden fees",
           "Fast & Safe",
-          "Intuitive payment process"
+          "Intuitive payment process",
+          "Instant payouts"
         ]
       },
       {
         "title": "Smart Analytics",
         "description": "We calculate key metrics for your business and keep track of your growth effortlessly.",
         "list": [
-          "See Measurable growth",
+          "See measurable growth",
           "Optimize processes",
           "Access analytics",
-          "Gain Insights"
+          "Gain insights"
         ]
       },
       {
-        "title": "Automatons",
-        "description": "Nefentus saves you from manual invoicing and simplifies your accounting.",
+        "title": "Automations",
+        "description": "Nefentus spares you the efforts of manual invoicing and simplifies your accounting.",
         "list": [
+          "Fraud-safe",
           "Automated invoicing",
-          "Insightful dashboards",
           "Financial overview",
-          "Completely complient "
+          "Completely compliant"
         ]
       },
       {
         "title": "Digital Products",
-        "description": "Securely upload digital products once to Nefentus and make them available for download after purchase, without any third-party providers.",
+        "description": "Safely upload your digital products to Nefentus and make them available for download upon purchase. Additionally,  track your physical product inventory, ensuring a seamless and efficient management experience.",
         "list": [
           "Secure your Content",
-          "Access to digital products ",
-          "Have Your Own cloud"
+          "Upload your digital products to Nefentus ",
+          "Sell digital & physical products",
+          "No need for third-party providers"
         ]
       }
     ],
     "paymentSubtitle": "Cost",
     "paymentTitleP1": "No Monthly Fee,",
-    "paymentTitleP2": "Pay Only for Results",
-    "paymentCard1Title": "Basic - Vendor",
-    "paymentCard1Description": "3.5 % Comission",
-    "paymentCard2Title": "Customized - Enterpriser",
-    "paymentCard2Description": "100,000+ EUR monthly transaction ",
+    "paymentTitleP2": "Pay Only For Results",
+    "paymentCard1Title": "Individual",
+    "paymentCard1Description": "3.0% Comission",
+    "paymentCard2Title": "Enterprise",
+    "paymentCard2Description": "100,000+ EUR monthly transaction volume",
     "paymentButton": "Sign Up For Free",
     "paymentCard1": [
-      "Automated invoicing",
-      "Accept 7 different payment methods",
-      "24/7 uptime",
-      "Automated receivables",
-      "Premium and fast support",
+      "Accept crypto payments safely",
+      "Fraud resistant smart contracts",
+      "Instant payouts",
+      "Automated Invoicing",
+      "No fixed fees",
+      "Free onboarding",
       "Instant access"
     ],
     "paymentCard2": [
-      "All benefits of the Basic-Vendor package",
-      "Support via phone and video by a dedicated  account manager",
-      "Free access to our private support group for questions, answers and discussion ",
-      "Early access to beta versions",
-      "Special discounts for transaction fees"
+      "All of Individual plan +",
+      "Lower commission",
+      "Exclusive Messenger Support",
+      "Nefentus enterprise circle",
+      "VIP networking gatherings"
     ]
   },
   "payroll": {
@@ -240,8 +246,8 @@
     "button-label-confirm": "Confirm password"
   },
   "signUp": {
-    "titleP1": "Get started with",
-    "titleP2": "Nefentus",
+    "titleP1": "Get started",
+    "titleP2": "with Nefentus",
     "description": "Start now, it is free. Nefentus helps you manage your business operations in a compliant and sustainable way.",
     "info": "Already have an account? ",
     "infoButton": "Sign in",
@@ -263,15 +269,17 @@
     "formInfo": "By signing up, you agree to out Privacy Policy and Terms of Service."
   },
   "login": {
-    "title": "Log in to Nefentus",
+    "titleP1": "Welcome Back",
+    "titleP2": "to Nefentus",
+    "description": "Enter your credentials below to access your Nefentus account and unlock a world of possibilities.",
     "button": "Sign in",
     "info": "Don't have an account? ",
     "infoButton": "Sign up",
     "forgot": "Forgot password?"
   },
   "affiliate": {
-    "heroTitle": "Uncover the top 1% of affiliate program.",
-    "heroGradient": "For Free.",
+    "heroTitle": "Probably The Best Affiliate Network",
+    "heroGradient": "Out There!",
     "heroSubtitle": "Affiliate Program",
     "heroHeading": "Earn commissions effortlessly",
     "heroDescription": "Sign up for Nefentus' affiliate program for free and start earning commissions on autopilot.",

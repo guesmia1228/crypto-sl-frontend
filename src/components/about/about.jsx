@@ -18,7 +18,10 @@ const About = () => {
           <p className={`subtitle ${styles.subtitle}`}>
             {t("home.aboutCard1Subtitle")}
           </p>
-          <h3> {t("home.aboutCard1Title")}</h3>
+          <h3>
+            {t("home.aboutCard1Title")}
+            <div className="gradient">{t("home.aboutCard1TitleGradient")}</div>
+          </h3>
           <p className="standard">{t("home.aboutCard1Description")}</p>
 
           <div className={styles.button}>

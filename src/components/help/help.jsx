@@ -12,10 +12,12 @@ const Help = () => {
 
   return (
     <div className="container">
-      <HeadingCenter
-        subtitle={t("home.helpSubtitle")}
-        title={t("home.helpTitle")}
-      />
+      <div className={styles.header}>
+        <HeadingCenter
+          subtitle={t("home.helpSubtitle")}
+          title={t("home.helpTitle")}
+        />
+      </div>
 
       <div className={`scroll ${styles.row}`}>
         <div className={`${styles.card} card`}>

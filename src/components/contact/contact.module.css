@@ -9,13 +9,13 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding-top: 25rem;
-  padding-bottom: 25rem;
+  padding-top: 15rem;
+  padding-bottom: 15rem;
   max-width: 75rem !important;
 }
 
 .contact h3 {
-  margin-bottom: 3rem;
+  margin-bottom: 6rem;
 }
 
 .description {

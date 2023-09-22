@@ -15,6 +15,7 @@ import { useEffect, useRef } from "react";
 const Layout = ({
   heading,
   title,
+  load = false,
   description,
   button,
   button2,
@@ -49,11 +50,11 @@ const Layout = ({
   return (
     <div
       className={`${styles.layout} ${heading ? styles.hero : ""} ${
-        heading ? "load hero" : ""
+        heading || load ? "load hero" : ""
       } container`}
     >
       <div
-        className={heading ? "" : "scroll"}
+        className={heading || load ? "" : "scroll"}
         style={{ order: reverse ? 2 : 1 }}
       >
         {subtitle && (
@@ -118,7 +119,9 @@ const Layout = ({
       </div>
       {!video && (
         <img
-          className={heading ? "" : reverse ? "slide-right" : "slide-left"}
+          className={
+            heading || load ? "" : reverse ? "slide-right" : "slide-left"
+          }
           src={image}
           alt=""
           style={{ order: reverse ? 1 : 2 }}

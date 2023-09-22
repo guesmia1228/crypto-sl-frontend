@@ -1,4 +1,4 @@
-import Logo from "../../assets/logo/logo.svg";
+import Logo from "../../assets/logo/logo2.svg";
 import Button from "../button/button";
 import Input, { Options } from "../input/input";
 
@@ -266,6 +266,11 @@ const Signup = () => {
 
   return (
     <div className={`${styles.signup}`}>
+      <div className={styles.closeWrapper}>
+        <Button link={"/"} color={"white"}>
+          Close
+        </Button>
+      </div>
       <div className={styles.left}>
         <img src={Logo} alt="" />
 
@@ -273,7 +278,7 @@ const Signup = () => {
           <h2>
             {t("signUp.titleP1")}
             <br />
-            {t("signUp.titleP2")}
+            <span className="gradient">{t("signUp.titleP2")}</span>
           </h2>
           <p>{t("signUp.description")}</p>
 
@@ -330,11 +335,6 @@ const Signup = () => {
             value={CountryOption}
             setValue={setCountryOption}
             options={country_list}
-          />
-          <Options
-            label={t("signUp.option2Label")}
-            value={UseOption}
-            setValue={setUseOption}
           />
         </div>
         <div className={styles.buttonWrapper}>

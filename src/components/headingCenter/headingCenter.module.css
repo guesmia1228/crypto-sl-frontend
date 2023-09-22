@@ -13,7 +13,7 @@
 .subtitle {
   background: var(--blue-color);
   -webkit-background-clip: text;
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   margin-bottom: 0.6rem;
   -webkit-text-fill-color: transparent;
 }

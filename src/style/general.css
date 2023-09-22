@@ -146,7 +146,7 @@ h1 {
   line-height: 105%;
 }
 
-h1 .gradient {
+.gradient {
   background: linear-gradient(
     to right,
     white 20%,

@@ -6,14 +6,14 @@
 }
 
 .body {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   justify-content: center;
   align-items: center;
   gap: 4rem;
 }
 
 .card {
-  width: 36.4rem;
   padding: 3rem;
 
   display: flex;
@@ -98,7 +98,7 @@
 
 @media (max-width: 750px) {
   .body {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     gap: 2rem;
   }
 

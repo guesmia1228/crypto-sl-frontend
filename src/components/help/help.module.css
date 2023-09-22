@@ -1,13 +1,18 @@
 .row {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   justify-content: center;
   gap: 4rem;
   position: relative;
   z-index: 1;
 }
 
+.header > div {
+  align-items: flex-start;
+  margin-bottom: 3rem;
+}
+
 .card {
-  width: 36.4rem;
   padding: 3rem;
   position: relative;
   display: flex;
@@ -17,7 +22,27 @@
 }
 
 .card:hover {
-  background-color: rgba(16, 16, 16, 0.8);
+  border-color: rgba(7, 132, 181, 0.24);
+
+  transform: matrix3d(
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0.98,
+    -0.00165,
+    0,
+    0,
+    24,
+    0.98
+  );
+  box-shadow: 0 0px 48px -16px rgba(255, 255, 255, 0.2);
 }
 
 /* .card:nth-child(2) ::after {
@@ -66,7 +91,7 @@
 
 @media (max-width: 750px) {
   .row {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     gap: 2rem;
   }
 

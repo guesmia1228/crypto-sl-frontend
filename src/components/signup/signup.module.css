@@ -35,6 +35,16 @@
   border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.closeWrapper {
+  position: absolute;
+  top: 2rem;
+  right: 10rem;
+}
+
+.closeWrapper > div > a > div {
+  padding: 1rem 3rem;
+}
+
 .left h2 {
   margin-bottom: 1rem;
 }
@@ -111,6 +121,11 @@
     height: max-content;
     padding: 5rem 3rem;
     gap: 5rem;
+    /* padding-top: 10rem; */
+  }
+
+  .closeWrapper {
+    display: none;
   }
 
   .left {

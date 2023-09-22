@@ -1,7 +1,7 @@
 import Input from "../input/input";
 import styles from "./loginBox.module.css";
 
-import Logo from "../../assets/logo/logo.svg";
+import Logo from "../../assets/logo/logo2.svg";
 import Button from "./../button/button";
 import { useState, useEffect } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
@@ -115,26 +115,43 @@ const LoginBox = () => {
   }
 
   return (
-    <div className={styles.login}>
-      <div className={styles.card}>
-        <div className={styles.left}>
-          <img src={Logo} alt="" />
-          <h3>{t("login.title")}</h3>
+    <div className={`${styles.login}`}>
+      <div className={styles.closeWrapper}>
+        <Button link={"/"} color={"white"}>
+          Close
+        </Button>
+      </div>
+      <div className={styles.left}>
+        <img src={Logo} alt="" />
+
+        <div>
+          <h2>
+            {t("login.titleP1")}
+            <br />
+            <span className="gradient">{t("login.titleP2")}</span>
+          </h2>
+          <p>{t("login.description")}</p>
+
+          <p>
+            {t("login.info")}
+            <u>
+              <Link to="/signUp">{t("login.infoButton")}</Link>
+            </u>
+          </p>
         </div>
-        <div className={styles.top}>
-          <div className={styles.message}>
-            {errorMessage && (
-              <div className={styles.errormessagecontainer}>
-                <p> {errorMessage}</p>
-              </div>
-            )}
-            {message && (
-              <div className={styles.messagecontainer}>
-                <p>{message}</p>
-              </div>
-            )}
+      </div>
+
+      <div className={styles.right}>
+        {errorMessage && (
+          <div className={styles.errormessagecontainer}>
+            <p>{errorMessage}</p>
           </div>
-        </div>
+        )}
+        {message && (
+          <div className={styles.messagecontainer}>
+            <p>{message}</p>
+          </div>
+        )}
 
         <div className={styles.inputWrapper}>
           <Input
@@ -150,33 +167,24 @@ const LoginBox = () => {
             placeholder={t("signUp.passwordPlaceholder")}
             secure
           />
-        </div>
 
-        <div className={styles.remeberInfo}>
-          <div onClick={() => setCheckBox((prev) => !prev)}>
-            <div className={styles.checkBox}>
-              {checkBox && <img src={CheckBox} alt="" />}
+          <div className={styles.remeberInfo}>
+            <div onClick={() => setCheckBox((prev) => !prev)}>
+              <div className={styles.checkBox}>
+                {checkBox && <img src={CheckBox} alt="" />}
+              </div>
+              <p>Remeber me</p>
             </div>
-            <p>Remeber me</p>
+
+            <Link to="/forgot-password">
+              <p>{t("login.forgot")}</p>
+            </Link>
           </div>
-
-          <Link to="/forgot-password">
-            <p>{t("login.forgot")}</p>
-          </Link>
         </div>
-
         <div className={styles.buttonWrapper}>
-          <Button link={null} onClick={handleClick}>
+          <Button className={styles.button} onClick={handleClick}>
             {t("login.button")}
           </Button>
-        </div>
-        <div className={styles.info}>
-          <p>
-            {t("login.info")}
-            <u>
-              <Link to="/signUp">{t("login.infoButton")}</Link>
-            </u>
-          </p>
         </div>
       </div>
     </div>
