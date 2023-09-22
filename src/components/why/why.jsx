@@ -1,8 +1,7 @@
+import Button from "../button/button";
 import styles from "./why.module.css";
 
-import Image from "../../assets/image/why.png";
-
-const Why = ({ title, content, image = Image }) => {
+const Why = ({ title, content, image = Image, button }) => {
   return (
     <div className={`container break ${styles.section}`}>
       <img className="slide-right" src={image} alt="" />
@@ -16,6 +15,10 @@ const Why = ({ title, content, image = Image }) => {
             <p>{item.description}</p>
           </div>
         ))}
+
+        <div className={`slide-left`}>
+          <Button link="/">{button}</Button>
+        </div>
       </div>
     </div>
   );

@@ -2,15 +2,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20rem;
-  margin-bottom: 20rem;
+  margin-top: 10rem;
+  margin-bottom: 10rem;
 }
 
 .hero {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
+  margin-top: 10rem !important;
+  margin-bottom: 10rem !important;
   padding-top: 5rem;
-  min-height: 100vh;
   max-height: 80rem;
 }
 

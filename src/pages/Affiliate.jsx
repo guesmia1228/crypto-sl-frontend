@@ -67,6 +67,7 @@ const Affiliate = () => {
             {t("affiliate.whyTitleP2")}
           </>
         }
+        button={t("affiliate.whyButton")}
         content={content}
         image={Image2}
       />

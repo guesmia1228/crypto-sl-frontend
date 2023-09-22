@@ -1,3 +1,31 @@
+.card {
+  position: relative;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 86px;
+  left: 0;
+  top: 80%;
+  z-index: 1;
+  opacity: 0;
+  background: linear-gradient(
+    0deg,
+    rgba(59, 56, 65, 0) 22.4%,
+    #0784b5 60.94%,
+    rgba(59, 56, 65, 0)
+  );
+  transition: top 0.8s cubic-bezier(0.215, 0.61, 0.355, 1), opacity 0.4s linear;
+  will-change: transform, opacity;
+}
+
+.card:hover::before {
+  opacity: 1;
+  top: 20%;
+}
+
 .horizontalCard {
   display: flex;
   justify-content: space-between;
@@ -17,7 +45,7 @@
   margin-bottom: 1rem;
 }
 
-.horizontalCard img {
+.horizontalImg {
   width: 52rem;
   align-self: center;
   transform: skewY(-5deg);
@@ -41,12 +69,12 @@
   padding-bottom: 7.5rem;
 }
 
-.verticalCard:first-child img {
+.verticalCard:first-child .verticalImg {
   padding: 4.5rem 3.5rem 0 3.5rem;
   margin-bottom: 3.5rem;
 }
 
-.verticalCard img {
+.verticalCard .verticalImg {
   width: 100%;
 }
 
@@ -60,8 +88,19 @@
   padding: 0 3.5rem;
 }
 
-.content p {
+.content > p {
   width: 35rem;
+}
+
+.button > div {
+  border: 1px solid red;
+  margin-top: 2rem;
+  font-size: 1.4rem;
+  width: max-content;
+}
+
+.button > div > a > div {
+  padding: 1rem 2rem !important;
 }
 
 @media (max-width: 900px) {
@@ -78,7 +117,7 @@
     align-self: flex-start;
   }
 
-  .horizontalCard img {
+  .horizontalImg {
     width: 100%;
     transform: skew(0);
   }
@@ -97,16 +136,16 @@
     padding-bottom: 2rem;
   }
 
-  .verticalCard img {
+  .verticalCard .verticalImg {
     order: 1;
   }
 
-  .verticalCard:first-child img {
+  .verticalCard:first-child .verticalImg {
     padding: 2rem;
     margin-bottom: 0;
   }
 
-  .verticalCard img {
+  .verticalCard .verticalImg {
     width: 100%;
   }
 
@@ -121,7 +160,7 @@
     margin-bottom: 4rem;
   }
 
-  .content p {
+  .content > p {
     width: 100%;
   }
 }

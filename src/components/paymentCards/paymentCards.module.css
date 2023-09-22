@@ -1,3 +1,10 @@
+.sectionWrapper {
+  background: url(../../assets/image/gradient.png);
+  background-position: center;
+  background-size: cover;
+  padding-bottom: 10rem;
+}
+
 .body {
   display: flex;
   justify-content: center;

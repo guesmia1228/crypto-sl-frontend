@@ -1,7 +1,7 @@
 .section {
   display: flex;
-  padding-top: 10rem;
-  padding-bottom: 10rem;
+  padding-top: 7rem;
+  padding-bottom: 7rem;
   justify-content: space-between;
   gap: 12rem;
   align-items: center;

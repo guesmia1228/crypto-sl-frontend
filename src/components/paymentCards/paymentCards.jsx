@@ -14,58 +14,60 @@ const PaymentCards = () => {
   const card2List = t("payment.paymentCard1", { returnObjects: true });
 
   return (
-    <div className="container scroll">
-      <HeadingCenter
-        noScroll
-        title={
-          <>
-            {t("payment.paymentTitleP1")}
-            <br />
-            {t("payment.paymentTitleP2")}
-          </>
-        }
-        subtitle={t("payment.paymentSubtitle")}
-      />
+    <div className={styles.sectionWrapper}>
+      <div className={`container scroll `}>
+        <HeadingCenter
+          noScroll
+          title={
+            <>
+              {t("payment.paymentTitleP1")}
+              <br />
+              {t("payment.paymentTitleP2")}
+            </>
+          }
+          subtitle={t("payment.paymentSubtitle")}
+        />
 
-      <div className={styles.body}>
-        <div className={`${styles.lightCard} card ${styles.card}`}>
-          <div>
-            <div className={styles.top}>
-              <h5>{t("payment.paymentCard1Title")}</h5>
-              <p>{t("payment.paymentCard1Description")}</p>
+        <div className={styles.body}>
+          <div className={`${styles.lightCard} card ${styles.card}`}>
+            <div>
+              <div className={styles.top}>
+                <h5>{t("payment.paymentCard1Title")}</h5>
+                <p>{t("payment.paymentCard1Description")}</p>
+              </div>
+              <div className={styles.list}>
+                {card1List.map((item) => (
+                  <div>
+                    <img src={Checkmark} alt="" />
+                    <p>{item}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className={styles.list}>
-              {card1List.map((item) => (
-                <div>
-                  <img src={Checkmark} alt="" />
-                  <p>{item}</p>
-                </div>
-              ))}
-            </div>
+
+            <Button link="/signup" color="white">
+              {t("payment.paymentButton")}
+            </Button>
           </div>
 
-          <Button link="/signup" color="white">
-            {t("payment.paymentButton")}
-          </Button>
-        </div>
+          <div className={`${styles.boldCard} card ${styles.card}`}>
+            <div>
+              <div className={styles.top}>
+                <h5>{t("payment.paymentCard2Title")}</h5>
+                <p>{t("payment.paymentCard2Description")}</p>
+              </div>
+              <div className={styles.list}>
+                {card2List.map((item) => (
+                  <div>
+                    <img src={Checkmark} alt="" />
+                    <p>{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-        <div className={`${styles.boldCard} card ${styles.card}`}>
-          <div>
-            <div className={styles.top}>
-              <h5>{t("payment.paymentCard2Title")}</h5>
-              <p>{t("payment.paymentCard2Description")}</p>
-            </div>
-            <div className={styles.list}>
-              {card2List.map((item) => (
-                <div>
-                  <img src={Checkmark} alt="" />
-                  <p>{item}</p>
-                </div>
-              ))}
-            </div>
+            <Button link="/signup">{t("payment.paymentButton")}</Button>
           </div>
-
-          <Button link="/signup">{t("payment.paymentButton")}</Button>
         </div>
       </div>
     </div>

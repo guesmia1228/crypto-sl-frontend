@@ -3,6 +3,7 @@ import styles from "./compare.module.css";
 import Pros from "../../assets/icon/pros.svg";
 import Cons from "../../assets/icon/cons.svg";
 import { useTranslation } from "react-i18next";
+import HeadingCenter from "../headingCenter/headingCenter";
 
 const Compare = () => {
   const { t } = useTranslation();
@@ -10,14 +11,20 @@ const Compare = () => {
   const content = t("affiliate.compareContent", { returnObjects: true });
 
   return (
-    <div className={`${styles.section} container`}>
-      {content.map((item) => (
-        <Card
-          type={item.type}
-          title={item.title}
-          description={item.description}
-        />
-      ))}
+    <div className="container">
+      <HeadingCenter
+        subtitle={t("affiliate.compareSubtitle")}
+        title={t("affiliate.compareTitle")}
+      />
+      <div className={`${styles.section} `}>
+        {content.map((item) => (
+          <Card
+            type={item.type}
+            title={item.title}
+            description={item.description}
+          />
+        ))}
+      </div>
     </div>
   );
 };

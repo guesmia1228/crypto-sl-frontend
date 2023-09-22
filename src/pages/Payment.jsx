@@ -18,7 +18,7 @@ import Logo7 from "../assets/icon/methods/logo7.svg";
 import { useTranslation } from "react-i18next";
 
 import HeroImage from "../assets/image/paymentHero.png";
-import WhyImage from "../assets/image/safePayment.png";
+import WhyImage from "../assets/image/whyNew.png";
 import { Helmet } from "react-helmet";
 
 const list = [Logo1, Logo2, Logo3, Logo4, Logo5, Logo6, Logo7];
@@ -35,7 +35,12 @@ const Payment = () => {
       </Helmet>
       {/* <Circle /> */}
       <Layout
-        heading={t("payment.heroHeading")}
+        heading={
+          <>
+            <div className="gradient"> {t("payment.heroHeadingGradient")}</div>
+            {t("payment.heroHeading")}
+          </>
+        }
         description={t("payment.heroDescription")}
         button={
           <>
@@ -48,18 +53,17 @@ const Payment = () => {
       <Grow />
       <IconRow
         subtitle={t("payment.iconSubtitle")}
-        title={
-          <>
-            {t("payment.iconTitleP1")}
-            <br />
-            {t("payment.iconTitleP2")}
-          </>
-        }
+        title={<>{t("payment.iconTitleP1")}</>}
         description={t("payment.iconDescription")}
         list={list}
       />
 
-      <Why title={t("payment.whyTitle")} content={content} image={WhyImage} />
+      <Why
+        title={t("payment.whyTitle")}
+        content={content}
+        image={WhyImage}
+        button={t("payment.whyButton")}
+      />
       <DataCards />
 
       <PaymentCards />

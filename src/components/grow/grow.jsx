@@ -33,8 +33,8 @@ const Grow = () => {
         title={
           <>
             {t("payment.growTitle")}
-            <br />
-            {t("payment.growTitle2")}
+            {/* <br />
+            {t("payment.growTitle2")} */}
           </>
         }
       />
@@ -46,12 +46,14 @@ const Grow = () => {
             title={listContent[0].title}
             description={listContent[0].description}
             image={content[0].image}
+            button={listContent[0].button}
           />
           <Card
             num={window.innerWidth > 900 ? 3 : 2}
             title={listContent[2].title}
             description={listContent[2].description}
             image={content[2].image}
+            button={listContent[2].button}
           />
         </div>
         <div className={styles.right}>
@@ -60,6 +62,7 @@ const Grow = () => {
             title={listContent[1].title}
             description={listContent[1].description}
             image={content[1].image}
+            button={listContent[1].button}
           />
         </div>
       </div>

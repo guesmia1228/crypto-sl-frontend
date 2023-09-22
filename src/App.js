@@ -39,7 +39,7 @@ import Cookies from "js-cookie";
 
 function App() {
   useEffect(() => {
-    window.addEventListener("scroll", () => {
+    const scrollEvent = () => {
       const scrollElement = document.querySelectorAll(".scroll");
       const slideElement = document.querySelectorAll(".slide-left");
       const slideElement2 = document.querySelectorAll(".slide-right");
@@ -59,7 +59,17 @@ function App() {
       addClass(scrollElement, "scrollAnimation");
       addClass(slideElement, "slideAnimation");
       addClass(slideElement2, "slideAnimation");
+    };
+
+    window.addEventListener("scroll", scrollEvent);
+
+    document.addEventListener("contextmenu", (event) => {
+      event.preventDefault();
     });
+
+    return () => {
+      window.removeEventListener("scroll", () => scrollEvent);
+    };
   }, []);
 
   const [ck, setCK] = useState(Cookies.get("acceptCookie"));
@@ -99,9 +109,12 @@ function App() {
             <Route
               path="/payment"
               element={
-                <Layout>
+                <>
+                  <Navigation />
+
                   <Payment />
-                </Layout>
+                  <Footer />
+                </>
               }
             />
             <Route
@@ -115,7 +128,7 @@ function App() {
             <Route
               path="/affiliate"
               element={
-                <Layout>
+                <Layout affiliate={true}>
                   <Affiliate />
                 </Layout>
               }

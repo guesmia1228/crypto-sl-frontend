@@ -18,6 +18,7 @@ import Image2 from "../assets/image/payrollHome.png";
 
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
+import Help from "../components/help/help";
 
 const Home = () => {
   const { t, i18n } = useTranslation();
@@ -38,7 +39,12 @@ const Home = () => {
         <title>Nefentus | Home</title>
       </Helmet>
       <Layout
-        heading={t("home.heroTitle")}
+        heading={
+          <>
+            {t("home.heroTitle")}
+            <div className="gradient"> {t("home.heroTitleGradient")}</div>
+          </>
+        }
         description={t("home.heroDescription")}
         button={
           <>
@@ -76,7 +82,9 @@ const Home = () => {
 
       <About />
 
-      <Reviews />
+      {/* <Reviews /> */}
+
+      <Help />
     </>
   );
 };

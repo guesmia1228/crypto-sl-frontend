@@ -1,8 +1,11 @@
 import styles from "./card.module.css";
 
 import Icon from "../../../assets/icon/check.svg";
+import Button from "../../button/button";
 
-const Card = ({ title, description, image, num }) => {
+import Arrow from "../../../assets/icon/arrow.svg";
+
+const Card = ({ title, description, image, num, button }) => {
   return (
     <div className={`${styles.card} scroll `}>
       <div className={`${styles.wrapper} card`}>
@@ -10,6 +13,11 @@ const Card = ({ title, description, image, num }) => {
         <div className={styles.number}>{num}</div>
         <div className={styles.title}>{title}</div>
         <div className={styles.description}>{description}</div>
+        <div className={styles.button}>
+          <Button link="/" color="white">
+            <p>{button}</p>
+          </Button>
+        </div>
 
         <div className={styles.image}>
           <img src={image} alt="" />

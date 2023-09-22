@@ -13,46 +13,48 @@
     "menu": "Registration"
   },
   "home": {
-    "heroTitle": "Level-up Business Revolution",
-    "heroDescription": "Our revolutionary automation and secure crypto checkouts let you focus on your business while maximizing earnings. Leave manual payments behind today.",
-    "heroButton": "Get Started",
+    "heroTitle": "Accept Crypto Payments",
+    "heroTitleGradient": "Risk Free",
+    "heroDescription": "Embrace the future with our innovative automation and secure crypto checkouts, empowering you to prioritize your business without the worry of crypto market fluctuations. Leave manual payments in the past, and let our technology simplify it all.",
+    "heroButton": "Join Now - It's free!",
     "heroButton2": "Download App",
     "heroAvailable": "Available on:",
-    "cardSubtitle": "Your partner for scaling",
-    "cardTitle": "Manage and scale your payment processing",
+    "cardSubtitle": "Step into the Future of Payments",
+    "cardTitle": "Stay Competitive with Modern Payment Processing",
     "cardList": [
       {
-        "title": "Free Support",
-        "description": "Take advantage of our onboarding support to help you get started."
+        "title": "Top-Tier Support:",
+        "description": "Your Satisfaction, Our Priority: Leading with Support Excellence."
       },
       {
-        "title": "Bespoke Solutions",
-        "description": "We offer customized solutions that can be tailored to your unique needs."
+        "title": "Unlock New Markets:",
+        "description": "Unleash the Power of Growth."
       },
       {
-        "title": "Benefit from expertise",
-        "description": "Leverage our deep knowledge to drive success within your business."
+        "title": "Streamline Your Workflow:",
+        "description": "Our Solution, All-In-One: Your Shortcut to Safe Crypto Payments"
       }
     ],
     "layoutButton": "Get Started for Free",
     "simplifySubtitle": "Simplify",
-    "simplifyTitle": "Manage crypto payments and invoicing",
-    "simplifyDescription": "Our secure platform is an all-encompassing, secure platform which streamlines, automates, and facilitate various types of transactions, including traditional and digital currencies, for businesses and customers alike.",
+    "simplifyTitle": "Effortless Crypto Transactions with Invoicing",
+    "simplifyDescription": "Experience a seamless and secure transaction environment and automated invoicing with Nefentus. Designed for your business to cater to the diverse needs of businesses and customers.",
     "payrollDescription": "Use our streamlined, efficient solution for managing employee compensation, including salary payments and benefit allocations.",
     "payrollSubtitle": "Process Payroll",
     "payrollTitleP1": "Grow with our",
     "payrollTitleP2": "payroll system",
     "aboutCard1Subtitle": "Rapid Adoption",
-    "aboutCard1Title": "Users trust is reflected in their increased activity",
-    "aboutCard1Description": "The growing user activity on Nefentus showcases our users' trust and the outstanding value they derive from our service. We are committed to continually delivering excellence and preserving their confidence.",
-    "aboutCard2Subtitle": "Manage",
-    "aboutCard2TitleP1": "Leverage the power",
-    "aboutCard2TitleP2": "of our Dashboards",
+    "aboutCard1Title": "Except A Wide Variety Cryptocurrencies Without Risk",
+    "aboutCard1Description": "Our smart contract based technology eliminates cryptocurrency volatility through instantly converting cryptocurrency payments into stable coins in your wallet. Securely accept a range of crypto currencies and offer payment flexibility to your customers.",
+    "aboutCard2Subtitle": "Tracking",
+    "aboutCard2TitleP1": "Everything You Need",
+    "aboutCard2TitleP2": "In One Place",
     "aboutCard2Description": "Our advanced dashboards enable you to gain deeper insights and make data-driven decisions with ease, improving your productivity and profitability.",
-    "aboutCard3Subtitle": "Integrate",
+    "aboutCard3Subtitle": "Integrating",
     "aboutCard3TitleP1": "Effortlessly connect ",
     "aboutCard3TitleP2": "with your other tools",
     "aboutCard3Description": "Integrating your financial stack with our platform offers access to 200+ crypto wallets, streamlines operations, and enhances financial control.",
+    "aboutCardButton": "Get Started",
     "reviewList": [
       {
         "name": "Stephan Walouch",
@@ -72,34 +74,46 @@
     ],
     "reviewTitleP1": "Hear Directly From ",
     "reviewTitleP2": "Our Customers",
-    "reviewSubtitle": "Reviews"
+    "reviewSubtitle": "Reviews",
+    "helpTitle": "Need Help?",
+    "helpSubtitle": "Quick support",
+    "helpCard1Title": "24/7 Chat Support",
+    "helpCard1Text": "Get 24/7 chat support with our friendly customer service agents at your service.",
+    "helpCard1Button": "Chat now",
+    "helpCard2Title": "FAQs",
+    "helpCard2Text": " View FAQs for detailed instructions on specific features",
+    "helpCard2Button": "View more"
   },
   "payment": {
-    "heroHeading": "Crypto Payments Accepted",
+    "heroHeadingGradient": "The New Way",
+    "heroHeading": "to Pay with Crypto",
     "heroDescription": "Experience the future of finance by revolutionizing your invoicing and payment processes with our advanced automation tools and secure crypto-based checkouts, simplifying financial management and maximizing revenue potential.",
-    "heroButton": "Start now",
+    "heroButton": "Start Now - It's free!",
     "growSubtitle": "Grow",
-    "growTitle": "Boost Your Sales With",
+    "growTitle": "Boost Your Sales With Nefentus!",
     "growTitle2": "Modern System",
     "growContent": [
       {
-        "title": "Turn Intelligence Into Growth",
-        "description": "Gain instant insight into your business by leveraging our automated calculations of key metrics, enabling you to easily monitor your growth and stay on top of your business."
+        "title": "Effortlessly Accept a Wide Range of Cryptos Securely:",
+        "description": "Our smart contract technology is engineered to tackle the roller-coaster ride of cryptocurrency prices. When your customers make payments using cryptocurrencies, our smart contracts swing into action, seamlessly converting those payments into stablecoins. This instant conversion ensures that the value of your received payments remains steady, effectively shielding your business from the unpredictable price fluctuations often associated with the crypto market.",
+        "button": "Get Started"
       },
       {
-        "title": "Optimized checkouts",
-        "description": "Maximize your sales potential with our sales-optimized checkouts, featuring lightning-fast load times, exceptional conversion rates, and an unparalleled user experience, guaranteed to delight your customers and boost your revenue."
+        "title": "Get Started In Less Than 5 Minutes:",
+        "description": "At Nefentus, we value your time. That's why we've streamlined the process to help you create your account and connect your wallet in less than 5 minutes. For EU residents, a KYC process is required. Don't worry if you don't have a wallet yet! Nefentus automatically creates one for you. However, if you prefer to use your existing wallet, you can easily link it to our system. Start your journey with Nefentus today and experience the freedom and flexibility that cryptocurrencies offer!",
+        "button": "Get Started"
       },
       {
-        "title": "Automate Your Financial Stack ",
-        "description": "From accounting and tax payments to product provisioning, returns and cancellations, commission and affiliate management, e-ticketing, and beyond, Nefentus offers a comprehensive suite of tools to help streamline and optimize your business operations."
+        "title": "Easy Transaction Management:",
+        "description": "Effortlessly accept payments: generate QR codes or payment links for customers to pay with any of our accepted cryptocurrencies. Track the payment process in real time and benefit from automatically created and sent invoices.",
+        "button": "Get Started"
       }
     ],
-    "iconTitleP1": "Adopt the Payment",
-    "iconTitleP2": "that Power the Future",
-    "iconSubtitle": "Dont Be Left Behind",
-    "iconDescription": "We offer a diverse range of payment options, including popular cryptocurrencies like Bitcoin, Ethereum, Ripple, and USDT, to help you effortlessly sell your products and services to a global audience. Our platform's flexibility and scalability enable you to customize your payment capabilities and stay ahead of the curve in today's rapidly evolving payment landscape.",
+    "iconTitleP1": "Empower Your Business",
+    "iconSubtitle": "Be Part of the Future",
+    "iconDescription": "Our platform is not just a gateway; it's a powerhouse of flexibility and scalability. Customize your payment capabilities to suit your unique needs and seize the opportunities presented by today's dynamic and ever-changing payment landscape. Stay ahead of the curve and transform your business.",
     "whyTitle": "Why Nefentus?",
+    "whyButton": "Get Started for free",
     "whyContent": [
       {
         "title": "Made in Europe",
@@ -268,6 +282,7 @@
     ],
     "whyTitleP1": "Products Tailored ",
     "whyTitleP2": "for Affiliate",
+    "whyButton": "Get Started for free",
     "whyContent": [
       {
         "title": "Overview",
@@ -286,6 +301,8 @@
         "description": "Keep track of your commissions and get notified about sales with our app."
       }
     ],
+    "compareTitle": "Thats how it was before and thats how we solve it...",
+    "compareSubtitle": "Solutions",
     "compareContent": [
       {
         "type": "cons",
@@ -345,9 +362,10 @@
     }
   },
   "contact": {
-    "title": "Schedule Free Onboarding Support Session Today",
+    "title": "Create Account Today",
     "description": "At Nefentus, we believe in supporting our clients every step of the way. That's why we offer free onboarding calls to assist with registration and setup. Whether you're a bar owner, consultant, coach, trainer, speaker, or agency owner, we're committed to finding the perfect solution for your unique needs.",
-    "button": "Book a call"
+    "button": "Sign up now",
+    "button2": "Schedule Free Onboarding Support Session"
   },
   "footer": {
     "copyright": "© 2023 Nefentus. All rights reserved.",
