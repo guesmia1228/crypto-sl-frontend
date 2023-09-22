@@ -18,10 +18,11 @@
   transition: 0.5s cubic-bezier(0.4, 0, 0, 1);
 }
 
-.button > a > div {
+.buttonText {
   display: flex;
   gap: 1rem;
   z-index: 2;
+  justify-content: center;
   position: relative;
   align-items: center;
 }

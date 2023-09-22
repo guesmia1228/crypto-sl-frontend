@@ -1,7 +1,11 @@
 .signup {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  padding: 10rem;
+  align-items: center;
   height: 100vh;
+  gap: 8rem;
 }
 
 .errormessagecontainer {
@@ -22,11 +26,13 @@
   border-radius: 4px;
 }
 
-
 .left {
-  padding-left: 16.5rem;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 5rem 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .left h2 {
@@ -34,8 +40,8 @@
 }
 
 .left p:nth-child(2) {
-  font-size: 1.8rem;
-  color: var(--gray-color);
+  font-size: 1.6rem;
+  opacity: 0.8;
   max-width: 50rem;
   line-height: 140%;
   margin-bottom: 2rem;
@@ -43,29 +49,20 @@
 
 .left p:nth-child(3) {
   font-size: 1.2rem;
-  color: var(--gray-color);
+  opacity: 0.42;
 }
 
 .left img {
-  position: absolute;
-  top: 4.4rem;
+  margin-bottom: 2.5rem;
   height: 3rem;
 }
 
 .right {
-  width: 60rem;
-
-  background: radial-gradient(
-    64.62% 74.22% at 26.36% 14.29%,
-    #1a1a1a 0%,
-    #151515 50%,
-    #101010 100%
-  );
-  border-radius: 25px 0px 0px 25px;
+  width: 100%;
 
   display: flex;
   flex-direction: column;
-  padding: 0 9rem;
+
   height: 100%;
 
   justify-content: center;
@@ -87,8 +84,8 @@
 
 .right > p {
   font-size: 1.2rem;
-  text-align: center;
-  color: var(--gray-color);
+  /* text-align: center; */
+  opacity: 0.42;
   font-weight: 400;
 }
 
@@ -96,38 +93,44 @@
   font-weight: 500;
 }
 
+.buttonWrapper {
+  margin-top: 1rem;
+  width: 20rem;
+}
+
 @media (max-width: 1200px) {
-  .left {
-    padding-left: 5rem;
+  .signup {
+    padding: 5rem;
   }
 }
 
 @media (max-width: 900px) {
   .signup {
+    display: flex;
     flex-direction: column;
     height: max-content;
-
+    padding: 5rem 3rem;
     gap: 5rem;
   }
 
   .left {
-    margin-top: 15rem;
+    border: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0;
   }
 
   .right {
     height: max-content;
     border-radius: 2.5rem 2.5rem 0 0;
     width: 100%;
-    padding: 3rem 5rem;
   }
 }
 
 @media (max-width: 550px) {
-  .right {
-    padding: 3rem 2.5rem;
-  }
-
-  .left {
-    padding: 0 2.5rem;
+  .row {
+    grid-template-columns: 1fr;
   }
 }

@@ -64,7 +64,7 @@ function App() {
     window.addEventListener("scroll", scrollEvent);
 
     document.addEventListener("contextmenu", (event) => {
-      event.preventDefault();
+      // event.preventDefault();
     });
 
     return () => {

@@ -22,10 +22,14 @@ const Button = ({ children, className, color, link, onClick }) => {
       ></div>
       {link ? (
         <Link to={link}>
-          <div style={{ color: "#fff" }}>{children}</div>
+          <div className={styles.buttonText} style={{ color: "#fff" }}>
+            {children}
+          </div>
         </Link>
       ) : (
-        <div style={{ color: "#fff" }}>{children}</div>
+        <div className={styles.buttonText} style={{ color: "#fff" }}>
+          {children}
+        </div>
       )}
     </div>
   );

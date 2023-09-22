@@ -42,16 +42,19 @@ const LoginBox = () => {
         const isGold = roleArray.includes("ROLE_GOLD_PARTNER"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
         const isIbLeader = roleArray.includes("ROLE_IB_LEADER"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
 
-
-        if (isAdmin) { navigate("/dashboard/admin"); }
-        else if (isAffiliate) { navigate("/dashboard/affiliate"); }
-        else if (isVendor) { navigate("/dashboard/vendor"); }
-        else if (isGold) { navigate("/dashboard/gold"); }
-        else if (isIbLeader) { navigate("/dashboard/ib-leader"); }
-        else if (isDiamond) { navigate("/dashboard/diamond"); }
-        
-        
-
+        if (isAdmin) {
+          navigate("/dashboard/admin");
+        } else if (isAffiliate) {
+          navigate("/dashboard/affiliate");
+        } else if (isVendor) {
+          navigate("/dashboard/vendor");
+        } else if (isGold) {
+          navigate("/dashboard/gold");
+        } else if (isIbLeader) {
+          navigate("/dashboard/ib-leader");
+        } else if (isDiamond) {
+          navigate("/dashboard/diamond");
+        }
       }
     }
 
@@ -76,12 +79,19 @@ const LoginBox = () => {
       const isDiamond = roleArray.includes("ROLE_DIAMOND_PARTNER"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
       const isGold = roleArray.includes("ROLE_GOLD_PARTNER"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
       const isIbLeader = roleArray.includes("ROLE_IB_LEADER");
-      if (isAdmin) { navigate("/dashboard/admin"); }
-        else if (isAffiliate) { navigate("/dashboard/affiliate"); }
-        else if (isVendor) { navigate("/dashboard/vendor"); }
-        else if (isGold) { navigate("/dashboard/gold"); }
-        else if (isDiamond) { navigate("/dashboard/diamond"); }
-        else if (isIbLeader) { navigate("/dashboard/ib-leader"); }
+      if (isAdmin) {
+        navigate("/dashboard/admin");
+      } else if (isAffiliate) {
+        navigate("/dashboard/affiliate");
+      } else if (isVendor) {
+        navigate("/dashboard/vendor");
+      } else if (isGold) {
+        navigate("/dashboard/gold");
+      } else if (isDiamond) {
+        navigate("/dashboard/diamond");
+      } else if (isIbLeader) {
+        navigate("/dashboard/ib-leader");
+      }
     } catch (error) {
       setErrorMessage("There was an error logging in");
     }
@@ -107,37 +117,40 @@ const LoginBox = () => {
   return (
     <div className={styles.login}>
       <div className={styles.card}>
-        <div className={styles.top}>
+        <div className={styles.left}>
           <img src={Logo} alt="" />
-
           <h3>{t("login.title")}</h3>
-          <div>
+        </div>
+        <div className={styles.top}>
+          <div className={styles.message}>
             {errorMessage && (
               <div className={styles.errormessagecontainer}>
-                <p style={{ color: "red" }}> {errorMessage}</p>
+                <p> {errorMessage}</p>
               </div>
             )}
             {message && (
               <div className={styles.messagecontainer}>
-                <p style={{ color: "green" }}>{message}</p>
+                <p>{message}</p>
               </div>
             )}
           </div>
         </div>
 
-        <Input
-          value={Username}
-          setState={setUsername}
-          label={t("signUp.emailLabel")}
-          placeholder={t("signUp.emailPlaceholder")}
-        />
-        <Input
-          value={Password}
-          setState={setPassword}
-          label={t("signUp.passwordLabel")}
-          placeholder={t("signUp.passwordPlaceholder")}
-          secure
-        />
+        <div className={styles.inputWrapper}>
+          <Input
+            value={Username}
+            setState={setUsername}
+            label={t("signUp.emailLabel")}
+            placeholder={t("signUp.emailPlaceholder")}
+          />
+          <Input
+            value={Password}
+            setState={setPassword}
+            label={t("signUp.passwordLabel")}
+            placeholder={t("signUp.passwordPlaceholder")}
+            secure
+          />
+        </div>
 
         <div className={styles.remeberInfo}>
           <div onClick={() => setCheckBox((prev) => !prev)}>
@@ -147,12 +160,16 @@ const LoginBox = () => {
             <p>Remeber me</p>
           </div>
 
-          <Link to="/forgot-password">  <p>{t("login.forgot")}</p></Link>
+          <Link to="/forgot-password">
+            <p>{t("login.forgot")}</p>
+          </Link>
         </div>
 
-        <Button link={null} onClick={handleClick}>
-          {t("login.button")}
-        </Button>
+        <div className={styles.buttonWrapper}>
+          <Button link={null} onClick={handleClick}>
+            {t("login.button")}
+          </Button>
+        </div>
         <div className={styles.info}>
           <p>
             {t("login.info")}

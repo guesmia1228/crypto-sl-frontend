@@ -5,31 +5,33 @@
   align-items: center;
 }
 
+.message {
+  position: relative;
+  height: 7.5rem;
+  display: flex;
+  align-items: center;
+}
+
 .errormessagecontainer {
-  background-color: #ffcccc;
-  color: red;
-  border: 1px solid red;
+  background-color: #d7263d;
+  border: 1px solid #d7263d;
   padding: 1rem;
-  margin-bottom: 1rem;
   border-radius: 4px;
 }
 
 .messagecontainer {
-  background-color: #ccffcc;
-  color: green;
-  border: 1px solid green;
+  background-color: #20bf55;
+  border: 1px solid #20bf55;
   padding: 1rem;
-  margin-bottom: 1rem;
   border-radius: 4px;
 }
 
+.left {
+  text-align: center;
+}
+
 .card {
-  background: radial-gradient(
-    64.62% 74.22% at 26.36% 14.29%,
-    #1a1a1a 0%,
-    #151515 50%,
-    #101010 100%
-  );
+  /* background-color: #101010; */
   border-radius: 25px;
   width: 100%;
   max-width: 53rem;
@@ -43,21 +45,27 @@
 .login h3 {
   font-size: 3rem;
   margin-top: 2rem;
-  margin-bottom: 3rem;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .remeberInfo {
-  margin-top: 2rem;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
   font-size: 1.2rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
 }
 
 .remeberInfo > div {
   display: flex;
+
   gap: 1rem;
   align-items: center;
 }
@@ -77,11 +85,11 @@
   height: 0.7rem;
 }
 
-.login > div > div:nth-child(2) {
-  margin-bottom: 2rem;
+.remeberInfo p {
+  padding-top: 7px;
 }
 
-.login > div > div:nth-child(5) {
+.buttonWrapper > div {
   margin-top: 2rem;
   width: 100%;
   display: flex;

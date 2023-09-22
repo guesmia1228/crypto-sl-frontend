@@ -226,7 +226,7 @@ const Signup = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [UseOption, setUseOption] = useState("Choose Options");
-  const [CountryOption, setCountryOption] = useState("Choose Country");
+  const [CountryOption, setCountryOption] = useState("Choose Options");
   const api = new backendAPI();
 
   const resetForm = () => {
@@ -236,7 +236,7 @@ const Signup = () => {
     setEmail("");
     setPassword("");
     setUseOption("Choose Options");
-    setCountryOption("Choose Country")
+    setCountryOption("Choose Options");
   };
 
   async function submitForm() {
@@ -265,7 +265,7 @@ const Signup = () => {
   }
 
   return (
-    <div className={styles.signup}>
+    <div className={`${styles.signup}`}>
       <div className={styles.left}>
         <img src={Logo} alt="" />
 
@@ -297,6 +297,7 @@ const Signup = () => {
             <p>{message}</p>
           </div>
         )}
+
         <div className={styles.row}>
           <Input
             label={t("signUp.firstNameLabel")}
@@ -304,41 +305,43 @@ const Signup = () => {
             value={FirstName}
             setState={setFirstName}
           />
+
           <Input
-            label={t("signUp.lastNameLabel")}
-            placeholder={t("signUp.lastNamePlaceholder")}
-            value={LastName}
-            setState={setLastName}
+            label={t("signUp.telefonLabel")}
+            placeholder="(979) 268-4143"
+            value={Telefon}
+            setState={setTelefon}
+          />
+          <Input
+            label={t("signUp.emailLabel")}
+            placeholder={t("signUp.emailPlaceholder")}
+            value={Email}
+            setState={setEmail}
+          />
+          <Input
+            label={t("signUp.passwordLabel")}
+            placeholder={t("signUp.passwordPlaceholder")}
+            value={Password}
+            setState={setPassword}
+            secure
+          />
+          <Options
+            label={t("signUp.option1Label")}
+            value={CountryOption}
+            setValue={setCountryOption}
+            options={country_list}
+          />
+          <Options
+            label={t("signUp.option2Label")}
+            value={UseOption}
+            setValue={setUseOption}
           />
         </div>
-        <Input
-          label={t("signUp.telefonLabel")}
-          placeholder="(979) 268-4143"
-          value={Telefon}
-          setState={setTelefon}
-        />
-        <Input
-          label={t("signUp.emailLabel")}
-          placeholder={t("signUp.emailPlaceholder")}
-          value={Email}
-          setState={setEmail}
-        />
-        <Input
-          label={t("signUp.passwordLabel")}
-          placeholder={t("signUp.passwordPlaceholder")}
-          value={Password}
-          setState={setPassword}
-          secure
-        />
-        <Options
-          value={CountryOption}
-          setValue={setCountryOption}
-          options={country_list}
-        />
-        <Options value={UseOption} setValue={setUseOption} />
-        <Button className={styles.button} onClick={handleClick}>
-          {t("signUp.formButton")}
-        </Button>
+        <div className={styles.buttonWrapper}>
+          <Button className={styles.button} onClick={handleClick}>
+            {t("signUp.formButton")}
+          </Button>
+        </div>
 
         <p>{t("signUp.formInfo")}</p>
       </div>
