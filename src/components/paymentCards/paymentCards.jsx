@@ -11,7 +11,7 @@ const PaymentCards = () => {
 
   const card1List = t("payment.paymentCard1", { returnObjects: true });
 
-  const card2List = t("payment.paymentCard1", { returnObjects: true });
+  const card2List = t("payment.paymentCard2", { returnObjects: true });
 
   return (
     <div className={styles.sectionWrapper}>

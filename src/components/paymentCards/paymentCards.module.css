@@ -9,7 +9,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   gap: 4rem;
 }
 
@@ -27,7 +27,7 @@
 }
 
 .boldCard {
-  padding-bottom: 5rem;
+  /* padding-bottom: 5rem; */
   position: relative;
   gap: 6rem;
 }
