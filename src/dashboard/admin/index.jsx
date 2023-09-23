@@ -20,9 +20,11 @@ import CopyValue from "../copyValue";
 import { MessageContext } from "../../context/message";
 import MessageComponent from "../../components/message";
 import imputStyles from "../../components/input/input.module.css";
+import { tab } from "@testing-library/user-event/dist/tab";
 
 const header = [
-	"Name",
+	"First Name",
+	"Last Name",
 	"Email",
 	"Roles",
 	"Status",
@@ -31,11 +33,10 @@ const header = [
 	"Actions",
 ];
 
-const colSizes = [2, 2, 1, 1, 1, 1, 2];
+const colSizes = [1, 1, 2, 1, 1, 1, 1, 2];
 
 const AdminBody = ({ type }) => {
 	const [cardInfo, setCardInfo] = useState([]);
-	const [userData, setUserData] = useState(null);
 	const [tableData, setTableData] = useState([]);
 	const [filteredData, setFilteredData] = useState([]);
 	const [searchText, setSearchText] = useState("");
@@ -112,7 +113,6 @@ const AdminBody = ({ type }) => {
     
 			dataUsers.reverse();
 			updateUsers(dataUsers);
-			setUserData(dataUsers);
 
 			console.log(reportResp);
 			setBarContent(reportResp);
@@ -139,7 +139,8 @@ const AdminBody = ({ type }) => {
 		console.log(dataUsers)
 		if (dataUsers) {
 			const newDataUsers = dataUsers.map(user => [
-				user.firstName + " " + user.lastName,
+				user.firstName,
+				user.lastName, 
 				user.email,
 				user.roles.map(role => ROLE_TO_NAME[role.replace(" ", "")]).join(', '),
 				(
@@ -160,7 +161,7 @@ const AdminBody = ({ type }) => {
 		return (
 			<div className={styles.linkWrapper}>
 				{!user.activated ? ( <span className={styles.actionsLink} onClick={() => activateUser(user.email)}>Activate</span> ) : (<span className={styles.actionsLink} onClick={() => deactivateUser(user.email)}>Deactivate</span>) }
-				<span className={styles.actionsLink} onClick={() => editUser(user.email)}>Edit</span>
+				<span className={styles.actionsLink} onClick={() => editUser(user)}>Edit</span>
 				<span className={styles.deleteLink} onClick={() => deleteUser(user.email)}>Delete</span>
 			</div>
 		);
@@ -192,20 +193,12 @@ const AdminBody = ({ type }) => {
 		}
 	};
 
-	const editUser = async (userEmail) => {
-		let user;
-		if (userData === null) {
-			const newUserData = await adminApi.getUsers();
-			setUserData(newUserData);
-			user = newUserData.find(user => user.email === userEmail);
-		} else {
-			user = userData.find(user => user.email === userEmail);
-		}
-
-		setEditEmailAddress(userEmail);
+	const editUser = async (user) => {
+		setEditEmailAddress(user.email);
 		setFirstName(user.firstName);
 		setLastName(user.lastName);
-		setEmail(userEmail);
+		setEmail(user.email);
+		// Only one role!
 		setRole(ROLE_TO_NAME[user.roles[0]]);
 
 		setOpenModal(true);
@@ -267,6 +260,9 @@ const AdminBody = ({ type }) => {
 			} else {
 				setErrorMessage("Could not update user!");
 			}
+
+			updateUsersTable();
+			console.log(tableData)
 		} else {
 			// Add
 			const resp = await adminApi.addUser(firstName, lastName, email, password, role);
@@ -285,10 +281,6 @@ const AdminBody = ({ type }) => {
 	
 			setErrorMessage("Could not add user!");
 		}
-
-		updateUsersTable();
-		const newUserData = await adminApi.getUsers();
-		setUserData(newUserData);
  	};
 
 	const affiliateLinkCopied = async () => {

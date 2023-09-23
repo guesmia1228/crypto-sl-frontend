@@ -1,12 +1,13 @@
 import styles from "./pagination.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classNames from "classnames";
 import { Options } from "../input/input";
 
-const Pagination = ({renderItems, length, initPageSize}) => {
+const Pagination = ({renderItems, data}) => {
 	const [currentPage, setCurrentPage] = useState(0);
-	const [pageSize, setPageSize] = useState(initPageSize || 10);
+	const [pageSize, setPageSize] = useState(10);
 
+	const length = data.length;
 	const numPages = Math.ceil(length/pageSize);
 
 	function updatePage(page) {
@@ -16,8 +17,13 @@ const Pagination = ({renderItems, length, initPageSize}) => {
 
 	function updatePageSize(newPageSize) {
 		setPageSize(newPageSize);
-		renderItems(currentPage*newPageSize, (currentPage+1)*newPageSize);
+		setCurrentPage(0);
+		renderItems(0, newPageSize);
 	}
+
+	useEffect(() => {
+		renderItems(currentPage*pageSize, (currentPage+1)*pageSize);
+	}, [data]);
 
     return (
         <div className={styles.paginationWrapper}>
@@ -40,12 +46,12 @@ const Pagination = ({renderItems, length, initPageSize}) => {
     );
 };
 
-const PageInput = ({value, updatePage}) => {
+const PageInput = ({value, updatePageSize}) => {
 	return (
 		<input 
 			className={styles.pageInput}
 			value={value}
-			onChange={(e) => updatePage(e.target.value - 1)}
+			onChange={(e) => updatePageSize(e.target.value - 1)}
 			type="text" 
 		/>
 	);
