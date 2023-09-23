@@ -31,10 +31,11 @@ const header = [
 	"Actions",
 ];
 
-const colSizes = [2, 2, 1, 1, 1, 1, 1];
+const colSizes = [2, 2, 1, 1, 1, 1, 2];
 
 const AdminBody = ({ type }) => {
 	const [cardInfo, setCardInfo] = useState([]);
+	const [userData, setUserData] = useState(null);
 	const [tableData, setTableData] = useState([]);
 	const [filteredData, setFilteredData] = useState([]);
 	const [searchText, setSearchText] = useState("");
@@ -47,6 +48,7 @@ const AdminBody = ({ type }) => {
 	const [email, setEmail] = useState("");
 	const [openModal, setOpenModal] = useState(false);
 	const [showPassword, setShowPassword] = useState(false);
+	const [editEmailAddress, setEditEmailAddress] = useState(null);
 
 	const { setInfoMessage, setErrorMessage, clearMessages } = useContext(MessageContext);
 
@@ -110,6 +112,7 @@ const AdminBody = ({ type }) => {
     
 			dataUsers.reverse();
 			updateUsers(dataUsers);
+			setUserData(dataUsers);
 
 			console.log(reportResp);
 			setBarContent(reportResp);
@@ -136,7 +139,7 @@ const AdminBody = ({ type }) => {
 		console.log(dataUsers)
 		if (dataUsers) {
 			const newDataUsers = dataUsers.map(user => [
-				user.fullname,
+				user.firstName + " " + user.lastName,
 				user.email,
 				user.roles.map(role => ROLE_TO_NAME[role.replace(" ", "")]).join(', '),
 				(
@@ -157,36 +160,69 @@ const AdminBody = ({ type }) => {
 		return (
 			<div className={styles.linkWrapper}>
 				{!user.activated ? ( <span className={styles.actionsLink} onClick={() => activateUser(user.email)}>Activate</span> ) : (<span className={styles.actionsLink} onClick={() => deactivateUser(user.email)}>Deactivate</span>) }
+				<span className={styles.actionsLink} onClick={() => editUser(user.email)}>Edit</span>
 				<span className={styles.deleteLink} onClick={() => deleteUser(user.email)}>Delete</span>
 			</div>
 		);
 	}
 
+	const modalAddUser = async () => {
+		setEditEmailAddress(null);
+
+		setFirstName("");
+		setLastName("");
+		setEmail("");
+		setPassword("");
+		setRole("");
+
+		setOpenModal(true);
+	}
+
 	const activateUser = async (userEmail) => {
 		const resp = await adminApi.patchStatus(userEmail);
 		if (resp) {
-			const newUserData = await adminApi.getUsers();
-			updateUsers(newUserData);
+			updateUsersTable();
 		}
 	};
 
 	const deactivateUser = async (userEmail) => {
 		const resp = await adminApi.deactivateUser(userEmail);
 		if (resp) {
-			const newUserData = await adminApi.getUsers();
-			updateUsers(newUserData);
+			updateUsersTable();
 		}
 	};
+
+	const editUser = async (userEmail) => {
+		let user;
+		if (userData === null) {
+			const newUserData = await adminApi.getUsers();
+			setUserData(newUserData);
+			user = newUserData.find(user => user.email === userEmail);
+		} else {
+			user = userData.find(user => user.email === userEmail);
+		}
+
+		setEditEmailAddress(userEmail);
+		setFirstName(user.firstName);
+		setLastName(user.lastName);
+		setEmail(userEmail);
+		setRole(ROLE_TO_NAME[user.roles[0]]);
+
+		setOpenModal(true);
+	}
 
 	const deleteUser = async (userEmail) => {
 		const resp = await adminApi.deleteUser(userEmail);
 		if (resp) {
-			const newUserData = await adminApi.getUsers();
-
-			newUserData.reverse();
-			updateUsers(newUserData);
+			updateUsersTable();
 		}
-	};
+	}
+
+	const updateUsersTable = async () => {
+		const newUserData = await adminApi.getUsers();
+		newUserData.reverse();
+		updateUsers(newUserData);
+	}
 
 	const clearAddUserFields = () => {
 		setFirstName("");
@@ -210,11 +246,11 @@ const AdminBody = ({ type }) => {
 			setErrorMessage("Last name is required");
 			return;
 		}
-		if (email === "") {
+		if (email === "" && editEmailAddress === null) {
 			setErrorMessage("Email is required");
 			return;
 		}
-		if (password === "") {
+		if (password === "" && editEmailAddress === null) {
 			setErrorMessage("Password is required");
 			return;
 		}
@@ -223,21 +259,36 @@ const AdminBody = ({ type }) => {
 			return;
 		}
 
-		const resp = await adminApi.addUser(firstName, lastName, email, password, role);
-		if (resp) {
-			if (resp.ok) {
-				setOpenModal(false);
-				fetchAdminData();
-				clearAddUserFields();
-				setInfoMessage("User added successfully!");
-				return;
-			} else if (resp.status === 409) {
-				setErrorMessage("User already exists!");
-				return;
+		if (editEmailAddress) {
+			// Update
+			const resp = await adminApi.updateUser(firstName, lastName, editEmailAddress, role);
+			if (resp) {
+				setInfoMessage("User updated successfully!");
+			} else {
+				setErrorMessage("Could not update user!");
 			}
+		} else {
+			// Add
+			const resp = await adminApi.addUser(firstName, lastName, email, password, role);
+			if (resp) {
+				if (resp.ok) {
+					setOpenModal(false);
+					fetchAdminData();
+					clearAddUserFields();
+					setInfoMessage("User added successfully!");
+					return;
+				} else if (resp.status === 409) {
+					setErrorMessage("User already exists!");
+					return;
+				}
+			}
+	
+			setErrorMessage("Could not add user!");
 		}
 
-		setErrorMessage("Could not add user!");
+		updateUsersTable();
+		const newUserData = await adminApi.getUsers();
+		setUserData(newUserData);
  	};
 
 	const affiliateLinkCopied = async () => {
@@ -255,7 +306,7 @@ const AdminBody = ({ type }) => {
         >
 			<div className={styles.topButtonWrapper} style={{gridTemplateColumns: !affiliate ? "1fr 1fr" : "1fr"}}>
 				{!affiliate && (
-					<Button onClick={() => setOpenModal(true)}>
+					<Button onClick={modalAddUser}>
 						Add User
 					</Button>
 				)}
@@ -384,30 +435,32 @@ const AdminBody = ({ type }) => {
             <div className={styles.modal}>
 				<MessageComponent />
 
-              <h4>Create User</h4>
+              <h4>{editEmailAddress ? "Edit" : "Create"} User</h4>
 
               <div className={styles.modalInputs}>
 				<Input dashboard label="First name*" placeholder={"Enter first name"} value={firstName} setState={setFirstName} />
 				<Input dashboard label="Last name*" placeholder={"Enter last name"} value={lastName} setState={setLastName} />
-                <Input dashboard label="Email*" placeholder={"Enter email"} value={email} setState={setEmail} />
-				<div className={imputStyles.inputWrapper}>
-					<p className={`${imputStyles.label} ${imputStyles.dashboardLabel}`}>
-						Password*
-					</p>
+                <Input dashboard label="Email*" placeholder={"Enter email"} value={email} setState={setEmail} disabled={editEmailAddress !== null} />
+				{editEmailAddress === null && (
+					<div className={imputStyles.inputWrapper}>
+						<p className={`${imputStyles.label} ${imputStyles.dashboardLabel}`}>
+							Password*
+						</p>
 
-					<div className={styles.passwordWrapper}>
-						<input
-							className={`${imputStyles.input} ${imputStyles.dashboardInput}`}
-							type={showPassword ? "text" : "password"}
-							placeholder={"Enter password"}
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-						/>
-						<div className={styles.iconEye} alt="View password" onClick={() => setShowPassword(!showPassword)}>
-							<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path style={{fill: "white"}} d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/></svg>
+						<div className={styles.passwordWrapper}>
+							<input
+								className={`${imputStyles.input} ${imputStyles.dashboardInput}`}
+								type={showPassword ? "text" : "password"}
+								placeholder={"Enter password"}
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+							/>
+							<div className={styles.iconEye} alt="View password" onClick={() => setShowPassword(!showPassword)}>
+								<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path style={{fill: "white"}} d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/></svg>
+							</div>
 						</div>
 					</div>
-				</div>
+				)}
 
                 {type === "admin" && <Options
                   label="Role*"
@@ -463,7 +516,7 @@ const AdminBody = ({ type }) => {
                 >
                   Cancel
                 </div>
-                <Button onClick={addUser} color="white">Add User</Button>
+                <Button onClick={addUser} color="white">{editEmailAddress ? "Edit" : "Create"} User</Button>
               </div>
             </div>
           </ModalOverlay>

@@ -221,6 +221,33 @@ export default class adminDashboardApi {
         }
     }
 
+	async updateUser(firstName, lastName, email, roles){
+        try{
+            const request = {
+				firstName: firstName,
+				lastName: lastName,
+				email: email,
+                roles: [roles]
+            };            
+            const url = `${this.baseURL}/users`;
+            const options = {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${this.token}`
+                },
+                body: JSON.stringify(request)
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return true;
+        } catch (error) {
+            return null; // or return some default value
+        }
+    }
+
     async getRoleReport(email, password, roles){
         try{      
             const url = `${this.baseURL}/userroles`;

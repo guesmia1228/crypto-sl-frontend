@@ -16,6 +16,7 @@ export const ROLE_TO_NAME = {
 	"affiliate": "Affiliate",
 	"broker": "Broker",
 	"seniorbroker": "Senior Broker",
+	"senior broker": "Senior Broker",
 	"leader": "Leader",
 	"admin": "Admin",
 }
