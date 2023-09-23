@@ -13,6 +13,7 @@ import ModalOverlay from "../modal/modalOverlay";
 import adminDashboardApi from "../../api/adminDashboardApi";
 import { useNavigate } from "react-router-dom";
 import Table from "../../components/table";
+import TablePagination from "../../components/tablePagination";
 import { formatUSDBalance } from "../../utils";
 import { ROLE_TO_NAME } from "../../constants";
 import CopyValue from "../copyValue";
@@ -147,6 +148,7 @@ const AdminBody = ({ type }) => {
 
 			]);
 			console.log(newDataUsers);
+
 			setTableData(newDataUsers);
   		}
 	}
@@ -234,7 +236,7 @@ const AdminBody = ({ type }) => {
 				return;
 			}
 		}
-		
+
 		setErrorMessage("Could not add user!");
  	};
 
@@ -366,7 +368,8 @@ const AdminBody = ({ type }) => {
 					<Input placeholder="Search" dashboard value={searchText} setState={changeSearchText} />
 				</div>
 			</div>
-			<Table
+
+			<TablePagination
 				headers={header} 
 				data={filteredData} 
 				colSizes={colSizes}
