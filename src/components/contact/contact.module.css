@@ -42,6 +42,10 @@
   width: 100% !important;
 }
 
+.buttonWrapper > div > a > div {
+  padding: 1rem !important;
+}
+
 @media (max-width: 900px) {
   .description {
     padding: 0 5rem;

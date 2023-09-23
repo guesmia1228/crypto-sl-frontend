@@ -20,7 +20,8 @@
     "heroButton2": "Download App",
     "heroAvailable": "Available on:",
     "cardSubtitle": "Step into the Future of Payments",
-    "cardTitle": "Stay Competitive with Modern Payment Processing",
+    "cardTitleP1": "Stay Competitive with Modern",
+    "cardTitleP2": "Payment Processing",
     "cardList": [
       {
         "title": "Top-Tier Support:",
@@ -124,7 +125,7 @@
         "description": "Our in-house team of expert IT specialists continuously develops and improves Nefentus to a highest standards,"
       },
       {
-        "title": "GDRP Compliant",
+        "title": "GDPR Compliant",
         "description": "We prioritize data protection, adhering to the highest security and privacy standards to ensure the protection of your company and customers' data."
       },
       {

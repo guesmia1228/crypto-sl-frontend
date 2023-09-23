@@ -38,6 +38,11 @@
   /* padding: 2rem; */
 }
 
+.buttonWrapper > div > a > div {
+  padding: 1rem 1.5rem !important;
+  font-size: 1.4rem;
+}
+
 .buttonWrapper p {
   position: relative;
   top: 2px;

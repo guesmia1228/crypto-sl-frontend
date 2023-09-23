@@ -86,10 +86,15 @@ const Cards = () => {
   }, []);
 
   return (
-    <div className="container break ">
+    <div className={`container break ${styles.section}`}>
       <HeadingCenter
         subtitle={t("home.cardSubtitle")}
-        title={t("home.cardTitle")}
+        title={
+          <>
+            {t("home.cardTitleP1")} <br />
+            {t("home.cardTitleP2")}
+          </>
+        }
       />
 
       <div className={styles.cards} ref={sectionRef}>

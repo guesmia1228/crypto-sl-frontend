@@ -27,11 +27,6 @@ let list = [
     code: "es",
   },
   {
-    label: "Français",
-    flag: FR,
-    code: "fr",
-  },
-  {
     label: "العربية",
     flag: AR,
     code: "ar",

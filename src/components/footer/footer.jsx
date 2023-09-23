@@ -48,7 +48,7 @@ const Footer = () => {
             </Link>
           </div>
           <div className={styles.buttonWrapper}>
-            <Button color={"white"}>
+            <Button link="/" color={"white"}>
               <img src={LogoIcon} alt="" />
               <p>Get our app now</p>
             </Button>

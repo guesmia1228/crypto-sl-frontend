@@ -15,7 +15,6 @@ const Contact = ({ affiliate }) => {
       </p> */}
         <div className={styles.buttonWrapper}>
           <Button
-            color="white"
             link={
               affiliate ? "https://calendly.com/nefentus/consulting" : "/signup"
             }
