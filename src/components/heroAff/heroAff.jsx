@@ -9,8 +9,9 @@ const HeroAff = () => {
     <div className={`${styles.hero} container load hero`}>
       <div className="scroll">
         <h1>
-          {t("affiliate.heroTitle")} <br />
+          {t("affiliate.heroTitleP1")}{" "}
           <span className="gradient">{t("affiliate.heroGradient")}</span>
+          <br /> {t("affiliate.heroTitleP2")}
         </h1>
         <Button link={"/"}>{t("affiliate.heroButton")}</Button>
       </div>

@@ -73,7 +73,7 @@ body {
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 3px;
 }
 
 /* Track */
@@ -175,13 +175,13 @@ h1 {
 
 h2 {
   font-weight: 500;
-  font-size: 5rem;
+  font-size: 4rem;
   line-height: 115%;
 }
 
 h3 {
   font-weight: 500;
-  font-size: 4rem;
+  font-size: 3.5rem;
   line-height: 115%;
 }
 

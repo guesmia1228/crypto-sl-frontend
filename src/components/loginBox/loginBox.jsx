@@ -126,9 +126,7 @@ const LoginBox = () => {
 
         <div>
           <h2>
-            {t("login.titleP1")}
-            <br />
-            <span className="gradient">{t("login.titleP2")}</span>
+            <span className="gradient">{t("login.titleP1")}</span>
           </h2>
           <p>{t("login.description")}</p>
 

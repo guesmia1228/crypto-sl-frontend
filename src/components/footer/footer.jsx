@@ -1,5 +1,6 @@
 import styles from "./footer.module.css";
 
+import LogoIcon from "../../assets/logo/logo.svg";
 import Logo from "../../assets/logo/logo2.svg";
 
 import Instagram from "../../assets/icon/instagram.svg";
@@ -7,14 +8,13 @@ import Linkedin from "../../assets/icon/linkedin.svg";
 import Youtube from "../../assets/icon/youtube.svg";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import Button from "../button/button";
 
 const content = [
   { link: "/" },
   { link: "/payment" },
   { link: "/support" },
   { link: "/affiliate" },
-  { link: "/" },
-  { link: "/" },
 ];
 
 const Footer = () => {
@@ -46,6 +46,12 @@ const Footer = () => {
             <Link to="https://www.youtube.com/channel/UCV1QWqkZXtZvXl6bq3AgkTA">
               <img src={Youtube} alt="" />
             </Link>
+          </div>
+          <div className={styles.buttonWrapper}>
+            <Button color={"white"}>
+              <img src={LogoIcon} alt="" />
+              <p>Get our app now</p>
+            </Button>
           </div>
         </div>
       </div>

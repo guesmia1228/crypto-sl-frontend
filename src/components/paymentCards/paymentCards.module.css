@@ -20,7 +20,7 @@
   flex-direction: column;
   justify-content: space-between;
 
-  gap: 5rem;
+  gap: 3rem;
 }
 
 .lightCard {
@@ -108,6 +108,6 @@
 
     padding: 3rem 2rem !important;
 
-    gap: 5rem !important;
+    gap: 3rem !important;
   }
 }

@@ -6,19 +6,23 @@ const Contact = ({ affiliate }) => {
   const { t } = useTranslation();
 
   return (
-    <div className={`${styles.contact} `}>
+    <div className={`${styles.contact}`}>
+      <div className={styles.bgImage}></div>
       <div className="container scroll">
-        {!affiliate && <h3>{t("contact.title")}</h3>}
+        {false && <h3>{t("contact.title")}</h3>}
         {/* <p className={`standard ${styles.description}`}>
         {t("contact.description")}
       </p> */}
-        <Button
-          link={
-            affiliate ? "https://calendly.com/nefentus/consulting" : "/signup"
-          }
-        >
-          {!affiliate ? t("contact.button") : t("contact.button2")}
-        </Button>
+        <div className={styles.buttonWrapper}>
+          <Button
+            color="white"
+            link={
+              affiliate ? "https://calendly.com/nefentus/consulting" : "/signup"
+            }
+          >
+            {!affiliate ? t("contact.button") : t("contact.button2")}
+          </Button>
+        </div>
       </div>
     </div>
   );

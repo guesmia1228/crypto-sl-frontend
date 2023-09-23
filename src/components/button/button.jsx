@@ -8,16 +8,13 @@ const Button = ({ children, className, color, link, onClick }) => {
       onClick={onClick}
       style={{
         border:
-          color === "white"
-            ? "1px solid rgba(255, 255, 255, 0.09)"
-            : "1px solid #0784B5",
+          color === "white" ? "1px solid rgb(38, 38, 38)" : "1px solid #0784B5",
       }}
     >
       <div
         className={styles.background}
         style={{
-          background:
-            color === "white" ? "rgba(255, 255, 255, 0.09)" : "#0784B5",
+          background: color === "white" ? "rgb(38, 38, 38)" : "#0784B5",
         }}
       ></div>
       {link ? (

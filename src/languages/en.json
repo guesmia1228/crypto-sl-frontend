@@ -278,8 +278,9 @@
     "forgot": "Forgot password?"
   },
   "affiliate": {
-    "heroTitle": "Probably The Best Affiliate Network",
-    "heroGradient": "Out There!",
+    "heroTitleP1": "Probably",
+    "heroGradient": "The Best",
+    "heroTitleP2": "Affiliate Network Out There!",
     "heroSubtitle": "Affiliate Program",
     "heroHeading": "Earn commissions effortlessly",
     "heroDescription": "Sign up for Nefentus' affiliate program for free and start earning commissions on autopilot.",
@@ -311,7 +312,7 @@
         "description": "Keep track of your commissions and get notified about sales with our app."
       }
     ],
-    "compareTitle": "Thats how it was before and thats how we solve it...",
+    "compareTitle": "Addressing Affiliate Challenges: Our Solutions",
     "compareSubtitle": "Solutions",
     "compareContent": [
       {
@@ -320,8 +321,8 @@
         "description": "With so many affiliate programs and traditional products available, it can be challenging for affiliates to differentiate themselves and their promotions from the competition. This can lead to lower engagement and sales, making it harder to earn commissions."
       },
       {
-        "title": "Difficulty in standing out among competitors in a crowded market",
-        "description": "Nefentus is a revolutionary platfomr and offers its affiliates a range of marketing materials, including banners and landing pages, to help them differentiate themselves and stand out in a crowded market. Additionally, the program offers attractive commissions and a range of products and services to promote, giving affiliates a competitive edge."
+        "title": "Stand out among competitors in a crowded market",
+        "description": "Nefentus is a revolutionary platform and offers its affiliates a range of marketing materials, including banners and landing pages, to help them differentiate themselves and stand out in a crowded market. Additionally, the program offers attractive commissions and a revolutionary product to promote, giving affiliates a competitive edge."
       },
       {
         "type": "cons",
@@ -329,17 +330,17 @@
         "description": "Affiliates are at the mercy of the performance and quality of the products or services they are promoting. If the product or service underperforms, it can negatively impact an affiliate's reputation and earnings potential."
       },
       {
-        "title": "Dependence on the performance of the products or services",
+        "title": "You can rely on the excellence of our product and service performance",
         "description": "Nefentus is committed to providing high-quality, reliable products and services to its customers, which ultimately benefits its affiliates by maintaining a positive reputation and ensuring customer satisfaction. We have been growing  quickly and have high levels of customer satisfaction."
       },
       {
         "type": "cons",
-        "title": "Limited control over the product or service, including pricing",
-        "description": "Traditionally affiliates  have limited control over the products or services they promote, including pricing, customer support, and other aspects of the customer experience. This can lead to frustration or dissatisfaction among customers, which can ultimately impact an affiliate's earnings potential."
+        "title": "Limited control and no instant affiliate commission payouts",
+        "description": "In the dynamic landscape of affiliate marketing, two significant challenges often arise, presenting hurdles that many affiliates encounter on their journey to success: limited transparency of the product offerings and the anticipation of delayed commission payouts."
       },
       {
-        "title": "Limited control over the product or service, including pricing",
-        "description": "Nefentus' customer support team is available 24/7 to handle any issues or concerns that customers may have, ensuring a positive customer experience. We also offer very competitive pricing, ensuring that our products and services remain attractive to customers and affiliates alike."
+        "title": "Transparent product and pricing structure, instant affiliate commission payouts",
+        "description": "These are the key elements that stand out as catalysts for success. We provide comprehensive product information and straightforward pricing models empowering affiliates to effectively market our products, resulting in higher conversion rates and customer satisfaction."
       }
     ]
   },
@@ -391,12 +392,6 @@
       },
       {
         "text": "Affiliate"
-      },
-      {
-        "text": "Play store"
-      },
-      {
-        "text": "App store"
       }
     ],
     "privacy": "Privacy Policy",

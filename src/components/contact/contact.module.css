@@ -1,7 +1,18 @@
 .contact {
+  position: relative;
+}
+
+.bgImage {
   background: url(../../assets/image/gradient.png);
   background-position: center;
   background-size: cover;
+  position: absolute;
+  top: -20vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  /* bottom: 0; */
 }
 
 .contact > div {
@@ -9,9 +20,9 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding-top: 15rem;
-  padding-bottom: 15rem;
-  max-width: 75rem !important;
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+  /* max-width: 75rem !important; */
 }
 
 .contact h3 {
@@ -24,6 +35,11 @@
   line-height: 140%;
   margin-bottom: 3rem;
   text-align: center;
+}
+
+.buttonWrapper,
+.buttonWrapper > div {
+  width: 100% !important;
 }
 
 @media (max-width: 900px) {
