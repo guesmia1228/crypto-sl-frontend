@@ -15,7 +15,7 @@ var country_list = [
   "Andorra",
   "Angola",
   "Anguilla",
-  "Antigua &amp; Barbuda",
+  "Antigua & Barbuda",
   "Argentina",
   "Armenia",
   "Aruba",
@@ -33,7 +33,7 @@ var country_list = [
   "Bermuda",
   "Bhutan",
   "Bolivia",
-  "Bosnia &amp; Herzegovina",
+  "Bosnia & Herzegovina",
   "Botswana",
   "Brazil",
   "British Virgin Islands",
@@ -52,7 +52,7 @@ var country_list = [
   "Congo",
   "Cook Islands",
   "Costa Rica",
-  "Cote D Ivoire",
+  "Cote D'Ivoire",
   "Croatia",
   "Cruise Ship",
   "Cuba",
@@ -164,7 +164,7 @@ var country_list = [
   "Romania",
   "Russia",
   "Rwanda",
-  "Saint Pierre &amp; Miquelon",
+  "Saint Pierre & Miquelon",
   "Samoa",
   "San Marino",
   "Satellite",
@@ -180,7 +180,7 @@ var country_list = [
   "South Korea",
   "Spain",
   "Sri Lanka",
-  "St Kitts &amp; Nevis",
+  "St Kitts & Nevis",
   "St Lucia",
   "St Vincent",
   "St. Lucia",
@@ -197,15 +197,16 @@ var country_list = [
   "Timor L'Este",
   "Togo",
   "Tonga",
-  "Trinidad &amp; Tobago",
+  "Trinidad & Tobago",
   "Tunisia",
   "Turkey",
   "Turkmenistan",
-  "Turks &amp; Caicos",
+  "Turks & Caicos",
   "Uganda",
   "Ukraine",
   "United Arab Emirates",
   "United Kingdom",
+  "United States of America",
   "Uruguay",
   "Uzbekistan",
   "Venezuela",
@@ -263,7 +264,7 @@ const Signup = () => {
       telNr: Telefon,
       email: Email,
       password: Password,
-      roles: [UseOption],
+      roles: ["Affiliate"],
       country: CountryOption,
       affiliateLink: localStorage.getItem("affiliateJoined"),
     };
@@ -352,7 +353,6 @@ const Signup = () => {
           setValue={setCountryOption}
           options={country_list}
         />
-        <Options value={UseOption} setValue={setUseOption} />
         <Button className={styles.button} onClick={handleClick}>
           {t("signUp.formButton")}
         </Button>
