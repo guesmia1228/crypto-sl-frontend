@@ -5,11 +5,15 @@ import { useState, useEffect } from "react";
 const TablePagination = ({ headers, data, colSizes, colColored, colHighlighted, striped, className }) => {
 	const [pageData, setPageData] = useState([]);
 
-	const pageSize = 10;
-
 	useEffect(() => {
-		setPageData(data.slice(0, pageSize));
+		setPageData(data.slice(0, 10));
 	}, [data]);
+
+	function renderItems(start, end) {
+		setPageData(data.slice(start, end));
+		console.log("Render items from " + start + " to " + end)
+
+	}
 
 	return (
 		<>
@@ -24,7 +28,7 @@ const TablePagination = ({ headers, data, colSizes, colColored, colHighlighted, 
 			/>
 
 			<Pagination 
-				renderItems={(start, end) => setPageData(data.slice(start, end))}
+				renderItems={renderItems}
 				length={data.length}
 			/>
 		</>

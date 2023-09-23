@@ -10,9 +10,13 @@ const Pagination = ({renderItems, length, initPageSize}) => {
 	const numPages = Math.ceil(length/pageSize);
 
 	function updatePage(page) {
-		console.log("Render items from " + page*pageSize + " to " + (page+1)*pageSize);
 		setCurrentPage(page);
 		renderItems(page*pageSize, (page+1)*pageSize);
+	}
+
+	function updatePageSize(newPageSize) {
+		setPageSize(newPageSize);
+		renderItems(currentPage*newPageSize, (currentPage+1)*newPageSize);
 	}
 
     return (
@@ -21,7 +25,7 @@ const Pagination = ({renderItems, length, initPageSize}) => {
 				<ul className={styles.pagination}>
 					<li onClick={() => updatePage(0)} className={classNames({[styles.hide]: currentPage === 0})}>«</li>
 					<li onClick={() => updatePage(currentPage-1)} className={classNames({[styles.hide]: currentPage === 0})}>‹</li>
-					<li class="current"><PageInput value={currentPage+1} updatePage={updatePage}/> of {numPages}</li>
+					<li><PageInput value={currentPage+1} updatePage={updatePage}/> of {numPages}</li>
 					<li onClick={() => updatePage(currentPage + 1)} className={classNames({[styles.hide]: currentPage + 1 === numPages})}>›</li>
 					<li onClick={() => updatePage(numPages-1)} className={classNames({[styles.hide]: currentPage + 1 === numPages})}>»</li>
 				</ul>
@@ -30,7 +34,7 @@ const Pagination = ({renderItems, length, initPageSize}) => {
 			<Options 
 				options={[10, 20, 50, 100]}
 				value={pageSize}
-				setValue={(newPageSize) => setPageSize(newPageSize)}
+				setValue={updatePageSize}
 			/>
         </div>
     );
