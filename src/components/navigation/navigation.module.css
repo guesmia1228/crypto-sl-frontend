@@ -477,8 +477,12 @@
     margin-right: 2rem;
   }
 
+  .mobileButtonWrapper > div {
+    border-radius: 4px;
+  }
+
   .mobileButtonWrapper > div > a > div {
-    padding: 1rem 2rem;
+    padding: 0.1rem 2rem;
     font-size: 1.2rem;
   }
 }

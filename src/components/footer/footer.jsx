@@ -46,12 +46,13 @@ const Footer = () => {
             <Link to="https://www.youtube.com/channel/UCV1QWqkZXtZvXl6bq3AgkTA">
               <img src={Youtube} alt="" />
             </Link>
-          </div>
-          <div className={styles.buttonWrapper}>
-            <Button link="/" color={"white"}>
-              <img src={LogoIcon} alt="" />
-              <p>{t("footer.downloadButton")}</p>
-            </Button>
+
+            <div className={styles.buttonWrapper}>
+              <Button link="/" color={"white"}>
+                <img src={LogoIcon} alt="" />
+                <p>{t("footer.downloadButton")}</p>
+              </Button>
+            </div>
           </div>
         </div>
       </div>

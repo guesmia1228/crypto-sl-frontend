@@ -27,17 +27,19 @@ const Grow = () => {
   const listContent = t("payment.growContent", { returnObjects: true });
 
   return (
-    <div className="container break">
-      <HeadingCenter
-        subtitle={t("payment.growSubtitle")}
-        title={
-          <>
-            {t("payment.growTitle")}
-            {/* <br />
-            {t("payment.growTitle2")} */}
-          </>
-        }
-      />
+    <div className={` container break`}>
+      <div className={`${styles.section}`}>
+        <HeadingCenter
+          subtitle={t("payment.growSubtitle")}
+          title={
+            <>
+              {t("payment.growTitle")}
+              <br />
+              {t("payment.growTitle2")}
+            </>
+          }
+        />
+      </div>
 
       <div className={styles.body}>
         <div className={styles.left}>

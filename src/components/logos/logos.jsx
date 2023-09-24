@@ -20,7 +20,7 @@ const Logos = () => {
     setTimeout(() => {
       line1.classList.add("move1");
       line2.classList.add("move2");
-    }, 250);
+    }, 1000);
   }, []);
 
   return (
