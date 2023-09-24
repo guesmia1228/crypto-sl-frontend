@@ -46,16 +46,20 @@
 }
 
 .top h4 {
-  font-size: 1.7rem;
+  font-size: 1.8rem;
   line-height: 120%;
   font-weight: 500;
-  width: 70%;
+  width: 100%;
 }
 
 .card p {
   font-size: 1.4rem;
   line-height: 140%;
   color: var(--gray-color);
+}
+
+.sectionHeader br {
+  display: none;
 }
 
 @media (max-width: 900px) {
@@ -108,5 +112,9 @@
 
   .top h4 {
     width: 100%;
+  }
+
+  .sectionHeader br {
+    display: initial;
   }
 }

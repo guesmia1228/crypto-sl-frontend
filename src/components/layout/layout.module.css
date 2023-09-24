@@ -145,9 +145,31 @@
     width: 100%;
   }
 
+  .hero > img {
+    width: 80%;
+  }
+
   .layout h1,
   .layout h3 {
     margin-bottom: 1rem;
+  }
+
+  .buttonWrapperMob img {
+    height: 2rem !important;
+  }
+
+  .buttonWrapperMob span {
+    font-size: 1.2rem;
+    position: relative;
+    top: 1px;
+  }
+
+  .buttonWrapperMob > div > a > div {
+    padding: 1rem 1.5rem;
+  }
+
+  .buttonWrapperMob > div {
+    border-radius: 0.5rem !important;
   }
 }
 

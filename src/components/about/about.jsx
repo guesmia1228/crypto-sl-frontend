@@ -19,7 +19,7 @@ const About = () => {
             {t("home.aboutCard1Subtitle")}
           </p>
           <h3>
-            {t("home.aboutCard1Title")}
+            {t("home.aboutCard1TitleP1")} <br /> {t("home.aboutCard1TitleP2")}
             <div className="gradient">{t("home.aboutCard1TitleGradient")}</div>
           </h3>
           <p className="standard">{t("home.aboutCard1Description")}</p>

@@ -97,6 +97,12 @@ const Navigation = () => {
               <Link to="/signup">{t("navigation.signUp")}</Link>
             </div>
 
+            <div className={styles.mobileButtonWrapper}>
+              <Button link="/signUp " color="white">
+                Sign Up
+              </Button>
+            </div>
+
             <div className={styles.mobMenu}>
               <div
                 className={`${styles.line} ${openMenu ? styles.openLine : ""}`}

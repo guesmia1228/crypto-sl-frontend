@@ -112,6 +112,8 @@
 
   .content {
     flex-direction: column;
+
+    gap: 0rem;
   }
 
   .content .label {
@@ -127,5 +129,8 @@
 
   .footer .icons {
     margin-left: 0rem;
+
+    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
 }

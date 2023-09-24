@@ -29,6 +29,11 @@
 }
 
 @media (max-width: 650px) {
+  .hero {
+    margin-top: 10rem !important;
+    margin-bottom: 10rem !important;
+  }
+
   .hero br {
     display: initial;
   }

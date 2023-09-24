@@ -50,7 +50,7 @@ const Footer = () => {
           <div className={styles.buttonWrapper}>
             <Button link="/" color={"white"}>
               <img src={LogoIcon} alt="" />
-              <p>Get our app now</p>
+              <p>{t("footer.downloadButton")}</p>
             </Button>
           </div>
         </div>

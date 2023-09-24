@@ -88,4 +88,13 @@
     height: auto;
     width: 100%;
   }
+
+  .image {
+    margin-top: 2.5rem;
+  }
+
+  .title {
+    line-height: 130%;
+    width: 80%;
+  }
 }

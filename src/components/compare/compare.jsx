@@ -11,11 +11,19 @@ const Compare = () => {
   const content = t("affiliate.compareContent", { returnObjects: true });
 
   return (
-    <div className="container">
-      <HeadingCenter
-        subtitle={t("affiliate.compareSubtitle")}
-        title={t("affiliate.compareTitle")}
-      />
+    <div className={`container`}>
+      <div className={`${styles.sectionHeader}`}>
+        <HeadingCenter
+          subtitle={t("affiliate.compareSubtitle")}
+          title={
+            <>
+              {t("affiliate.compareTitle").split(":")[0]}:
+              <br />
+              {t("affiliate.compareTitle").split(":")[1]}
+            </>
+          }
+        />
+      </div>
       <div className={`${styles.section} `}>
         {content.map((item) => (
           <Card
@@ -37,7 +45,11 @@ const Card = ({ type, title, description }) => {
       <div className={`${styles.wrapper} card`}>
         <div className={styles.top}>
           <img src={type === "cons" ? Cons : Pros} alt="" />
-          <h4>{title}</h4>
+          <h4>
+            {title.split("\n")[0]}
+            <br />
+            {title.split("\n")[1]}
+          </h4>
         </div>
         <p>{description}</p>
       </div>

@@ -314,6 +314,10 @@
   transition: 0.3s ease;
 }
 
+.mobileButtonWrapper {
+  display: none;
+}
+
 @media (max-width: 900px) {
   .logo {
     height: 2.2rem;
@@ -343,7 +347,7 @@
   }
 
   .right {
-    gap: 5rem;
+    gap: 2rem;
   }
 
   .dropdownMenu p {
@@ -465,5 +469,16 @@
 
   .mobMenu img {
     width: 1.6rem;
+  }
+
+  .mobileButtonWrapper {
+    display: initial;
+    pointer-events: initial;
+    margin-right: 2rem;
+  }
+
+  .mobileButtonWrapper > div > a > div {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
   }
 }

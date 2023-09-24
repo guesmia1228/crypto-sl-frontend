@@ -45,6 +45,10 @@
   margin-bottom: 1rem;
 }
 
+.horizontalCard h3 br {
+  display: none;
+}
+
 .horizontalImg {
   width: 52rem;
   align-self: center;
@@ -162,5 +166,11 @@
 
   .content > p {
     width: 100%;
+  }
+}
+
+@media (max-width: 550px) {
+  .horizontalCard h3 br {
+    display: initial;
   }
 }

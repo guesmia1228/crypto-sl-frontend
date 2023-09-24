@@ -45,7 +45,8 @@
     "payrollTitleP1": "Grow with our",
     "payrollTitleP2": "payroll system",
     "aboutCard1Subtitle": "Rapid Adoption",
-    "aboutCard1Title": "Accept A Wide Variety Cryptocurrencies",
+    "aboutCard1TitleP1": "Accept A ",
+    "aboutCard1TitleP2": "Wide Variety Cryptocurrencies",
     "aboutCard1TitleGradient": "Without Risk",
     "aboutCard1Description": "Our smart contract based technology eliminates cryptocurrency volatility through instantly converting cryptocurrency payments into stable coins in your wallet. Securely accept a range of crypto currencies and offer payment flexibility to your customers.",
     "aboutCard2Subtitle": "Tracking",
@@ -322,7 +323,7 @@
         "description": "With so many affiliate programs and traditional products available, it can be challenging for affiliates to differentiate themselves and their promotions from the competition. This can lead to lower engagement and sales, making it harder to earn commissions."
       },
       {
-        "title": "Stand out among competitors in a crowded market",
+        "title": "Stand out among competitors in\na crowded market",
         "description": "Nefentus is a revolutionary platform and offers its affiliates a range of marketing materials, including banners and landing pages, to help them differentiate themselves and stand out in a crowded market. Additionally, the program offers attractive commissions and a revolutionary product to promote, giving affiliates a competitive edge."
       },
       {
@@ -381,6 +382,7 @@
   },
   "footer": {
     "copyright": "© 2023 Nefentus. All rights reserved.",
+    "downloadButton": "DOWNLOAD NOW",
     "content": [
       {
         "text": "Home"

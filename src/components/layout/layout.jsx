@@ -1,8 +1,8 @@
 import styles from "./layout.module.css";
 import Button from "./../button/button";
 
-import Android from "../../assets/icon/android.svg";
-import Apple from "../../assets/icon/apple.svg";
+import Android from "../../assets/icon/android2.svg";
+import Apple from "../../assets/icon/apple2.svg";
 import Chevron from "../../assets/icon/chevron.svg";
 
 import Dummy from "../../assets/image/dummy.png";
@@ -105,13 +105,15 @@ const Layout = ({
             <div className={styles.store}>
               <p className="standard">{t("home.heroAvailable")}</p>
 
-              <div>
-                <Link to="/">
+              <div className={styles.buttonWrapperMob}>
+                <Button link="/" color="white">
                   <img src={Android} alt="" />
-                </Link>
-                <Link to="/">
+                  <span>Play Store</span>
+                </Button>
+                <Button link="/" color="white">
                   <img src={Apple} alt="" />
-                </Link>
+                  <span>App Store</span>
+                </Button>
               </div>
             </div>
           )}
