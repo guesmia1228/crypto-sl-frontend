@@ -5,7 +5,7 @@ import Android from "../../assets/icon/android2.svg";
 import Apple from "../../assets/icon/apple2.svg";
 import Chevron from "../../assets/icon/chevron.svg";
 
-import Dummy from "../../assets/image/dummy.png";
+import Dummy from "../../assets/image/dummy.webp";
 
 import Checkmark from "../../assets/icon/singleCheckmark.svg";
 import { Link } from "react-router-dom";
