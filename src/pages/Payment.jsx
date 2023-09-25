@@ -5,7 +5,6 @@ import Grow from "../components/grow/grow";
 import IconRow from "./../components/iconRow/iconRow";
 import Why from "../components/why/why";
 import DataCards from "../components/dataCards/dataCards";
-import Circle from "../components/circle/circle";
 import PaymentCards from "./../components/paymentCards/paymentCards";
 
 import Logo1 from "../assets/icon/methods/logo1.svg";

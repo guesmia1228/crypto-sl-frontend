@@ -318,9 +318,23 @@
   display: none;
 }
 
+.rightWrapper {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.rightWrapper > img:first-child {
+  width: 1.4rem;
+}
+
 @media (max-width: 900px) {
   .logo {
     height: 2.2rem;
+  }
+
+  .rightWrapper > img:first-child {
+    display: none;
   }
 
   .navigation {

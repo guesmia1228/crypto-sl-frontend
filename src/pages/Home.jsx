@@ -1,8 +1,6 @@
 import Layout from "../components/layout/layout";
 import Navigation from "../components/navigation/navigation";
 
-import Arrow from "../assets/icon/arrow.svg";
-import Circle from "../components/circle/circle";
 import Logos from "../components/logos/logos";
 import Cards from "../components/cards/cards";
 import About from "../components/about/about";
@@ -14,7 +12,6 @@ import HomeHeroVideo from "../assets/video/homeHero.mp4";
 import { Helmet } from "react-helmet";
 
 import Image1 from "../assets/image/paymentHome.png";
-import Image2 from "../assets/image/payrollHome.png";
 
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
@@ -36,7 +33,7 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>Nefentus | Home</title>
+        <title>Nefentus | Accept Crypto Payments Risk Free</title>
       </Helmet>
       <Layout
         heading={

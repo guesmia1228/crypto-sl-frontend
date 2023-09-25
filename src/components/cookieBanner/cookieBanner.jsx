@@ -5,22 +5,21 @@ import Cookie from "../../assets/icon/cookie.svg";
 import styles from "./cookie.module.css";
 import setCookie from "../setCookie/setCookie";
 
-const CookieBanner = ( {close} ) => {
-
-  const accept = ()=>{
+const CookieBanner = ({ close }) => {
+  const accept = () => {
     setCookie("acceptCookie", true);
     close();
-  }
+  };
 
-  const decline = ()=>{
-    setCookie("acceptCookie", false)
+  const decline = () => {
+    setCookie("acceptCookie", false);
     close();
-  }
+  };
 
   return (
     <div className={`${styles.banner} card`}>
       <div className={styles.left}>
-        <img src={Cookie} alt="" />
+        <img src={Cookie} alt="cookie" />
 
         <p className={styles.text}>
           We use third-party <Link to="/privacy">cookies</Link> in order to{" "}

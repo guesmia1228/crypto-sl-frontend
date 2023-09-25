@@ -64,7 +64,7 @@ const Languages = () => {
   return (
     <div className={styles.languages}>
       <div className={styles.menu}>
-        <img src={Globe} alt="" />
+        <img src={Globe} alt="language globe icon" />
       </div>
       <div className={`${styles.dropdown}`}>
         <div className={`${styles.body} card`}>
@@ -74,7 +74,7 @@ const Languages = () => {
               className={styles.item}
               onClick={() => handleTrans(item.code)}
             >
-              <img src={item.flag} alt="" />
+              <img src={item.flag} alt="language flag" />
               <p className="standard">{item.label}</p>
             </div>
           ))}

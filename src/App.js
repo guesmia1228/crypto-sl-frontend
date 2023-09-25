@@ -15,7 +15,6 @@ import SignUp from "./pages/Signup";
 import Layout from "./pages/Layout";
 import Login from "./pages/Login";
 import Payment from "./pages/Payment";
-import Payroll from "./pages/Payroll";
 import Affiliate from "./pages/Affiliate";
 import Support from "./pages/Support";
 import Privacy from "./pages/Privacy";
@@ -117,14 +116,14 @@ function App() {
                 </>
               }
             />
-            <Route
+            {/* <Route
               path="/payroll"
               element={
                 <Layout>
                   <Payroll />
                 </Layout>
               }
-            />
+            /> */}
             <Route
               path="/affiliate"
               element={

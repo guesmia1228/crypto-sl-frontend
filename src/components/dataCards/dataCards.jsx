@@ -50,7 +50,7 @@ const Card = ({ image, title, description, list, side }) => {
     <div className={`${styles.card} ${side}`}>
       <div className={`${styles.wrapper} card`}>
         <div className={styles.top}>
-          <img src={image} alt="" />
+          <img src={image} alt="data symbol icon" />
           <h4>{title}</h4>
         </div>
         <p className={styles.description}>{description}</p>
@@ -58,7 +58,7 @@ const Card = ({ image, title, description, list, side }) => {
         <div className={styles.list}>
           {list.map((item) => (
             <div>
-              <img src={Checkmark} alt="" />
+              <img src={Checkmark} alt="checkmark" />
               <p>{item}</p>
             </div>
           ))}

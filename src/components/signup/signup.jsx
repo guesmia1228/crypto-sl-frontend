@@ -272,7 +272,7 @@ const Signup = () => {
         </Button>
       </div>
       <div className={styles.left}>
-        <img src={Logo} alt="" />
+        <img src={Logo} alt="nefentus logo" />
 
         <div>
           <h2>
@@ -343,7 +343,7 @@ const Signup = () => {
           </Button>
         </div>
 
-        <p>{t("signUp.formInfo")}</p>
+        <p className={styles.formAgreement}>{t("signUp.formInfo")}</p>
       </div>
     </div>
   );

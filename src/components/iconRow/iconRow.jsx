@@ -31,7 +31,7 @@ const IconRow = ({ subtitle, title, description, list }) => {
       <div className={`${styles.logos}`} ref={sectionRef}>
         {list.map((image) => (
           <div>
-            <img src={image} alt="" />
+            <img src={image} alt="partner logo" />
           </div>
         ))}
       </div>

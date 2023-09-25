@@ -38,7 +38,8 @@ const AffiliateBody = () => {
   const [totalRegistrations, setTotalRegistrations] = useState(0);
   const [totalClicks, setTotalClicks] = useState(0);
   const [totalIncomes, setTotalIncomes] = useState(0);
-  const [totalRegistrationsPercentage, setTotalRegistrationsPercentage] = useState(0);
+  const [totalRegistrationsPercentage, setTotalRegistrationsPercentage] =
+    useState(0);
   const [totalClicksPercentage, setTotalClicksPercentage] = useState(0);
   const [totalIncomesPercentage, setTotalIncomesPercentage] = useState(0);
   const [tableData, setTableData] = useState([]);
@@ -68,7 +69,7 @@ const AffiliateBody = () => {
     fetchData();
   }, []);
 
-  const fetchAffData = async () =>{
+  const fetchAffData = async () => {
     const result = await affDashboardApi.checkPermission();
     if (result !== true) {
       navigate("/login");
@@ -83,7 +84,7 @@ const AffiliateBody = () => {
       setTotalIncomes(dataInc.number);
       setTotalIncomesPercentage(dataInc.percentage);
     }
-  }
+  };
 
   return (
     <div className="container">
@@ -122,16 +123,16 @@ const AffiliateNavigation = () => {
 
   return (
     <div className={styles.navigation}>
-      <img src={Logo} alt="" />
+      <img src={Logo} alt="nefentus logo" />
 
       <div className={styles.right}>
         <div className={`${styles.settingsBody} card`}>
           <Link to="/dashboard/settings" className={styles.logout}>
-            <img src={Settings} alt="" />
+            <img src={Settings} alt="settings" />
             <p>Settings</p>
           </Link>
           <Link onClick={logOut} to="/" className={styles.logout}>
-            <img src={Logout} alt="" />
+            <img src={Logout} alt="logout" />
             <p>Log out</p>
           </Link>
         </div>
@@ -176,7 +177,7 @@ const AffiliateHeader = () => {
           </p>
           <img
             src={UrlLink}
-            alt=""
+            alt="url icon"
             onClick={() => {
               navigator.clipboard.writeText(
                 `https://nefentus.com/?affiliate=${localStorage.getItem(

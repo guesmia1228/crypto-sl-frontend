@@ -4,7 +4,6 @@ import Image from "../../assets/icon/attachment.svg";
 import { useRef, useState } from "react";
 
 const Input = ({ label, placeholder, type = "text", setState, value }) => {
-
   const handleChange = (e) => {
     setState(e.target.value);
   };
@@ -13,7 +12,14 @@ const Input = ({ label, placeholder, type = "text", setState, value }) => {
     <div className={styles.input}>
       <p>{label}</p>
 
-      <input type={type} name="" id="" value={value} placeholder={placeholder} onChange={handleChange}/>
+      <input
+        type={type}
+        name=""
+        id=""
+        value={value}
+        placeholder={placeholder}
+        onChange={handleChange}
+      />
     </div>
   );
 };
@@ -35,28 +41,26 @@ export const Attachment = ({ label, onUpload }) => {
     return allowedExtensions.includes(extension);
   }
 
-
   const handleChange = () => {
     const file = inputRef.current.files[0];
     const fileName = inputRef.current.value.split("\\").pop();
     var extension = fileName.split(".").pop();
     console.log(extension);
-    if(checkFileExtension(extension)){
+    if (checkFileExtension(extension)) {
       setText(fileName);
       onUpload(file);
-    }else{
+    } else {
       //todo throw new Error maybe with toast!
     }
   };
 
   return (
     <>
-    
       <div className={styles.input}>
         <p>{label}</p>
 
         <div className={styles.attachment} onClick={handleClick}>
-          <img src={Image} alt="" />
+          <img src={Image} alt="input icon" />
           <p style={{ color: text ? "#fff" : "#c4c4c4" }}>
             {text ? text : "Add attachment"}
           </p>

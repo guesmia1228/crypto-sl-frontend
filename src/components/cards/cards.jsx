@@ -1,10 +1,6 @@
 import HeadingCenter from "../headingCenter/headingCenter";
 import styles from "./cards.module.css";
 
-import Wallet from "../../assets/image/wallet.png";
-import Case from "../../assets/image/case.png";
-import Bag from "../../assets/image/bag.png";
-
 import Video1 from "../../assets/video/phone.mp4";
 import Video2 from "../../assets/video/chart.mp4";
 import Video3 from "../../assets/video/target.mp4";

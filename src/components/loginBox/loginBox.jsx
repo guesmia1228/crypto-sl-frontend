@@ -122,7 +122,7 @@ const LoginBox = () => {
         </Button>
       </div>
       <div className={styles.left}>
-        <img src={Logo} alt="" />
+        <img src={Logo} alt="nefentus logo" />
 
         <div>
           <h2>
@@ -169,7 +169,7 @@ const LoginBox = () => {
           <div className={styles.remeberInfo}>
             <div onClick={() => setCheckBox((prev) => !prev)}>
               <div className={styles.checkBox}>
-                {checkBox && <img src={CheckBox} alt="" />}
+                {checkBox && <img src={CheckBox} alt="checkbox" />}
               </div>
               <p>Remeber me</p>
             </div>

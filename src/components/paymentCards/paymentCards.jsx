@@ -15,6 +15,7 @@ const PaymentCards = () => {
 
   return (
     <div className={styles.sectionWrapper}>
+      <div className={styles.bgImage}></div>
       <div className={`container scroll `}>
         <HeadingCenter
           noScroll
@@ -38,7 +39,7 @@ const PaymentCards = () => {
               <div className={styles.list}>
                 {card1List.map((item) => (
                   <div>
-                    <img src={Checkmark} alt="" />
+                    <img src={Checkmark} alt="checkmark" />
                     <p>{item}</p>
                   </div>
                 ))}
@@ -59,7 +60,7 @@ const PaymentCards = () => {
               <div className={styles.list}>
                 {card2List.map((item) => (
                   <div>
-                    <img src={Checkmark} alt="" />
+                    <img src={Checkmark} alt="checkmark" />
                     <p>{item}</p>
                   </div>
                 ))}

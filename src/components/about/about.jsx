@@ -27,17 +27,25 @@ const About = () => {
           <div className={styles.button}>
             <Button link="/" color="white">
               <p>{t("home.aboutCardButton")}</p>
-              <img src={Arrow} alt="" />
+              <img src={Arrow} alt="Arrow" />
             </Button>
           </div>
         </div>
-        <img className={styles.horizontalImg} src={Graphic1} alt="" />
+        <img
+          className={styles.horizontalImg}
+          src={Graphic1}
+          alt="cryptocurrency graphics"
+        />
       </div>
       <div className={`${styles.cardRow}`}>
         <div
           className={`${styles.card} ${styles.verticalCard} slide-right card`}
         >
-          <img className={styles.verticalImg} src={Graphic2} alt="" />
+          <img
+            className={styles.verticalImg}
+            src={Graphic2}
+            alt="tracking graphics"
+          />
           <div className={styles.content}>
             <p className={`subtitle ${styles.subtitle}`}>
               {t("home.aboutCard2Subtitle")}
@@ -52,7 +60,7 @@ const About = () => {
             <div className={styles.button}>
               <Button link="/" color="white">
                 <p>{t("home.aboutCardButton")}</p>
-                <img src={Arrow} alt="" />
+                <img src={Arrow} alt="arrow" />
               </Button>
             </div>
           </div>
@@ -60,7 +68,11 @@ const About = () => {
         <div
           className={`${styles.card} ${styles.verticalCard} slide-left card`}
         >
-          <img className={styles.verticalImg} src={Graphic3} alt="" />
+          <img
+            className={styles.verticalImg}
+            src={Graphic3}
+            alt="integrating logos"
+          />
 
           <div className={styles.content}>
             <p className={`subtitle ${styles.subtitle}`}>
@@ -76,7 +88,7 @@ const About = () => {
             <div className={styles.button}>
               <Button link="/" color="white">
                 <p>{t("home.aboutCardButton")}</p>
-                <img src={Arrow} alt="" />
+                <img src={Arrow} alt="arrow" />
               </Button>
             </div>
           </div>

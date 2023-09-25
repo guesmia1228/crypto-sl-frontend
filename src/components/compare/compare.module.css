@@ -62,6 +62,24 @@
   display: none;
 }
 
+.sectionWrapper {
+  position: relative;
+  padding-bottom: 10rem;
+}
+
+.bgImage {
+  background: url(../../assets/image/gradient.png);
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  top: -20vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  /* bottom: 0; */
+}
+
 @media (max-width: 900px) {
   .section {
     grid-template-columns: 1fr;

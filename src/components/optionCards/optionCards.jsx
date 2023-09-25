@@ -27,7 +27,7 @@ const OptionCards = () => {
       {content.map((item, index) => (
         <div className="card">
           <div className={styles.image}>
-            <img src={contentImage[index].image} alt="" />
+            <img src={contentImage[index].image} alt="payroll" />
           </div>
           <h4>{item.title}</h4>
           <p>{item.description}</p>

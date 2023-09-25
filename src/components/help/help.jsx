@@ -11,42 +11,45 @@ const Help = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="container">
-      <div className={styles.header}>
-        <HeadingCenter
-          subtitle={t("home.helpSubtitle")}
-          title={t("home.helpTitle")}
-        />
-      </div>
-
-      <div className={`scroll ${styles.row}`}>
-        <div className={`${styles.card} card`}>
-          <div>
-            <div className={styles.top}>
-              <img src={Support} alt="" />
-              <h5>{t("home.helpCard1Title")}</h5>
-            </div>
-
-            <p className="standard">{t("home.helpCard1Text")}</p>
-          </div>
-
-          <Link to="https://calendly.com/nefentus/consulting">
-            <div className={styles.button}>{t("home.helpCard1Button")}</div>
-          </Link>
+    <div className={`${styles.sectionWrapper}`}>
+      <div className={`container`}>
+        <div className={styles.bgImage}></div>
+        <div className={styles.header}>
+          <HeadingCenter
+            subtitle={t("home.helpSubtitle")}
+            title={t("home.helpTitle")}
+          />
         </div>
-        <div className={`${styles.card} card`}>
-          <div>
-            <div className={styles.top}>
-              <img src={FAQ} alt="" />
-              <h5>{t("home.helpCard2Title")}</h5>
+
+        <div className={`scroll ${styles.row}`}>
+          <div className={`${styles.card} card`}>
+            <div>
+              <div className={styles.top}>
+                <img src={Support} alt="support icon call" />
+                <h5>{t("home.helpCard1Title")}</h5>
+              </div>
+
+              <p className="standard">{t("home.helpCard1Text")}</p>
             </div>
 
-            <p className="standard">{t("home.helpCard2Text")}</p>
+            <Link to="https://calendly.com/nefentus/consulting">
+              <div className={styles.button}>{t("home.helpCard1Button")}</div>
+            </Link>
           </div>
+          <div className={`${styles.card} card`}>
+            <div>
+              <div className={styles.top}>
+                <img src={FAQ} alt="support icon faq" />
+                <h5>{t("home.helpCard2Title")}</h5>
+              </div>
 
-          <Link to="/support">
-            <div className={styles.button}>{t("home.helpCard2Button")}</div>
-          </Link>
+              <p className="standard">{t("home.helpCard2Text")}</p>
+            </div>
+
+            <Link to="/support">
+              <div className={styles.button}>{t("home.helpCard2Button")}</div>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

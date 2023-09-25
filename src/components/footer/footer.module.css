@@ -104,6 +104,11 @@
   height: 1.6rem;
 }
 
+.footer .icons > a > img {
+  position: relative;
+  top: 2px;
+}
+
 @media (max-width: 900px) {
   .top {
     flex-direction: column;
@@ -130,6 +135,11 @@
     align-items: center;
     gap: 2rem;
     text-align: center;
+  }
+
+  .copyright p,
+  .copyright li {
+    font-size: 1.2rem !important;
   }
 
   .footer .icons {

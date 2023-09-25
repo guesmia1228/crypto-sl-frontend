@@ -27,11 +27,11 @@ const Header = ({ title }) => {
       <div className={styles.right}>
         <div className={`${styles.settingsBody} card`}>
           <Link to="/dashboard/settings" className={styles.logout}>
-            <img src={Settings} alt="" />
+            <img src={Settings} alt="settings" />
             <p>Settings</p>
           </Link>
           <Link onClick={logOut} to="/" className={styles.logout}>
-            <img src={Logout} alt="" />
+            <img src={Logout} alt="logout" />
             <p>Log out</p>
           </Link>
         </div>

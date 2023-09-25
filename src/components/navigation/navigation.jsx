@@ -47,7 +47,7 @@ const Navigation = () => {
         <div className={`container ${styles.content}`}>
           <div className={styles.left}>
             <Link className={styles.logoWrapper} to="/">
-              <img className={styles.logo} src={Logo} alt="" />
+              <img className={styles.logo} src={Logo} alt="nefentus logo" />
             </Link>
 
             <ul className={styles.navList}>
@@ -79,12 +79,15 @@ const Navigation = () => {
           </div>
 
           <div className={styles.right}>
-            <div
-              className={`${styles.lang} ${
-                openMenu ? styles.showLanguage : ""
-              }`}
-            >
-              <Languages />
+            <div className={styles.rightWrapper}>
+              <img src={QR} alt="qr" />
+              <div
+                className={`${styles.lang} ${
+                  openMenu ? styles.showLanguage : ""
+                }`}
+              >
+                <Languages />
+              </div>
             </div>
 
             <p className={styles.login}>

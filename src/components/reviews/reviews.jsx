@@ -94,7 +94,7 @@ const Reviews = () => {
                 >
                   <img
                     src={Speaker}
-                    alt=""
+                    alt="speaker"
                     onClick={() => handleMuted(index)}
                   />
                 </div>
@@ -104,7 +104,7 @@ const Reviews = () => {
               </div>
               <div className={styles.blur}>
                 <div className={styles.overlay}></div>
-                <img src={item.image} alt="" />
+                <img src={item.image} alt="client image" />
               </div>
               <p>{content[index].name}</p>
               <p>{content[index].position}</p>

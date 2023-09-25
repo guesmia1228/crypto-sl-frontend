@@ -13,6 +13,19 @@
   max-height: 80rem;
 }
 
+.bgImage {
+  background: url(../../assets/image/gradient.png);
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  top: -20vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  /* bottom: 0; */
+}
+
 .layout > div {
   width: 46rem;
 }
@@ -93,8 +106,8 @@
 
 .list {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  row-gap: 2rem;
+  row-gap: 1rem;
+  margin-top: -2rem;
   column-gap: 5rem;
   margin-bottom: 4rem;
 }

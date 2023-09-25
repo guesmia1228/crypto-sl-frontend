@@ -70,19 +70,19 @@ const Layout = ({
         {list && (
           <div className={styles.list}>
             <div>
-              <img src={Checkmark} alt="" />
+              <img src={Checkmark} alt="Checkmark" />
               <p>{content[0]}</p>
             </div>
             <div>
-              <img src={Checkmark} alt="" />
+              <img src={Checkmark} alt="Checkmark" />
               <p>{content[1]}</p>
             </div>
             <div>
-              <img src={Checkmark} alt="" />
+              <img src={Checkmark} alt="Checkmark" />
               <p>{content[2]}</p>
             </div>
             <div>
-              <img src={Checkmark} alt="" />
+              <img src={Checkmark} alt="Checkmark" />
               <p>{content[3]}</p>
             </div>
           </div>
@@ -94,7 +94,7 @@ const Layout = ({
             <div className={styles.button}>
               <p>{button2}</p>
               <div className={styles.imgWrapper}>
-                <img src={Chevron} alt="" />
+                <img src={Chevron} alt="chevron arrow" />
 
                 <div className={styles.buttonLine}></div>
               </div>
@@ -107,11 +107,11 @@ const Layout = ({
 
               <div className={styles.buttonWrapperMob}>
                 <Button link="/" color="white">
-                  <img src={Android} alt="" />
+                  <img src={Android} alt="android logo" />
                   <span>Play Store</span>
                 </Button>
                 <Button link="/" color="white">
-                  <img src={Apple} alt="" />
+                  <img src={Apple} alt="apple logo" />
                   <span>App Store</span>
                 </Button>
               </div>
@@ -125,7 +125,7 @@ const Layout = ({
             heading || load ? "" : reverse ? "slide-right" : "slide-left"
           }
           src={image}
-          alt=""
+          alt="nefentus graphics"
           style={{ order: reverse ? 1 : 2 }}
         />
       )}

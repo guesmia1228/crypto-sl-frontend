@@ -9,8 +9,6 @@ const Card = ({ title, description1, description2, image, num, button }) => {
   return (
     <div className={`${styles.card} scroll `}>
       <div className={`${styles.wrapper} card`}>
-        {/* <img className={styles.icon} src={Icon} alt="" /> */}
-        {/* <div className={styles.number}>{num}</div> */}
         <div className={styles.title}>{title}</div>
         <div className={styles.description}>
           {description1}
@@ -23,7 +21,7 @@ const Card = ({ title, description1, description2, image, num, button }) => {
         </div>
 
         <div className={styles.image}>
-          <img src={image} alt="" />
+          <img src={image} alt="grow graphics" />
         </div>
       </div>
     </div>

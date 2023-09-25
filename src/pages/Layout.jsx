@@ -8,7 +8,7 @@ const Layout = ({ children, affiliate }) => {
       <Navigation />
 
       {children}
-      <Contact affiliate={affiliate} />
+      {/* <Contact affiliate={affiliate} /> */}
       <Footer />
     </>
   );

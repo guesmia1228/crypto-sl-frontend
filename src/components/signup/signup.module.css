@@ -108,6 +108,10 @@
   width: 20rem;
 }
 
+.formAgreement {
+  font-size: 1rem !important;
+}
+
 @media (max-width: 1200px) {
   .signup {
     padding: 5rem;

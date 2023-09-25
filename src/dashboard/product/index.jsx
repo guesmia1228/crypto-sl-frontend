@@ -56,10 +56,10 @@ const Card = ({ title, description, image, price }) => {
     <div className={`card ${styles.card}`}>
       <div className={styles.imageWrapper}>
         <div className={styles.icons}>
-          <img src={Edit} alt="" />
-          <img src={Delete} alt="" />
+          <img src={Edit} alt="edit" />
+          <img src={Delete} alt="delete" />
         </div>
-        <img src={image} alt="" className={styles.image} />
+        <img src={image} alt="card graphics" className={styles.image} />
       </div>
 
       <div className={styles.body}>

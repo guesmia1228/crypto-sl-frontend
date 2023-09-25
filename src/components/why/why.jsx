@@ -4,7 +4,7 @@ import styles from "./why.module.css";
 const Why = ({ title, content, image = Image, button }) => {
   return (
     <div className={`container break ${styles.section}`}>
-      <img className="slide-right" src={image} alt="" />
+      <img className="slide-right" src={image} alt="table/testimonials" />
 
       <div className={`${styles.content}`}>
         <h3 className="slide-left">{title}</h3>

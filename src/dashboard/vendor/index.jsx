@@ -138,7 +138,7 @@ const Card = ({ title, amount, percentage }) => {
       </p>
 
       <div className={styles.info}>
-        <img src={positive ? Positive : Negative} alt="" />
+        <img src={positive ? Positive : Negative} alt="status" />
         <p className={styles.percentage}>
           <span style={{ color: positive ? "#23C215" : "#C21515" }}>
             {positive ? `+` : `-`}

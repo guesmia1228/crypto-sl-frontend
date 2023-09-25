@@ -25,7 +25,7 @@ const Footer = () => {
   return (
     <footer className={`${styles.footer} card`}>
       <div className={`${styles.top} container`}>
-        <img src={Logo} alt="" />
+        <img src={Logo} alt="nefentus logo" />
 
         <div className={styles.content}>
           <ul>
@@ -38,18 +38,18 @@ const Footer = () => {
 
           <div className={styles.icons}>
             <Link to="https://www.linkedin.com/company/nefentuspay/">
-              <img src={Linkedin} alt="" />
+              <img src={Linkedin} alt="linkedin" />
             </Link>
             <Link to="https://www.instagram.com/nefentus/">
-              <img src={Instagram} alt="" />
+              <img src={Instagram} alt="instagram" />
             </Link>
             <Link to="https://www.youtube.com/channel/UCV1QWqkZXtZvXl6bq3AgkTA">
-              <img src={Youtube} alt="" />
+              <img src={Youtube} alt="youtube" />
             </Link>
 
             <div className={styles.buttonWrapper}>
               <Button link="/" color={"white"}>
-                <img src={LogoIcon} alt="" />
+                <img src={LogoIcon} alt="nefentus logo icon" />
                 <p>{t("footer.downloadButton")}</p>
               </Button>
             </div>

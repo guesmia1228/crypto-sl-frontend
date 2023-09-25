@@ -74,7 +74,7 @@ export const Options = ({
         }`}
         onClick={() => setOpen((prev) => !prev)}
       >
-        {value} <img src={dropDown} alt="" />
+        {value} <img src={dropDown} alt="dropdown" />
         {open && (
           <div className={`card ${styles.body}`}>
             {options.length > 0 ? (

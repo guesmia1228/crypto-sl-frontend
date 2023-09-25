@@ -55,7 +55,7 @@ const PaymentBody = () => {
 
               <div className={styles.item}>
                 <div className={styles.itemTitle}>
-                  <img src={Checkmark} alt="" />
+                  <img src={Checkmark} alt="checkmark" />
 
                   <p>Payment & Invoice</p>
                 </div>
@@ -68,7 +68,7 @@ const PaymentBody = () => {
 
               <div className={styles.item}>
                 <div className={styles.itemTitle}>
-                  <img src={Checkmark} alt="" />
+                  <img src={Checkmark} alt="checkmark" />
 
                   <p>Transactions</p>
                 </div>
@@ -133,7 +133,7 @@ const PaymentBody = () => {
           close={() => setQRModal(false)}
         >
           <div className={styles.modalBody}>
-            <img src={QR} alt="" />
+            <img src={QR} alt="qr" />
           </div>
         </Modal>
       )}
@@ -147,7 +147,7 @@ const Modal = ({ title, info, successful, children, close }) => {
   return (
     <ModalOverlay style={{ width: "100%", maxWidth: "38.2rem" }}>
       {successful && (
-        <img className={styles.modalImage} src={Checkmark} alt="" />
+        <img className={styles.modalImage} src={Checkmark} alt="checkmark" />
       )}
       {!successful && (
         <p className={styles.close} onClick={close}>

@@ -128,7 +128,7 @@ const CryptoLine = ({ data }) => {
   return (
     <div className={styles.line}>
       <div className={styles.lineLeft}>
-        <img src={data.icon} alt="" />
+        <img src={data.icon} alt="crypto data icon" />
         <div>
           <p className={styles.name}>{data.name}</p>
           <p className={styles.abbr}>{data.abbr}</p>

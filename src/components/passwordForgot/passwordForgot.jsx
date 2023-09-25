@@ -38,7 +38,7 @@ const PasswordForgot = () => {
     <div className={styles.login}>
       <div className={styles.card}>
         <div className={styles.left}>
-          <img src={Logo} alt="" />
+          <img src={Logo} alt="nefentus logo" />
 
           <h3>{t("forgot-password.title")}</h3>
         </div>
