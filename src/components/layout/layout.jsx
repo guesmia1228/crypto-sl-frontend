@@ -25,6 +25,7 @@ const Layout = ({
   reverse,
   video,
   list,
+  full,
 }) => {
   const { t } = useTranslation();
 
@@ -121,9 +122,9 @@ const Layout = ({
       </div>
       {!video && (
         <img
-          className={
+          className={`${
             heading || load ? "" : reverse ? "slide-right" : "slide-left"
-          }
+          } ${full ? styles.full : ""}`}
           src={image}
           alt="nefentus graphics"
           style={{ order: reverse ? 1 : 2 }}

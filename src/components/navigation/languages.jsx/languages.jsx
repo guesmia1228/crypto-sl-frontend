@@ -3,6 +3,7 @@ import USA from "../../../assets/icon/flags/usa.svg";
 import DE from "../../../assets/icon/flags/de.svg";
 import ES from "../../../assets/icon/flags/es.svg";
 import AR from "../../../assets/icon/flags/ar.svg";
+import UK from "../../../assets/icon/flags/uk.svg";
 import FR from "../../../assets/icon/flags/fr.svg";
 
 import styles from "./languages.module.css";
@@ -27,9 +28,9 @@ let list = [
     code: "es",
   },
   {
-    label: "العربية",
-    flag: AR,
-    code: "ar",
+    label: "Ukrainian",
+    flag: UK,
+    code: "uk",
   },
 ];
 

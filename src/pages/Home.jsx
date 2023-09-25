@@ -12,6 +12,7 @@ import HomeHeroVideo from "../assets/video/homeHero.mp4";
 import { Helmet } from "react-helmet";
 
 import Image1 from "../assets/image/paymentHome.webp";
+import Main from "../assets/image/main.svg";
 
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
@@ -49,6 +50,8 @@ const Home = () => {
           </>
         }
         button2={t("home.heroButton2")}
+        image={Main}
+        full
         // video={HomeHeroVideo}
         store
       />
