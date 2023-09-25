@@ -142,7 +142,7 @@ body {
 
 h1 {
   font-weight: 600;
-  font-size: 5.5rem;
+  font-size: 5rem;
   line-height: 105%;
 }
 
@@ -198,11 +198,11 @@ h3 {
 
 @media (max-width: 550px) {
   h1 {
-    /* font-size: 3.5rem; */
+    font-size: 3rem;
   }
 
   h2 {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 }
 

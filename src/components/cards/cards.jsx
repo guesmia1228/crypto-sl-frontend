@@ -6,6 +6,7 @@ import Video2 from "../../assets/video/chart.mp4";
 import Video3 from "../../assets/video/target.mp4";
 import { useTranslation } from "react-i18next";
 import { useEffect, useRef } from "react";
+import separateText from "../../func/separate";
 
 const list = [
   {
@@ -87,7 +88,7 @@ const Cards = () => {
         subtitle={t("home.cardSubtitle")}
         title={
           <>
-            {t("home.cardTitleP1")} <br />
+            {t("home.cardTitleP1")} <br className={styles.headerSpace} />
             {t("home.cardTitleP2")}
           </>
         }
@@ -111,7 +112,7 @@ const Cards = () => {
             >
               <source src={item.video} type="video/mp4" />
             </video>
-            <p>{list2[index].title}</p>
+            <p>{separateText(list2[index].title)}</p>
             <p className="standard">{list2[index].description}</p>
           </div>
         ))}

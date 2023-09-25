@@ -138,7 +138,7 @@ const Navigation = () => {
               <li className="standard">{t("navigation.home")}</li>
             </Link>
             <Link to="/payment" onClick={() => setOpenMenu(false)}>
-              <li className="standard">{t("navigation.payment")}</li>
+              <li className="standard">{t("navigation.solutions")}</li>
             </Link>
 
             <Link to="/affiliate" onClick={() => setOpenMenu(false)}>

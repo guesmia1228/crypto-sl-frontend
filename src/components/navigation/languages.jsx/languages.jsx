@@ -23,11 +23,6 @@ let list = [
     code: "de",
   },
   {
-    label: "Español",
-    flag: ES,
-    code: "es",
-  },
-  {
     label: "Ukrainian",
     flag: UK,
     code: "uk",
@@ -50,9 +45,8 @@ const Languages = () => {
 
   useEffect(() => {
     if (query.pathname === "/support") {
-      setLangList(list.slice(0, 2));
-
-      handleTrans("en");
+      // setLangList(list.slice(0, 2));
+      // handleTrans("en");
     } else if (query.pathname === "/privacy" || query.pathname === "/imprint") {
       setLangList(list.slice(0, 1));
 

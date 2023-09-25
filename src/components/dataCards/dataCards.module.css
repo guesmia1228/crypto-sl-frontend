@@ -75,8 +75,8 @@
 
 .list {
   display: grid;
-  grid-template-columns: repeat(2, max-content);
-  grid-row-gap: 2rem;
+  /* grid-template-columns: repeat(2, max-content); */
+  grid-row-gap: 1rem;
   grid-column-gap: 3rem;
 }
 

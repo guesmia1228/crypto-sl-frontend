@@ -4,6 +4,7 @@ import Pros from "../../assets/icon/pros.svg";
 import Cons from "../../assets/icon/cons.svg";
 import { useTranslation } from "react-i18next";
 import HeadingCenter from "../headingCenter/headingCenter";
+import separateText from "../../func/separate";
 
 const Compare = () => {
   const { t } = useTranslation();
@@ -17,13 +18,7 @@ const Compare = () => {
         <div className={`${styles.sectionHeader}`}>
           <HeadingCenter
             subtitle={t("affiliate.compareSubtitle")}
-            title={
-              <>
-                {t("affiliate.compareTitle").split(":")[0]}:
-                <br />
-                {t("affiliate.compareTitle").split(":")[1]}
-              </>
-            }
+            title={<>{separateText(t("affiliate.compareTitle"))}</>}
           />
         </div>
         <div className={`${styles.section} `}>

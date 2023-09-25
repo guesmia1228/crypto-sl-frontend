@@ -30,6 +30,10 @@
   margin-bottom: 3rem;
 }
 
+.header h2 {
+  text-align: left !important;
+}
+
 .card {
   padding: 3rem;
   position: relative;

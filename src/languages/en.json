@@ -45,8 +45,7 @@
     "payrollTitleP1": "Grow with our",
     "payrollTitleP2": "payroll system",
     "aboutCard1Subtitle": "Rapid Adoption",
-    "aboutCard1TitleP1": "Accept A ",
-    "aboutCard1TitleP2": "Wide Variety Cryptocurrencies",
+    "aboutCard1Title": "Accept A\n Wide Variety Cryptocurrencies",
     "aboutCard1TitleGradient": "Without Risk",
     "aboutCard1Description": "Our smart contract based technology eliminates cryptocurrency volatility through instantly converting cryptocurrency payments into stable coins in your wallet. Securely accept a range of crypto currencies and offer payment flexibility to your customers.",
     "aboutCard2Subtitle": "Tracking",
@@ -314,7 +313,7 @@
         "description": "Keep track of your commissions and get notified about sales with our app."
       }
     ],
-    "compareTitle": "Addressing Affiliate Challenges: Our Solutions",
+    "compareTitle": "Addressing Affiliate Challenges:\n Our Solutions",
     "compareSubtitle": "Solutions",
     "compareContent": [
       {

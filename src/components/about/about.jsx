@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import Button from "../button/button";
 
 import Arrow from "../../assets/icon/arrow.svg";
+import separateText from "../../func/separate";
 
 const About = () => {
   const { t } = useTranslation();
@@ -19,7 +20,7 @@ const About = () => {
             {t("home.aboutCard1Subtitle")}
           </p>
           <h3>
-            {t("home.aboutCard1TitleP1")} <br /> {t("home.aboutCard1TitleP2")}
+            {separateText(t("home.aboutCard1Title"))}
             <div className="gradient">{t("home.aboutCard1TitleGradient")}</div>
           </h3>
           <p className="standard">{t("home.aboutCard1Description")}</p>
@@ -81,7 +82,7 @@ const About = () => {
             <h3>
               {t("home.aboutCard3TitleP1")}
               <br />
-              {t("home.aboutCard3TitleP2")}
+              {separateText(t("home.aboutCard3TitleP2"))}
             </h3>
             <p className="standard">{t("home.aboutCard3Description")}</p>
 

@@ -9,7 +9,7 @@
     "menu": "Registrierung"
   },
   "home": {
-    "heroTitle": "Akzeptieren Sie Krypto-Zahlungen",
+    "heroTitle": "Akzeptieren Sie Krypto Zahlungen",
     "heroTitleGradient": "Ohne Risiko",
     "heroDescription": "Mit unserer innovativen Automatisierung und sicheren Krypto-Checkouts, die es Ihnen ermöglichen, sich auf Ihr Geschäft zu konzentrieren, ohne sich um die Schwankungen des Krypto-Marktes sorgen zu müssen. Lassen Sie manuelle Zahlungen der Vergangenheit angehören und lassen Sie uns alles vereinfachen.",
     "heroButton": "Starte Jetzt - Kostenlos!",
@@ -24,11 +24,11 @@
         "description": "Ihre Zufriedenheit, unsere Priorität: Führend mit exzellentem Support."
       },
       {
-        "title": "Erschließen Sie neue Märkte:",
+        "title": "Erschließen Sie\n neue Märkte:",
         "description": "Entfesseln Sie die Kraft des Wachstums und machen Sie sich fit für die Zukunft."
       },
       {
-        "title": "Optimieren Sie Ihren Workflow:",
+        "title": "Optimieren Sie\n Ihren Workflow:",
         "description": "Unsere Lösung, alles in einem: Ihre Abkürzung zu sicheren Krypto-Zahlungen"
       }
     ],
@@ -37,8 +37,7 @@
     "simplifyTitle": "Mühelose Krypto-Transaktionen mit Rechnungsstellung",
     "simplifyDescription": "Erleben Sie eine nahtlose und sichere Transaktions-Umwandlung und eine automatisierte Rechnungsstellung mit Nefentus - entwickelt für Sie, um den vielfältigen Anforderungen von Unternehmen und Kunden gerecht zu werden.",
     "aboutCard1Subtitle": "Schnelle Annahme",
-    "aboutCard1TitleP1": "Akzeptieren Sie eine",
-    "aboutCard1TitleP2": "Vielfalt an Kryptowährungen",
+    "aboutCard1Title": "Akzeptieren Sie\n eine Vielfalt an Kryptowährungen",
     "aboutCard1TitleGradient": "ohne Risiko",
     "aboutCard1Description": "Unsere auf Smart Contracts basierende Technologie eliminiert die Volatilität von Kryptowährungen durch die sofortige Umwandlung von Kryptowährungszahlungen in stabile Coins in Ihrer Wallet. So akzeptieren Sie sicher eine Reihe von Kryptowährungen und bieten Sie Ihren Kunden Zahlungsflexibilität.",
     "aboutCard2Subtitle": "Tracking",
@@ -47,7 +46,7 @@
     "aboutCard2Description": "Unsere fortschrittlichen Dashboards ermöglichen es Ihnen, tiefere Einblicke zu gewinnen und mühelos datenbasierte Entscheidungen zu treffen, die Ihre Produktivität und Profitabilität erhöhen.",
     "aboutCard3Subtitle": "Integration",
     "aboutCard3TitleP1": "Nahtlose Verbindungen ",
-    "aboutCard3TitleP2": "mit all Ihren anderen Tools",
+    "aboutCard3TitleP2": "mit all Ihren\n anderen Tools",
     "aboutCard3Description": "Die Integration in unsere Plattform bietet Zugang zu mehr als 200 Krypto-Wallets, optimiert die Abläufe und verbessert die Finanzkontrolle.",
     "aboutCardButton": "Jetzt Account erstellen",
     "reviewList": [],
@@ -62,7 +61,7 @@
   },
   "payment": {
     "heroHeadingGradient": "Der neue Weg",
-    "heroHeading": "mit Krypto-Währungen zu bezahlen",
+    "heroHeading": "mit Krypto Währungen zu bezahlen",
     "heroDescription": "Erleben Sie die Zukunft des Finanzwesens, indem Sie Ihre Rechnungs- und Zahlungsprozesse mit unseren fortschrittlichen Automatisierungstools und sicheren kryptobasierten Checkouts revolutionieren, welches Finanzmanagement vereinfachen und das Umsatzpotenzial maximieren.",
     "heroButton": "Starten Sie Jetzt - Es ist Kostenlos!",
     "growSubtitle": "Wachsen Sie mit Uns",
@@ -218,7 +217,7 @@
     "forgot": "Passwort vergessen?"
   },
   "affiliate": {
-    "heroTitleP1": "Wahrscheinlich",
+    "heroTitleP1": "Wahrscheinlich\n",
     "heroGradient": "das Beste",
     "heroTitleP2": "Affiliate-Netzwerk da draußen!",
     "heroSubtitle": "Partnerprogramm",
@@ -252,7 +251,7 @@
         "description": "Behalten Sie den Überblick über Ihre Provisionen und lassen Sie sich mit unserer App über Verkäufe benachrichtigen."
       }
     ],
-    "compareTitle": "Herausforderungen für andere Partnerprogramme: Unsere Lösungen",
+    "compareTitle": "Herausforderungen\n für andere Partnerprogramme: Unsere Lösungen",
     "compareSubtitle": "Lösungen",
     "compareContent": [
       {
