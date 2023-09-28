@@ -120,6 +120,10 @@
     width: auto !important;
   }
 
+  .footer ul {
+    width: 70%;
+  }
+
   .content {
     flex-direction: column;
 

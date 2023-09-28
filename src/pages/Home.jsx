@@ -17,6 +17,7 @@ import Main from "../assets/image/main.svg";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import Help from "../components/help/help";
+import PaymentCards from "../components/paymentCards/paymentCards";
 
 const Home = () => {
   const { t, i18n } = useTranslation();
@@ -84,7 +85,9 @@ const Home = () => {
 
       {/* <Reviews /> */}
 
-      <Help />
+      {/* <Help /> */}
+
+      <PaymentCards />
     </>
   );
 };

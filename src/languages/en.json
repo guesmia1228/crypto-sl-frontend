@@ -176,8 +176,7 @@
       }
     ],
     "paymentSubtitle": "Cost",
-    "paymentTitleP1": "No Monthly Fee,",
-    "paymentTitleP2": "Pay Only For Results",
+    "paymentTitle": "No Monthly Fee, Pay Only For Results",
     "paymentCard1Title": "Individual",
     "paymentCard1Description": "3.0% Comission",
     "paymentCard2Title": "Enterprise",
@@ -359,8 +358,8 @@
     "contact": {
       "title": "For more help, contact us!",
       "description": "If you prefer a more personal touch, we're always here to help via phone or email. Whether you have a quick question or need more in-depth assistance, we're just a call or click away.",
-      "button1Text": "Write on Instagram",
-      "button1Description": "You can write on instagram on",
+      "button1Text": "Write on Messenger",
+      "button1Description": "Our web messenger is available for your needs.",
       "button2Description": "Your request will be answered within one day."
     },
     "introduction": {

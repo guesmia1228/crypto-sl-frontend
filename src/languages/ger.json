@@ -65,7 +65,7 @@
     "heroDescription": "Erleben Sie die Zukunft des Finanzwesens, indem Sie Ihre Rechnungs- und Zahlungsprozesse mit unseren fortschrittlichen Automatisierungstools und sicheren kryptobasierten Checkouts revolutionieren, welches Finanzmanagement vereinfachen und das Umsatzpotenzial maximieren.",
     "heroButton": "Starten Sie Jetzt - Es ist Kostenlos!",
     "growSubtitle": "Wachsen Sie mit Uns",
-    "growTitle": "Maximieren Sie Ihre Verkäufe",
+    "growTitle": "Maximieren Sie \nIhre Verkäufe",
     "growTitle2": "mit Nefentus!",
     "growContent": [
       {
@@ -149,8 +149,7 @@
       }
     ],
     "paymentSubtitle": "Kosten",
-    "paymentTitleP1": "Keine monatliche Gebühr,",
-    "paymentTitleP2": "Zahlen Sie nur für Ergebnisse",
+    "paymentTitle": "Keine monatliche Gebühr, \nZahlen Sie nur für Ergebnisse",
     "paymentCard1Title": "Individuell",
     "paymentCard1Description": "3,0% Kommission",
     "paymentCard2Title": "Enterprise",
@@ -208,7 +207,7 @@
     "formInfo": "Mit der Anmeldung erklären Sie sich mit unseren Datenschutzbestimmungen und Nutzungsbedingungen einverstanden.."
   },
   "login": {
-    "titleP1": "Willkommen zurück",
+    "titleP1": "Willkommen",
     "titleP2": "bei Nefentus",
     "description": "Geben Sie Ihre Anmeldedaten unten ein, um auf Ihr Nefentus-Konto zuzugreifen und eine Welt voller Möglichkeiten zu erschließen.",
     "button": "Anmelden",
@@ -219,7 +218,7 @@
   "affiliate": {
     "heroTitleP1": "Wahrscheinlich\n",
     "heroGradient": "das Beste",
-    "heroTitleP2": "Affiliate-Netzwerk da draußen!",
+    "heroTitleP2": "Affiliate Netzwerk da draußen!",
     "heroSubtitle": "Partnerprogramm",
     "heroHeading": "Provisionen mühelos verdienen",
     "heroDescription": "Melden Sie sich kostenlos für das Partnerprogramm von Nefentus an und beginnen Sie, Provisionen auf Autopilot zu verdienen.",
@@ -251,7 +250,7 @@
         "description": "Behalten Sie den Überblick über Ihre Provisionen und lassen Sie sich mit unserer App über Verkäufe benachrichtigen."
       }
     ],
-    "compareTitle": "Herausforderungen\n für andere Partnerprogramme: Unsere Lösungen",
+    "compareTitle": "Herausforderungen\n für andere: Unsere Lösungen",
     "compareSubtitle": "Lösungen",
     "compareContent": [
       {

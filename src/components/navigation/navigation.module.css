@@ -204,7 +204,7 @@
   font-size: 1.4rem;
 }
 
-.button {
+.button > a {
   border-radius: 1rem;
   background: rgba(255, 255, 255, 0.09);
   color: white;
@@ -215,7 +215,7 @@
   transition: 0.2s ease-out;
 }
 
-.button:hover {
+.button > a:hover {
   background-color: var(--blue-color);
 }
 

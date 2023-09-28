@@ -87,7 +87,8 @@
 }
 
 .button {
-  width: 100%;
+  width: max-content !important;
+
   justify-content: center;
   display: flex;
 }

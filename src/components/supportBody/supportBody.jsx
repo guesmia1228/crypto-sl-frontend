@@ -118,11 +118,11 @@ const Contact = () => {
           </div>
           <div className={styles.info}>
             {t("support.contact.button1Description")}{" "}
-            <u>
+            {/* <u>
               <Link to="https://www.instagram.com/helpdesk.nefentus/">
                 helpdesk.nefentus
               </Link>
-            </u>
+            </u> */}
           </div>
         </div>
         <div className="card">

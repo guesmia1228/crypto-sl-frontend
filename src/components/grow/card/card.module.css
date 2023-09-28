@@ -89,12 +89,25 @@
     width: 100%;
   }
 
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
   .image {
-    margin-top: 1.2rem;
+    margin-bottom: 2rem;
+    order: 1;
+    margin-top: 0;
   }
 
   .title {
     line-height: 130%;
     width: 80%;
+    order: 2;
+  }
+
+  .description,
+  .button {
+    order: 2;
   }
 }

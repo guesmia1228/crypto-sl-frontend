@@ -8,6 +8,7 @@ import Card from "./card/card";
 
 import styles from "./grow.module.css";
 import { useTranslation } from "react-i18next";
+import separateText from "../../func/separate";
 
 const content = [
   {
@@ -33,7 +34,7 @@ const Grow = () => {
           subtitle={t("payment.growSubtitle")}
           title={
             <>
-              {t("payment.growTitle")}
+              {separateText(t("payment.growTitle"))}
               <br />
               {t("payment.growTitle2")}
             </>
