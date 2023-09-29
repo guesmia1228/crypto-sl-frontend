@@ -1,6 +1,6 @@
 import styles from "./sidebar.module.css";
 
-import Logo from "../../assets/logo/logo.svg";
+import Logo from "../../assets/logo/logo_wide.svg";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -178,7 +178,9 @@ const Sidebar = () => {
         <div className={`${styles.sidebar}`}>
           <div>
             <div className={styles.logo}>
-				<img src={Logo} alt="nefentus logo" />
+				<center>
+					<img src={Logo} alt="nefentus logo" />
+				</center>
 
               <p className={styles.close} onClick={() => setOpen(false)}>
                 X
