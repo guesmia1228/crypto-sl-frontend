@@ -1,10 +1,10 @@
 import Logo from "../../assets/logo/logo2.svg";
 import Button from "../button/button";
-import Input, { Options } from "../input/input";
+import Input, { SearchOptions} from "../input/input";
 
 import styles from "./signup.module.css";
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import {  useState } from "react";
 import { useTranslation } from "react-i18next";
 import backendAPI from "../../api/backendAPI";
 
@@ -226,7 +226,7 @@ const Signup = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [UseOption, setUseOption] = useState("Choose Options");
-  const [CountryOption, setCountryOption] = useState("Choose Options");
+  const [CountryOption, setCountryOption] = useState("");
   const api = new backendAPI();
 
   const resetForm = () => {
@@ -330,11 +330,12 @@ const Signup = () => {
             setState={setPassword}
             secure
           />
-          <Options
+          <SearchOptions
             label={t("signUp.option1Label")}
             value={CountryOption}
             setValue={setCountryOption}
             options={country_list}
+            placeholder={"Choose Country"}
           />
         </div>
         <div className={styles.buttonWrapper}>
