@@ -33,34 +33,26 @@
 }
 
 /* General */
-html:not(:has(.dashboardFont)) {
- 	font-size: var(--font-size);
+html {
+	font-size: 0.694vw;
 }
-
-html:has(.dashboardFont) {
-	font-size: var(--dashboard-font-size);
-}
-
+  
 @media (max-width: 1200px) {
-	html:not(:has(.dashboardFont)) {
-		font-size: var(--font-size-small);
-	}
-
-	html:has(.dashboardFont) {
-		font-size: var(--dashboard-font-size-small);
+	html {
+	  font-size: 0.833vw;
 	}
 }
-
+  
 @media (max-width: 900px) {
-  html {
-    font-size: 10px !important;
-  }
+	html {
+		font-size: 10px;
+	}
 }
-
+  
 @media (min-width: 1600px) {
-  html {
-    font-size: 11.1px;
-  }
+	html {
+		font-size: 11.1px;
+	}
 }
 
 * {
