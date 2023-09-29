@@ -1,23 +1,23 @@
 import { useState, useContext, useEffect } from "react";
 import QRCode from "react-qr-code";
-import { Options } from "../../components/input/input";
+// import { Options } from "../../components/input/input";
 import Header from "../header/header";
 import Input from "../../components/input/input";
 import Table from "../../components/table";
 import Button from "../../components/button/button";
 import CopyValue from "../copyValue";
 import styles from "./payment.module.css";
-import Checkmark from "../../assets/icon/checkmark.svg";
-import backendAPI from "../../api/backendAPI";
+// import Checkmark from "../../assets/icon/checkmark.svg";
+// import backendAPI from "../../api/backendAPI";
 import vendorDashboardApi from "../../api/vendorDashboardApi";
 import QR from "../../assets/icon/qrcode.svg";
 import TopInfo from "../topInfo/topInfo";
 import ModalOverlay from "../modal/modalOverlay";
-import useInternalWallet from "../../hooks/internalWallet";
+// import useInternalWallet from "../../hooks/internalWallet";
 import { MessageContext } from "../../context/message";
-import inputStyles from "../../components/input/input.module.css";
+// import inputStyles from "../../components/input/input.module.css";
 import { formatUSDBalance } from "../../utils";
-import { useConnect, useDisconnect, metamaskWallet, useConnectionStatus, useAddress } from "@thirdweb-dev/react";
+// import { useConnect, useDisconnect, metamaskWallet, useConnectionStatus, useAddress } from "@thirdweb-dev/react";
 import MessageComponent from "../../components/message";
 
 const headers = ["Created at", "Price ($)", "Status", "QR code", "Actions"]
@@ -25,6 +25,11 @@ const colSizes = [1.5, 1, 1.5, 1.5, 1.5];
 
 const PaymentBody = () => {
 	const [amount, setAmount] = useState("");
+	const [email, setEmail] = useState("");
+	const [name, setName] = useState("");
+	const [company, setCompany] = useState("");
+	const [adress, setAdress] = useState("");
+	const [taxNumber, setTaxNumber] = useState("");
 	const [invoiceData, setInvoiceData] = useState([]);
 	const { clearMessages, setErrorMessage, setInfoMessage } = useContext(MessageContext);
 	const [successfulModal, setSuccessfulModal] = useState(false);
@@ -39,9 +44,38 @@ const PaymentBody = () => {
 			setErrorMessage("Please enter a valid amount");
 			return;
 		}
+		if(!email){
+			setErrorMessage("Please enter a valid email");
+			return;
+		}
+		if(!name){
+			setErrorMessage("Please enter a valid name");
+			return;
+		}
+		if(!company){
+			setErrorMessage("Please enter a valid company");
+			return;
+		}
+		if(!adress){
+			setErrorMessage("Please enter a valid adress");
+			return;
+		}
+		if(!taxNumber){
+			setErrorMessage("Please enter a valid tax number");
+			return;
+		}
+
+		const data={
+			amountUSD: amount,
+			email,
+			name,
+			company,
+			adress,
+			taxNumber
+		}
 
 		// Create invoice
-		const invoiceLinkPart = await vendorAPI.createInvoice(amount);
+		const invoiceLinkPart = await vendorAPI.createInvoice(data);
 
 		if (invoiceLinkPart) {
 			const invoiceLink = window.location.origin + "/pay/" + invoiceLinkPart;
@@ -70,6 +104,11 @@ const PaymentBody = () => {
 		function openModalWithInvoiceData() {
 			setQRValue(window.location.origin + "/pay/" + invoice.link);
 			setAmount(invoice.price);
+			setEmail(invoice.email);
+			setName(invoice.name);
+			setCompany(invoice.company);
+			setAdress(invoice.adress);
+			setTaxNumber(invoice.taxNumber);
 			setQRModalOpen(true);
 		}
 
@@ -109,6 +148,7 @@ const PaymentBody = () => {
 
 	useEffect(() => {
 		fetchInvoices();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
   return (
@@ -133,6 +173,11 @@ const PaymentBody = () => {
           <div className={styles.body}>
 			<div className={styles.columns}>
 					<Input setState={setAmount} placeholder={"Enter amount in $"} dashboard value={amount} />
+					<Input setState={setEmail} placeholder={"Email"} dashboard value={email} />
+					<Input setState={setName} placeholder={"Name"} dashboard value={name} />
+					<Input setState={setCompany} placeholder={"Company"} dashboard value={company} />
+					<Input setState={setAdress} placeholder={"Adress"} dashboard value={adress} />
+					<Input setState={setTaxNumber} placeholder={"Tax number"} dashboard value={taxNumber} />
 
 					<div className={styles.button} onClick={createInvoice}>
 						<center>Create invoice</center>
@@ -187,6 +232,11 @@ const PaymentBody = () => {
       {qrModalOpen && (
         <Modal
 			amount={amount}
+			email={email}
+			name={name}
+			company={company}
+			adress={adress}
+			taxNumber={taxNumber}
 			qrValue={qrValue}
 			onClose={() => { setQRModalOpen(false); clearMessages(); fetchInvoices() } }
 		/>
@@ -197,7 +247,7 @@ const PaymentBody = () => {
 
 export default PaymentBody;
 
-const Modal = ({ amount, qrValue, onClose }) => {
+const Modal = ({ amount, email, name, company, adress, taxNumber, qrValue, onClose }) => {
 	const { setInfoMessage } = useContext(MessageContext);
 
 	return (
@@ -212,6 +262,11 @@ const Modal = ({ amount, qrValue, onClose }) => {
 				<Table 
 					data={[
 						["Amount:", `${amount} USD`],
+						["Email:", `${email}`],
+						["Name:", `${name}`],
+						["Company:", `${company}`],
+						["Adress:", `${adress}`],
+						["Tax number:", `${taxNumber}`],
 						["Link:", <CopyValue value={qrValue} onCopy={() => setInfoMessage("Payment link copied to clipboard!")} />]
 					]} 
 					colSizes={[1, 3]}
