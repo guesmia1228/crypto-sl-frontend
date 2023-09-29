@@ -206,7 +206,6 @@ var country_list = [
   "Ukraine",
   "United Arab Emirates",
   "United Kingdom",
-  "United States of America",
   "Uruguay",
   "Uzbekistan",
   "Venezuela",
@@ -227,7 +226,7 @@ const Signup = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [UseOption, setUseOption] = useState("Choose Options");
-  const [CountryOption, setCountryOption] = useState("Choose Country*");
+  const [CountryOption, setCountryOption] = useState("Choose country");
   const api = new backendAPI();
 
   const resetForm = () => {
@@ -237,7 +236,7 @@ const Signup = () => {
     setEmail("");
     setPassword("");
     setUseOption("Choose Options");
-    setCountryOption("Choose Country*");
+    setCountryOption("Choose country");
   };
 
   async function submitForm() {
@@ -253,7 +252,7 @@ const Signup = () => {
 	} else if (Password === "") {
 		setErrorMessage("Please enter your password");
 		return;
-	} else if (CountryOption === "Choose Country*") {
+	} else if (CountryOption === "Choose country") {
 		setErrorMessage("Please choose a country");
 		return;
 	}
@@ -280,7 +279,7 @@ const Signup = () => {
 
   function handleClick(e) {
 	e.preventDefault();
-    submitForm();
+	submitForm();
   }
 
   return (
@@ -310,19 +309,19 @@ const Signup = () => {
         </div>
       </div>
 
-      <div className={styles.right}>
-        {errorMessage && (
-          <div className={styles.errormessagecontainer}>
-            <p>{errorMessage}</p>
-          </div>
-        )}
-        {message && (
-          <div className={styles.messagecontainer}>
-            <p>{message}</p>
-          </div>
-        )}
+	  <form onSubmit={handleClick}>
+		<div className={styles.right}>
+			{errorMessage && (
+			<div className={styles.errormessagecontainer}>
+				<p>{errorMessage}</p>
+			</div>
+			)}
+			{message && (
+			<div className={styles.messagecontainer}>
+				<p>{message}</p>
+			</div>
+			)}
 
-		<form onSubmit={handleClick}>
 			<div className={styles.row}>
 				<Input
 					label={t("signUp.firstNameLabel") + "*"}
@@ -338,20 +337,20 @@ const Signup = () => {
 					setState={setTelefon}
 				/>
 				<Input
-					label={t("signUp.emailLabel")}
+					label={t("signUp.emailLabel") + "*"}
 					placeholder={t("signUp.emailPlaceholder")}
 					value={Email}
 					setState={setEmail}
 				/>
 				<Input
-					label={t("signUp.passwordLabel")}
+					label={t("signUp.passwordLabel") + "*"}
 					placeholder={t("signUp.passwordPlaceholder")}
 					value={Password}
 					setState={setPassword}
 					secure
 				/>
 				<Options
-					label={t("signUp.option1Label")}
+					label={t("signUp.option1Label") + "*"}
 					value={CountryOption}
 					setValue={setCountryOption}
 					options={country_list}
@@ -366,8 +365,8 @@ const Signup = () => {
 			<p className={styles.formAgreement}>{t("signUp.formInfo")}</p>
 
 			<button type="submit" hidden />
-		</form>
-      </div>
+      	</div>
+	  </form>
     </div>
   );
 };
