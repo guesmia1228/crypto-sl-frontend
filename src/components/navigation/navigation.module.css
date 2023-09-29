@@ -1,20 +1,28 @@
 .navigation {
   top: -100px;
   /* transform: translateY(-100%); */
-  transition: 0.2 ease-in;
-  padding-top: 3.5rem;
-  padding-bottom: 2rem;
+  transition: 0.2 ease-out;
   position: fixed;
   left: 0;
   right: 0;
   z-index: 10;
   pointer-events: none;
-  background: var(--black-color);
+}
+
+.contentWrapper {
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 100;
 }
 
 .content {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  position: relative;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 
 .content > div {
@@ -22,11 +30,16 @@
   align-items: center;
 }
 
+.left {
+  gap: 5rem;
+}
+
 .logo {
-  height: 2.4rem;
-  margin-right: 8rem;
+  height: 2.5rem;
   cursor: pointer;
   pointer-events: initial;
+  transform: translateY(-1px);
+  margin-right: -20px;
 }
 
 .navigation ul {
@@ -40,8 +53,24 @@
   cursor: pointer;
   pointer-events: initial;
   position: relative;
-  transition: 0.2s ease-in;
+  transition: 0.2s ease-out;
   font-size: 1.3rem;
+  overflow: hidden;
+  color: white;
+
+  transform: translateY(0%);
+}
+
+.navigation ul li p {
+  transition: 0.2s ease-out;
+}
+
+.navigation ul li:hover p {
+  transform: translateY(-100%);
+}
+
+.navigation .fake {
+  position: absolute;
 }
 
 .menu {
@@ -51,8 +80,8 @@
 }
 
 .menu a {
-	text-wrap: nowrap;
-  }
+  text-wrap: nowrap;
+}
 
 .hover:hover .dropdownMenu {
   transform: translate(-50%, 0);
@@ -162,7 +191,7 @@
 
 .right {
   gap: 3rem;
-  margin-left: 20px;
+  /* margin-left: 20px; */
 }
 
 .right p {
@@ -172,28 +201,35 @@
 }
 
 .right > p {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
 }
 
-.right p:hover {
-	color: var(--white-color);
-}
-
-.button {
-  background-color: var(--white-color);
-  color: var(--black-color);
-  font-size: 1.3rem;
-  border-radius: 0.5rem;
+.button > a {
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.09);
+  color: white;
+  font-size: 1.4rem;
   pointer-events: initial;
   cursor: pointer;
-  padding: 0.4rem 2.3rem;
-  transition: 0.2s ease-in;
-  border: 1px solid rgba(255, 255, 255, 30%);
+  padding: 1rem 3rem;
+  transition: 0.2s ease-out;
 }
 
-.button:hover {
-  background-color: transparent;
-  color: var(--white-color);
+.button > a:hover {
+  background-color: var(--blue-color);
+}
+
+.login {
+  overflow: hidden;
+  position: relative;
+}
+
+.login p {
+  transition: 0.2s ease-out;
+}
+
+.login:hover p {
+  transform: translateY(-100%);
 }
 
 .dashboardButton {
@@ -205,25 +241,17 @@
   display: none !important;
 }
 
-.mobMenu .midWidth {
-	display: contents;
-}
-
-@media (max-width: 600px) {
-	.mobMenu .midWidth {
-		display: none !important;
-	}
+.content {
+  background: rgba(0, 0, 0, 1);
+  z-index: 5;
 }
 
 .mobileMenu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: var(--black-color);
-  padding: 2rem;
-  transition: 0.2s ease-in;
+  background: rgba(0, 0, 0, 1);
+  backdrop-filter: blur(10px);
+  padding: 2rem 2.5rem;
+  transition: 0.5s ease-out;
+  /* height: 100%; */
 
   display: flex;
   flex-direction: column;
@@ -264,12 +292,16 @@
 .mobileMenu ul {
   flex-direction: column;
   align-items: flex-start;
-  gap: 2rem;
+  gap: 15px;
+}
+
+.mobileMenu ul a {
+  width: 100%;
 }
 
 .mobileMenu ul li {
   width: 100%;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
   border-bottom: 1px solid rgba(255, 255, 255, 15%);
 
   font-size: 1.6rem;
@@ -287,19 +319,54 @@
   transition: 0.3s ease;
 }
 
+.mobileButtonWrapper {
+  display: none;
+}
+
+.rightWrapper {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.rightWrapper > img:first-child {
+  width: 1.4rem;
+}
+
 @media (max-width: 900px) {
-  .navigation > .content ul {
+  .logo {
+    height: 2.2rem;
+  }
+
+  .rightWrapper > img:first-child {
     display: none;
   }
 
-  .right {
+  .navigation {
+    display: grid;
+    grid-template-rows: max-content 1fr;
+  }
+
+  .navigation .content ul {
+    display: none;
+  }
+
+  .login,
+  .button {
     display: none !important;
   }
 
-  .mobMenu {
-    display: initial !important;
-    cursor: pointer;
-    pointer-events: initial !important;
+  .lang {
+    opacity: 0;
+    transition: 0.25s ease-out;
+  }
+
+  .showLanguage {
+    opacity: 1;
+  }
+
+  .right {
+    gap: 2rem;
   }
 
   .dropdownMenu p {
@@ -366,21 +433,75 @@
     transform: translateX(0px);
   }
 
-  .mobButton {
-    font-size: 1.2rem;
-    border: 1px solid var(--white-color);
-    border-radius: 0.5rem;
-    padding: 0.7rem 1.5rem;
-    font-weight: 400;
+  .mobMenu {
+    position: relative;
+    display: initial !important;
+    cursor: pointer;
+    pointer-events: initial !important;
+
+    /* background-color: red; */
+    /* width: 25px;
+    height: 50px; */
   }
 
-  .mobMenu {
-    display: flex !important;
-    align-items: center;
-    gap: 1rem;
+  .lineButton {
+    position: absolute;
+    width: 50px;
+    right: 0;
+    top: 0;
+    transform: translateY(-50%);
+    height: 40px;
+  }
+
+  .line {
+    top: 50%;
+    background-color: white;
+    width: 25px;
+    height: 1.5px;
+    position: absolute;
+    right: 0;
+    transition: 0.2s ease-out;
+    /* transform-origin: left; */
+    transform-origin: center;
+  }
+
+  .line:nth-child(1) {
+    transform: translateY(-7.5px);
+  }
+
+  .line:nth-child(3) {
+    transform: translateY(7.5px);
+  }
+
+  .openLine:nth-child(2) {
+    width: 0px;
+    right: 12.5px;
+  }
+
+  .openLine:nth-child(1) {
+    transform: translateY(0) rotate(45deg);
+  }
+
+  .openLine:nth-child(3) {
+    transform: translateY(0) rotate(-45deg);
   }
 
   .mobMenu img {
     width: 1.6rem;
+  }
+
+  .mobileButtonWrapper {
+    display: initial;
+    pointer-events: initial;
+    margin-right: 2rem;
+  }
+
+  .mobileButtonWrapper > div {
+    border-radius: 4px;
+  }
+
+  .mobileButtonWrapper > div > a > div {
+    padding: 0.1rem 2rem;
+    font-size: 1.2rem;
   }
 }

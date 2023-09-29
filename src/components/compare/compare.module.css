@@ -4,14 +4,40 @@
   gap: 4rem;
 }
 
-.card {
-  padding: 3rem 3rem 5rem 3rem;
+.wrapper {
+  padding: 3rem;
+  height: 100%;
+  transition: 0.25s ease-out;
+}
+
+.wrapper:hover {
+  border-color: rgba(7, 132, 181, 0.24);
+
+  transform: matrix3d(
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0.98,
+    -0.00165,
+    0,
+    0,
+    24,
+    0.98
+  );
+  box-shadow: 0 0px 48px -16px rgba(255, 255, 255, 0.2);
 }
 
 .top {
   display: flex;
   align-items: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   gap: 3rem;
 }
 
@@ -20,14 +46,38 @@
 }
 
 .top h4 {
-  font-size: 2.2rem;
+  font-size: 1.8rem;
+  line-height: 120%;
   font-weight: 500;
+  width: 100%;
 }
 
 .card p {
   font-size: 1.4rem;
   line-height: 140%;
   color: var(--gray-color);
+}
+
+.sectionHeader br {
+  display: none;
+}
+
+.sectionWrapper {
+  position: relative;
+  padding-bottom: 10rem;
+}
+
+.bgImage {
+  background: url(../../assets/image/gradient.webp);
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  top: -20vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  /* bottom: 0; */
 }
 
 @media (max-width: 900px) {
@@ -63,18 +113,26 @@
 }
 
 @media (max-width: 550px) {
-  .card {
-    padding: 2rem 2rem 4rem 2rem;
+  .wrapper {
+    padding: 2rem;
   }
 
   .top {
     flex-direction: column;
     align-items: flex-start;
-    margin-bottom: 1.5rem;
-    gap: 1rem;
+    margin-bottom: 1rem;
+    gap: 1.5rem;
   }
 
   .top img {
     width: 4rem;
+  }
+
+  .top h4 {
+    width: 100%;
+  }
+
+  .sectionHeader br {
+    display: initial;
   }
 }

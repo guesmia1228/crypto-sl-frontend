@@ -90,11 +90,11 @@ const Reviews = () => {
               >
                 <div
                   className={styles.speaker}
-                  style={{ opacity: muted[index] ? 1 : 0.7 }}
+                  style={{ opacity: muted[index] ? 1 : 0.25 }}
                 >
                   <img
                     src={Speaker}
-                    alt=""
+                    alt="speaker"
                     onClick={() => handleMuted(index)}
                   />
                 </div>
@@ -104,14 +104,14 @@ const Reviews = () => {
               </div>
               <div className={styles.blur}>
                 <div className={styles.overlay}></div>
-                <img src={item.image} alt="" />
+                <img src={item.image} alt="client image" />
               </div>
               <p>{content[index].name}</p>
               <p>{content[index].position}</p>
             </div>
 
             <div className={styles.body}>
-              <p className={styles.text}>{content[index].message}</p>
+              <p className={styles.text}>“{content[index].message}”</p>
             </div>
           </div>
         ))}

@@ -1,7 +1,7 @@
 import Input from "../input/input";
 import styles from "./loginBox.module.css";
 
-import Logo from "../../assets/logo/logo.svg";
+import Logo from "../../assets/logo/logo2.svg";
 import Button from "./../button/button";
 import { useState, useEffect } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
@@ -81,62 +81,75 @@ const LoginBox = () => {
   }
 
   return (
-    <div className={styles.login}>
-      <div className={styles.card}>
-		<div className={styles.top}>
-			<img src={Logo} alt="" />
+    <div className={`${styles.login}`}>
+      <div className={styles.closeWrapper}>
+        <Button link={"/"} color={"white"}>
+          Close
+        </Button>
+      </div>
+      <div className={styles.left}>
+        <img src={Logo} alt="nefentus logo" />
 
-			<h3>{t("login.title")}</h3>
-			<div>
-				{errorMessage && (
-				<div className={styles.errormessagecontainer}>
-					<p style={{ color: "red" }}> {errorMessage}</p>
-				</div>
-				)}
-				{message && (
-				<div className={styles.messagecontainer}>
-					<p style={{ color: "green" }}>{message}</p>
-				</div>
-				)}
-			</div>
-		</div>
+        <div>
+          <h2>
+            <span className="gradient">{t("login.titleP1")}</span>
+          </h2>
+          <p>{t("login.description")}</p>
+
+          <p>
+            {t("login.info")}
+            <u>
+              <Link to="/signUp">{t("login.infoButton")}</Link>
+            </u>
+          </p>
+        </div>
+      </div>
+
+      <div className={styles.right}>
+        {errorMessage && (
+          <div className={styles.errormessagecontainer}>
+            <p>{errorMessage}</p>
+          </div>
+        )}
+        {message && (
+          <div className={styles.messagecontainer}>
+            <p>{message}</p>
+          </div>
+        )}
 
 		<form onSubmit={handleClick}>
+			<div className={styles.inputWrapper}>
 			<Input
-			value={Username}
-			setState={setUsername}
-			label={t("signUp.emailLabel")}
-			placeholder={t("signUp.emailPlaceholder")}
+				value={Username}
+				setState={setUsername}
+				label={t("signUp.emailLabel")}
+				placeholder={t("signUp.emailPlaceholder")}
 			/>
 			<Input
-			value={Password}
-			setState={setPassword}
-			label={t("signUp.passwordLabel")}
-			placeholder={t("signUp.passwordPlaceholder")}
-			secure
+				value={Password}
+				setState={setPassword}
+				label={t("signUp.passwordLabel")}
+				placeholder={t("signUp.passwordPlaceholder")}
+				secure
 			/>
 
-			<div className={styles.remeberInfo}>
-			<div onClick={() => setCheckBox((prev) => !prev)}>
+			<div className={styles.rememberInfo}>
+				<div onClick={() => setCheckBox((prev) => !prev)}>
 				<div className={styles.checkBox}>
-				{checkBox && <img src={CheckBox} alt="" />}
+					{checkBox && <img src={CheckBox} alt="checkbox" />}
 				</div>
 				<p>Remember me</p>
-			</div>
+				</div>
 
-			<Link to="/forgot-password">  <p>{t("login.forgot")}</p></Link>
+				<Link to="/forgot-password">
+				<p>{t("login.forgot")}</p>
+				</Link>
 			</div>
-
-			<Button link={null} onClick={handleClick} style={{width: "100%"}}>
+			</div>
+			<div className={styles.buttonWrapper}>
+			<Button className={styles.button} onClick={handleClick}>
 				{t("login.button")}
 			</Button>
-			<div className={styles.info}>
-			<p>
-				{t("login.info")}
-				<u>
-				<Link to="/signUp">{t("login.infoButton")}</Link>
-				</u>
-			</p>
 			</div>
 
 			<button type="submit" hidden />

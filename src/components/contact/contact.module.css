@@ -1,25 +1,49 @@
 .contact {
+  position: relative;
+}
+
+.bgImage {
+  background: url(../../assets/image/gradient.webp);
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  top: -20vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  /* bottom: 0; */
+}
+
+.contact > div {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+  /* max-width: 75rem !important; */
+}
 
-  background-image: url("../../assets/image/gradient.png");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-
-  padding-top: 15rem;
-  padding-bottom: 24rem;
+.contact h3 {
+  margin-bottom: 6rem;
 }
 
 .description {
   margin-top: 1rem;
-  max-width: 75rem;
   font-size: 1.8rem;
   line-height: 140%;
   margin-bottom: 3rem;
   text-align: center;
-  color: var(--gray-color);
+}
+
+.buttonWrapper,
+.buttonWrapper > div {
+  width: 100% !important;
+}
+
+.buttonWrapper > div > a > div {
+  padding: 1rem !important;
 }
 
 @media (max-width: 900px) {

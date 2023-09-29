@@ -15,7 +15,6 @@ import SignUp from "./pages/Signup";
 import Layout from "./pages/Layout";
 import Login from "./pages/Login";
 import Payment from "./pages/Payment";
-import Payroll from "./pages/Payroll";
 import Affiliate from "./pages/Affiliate";
 import Support from "./pages/Support";
 import Privacy from "./pages/Privacy";
@@ -42,19 +41,37 @@ import { MessageContextProvider } from "./context/message";
 
 function App() {
   useEffect(() => {
-    window.addEventListener("scroll", () => {
+    const scrollEvent = () => {
       const scrollElement = document.querySelectorAll(".scroll");
+      const slideElement = document.querySelectorAll(".slide-left");
+      const slideElement2 = document.querySelectorAll(".slide-right");
 
-      for (let i = 0; i < scrollElement.length; i++) {
-        const sectionTop = scrollElement[i].offsetTop;
+      const addClass = (element, className) => {
+        for (let i = 0; i < element.length; i++) {
+          const sectionTop = element[i].offsetTop;
 
-        const scrollPosition = window.scrollY;
+          const scrollPosition = window.scrollY;
 
-        if (scrollPosition + window.innerHeight * 0.6 >= sectionTop) {
-          scrollElement[i].classList.add("scrollAnimation");
+          if (scrollPosition + window.innerHeight * 0.6 >= sectionTop) {
+            element[i].classList.add(className);
+          }
         }
-      }
+      };
+
+      addClass(scrollElement, "scrollAnimation");
+      addClass(slideElement, "slideAnimation");
+      addClass(slideElement2, "slideAnimation");
+    };
+
+    window.addEventListener("scroll", scrollEvent);
+
+    document.addEventListener("contextmenu", (event) => {
+      // event.preventDefault();
     });
+
+    return () => {
+      window.removeEventListener("scroll", () => scrollEvent);
+    };
   }, []);
 
   const [ck, setCK] = useState(Cookies.get("acceptCookie"));
@@ -95,23 +112,26 @@ function App() {
             <Route
               path="/payment"
               element={
-                <Layout>
+                <>
+                  <Navigation />
+
                   <Payment />
-                </Layout>
+                  <Footer />
+                </>
               }
             />
-            <Route
+            {/* <Route
               path="/payroll"
               element={
                 <Layout>
                   <Payroll />
                 </Layout>
               }
-            />
+            /> */}
             <Route
               path="/affiliate"
               element={
-                <Layout>
+                <Layout affiliate={true}>
                   <Affiliate />
                 </Layout>
               }
@@ -251,8 +271,9 @@ function App() {
                     <>
                         <Admin type={"leader"} />
                     </>
+
                 }
-            />
+              />
 
               <Route
                 path="/dashboard/kyc"
@@ -296,9 +317,9 @@ function App() {
 			  />
           </Routes>
         </ScrollToTop>
-        
+
         {/* COOKIE BANNER */}
-        {!ck  && <CookieBanner close={() => setCK(true)} />}
+        {!ck && <CookieBanner close={() => setCK(true)} />}
       </BrowserRouter>
 	</MessageContextProvider>
     </div>

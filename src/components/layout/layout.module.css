@@ -2,37 +2,96 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20rem;
-  margin-bottom: 20rem;
+  margin-top: 10rem;
+  margin-bottom: 10rem;
 }
 
 .hero {
-  margin-top: 14rem;
-  margin-bottom: 14rem;
+  margin-top: 10rem !important;
+  margin-bottom: 10rem !important;
+  padding-top: 5rem;
+  max-height: 80rem;
+}
+
+.bgImage {
+  background: url(../../assets/image/gradient.webp);
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  top: -20vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  /* bottom: 0; */
 }
 
 .layout > div {
-  width: 51rem;
+  width: 46rem;
+}
+
+.buttonWrapper {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.button {
+  cursor: pointer;
+  font-size: 1.4rem;
+
+  font-size: 1.6rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  padding: 1.4rem 3rem;
+  text-align: center;
+  font-weight: 400;
+  gap: 1rem;
+  transition: 0.2s ease-out;
+}
+
+.button img {
+  height: 1rem;
+  transition: 0.2s ease-out;
+  transform-origin: left;
+  padding-top: 1px;
+}
+
+.imgWrapper {
+  position: relative;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.button:hover img {
+  transform: scale(1.25);
 }
 
 .layout h1,
-.layout h2 {
-  margin-bottom: 2rem;
+.layout h3 {
+  margin-bottom: 1rem;
 }
 
 .layout .description {
   margin-bottom: 4rem;
 }
 
-.store p {
-  margin-top: 3rem;
-  margin-bottom: 1rem;
+.store {
+  display: none;
+  margin-top: 2rem;
+  gap: 1rem;
+  flex-direction: column;
 }
 
 .store > div {
   display: flex;
   width: max-content;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .store img {
@@ -47,8 +106,8 @@
 
 .list {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  row-gap: 2rem;
+  row-gap: 1rem;
+  margin-top: -2rem;
   column-gap: 5rem;
   margin-bottom: 4rem;
 }
@@ -62,23 +121,31 @@
   gap: 1rem;
   align-items: center;
   font-size: 1.4rem;
+  width: max-content;
   color: var(--gray-color);
 }
 
 @media (max-width: 900px) {
+  .hero {
+    max-height: max-content;
+  }
+
   .layout {
     flex-direction: column;
     gap: 3rem;
 
-    margin-top: 10rem;
-    margin-bottom: 10rem;
+    margin-top: 10rem !important;
+    margin-bottom: 10rem !important;
   }
 
   .layout > div {
-    order: 2 !important;
     width: 100%;
     display: flex;
     flex-direction: column;
+  }
+
+  .hero > div {
+    order: 2 !important;
   }
 
   .layout:nth-child(3) {
@@ -91,14 +158,64 @@
     width: 100%;
   }
 
+  .hero > img {
+    width: 70%;
+  }
+
+  .hero > .full {
+    width: 100% !important;
+  }
+
   .layout h1,
-  .layout h2 {
+  .layout h3 {
     margin-bottom: 1rem;
+  }
+
+  .buttonWrapperMob img {
+    height: 2rem !important;
+  }
+
+  .buttonWrapperMob span {
+    font-size: 1.2rem;
+    position: relative;
+    top: 1px;
+  }
+
+  .buttonWrapperMob > div > a > div {
+    padding: 1rem 1.5rem;
+  }
+
+  .buttonWrapperMob > div {
+    border-radius: 0.5rem !important;
   }
 }
 
 @media (max-width: 650px) {
+  .hero {
+    min-height: max-content;
+  }
+
+  .layout {
+    margin-top: 3rem !important;
+    margin-bottom: 3rem !important;
+  }
+
   .list {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 450px) {
+  .buttonWrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .store {
+    display: flex;
+  }
+  /* .hero .buttonWrapper > div:first-child, */
+  .button {
+    display: none;
   }
 }

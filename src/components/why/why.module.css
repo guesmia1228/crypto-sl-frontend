@@ -1,5 +1,7 @@
 .section {
   display: flex;
+  padding-top: 7rem;
+  padding-bottom: 7rem;
   justify-content: space-between;
   gap: 12rem;
   align-items: center;
@@ -7,6 +9,9 @@
 
 .section img {
   width: 47rem;
+}
+
+.item {
 }
 
 .content {
@@ -18,12 +23,13 @@
 .content h4 {
   font-size: 2.2rem;
   font-weight: 500;
-  margin-bottom: 1rem;
+  /* margin-bottom: 0.5rem; */
 }
 
 .content p {
   line-height: 140%;
-  color: var(--gray-color);
+  color: #fff;
+  opacity: 0.42;
   font-size: 1.6rem;
 }
 
@@ -35,6 +41,7 @@
   .section img {
     width: 100%;
     height: auto;
+    order: 2;
   }
 
   .content {

@@ -11,9 +11,9 @@
 }
 
 .subtitle {
-  background: var(--linear-color);
+  background: var(--blue-color);
   -webkit-background-clip: text;
-  font-size: 2.2rem;
+  font-size: 1.5rem;
   margin-bottom: 0.6rem;
   -webkit-text-fill-color: transparent;
 }
@@ -21,11 +21,11 @@
 @media (max-width: 900px) {
   .heading {
     margin-bottom: 3rem;
-    align-items: flex-start;
+    /* align-items: flex-start; */
   }
 
   .heading h2 {
-    text-align: left;
+    /* text-align: left; */
   }
 
   .subtitle {

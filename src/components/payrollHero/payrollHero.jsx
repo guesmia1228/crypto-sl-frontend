@@ -25,7 +25,7 @@ const PayrollHero = () => {
         </p>
       </div>
 
-      <img src={Image} alt="" />
+      <img src={Image} alt="payroll dashboard" />
     </div>
   );
 };

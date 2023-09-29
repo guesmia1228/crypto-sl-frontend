@@ -6,7 +6,7 @@ import translationDE from "./ger.json";
 import translationAR from "./ar.json";
 import translationFR from "./Fr.json";
 import translationES from "./es.json";
-
+import translationUK from "./uk.json";
 
 i18n.use(initReactI18next).init({
   debug: true,
@@ -16,20 +16,23 @@ i18n.use(initReactI18next).init({
   },
   resources: {
     en: {
-      translation: translationEN
+      translation: translationEN,
     },
     de: {
-      translation: translationDE
+      translation: translationDE,
     },
     ar: {
-      translation : translationAR
+      translation: translationAR,
     },
     fr: {
-      translation : translationFR
+      translation: translationFR,
     },
     es: {
-      translation : translationES
-    }
+      translation: translationES,
+    },
+    uk: {
+      translation: translationUK,
+    },
   },
 });
 

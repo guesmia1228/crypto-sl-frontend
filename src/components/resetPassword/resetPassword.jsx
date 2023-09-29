@@ -55,7 +55,7 @@ const ResetPassword = () => {
     <div className={styles.login}>
       <div className={styles.card}>
         <div className={styles.top}>
-          <img src={Logo} alt="" />
+          <img src={Logo} alt="nefentus logo" />
 
           <h3>{t("reset-password.title")}</h3>
           <div>
@@ -87,15 +87,12 @@ const ResetPassword = () => {
 			placeholder={t("signUp.passwordPlaceholder")}
 			secure
 			/>
-			<div className={styles.buttonWrapper}>
-				<Button link={null} onClick={handleClick}>Reset password</Button>
-			</div>			
+			<Button link={null} onClick={handleClick}>
+			{t("reset-password.button")}
+			</Button>
 			<div className={styles.info}>
-			<p>
-				Don't want to reset your password? <Link to="/login">Login</Link> instead.
-			</p>
+			<p>{t("reset-password.info")}</p>
 			</div>
-
 			<button type="submit" hidden />
 		</form>
       </div>

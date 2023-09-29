@@ -1,39 +1,50 @@
+.sectionWrapper {
+  background: url(../../assets/image/gradient.webp);
+  background-position: center;
+  background-size: cover;
+  padding-bottom: 10rem;
+}
+
 .body {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
+  gap: 4rem;
 }
 
 .card {
-  width: 36.4rem;
   padding: 3rem;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  gap: 5rem;
+  gap: 3rem;
 }
 
 .lightCard {
-  background: linear-gradient(
-    359.52deg,
-    rgba(21, 149, 194, 0.2) 0.37%,
-    rgba(102, 191, 222, 0.2) 99.54%
-  );
-  border-radius: 25px 0px 0px 25px;
 }
 
 .boldCard {
-  background: linear-gradient(
-    359.52deg,
-    rgb(21, 149, 194, 0.7) 0.37%,
-    rgba(102, 191, 222, 0.7) 99.54%
-  );
-  border-radius: 25px;
-  padding-bottom: 5rem;
-
+  /* padding-bottom: 5rem; */
+  position: relative;
   gap: 6rem;
+}
+
+.boldCard::after {
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  right: -2px;
+  bottom: -2px;
+  background-image: linear-gradient(
+    rgba(216, 213, 209, 0.5),
+    rgba(255, 255, 255, 0.1)
+  );
+  z-index: -1;
+  border-radius: 2.5rem;
 }
 
 .card > div:last-child {
@@ -87,7 +98,7 @@
 
 @media (max-width: 750px) {
   .body {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     gap: 2rem;
   }
 
@@ -97,6 +108,6 @@
 
     padding: 3rem 2rem !important;
 
-    gap: 5rem !important;
+    gap: 3rem !important;
   }
 }

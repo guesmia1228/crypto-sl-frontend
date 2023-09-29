@@ -1,22 +1,23 @@
 .footer {
   border-radius: 5rem 5rem 0 0;
   background-color: var(--black-color);
-  margin-top: -4rem;
 }
 
 .top {
   display: flex;
   justify-content: space-between;
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  align-items: center;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .content {
   gap: 4rem;
-  width: 73rem;
-
+  position: relative;
+  top: 3px;
+  align-items: center;
   display: flex;
   justify-content: space-between;
 }
@@ -31,38 +32,81 @@
   margin-bottom: 3rem;
 }
 
-.content ul {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+.buttonWrapper img {
+  height: 2rem;
+  /* background-color: white; */
+  /* padding: 2rem; */
 }
 
-.content ul li {
+.buttonWrapper > div > a > div {
+  padding: 1rem 1.5rem !important;
+  font-size: 1.4rem;
+}
+
+.buttonWrapper p {
+  position: relative;
+  top: 2px;
+}
+
+.footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-self: center;
+  justify-content: center;
+  column-gap: 3rem;
+  row-gap: 1.5rem;
+}
+
+.footer ul li {
   list-style-type: none;
   font-size: 1.4rem;
-  font-weight: 500;
-  color: var(--gray-color);
+  color: fff;
+  transition: 0.25s ease-out;
+}
+
+.footer ul li:hover {
+  opacity: 0.6;
+}
+
+.bottomList li {
+  opacity: 0.6;
+}
+
+.bottomList li:hover {
+  opacity: 1 !important;
 }
 
 .copyright {
   display: flex;
   justify-content: space-between;
-  padding: 2.5rem 0;
+  padding: 3rem 0;
 }
 
 .copyright p {
   font-size: 1.4rem;
-  color: var(--gray-color);
+  color: #fff;
+  opacity: 0.6;
   font-weight: 500;
 }
 
-.copyright .icons {
+.footer .icons {
+  margin-left: 2.5rem;
   display: flex;
+  align-items: center;
   gap: 2rem;
 }
 
-.copyright img {
+.buttonWrapper {
+  margin-left: 2rem;
+}
+
+.footer .icons img {
   height: 1.6rem;
+}
+
+.footer .icons > a > img {
+  position: relative;
+  top: 2px;
 }
 
 @media (max-width: 900px) {
@@ -76,11 +120,14 @@
     width: auto !important;
   }
 
+  .footer ul {
+    width: 70%;
+  }
+
   .content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     flex-direction: column;
-    width: 100%;
+
+    gap: 0rem;
   }
 
   .content .label {
@@ -92,5 +139,21 @@
     align-items: center;
     gap: 2rem;
     text-align: center;
+  }
+
+  .copyright p,
+  .copyright li {
+    font-size: 1.2rem !important;
+  }
+
+  .footer .icons {
+    margin-left: 0rem;
+
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .buttonWrapper {
+    margin-left: 0rem;
   }
 }

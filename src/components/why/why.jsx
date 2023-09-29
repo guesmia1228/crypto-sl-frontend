@@ -1,21 +1,24 @@
+import Button from "../button/button";
 import styles from "./why.module.css";
 
-import Image from "../../assets/image/why.png";
-
-const Why = ({ title, content, image = Image }) => {
+const Why = ({ title, content, image = Image, button }) => {
   return (
     <div className={`container break ${styles.section}`}>
-      <img className="scroll" src={image} alt="" />
+      <img className="slide-right" src={image} alt="table/testimonials" />
 
-      <div className={`scroll ${styles.content}`}>
-        <h2>{title}</h2>
+      <div className={`${styles.content}`}>
+        <h3 className="slide-left">{title}</h3>
 
         {content.map((item) => (
-          <div>
+          <div className={`${styles.item} slide-left`}>
             <h4>{item.title}</h4>
             <p>{item.description}</p>
           </div>
         ))}
+
+        <div className={`slide-left`}>
+          <Button link="/">{button}</Button>
+        </div>
       </div>
     </div>
   );

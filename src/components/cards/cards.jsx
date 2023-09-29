@@ -1,15 +1,12 @@
 import HeadingCenter from "../headingCenter/headingCenter";
 import styles from "./cards.module.css";
 
-import Wallet from "../../assets/image/wallet.png";
-import Case from "../../assets/image/case.png";
-import Bag from "../../assets/image/bag.png";
-
 import Video1 from "../../assets/video/phone.mp4";
 import Video2 from "../../assets/video/chart.mp4";
 import Video3 from "../../assets/video/target.mp4";
 import { useTranslation } from "react-i18next";
 import { useEffect, useRef } from "react";
+import separateText from "../../func/separate";
 
 const list = [
   {
@@ -28,9 +25,12 @@ const Cards = () => {
 
   const list2 = t("home.cardList", { returnObjects: true });
 
+  const sectionRef = useRef(null);
   const videoRefs = [useRef(null), useRef(null), useRef(null)];
 
   const handleLoad = (videoRef) => {
+    if (window.innerWidth > 900) return;
+
     if (videoRef.current) {
       const playPromise = videoRef.current.play();
       if (playPromise !== undefined) {
@@ -43,16 +43,64 @@ const Cards = () => {
     }
   };
 
+  const handleEnter = (videoRef) => {
+    if (videoRef.current) {
+      videoRef.current.play();
+    }
+  };
+
+  const handleLeave = (videoRef) => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
+  };
+
+  useEffect(() => {
+    const handleScroll = (scrollEvent) => {
+      const minValue = window.innerHeight * 0.4;
+      const scrollPos =
+        window.innerHeight - sectionRef.current.getBoundingClientRect().top;
+
+      if (scrollPos > minValue) {
+        sectionRef.current.children[0].style.transform = "scale(1)";
+        sectionRef.current.children[0].style.opacity = 1;
+
+        setTimeout(() => {
+          sectionRef.current.children[1].style.transform = "scale(1)";
+          sectionRef.current.children[1].style.opacity = 1;
+
+          setTimeout(() => {
+            sectionRef.current.children[2].style.transform = "scale(1)";
+            sectionRef.current.children[2].style.opacity = 1;
+          }, 250);
+        }, 250);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="container break ">
+    <div className={`container break ${styles.section}`}>
       <HeadingCenter
         subtitle={t("home.cardSubtitle")}
-        title={t("home.cardTitle")}
+        title={
+          <>
+            {t("home.cardTitleP1")} <br className={styles.headerSpace} />
+            {t("home.cardTitleP2")}
+          </>
+        }
       />
 
-      <div className={styles.cards}>
+      <div className={styles.cards} ref={sectionRef}>
         {list.map((item, index) => (
-          <div className={`${styles.card} scroll card`}>
+          <div
+            className={`${styles.card} card`}
+            // onMouseEnter={() => handleEnter(videoRefs[index])}
+            // onMouseLeave={() => handleLeave(videoRefs[index])}
+          >
             <video
               ref={videoRefs[index]}
               className="cardVideo"
@@ -64,7 +112,7 @@ const Cards = () => {
             >
               <source src={item.video} type="video/mp4" />
             </video>
-            <p>{list2[index].title}</p>
+            <p>{separateText(list2[index].title)}</p>
             <p className="standard">{list2[index].description}</p>
           </div>
         ))}

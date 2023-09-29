@@ -1,20 +1,25 @@
 .input, .textarea, .attachment {
   width: 100%;
-  background-color: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: #101010;
+  border: 1px solid rgba(255, 255, 255, 0);
   border-radius: 1rem;
-  padding: 1.2rem 2rem;
-  font-size: 1.2rem;
+  padding: 1.8rem 2rem;
+  font-size: 1.4rem;
+  outline: 0 !important;
   color: var(--white-color);
   font-family: 'Euclid';
 }
 
-input::placeholder, textarea::placeholder, .attachment::placeholder {
-  color: var(--gray-color);
+.inputWrapper .input:focus {
+  /* border: 1px solid red !important; */
 }
 
-.label {
-  font-size: 1.2rem;
+.inputWrapper input::placeholder, .inputWrapper textarea::placeholder, .inputWrapper .attachment::placeholder {
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.inputWrapper .label {
+  font-size: 1.4rem !important;
   margin-bottom: 1rem;
   font-weight: 500;
 }

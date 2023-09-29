@@ -32,6 +32,7 @@ const DataCards = () => {
     <div className={`container break ${styles.section}`}>
       {content.map((item, index) => (
         <Card
+          side={index % 2 ? "slide-left" : "slide-right"}
           image={imageContent[index].icon}
           title={item.title}
           list={item.list}
@@ -44,22 +45,24 @@ const DataCards = () => {
 
 export default DataCards;
 
-const Card = ({ image, title, description, list }) => {
+const Card = ({ image, title, description, list, side }) => {
   return (
-    <div className={`${styles.card} scroll card`}>
-      <div className={styles.top}>
-        <img src={image} alt="" />
-        <h4>{title}</h4>
-      </div>
-      <p className={styles.description}>{description}</p>
+    <div className={`${styles.card} ${side}`}>
+      <div className={`${styles.wrapper} card`}>
+        <div className={styles.top}>
+          <img src={image} alt="data symbol icon" />
+          <h4>{title}</h4>
+        </div>
+        <p className={styles.description}>{description}</p>
 
-      <div className={styles.list}>
-        {list.map((item) => (
-          <div>
-            <img src={Checkmark} alt="" />
-            <p>{item}</p>
-          </div>
-        ))}
+        <div className={styles.list}>
+          {list.map((item) => (
+            <div>
+              <img src={Checkmark} alt="checkmark" />
+              <p>{item}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

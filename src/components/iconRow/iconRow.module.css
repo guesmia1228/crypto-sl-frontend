@@ -1,4 +1,4 @@
-.section > div:first-child {
+.section > div:first-child > div:first-child {
   margin-bottom: 1rem;
 }
 
@@ -6,7 +6,8 @@
   line-height: 140%;
   margin: 0 auto;
   font-size: 1.6rem;
-  color: var(--gray-color);
+  color: #fff;
+  opacity: 0.42;
   max-width: 75rem;
   text-align: center;
 }
@@ -19,6 +20,16 @@
 
 .logos img {
   width: 9.6rem;
+  transform: scale(0);
+  transition: 0.3s ease-out;
+}
+
+.logos div:nth-child(3n + 1) img {
+  transition-delay: 0.2s;
+}
+
+.logos div:nth-child(3n + 2) img {
+  transition-delay: 0.4s;
 }
 
 .logos div:nth-child(1),
@@ -33,10 +44,6 @@
 }
 
 @media (max-width: 900px) {
-  .description {
-    text-align: left;
-  }
-
   .logos img {
     width: 6rem;
   }

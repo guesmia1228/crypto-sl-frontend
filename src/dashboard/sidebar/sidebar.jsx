@@ -168,7 +168,7 @@ const Sidebar = () => {
       <img
         className={styles.hamburger}
         src={Hamburger}
-        alt=""
+        alt="hamburger"
         onClick={() => setOpen(true)}
       />
       <div
@@ -178,7 +178,7 @@ const Sidebar = () => {
         <div className={`${styles.sidebar}`}>
           <div>
             <div className={styles.logo}>
-              <img src={Logo} alt="" />
+              <img src={Logo} alt="nefentus logo" />
 
               <p className={styles.close} onClick={() => setOpen(false)}>
                 X

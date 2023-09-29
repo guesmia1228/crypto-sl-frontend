@@ -224,7 +224,7 @@ const CardGraph = ({ title, description, data }) => {
           <div className={styles.tableLine}>
             <div className={styles.left}>
               <div className={styles.image}>
-                <img src={item.img} alt="" />
+                <img src={item.img} alt="image" />
               </div>
 
               <Bar percentage={item.percentage} />

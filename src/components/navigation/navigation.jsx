@@ -5,17 +5,20 @@ import Logo from "../../assets/logo/logo.svg";
 import Hamburger from "../../assets/icon/hamburger.svg";
 import Button from "../button/button";
 import Languages from "./languages.jsx/languages";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+
 import QR from "../../assets/icon/qrcode.svg";
+
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import backend_API from "../../api/backendAPI";
 import { dashboardLink } from "../../utils";
 
 const Navigation = () => {
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
   	const [openMenu, setOpenMenu] = useState(false);
   	const [profile, setProfile] = useState({});
+  	const [height, setHeight] = useState("");
 
 	const backendAPI = new backend_API();
 
@@ -114,84 +117,140 @@ const Navigation = () => {
 		}
 	}
 
+  useEffect(() => {
+    if (window.innerHeight >= 900) return;
+
+    const changeHeight = () => {
+      setHeight(window.innerHeight);
+    };
+
+    changeHeight();
+
+    window.addEventListener("resize", changeHeight);
+
+    return () => window.removeEventListener("resize", changeHeight);
+  });
+
   return (
-    <nav className={`${styles.navigation} load`}>
-      <div className={`container ${styles.content}`}>
-        <div>
-          <Link to="/">
-            <img className={styles.logo} src={Logo} alt="" />
-          </Link>
-          <ul>
-            <li className="standard">
-              <Link to="/">{t("navigation.home")}</Link>
-            </li>
-            <li className={`standard ${styles.hover}`}>
-              <div className={styles.menu}>
-                <Link to="/payment">{t("navigation.solutions")}</Link>
+    <nav className={`${styles.navigation} load`} style={{ height }}>
+      <div className={` ${styles.contentWrapper}`}>
+        <div className={`container ${styles.content}`}>
+          <div className={styles.left}>
+            <Link className={styles.logoWrapper} to="/">
+              <img className={styles.logo} src={Logo} alt="nefentus logo" />
+            </Link>
+
+            <ul className={styles.navList}>
+              <li className="standard">
+                <Link to="/">
+                  <p>{t("navigation.home")}</p>
+                  <p className={styles.fake}>{t("navigation.home")}</p>
+                </Link>
+              </li>
+              <li className="standard">
+                <Link to="/payment">
+                  <p>{t("navigation.solutions")}</p>
+                  <p className={styles.fake}>{t("navigation.solutions")}</p>
+                </Link>
+              </li>
+              <li className="standard">
+                <Link to="/affiliate">
+                  <p>{t("navigation.affiliate")}</p>
+                  <p className={styles.fake}>{t("navigation.affiliate")}</p>
+                </Link>
+              </li>
+              <li className="standard">
+                <Link to="/support">
+                  <p>{t("navigation.resources")}</p>
+                  <p className={styles.fake}>{t("navigation.resources")}</p>
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div className={styles.right}>
+            <div className={styles.rightWrapper}>
+              <img src={QR} alt="qr" />
+              <div
+                className={`${styles.lang} ${
+                  openMenu ? styles.showLanguage : ""
+                }`}
+              >
+                <Languages />
               </div>
-            </li>
-            <li className="standard">
-              <Link to="/support">{t("navigation.resources")}</Link>
-            </li>
-            <li className="standard">
-              <Link to="/affiliate">{t("navigation.affiliate")}</Link>
-            </li>
-          </ul>
-        </div>
-        <div className={styles.right}>
-		  {loginAndSignupWeb()}
+            </div>
 
-          <Languages />
-        </div>
+            <p className={styles.login}>
+              <Link to="/login">
+                <p>{t("navigation.login")}</p>
+                <p className={styles.fake}>{t("navigation.login")}</p>
+              </Link>
+            </p>
+            <div className={styles.button}>
+              <Link to="/signup">{t("navigation.signUp")}</Link>
+            </div>
 
-        <div className={styles.mobMenu}>
-			<span className={styles.midWidth}>
-				{loginAndSignupTopButtons()}
-			</span>
+            <div className={styles.mobileButtonWrapper}>
+              <Button link="/signUp " color="white">
+                Sign Up
+              </Button>
+            </div>
 
-          <img src={Hamburger} alt="" onClick={() => setOpenMenu(true)} />
+            <div className={styles.mobMenu}>
+              <div
+                className={`${styles.line} ${openMenu ? styles.openLine : ""}`}
+              ></div>
+              <div
+                className={`${styles.line} ${openMenu ? styles.openLine : ""}`}
+              ></div>
+              <div
+                className={`${styles.line} ${openMenu ? styles.openLine : ""}`}
+              ></div>
+
+              <div
+                onClick={() => setOpenMenu((prev) => !prev)}
+                className={styles.lineButton}
+              ></div>
+            </div>
+          </div>
         </div>
       </div>
 
       <div
         className={styles.mobileMenu}
-        style={{ transform: openMenu ? "translateX(0%)" : "translateX(100%)" }}
+        style={{
+          transform: openMenu ? "translateY(0%)" : "translateY(-120%)",
+        }}
       >
         <div>
-          <div>
-            <img src={Logo} alt="" />
-
-            <div className={styles.close}>
-              <Languages />
-
-              <p onClick={() => setOpenMenu(false)}>X</p>
-            </div>
-          </div>
-
           <ul>
-            <li className="standard">
-              <Link to="/" onClick={() => setOpenMenu(false)}>
-                {t("navigation.home")}
-              </Link>
-            </li>
-            <li className="standard">
-              <Link to="/payment" onClick={() => setOpenMenu(false)}>
-                {t("navigation.solutions")}
-              </Link>
-            </li>
-            <li className="standard">
-              <Link to="/support" onClick={() => setOpenMenu(false)}>
-                {t("navigation.resources")}
-              </Link>
-            </li>
-            <li className="standard">
-              <Link to="/affiliate" onClick={() => setOpenMenu(false)}>
-                {t("navigation.affiliate")}
-              </Link>
-            </li>
+            <Link to="/" onClick={() => setOpenMenu(false)}>
+              <li className="standard">{t("navigation.home")}</li>
+            </Link>
+            <Link to="/payment" onClick={() => setOpenMenu(false)}>
+              <li className="standard">{t("navigation.solutions")}</li>
+            </Link>
+
+            <Link to="/affiliate" onClick={() => setOpenMenu(false)}>
+              <li className="standard">{t("navigation.affiliate")}</li>
+            </Link>
+            <Link to="/support" onClick={() => setOpenMenu(false)}>
+              <li className="standard">{t("navigation.resources")}</li>
+            </Link>
           </ul>
         </div>
-		{loginAndSignupMobile()}
+        <div>
+          <Button link="/login" onClick={() => setOpenMenu(false)}>
+            {t("navigation.login")}
+          </Button>
+          <Button
+            link="/signup"
+            color="white"
+            onClick={() => setOpenMenu(false)}
+          >
+            {t("navigation.signUp")}
+          </Button>
+        </div>
       </div>
     </nav>
   );

@@ -279,7 +279,7 @@ const KycBody = () => {
         </div>
 
         <div className={styles.input}>
-          <img src={Search} alt="" />
+          <img src={Search} alt="search" />
           <input type="text" name="" id="" placeholder="Search..." />
         </div>
       </div>
@@ -318,7 +318,7 @@ const Table = ({ data }) => {
                     {index === 0 ? (
                       <li className={styles.profile}>
                         <div className={styles.profileImage}>
-                          <img src={item.img} alt="" />
+                          <img src={item.img} alt="table icon" />
                         </div>
 
                         <div className={styles.profileInfo}>
@@ -355,7 +355,7 @@ const Table = ({ data }) => {
                   <div className={styles.line}>
                     <p>{item.type}</p>
 
-                    <img src={Download} alt="" />
+                    <img src={Download} alt="download" />
                   </div>
                 ))}
               </div>

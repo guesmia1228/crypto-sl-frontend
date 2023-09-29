@@ -17,7 +17,6 @@ const PasswordForgot = () => {
   const backendAPI = new backend_API();
   const { t } = useTranslation();
 
-
   async function sendResetMail(username1) {
     try {
       const response = await backendAPI.forgotPassword(username1);
@@ -31,7 +30,6 @@ const PasswordForgot = () => {
     }
   }
 
-
   function handleClick(e) {
 	e.preventDefault();
     sendResetMail(Username);
@@ -40,19 +38,21 @@ const PasswordForgot = () => {
   return (
     <div className={styles.login}>
       <div className={styles.card}>
-        <div className={styles.top}>
-          <img src={Logo} alt="" />
+        <div className={styles.left}>
+          <img src={Logo} alt="nefentus logo" />
 
           <h3>{t("forgot-password.title")}</h3>
-          <div>
+        </div>
+        <div className={styles.top}>
+          <div className={styles.message}>
             {errorMessage && (
               <div className={styles.errormessagecontainer}>
-                <p style={{ color: "red" }}> {errorMessage}</p>
+                <p> {errorMessage}</p>
               </div>
             )}
             {message && (
               <div className={styles.messagecontainer}>
-                <p style={{ color: "green" }}>{message}</p>
+                <p>{message}</p>
               </div>
             )}
           </div>
@@ -66,12 +66,12 @@ const PasswordForgot = () => {
 			placeholder={t("signUp.emailPlaceholder")}
 			/>
 			<div className={styles.buttonWrapper}>
-				<Button link={null} onClick={handleClick}>{t("forgot-password.button")}</Button>
+			<Button link={null} onClick={handleClick}>
+				{t("forgot-password.button")}
+			</Button>
 			</div>
 			<div className={styles.info}>
-			<p>
-				{t("forgot-password.info")}
-			</p>
+			<p>{t("forgot-password.info")}</p>
 			</div>
 
 			<button type="submit" hidden />

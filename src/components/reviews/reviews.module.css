@@ -4,8 +4,16 @@
   gap: 4rem;
 }
 
+.row > div:nth-child(2) {
+  animation-delay: 0.25s;
+}
+
+.row > div:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
 .image {
-  height: 22.7rem;
+  height: 25rem;
   border-radius: 2.5rem;
   padding: 3rem;
   display: flex;
@@ -61,17 +69,13 @@
 }
 
 .quote p {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   color: var(--gray-color);
 }
 
 .text {
   font-size: 1.8rem;
   line-height: 2.8rem;
-}
-
-.reviews br {
-  display: none;
 }
 
 .imageVideo {
@@ -119,6 +123,14 @@
 
   .reviews br {
     display: initial;
+  }
+
+  .row > div:nth-child(2) {
+    animation-delay: 0s;
+  }
+
+  .row > div:nth-child(3) {
+    animation-delay: 0s;
   }
 }
 

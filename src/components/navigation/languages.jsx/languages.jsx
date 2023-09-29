@@ -1,8 +1,9 @@
-import DropDown from "../../../assets/icon/dropdown.svg";
+import Globe from "../../../assets/icon/globe.svg";
 import USA from "../../../assets/icon/flags/usa.svg";
 import DE from "../../../assets/icon/flags/de.svg";
 import ES from "../../../assets/icon/flags/es.svg";
 import AR from "../../../assets/icon/flags/ar.svg";
+import UK from "../../../assets/icon/flags/uk.svg";
 import FR from "../../../assets/icon/flags/fr.svg";
 
 import styles from "./languages.module.css";
@@ -22,19 +23,9 @@ let list = [
     code: "de",
   },
   {
-    label: "Español",
-    flag: ES,
-    code: "es",
-  },
-  {
-    label: "Français",
-    flag: FR,
-    code: "fr",
-  },
-  {
-    label: "العربية",
-    flag: AR,
-    code: "ar",
+    label: "Ukrainian",
+    flag: UK,
+    code: "uk",
   },
 ];
 
@@ -54,9 +45,8 @@ const Languages = () => {
 
   useEffect(() => {
     if (query.pathname === "/support") {
-      setLangList(list.slice(0, 2));
-
-      handleTrans("en");
+      // setLangList(list.slice(0, 2));
+      // handleTrans("en");
     } else if (query.pathname === "/privacy" || query.pathname === "/imprint") {
       setLangList(list.slice(0, 1));
 
@@ -69,14 +59,7 @@ const Languages = () => {
   return (
     <div className={styles.languages}>
       <div className={styles.menu}>
-        <img
-          src={
-            list.filter((item) => item.code === language.toLowerCase())[0].flag
-          }
-          alt=""
-        />
-        <p className="standard">{language}</p>
-        <img src={DropDown} alt="" />
+        <img src={Globe} alt="language globe icon" />
       </div>
       <div className={`${styles.dropdown}`}>
         <div className={`${styles.body} card`}>
@@ -86,7 +69,7 @@ const Languages = () => {
               className={styles.item}
               onClick={() => handleTrans(item.code)}
             >
-              <img src={item.flag} alt="" />
+              <img src={item.flag} alt="language flag" />
               <p className="standard">{item.label}</p>
             </div>
           ))}

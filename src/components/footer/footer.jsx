@@ -1,36 +1,20 @@
 import styles from "./footer.module.css";
 
-import Logo from "../../assets/logo/logo.svg";
+import LogoIcon from "../../assets/logo/logo.svg";
+import Logo from "../../assets/logo/logo2.svg";
 
 import Instagram from "../../assets/icon/instagram.svg";
 import Linkedin from "../../assets/icon/linkedin.svg";
 import Youtube from "../../assets/icon/youtube.svg";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import Button from "../button/button";
 
 const content = [
-  {
-    links: [
-      { link: "/" },
-      { link: "/payment" },
-      { link: "/support" },
-      { link: "/affiliate" },
-    ],
-  },
-  {
-    links: [
-      { link: "/login" },
-      { link: "/signup" },
-      { link: "/" },
-      { link: "/" },
-    ],
-  },
-  {
-    links: [{ link: "/privacy" }, { link: "/imprint" }],
-  },
-  {
-    links: [{ link: "mailto:office@nefentus.com" }, { link: false }],
-  },
+  { link: "/" },
+  { link: "/payment" },
+  { link: "/support" },
+  { link: "/affiliate" },
 ];
 
 const Footer = () => {
@@ -39,45 +23,52 @@ const Footer = () => {
   const footerContent = t("footer.content", { returnObjects: true });
 
   return (
-    <footer className={styles.footer}>
+    <footer className={`${styles.footer} card`}>
       <div className={`${styles.top} container`}>
-        <img src={Logo} alt="" />
+        <img src={Logo} alt="nefentus logo" />
 
         <div className={styles.content}>
-          {content.map((item, indexContent) => (
-            <div className={styles.column} key={indexContent}>
-              <p className={styles.label}>
-                {footerContent[indexContent].label}
-              </p>
+          <ul>
+            {content.map((item, indexLinks) => (
+              <li key={indexLinks}>
+                <Link to={item.link}>{footerContent[indexLinks].text}</Link>
+              </li>
+            ))}
+          </ul>
 
-              <ul>
-                {item.links.map((item, indexLinks) => (
-                  <li key={indexLinks}>
-                    <Link to={item.link}>
-                      {footerContent[indexContent].links[indexLinks].text}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+          <div className={styles.icons}>
+            <Link to="https://www.linkedin.com/company/nefentuspay/">
+              <img src={Linkedin} alt="linkedin" />
+            </Link>
+            <Link to="https://www.instagram.com/nefentus/">
+              <img src={Instagram} alt="instagram" />
+            </Link>
+            <Link to="https://www.youtube.com/channel/UCV1QWqkZXtZvXl6bq3AgkTA">
+              <img src={Youtube} alt="youtube" />
+            </Link>
+
+            <div className={styles.buttonWrapper}>
+              <Button link="/" color={"white"}>
+                <img src={LogoIcon} alt="nefentus logo icon" />
+                <p>{t("footer.downloadButton")}</p>
+              </Button>
             </div>
-          ))}
+          </div>
         </div>
       </div>
 
       <div className={`${styles.copyright} container`}>
-        <p>
-          {t("footer.copyright")} 
-        </p>
-        <div className={styles.icons}>
-          <Link to="https://www.linkedin.com/company/nefentuspay/">
-            <img src={Linkedin} alt="" />
-          </Link>
-          <Link to="https://www.instagram.com/nefentus/">
-            <img src={Instagram} alt="" />
-          </Link>
-          <Link to="https://www.youtube.com/channel/UCV1QWqkZXtZvXl6bq3AgkTA">
-            <img src={Youtube} alt="" />
-          </Link>
+        <p>{t("footer.copyright")}</p>
+
+        <div>
+          <ul className={styles.bottomList}>
+            <li>
+              <Link to={"/privacy"}>{t("footer.privacy")}</Link>
+            </li>
+            <li>
+              <Link to={"/imprint"}>{t("footer.imprint")}</Link>
+            </li>
+          </ul>
         </div>
       </div>
     </footer>

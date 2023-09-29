@@ -1,4 +1,4 @@
-import Logo from "../../assets/logo/logo.svg";
+import Logo from "../../assets/logo/logo2.svg";
 import Button from "../button/button";
 import Input, { Options } from "../input/input";
 
@@ -227,7 +227,7 @@ const Signup = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [UseOption, setUseOption] = useState("Choose Options");
-  const [CountryOption, setCountryOption] = useState("Choose Country");
+  const [CountryOption, setCountryOption] = useState("Choose Country*");
   const api = new backendAPI();
 
   const resetForm = () => {
@@ -237,7 +237,7 @@ const Signup = () => {
     setEmail("");
     setPassword("");
     setUseOption("Choose Options");
-    setCountryOption("Choose Country*")
+    setCountryOption("Choose Country*");
   };
 
   async function submitForm() {
@@ -278,20 +278,26 @@ const Signup = () => {
     }
   }
 
-  function handleClick() {
+  function handleClick(e) {
+	e.preventDefault();
     submitForm();
   }
 
   return (
-    <div className={styles.signup}>
+    <div className={`${styles.signup}`}>
+      <div className={styles.closeWrapper}>
+        <Button link={"/"} color={"white"}>
+          Close
+        </Button>
+      </div>
       <div className={styles.left}>
-        <img src={Logo} alt="" />
+        <img src={Logo} alt="nefentus logo" />
 
         <div>
           <h2>
             {t("signUp.titleP1")}
             <br />
-            {t("signUp.titleP2")}
+            <span className="gradient">{t("signUp.titleP2")}</span>
           </h2>
           <p>{t("signUp.description")}</p>
 
@@ -315,49 +321,52 @@ const Signup = () => {
             <p>{message}</p>
           </div>
         )}
-        <div className={styles.row}>
-          <Input
-            label={t("signUp.firstNameLabel") + "*"}
-            placeholder={t("signUp.firstNamePlaceholder")}
-            value={FirstName}
-            setState={setFirstName}
-          />
-          <Input
-            label={t("signUp.lastNameLabel") + "*"}
-            placeholder={t("signUp.lastNamePlaceholder")}
-            value={LastName}
-            setState={setLastName}
-          />
-        </div>
-        <Input
-          label={t("signUp.telefonLabel")}
-          placeholder="(979) 268-4143"
-          value={Telefon}
-          setState={setTelefon}
-        />
-        <Input
-          label={t("signUp.emailLabel") + "*"}
-          placeholder={t("signUp.emailPlaceholder")}
-          value={Email}
-          setState={setEmail}
-        />
-        <Input
-          label={t("signUp.passwordLabel") + "*"}
-          placeholder={t("signUp.passwordPlaceholder")}
-          value={Password}
-          setState={setPassword}
-          secure
-        />
-        <Options
-          value={CountryOption}
-          setValue={setCountryOption}
-          options={country_list}
-        />
-        <Button className={styles.button} onClick={handleClick}>
-          {t("signUp.formButton")}
-        </Button>
 
-        <p>{t("signUp.formInfo")}</p>
+		<form onSubmit={handleClick}>
+			<div className={styles.row}>
+				<Input
+					label={t("signUp.firstNameLabel") + "*"}
+					placeholder={t("signUp.firstNamePlaceholder")}
+					value={FirstName}
+					setState={setFirstName}
+				/>
+
+				<Input
+					label={t("signUp.telefonLabel")}
+					placeholder="(979) 268-4143"
+					value={Telefon}
+					setState={setTelefon}
+				/>
+				<Input
+					label={t("signUp.emailLabel")}
+					placeholder={t("signUp.emailPlaceholder")}
+					value={Email}
+					setState={setEmail}
+				/>
+				<Input
+					label={t("signUp.passwordLabel")}
+					placeholder={t("signUp.passwordPlaceholder")}
+					value={Password}
+					setState={setPassword}
+					secure
+				/>
+				<Options
+					label={t("signUp.option1Label")}
+					value={CountryOption}
+					setValue={setCountryOption}
+					options={country_list}
+				/>
+			</div>
+			<div className={styles.buttonWrapper}>
+				<Button className={styles.button} onClick={handleClick}>
+					{t("signUp.formButton")}
+				</Button>
+			</div>
+
+			<p className={styles.formAgreement}>{t("signUp.formInfo")}</p>
+
+			<button type="submit" hidden />
+		</form>
       </div>
     </div>
   );

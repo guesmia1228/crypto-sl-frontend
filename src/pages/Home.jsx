@@ -1,8 +1,6 @@
 import Layout from "../components/layout/layout";
 import Navigation from "../components/navigation/navigation";
 
-import Arrow from "../assets/icon/arrow.svg";
-import Circle from "../components/circle/circle";
 import Logos from "../components/logos/logos";
 import Cards from "../components/cards/cards";
 import About from "../components/about/about";
@@ -13,11 +11,13 @@ import HomeHeroVideo from "../assets/video/homeHero.mp4";
 
 import { Helmet } from "react-helmet";
 
-import Image1 from "../assets/image/paymentHome.png";
-import Image2 from "../assets/image/payrollHome.png";
+import Image1 from "../assets/image/paymentHome.webp";
+import Main from "../assets/image/main.svg";
 
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
+import Help from "../components/help/help";
+import PaymentCards from "../components/paymentCards/paymentCards";
 
 const Home = () => {
   const { t, i18n } = useTranslation();
@@ -30,27 +30,31 @@ const Home = () => {
       localStorage.setItem("affiliateJoined", paramValue);
       api.countAffiliate(paramValue);
     }
-
-    console.log(cookies.get("profile_pic"));
   }, []);
 
   return (
     <>
       <Helmet>
-        <title>Nefentus | Home</title>
+        <title>Nefentus | Accept Crypto Payments Risk Free</title>
       </Helmet>
-      {/* <Circle /> */}
       <Layout
-        heading={t("home.heroTitle")}
+        heading={
+          <>
+            {t("home.heroTitle")}
+            <div className="gradient"> {t("home.heroTitleGradient")}</div>
+          </>
+        }
         description={t("home.heroDescription")}
         button={
           <>
             <p>{t("home.heroButton")}</p>
-            <img src={Arrow} alt="" />
           </>
         }
-        video={HomeHeroVideo}
-        store={true}
+        button2={t("home.heroButton2")}
+        image={Main}
+        full
+        // video={HomeHeroVideo}
+        store
       />
 
       <Logos />
@@ -66,7 +70,11 @@ const Home = () => {
 
       <About />
 
-      <Reviews />
+      {/* <Reviews /> */}
+
+      {/* <Help /> */}
+
+      <PaymentCards />
     </>
   );
 };

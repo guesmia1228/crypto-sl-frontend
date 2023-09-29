@@ -68,7 +68,7 @@ const TransactionsBody = () => {
 
 		{/*
         <div className={styles.input}>
-          <img src={Search} alt="" />
+          <img src={Search} alt="search" />
           <input type="text" name="" id="" placeholder="Search..." />
         </div>
   		*/}

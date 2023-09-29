@@ -8,8 +8,12 @@
   width: 1.3rem;
 }
 
-.languages .menu {
-  display: flex;
+.menu {
+  height: 1.6rem;
+}
+
+.menu img {
+  width: 1.6rem !important;
 }
 
 .languages p {
@@ -20,10 +24,11 @@
 
 .dropdown {
   position: absolute;
-  left: -2rem;
-  padding-top: 1rem;
+  left: 50%;
+  transform: translate(-50%, 1rem);
+  padding-top: 1.5rem;
   opacity: 0;
-  transition: 0.2s ease-in;
+  transition: 0.5s ease-out;
   z-index: 100;
 
   pointer-events: none;
@@ -42,13 +47,13 @@
 }
 
 .item p {
-  pointer-events: none;
+  pointer-events: none !important;
 }
 
 .languages:hover .dropdown {
   opacity: 1;
-
-  pointer-events: initial;
+  transform: translate(-50%, 0rem);
+  pointer-events: initial !important;
 }
 
 .item:hover p {

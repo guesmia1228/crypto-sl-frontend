@@ -2,13 +2,13 @@ import Contact from "./../components/contact/contact";
 import Footer from "./../components/footer/footer";
 import Navigation from "./../components/navigation/navigation";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, affiliate }) => {
   return (
     <>
       <Navigation />
 
       {children}
-      <Contact />
+      {/* <Contact affiliate={affiliate} /> */}
       <Footer />
     </>
   );

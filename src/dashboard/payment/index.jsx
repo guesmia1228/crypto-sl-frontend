@@ -132,11 +132,10 @@ const PaymentBody = () => {
 
           <div className={styles.body}>
 			<div className={styles.columns}>
-					<Input setState={setAmount} placeholder={"Enter amount in $"} dashboard value={amount} />
-
-					<div className={styles.button} onClick={createInvoice}>
-						<center>Create invoice</center>
-					</div>
+				<Input setState={setAmount} placeholder={"Enter amount in $"} dashboard value={amount} />
+				<div className={styles.button} onClick={createInvoice}>
+					<center>Create invoice</center>
+				</div>
 			</div>
           </div>
         </div>

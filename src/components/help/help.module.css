@@ -1,0 +1,123 @@
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  gap: 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.sectionWrapper {
+  position: relative;
+  padding-bottom: 10rem;
+}
+
+.bgImage {
+  background: url(../../assets/image/gradient.webp);
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  top: -20vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  /* bottom: 0; */
+}
+
+.header > div {
+  align-items: flex-start;
+  margin-bottom: 3rem;
+}
+
+.header h2 {
+  text-align: left !important;
+}
+
+.card {
+  padding: 3rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: 0.25s ease-out;
+}
+
+.card:hover {
+  border-color: rgba(7, 132, 181, 0.24);
+
+  transform: matrix3d(
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0.98,
+    -0.00165,
+    0,
+    0,
+    24,
+    0.98
+  );
+  box-shadow: 0 0px 48px -16px rgba(255, 255, 255, 0.2);
+}
+
+/* .card:nth-child(2) ::after {
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  right: -2px;
+  bottom: -2px;
+  background-image: linear-gradient(
+    rgba(216, 213, 209, 0.5),
+    rgba(255, 255, 255, 0.05)
+  );
+  z-index: -1;
+  border-radius: 2.5rem;
+} */
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.top h5 {
+  font-size: 2rem;
+  padding-top: 3px;
+}
+
+.top img {
+  height: 3rem;
+}
+
+.button {
+  margin-top: 2.5rem;
+  cursor: pointer;
+  font-size: 1.6rem;
+  color: var(--blue-color);
+  width: max-content;
+  transition: 0.25s ease-out;
+}
+
+.button:hover {
+  opacity: 0.6;
+}
+
+@media (max-width: 750px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .card {
+    width: 100%;
+  }
+}
