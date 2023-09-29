@@ -61,13 +61,15 @@ const Navigation = () => {
 		} else {
 			return (
 				<>
-					<p className="">
-						<Link to="/login">{t("navigation.login")}</Link>
+					<p className={styles.login}>
+						<Link to="/login">
+							<p>{t("navigation.login")}</p>
+							<p className={styles.fake}>{t("navigation.login")}</p>
+						</Link>
 					</p>
 					<div className={styles.button}>
 						<Link to="/signup">{t("navigation.signUp")}</Link>
 					</div>
-					<img className={styles.qrcode} src={QR} alt="" />
 				</>
 			);
 		}
@@ -83,12 +85,9 @@ const Navigation = () => {
 		} else {
 			return (
 				<>
-					<Link to="/login">
-						<div className={styles.mobButton}>{t("navigation.login")}</div>
-					</Link>
-					<Link to="/signup">
-						<div className={styles.mobButton}>{t("navigation.signUp")}</div>
-					</Link>
+					<Button link="/signUp " color="white">
+						Sign Up
+					</Button>
 				</>
 			);
 		}
@@ -97,22 +96,26 @@ const Navigation = () => {
 	function loginAndSignupMobile() {
 		if (profile.email) {
 			return (
-				<div>
+				<>
 					<Button link={profile.dashboardLink} onClick={() => setOpenMenu(false)}>
 						{dashboardString(profile)}
 					</Button>
-				</div>
+				</>
 			);
 		} else {
 			return (
-				<div>
+				<>
 					<Button link="/login" onClick={() => setOpenMenu(false)}>
 						{t("navigation.login")}
 					</Button>
-					<Button color="white" onClick={() => setOpenMenu(false)}>
+					<Button
+						link="/signup"
+						color="white"
+						onClick={() => setOpenMenu(false)}
+					>
 						{t("navigation.signUp")}
 					</Button>
-				</div>
+				</>
 			);
 		}
 	}
@@ -180,20 +183,10 @@ const Navigation = () => {
               </div>
             </div>
 
-            <p className={styles.login}>
-              <Link to="/login">
-                <p>{t("navigation.login")}</p>
-                <p className={styles.fake}>{t("navigation.login")}</p>
-              </Link>
-            </p>
-            <div className={styles.button}>
-              <Link to="/signup">{t("navigation.signUp")}</Link>
-            </div>
+            {loginAndSignupWeb()}
 
             <div className={styles.mobileButtonWrapper}>
-              <Button link="/signUp " color="white">
-                Sign Up
-              </Button>
+				{loginAndSignupTopButtons()}
             </div>
 
             <div className={styles.mobMenu}>
@@ -239,17 +232,9 @@ const Navigation = () => {
             </Link>
           </ul>
         </div>
+
         <div>
-          <Button link="/login" onClick={() => setOpenMenu(false)}>
-            {t("navigation.login")}
-          </Button>
-          <Button
-            link="/signup"
-            color="white"
-            onClick={() => setOpenMenu(false)}
-          >
-            {t("navigation.signUp")}
-          </Button>
+			{loginAndSignupMobile()}
         </div>
       </div>
     </nav>
