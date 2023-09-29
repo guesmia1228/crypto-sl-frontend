@@ -1,14 +1,15 @@
 import Cookies from "js-cookie";
+import ReactGA from "react-ga4";
+
 export default class adminDashboardApi {
     constructor(type) {
-        //LAUNCH
-        //this.baseURL = "https://nefentus.com:8443/api/dashboard/admin";
-        //DEV
 		if (type !== "admin")
         	type = "partner";
 		this.baseURL = process.env.REACT_APP_BASE_ENDPOINT_API + `/dashboard/${type}`;
         this.token = Cookies.get("token");
+		ReactGA.initialize(process.env.REACT_APP_GA_ID);
     }
+
     async checkPermission(){
         try{
             const url = `${this.baseURL}/`;
@@ -215,6 +216,13 @@ export default class adminDashboardApi {
                 body: JSON.stringify(request)
             };
             const response = await fetch(url, options);
+			if (response.ok) {
+				ReactGA.event({
+					category: "Registration",
+					action: "registration_passive",
+					label: email
+				});
+			}
             return response;
         } catch (error) {
             return null; // or return some default value

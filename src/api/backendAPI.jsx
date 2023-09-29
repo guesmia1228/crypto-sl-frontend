@@ -1,13 +1,13 @@
 import Cookies from "js-cookie";
 import setCookie from "../components/setCookie/setCookie";
+import ReactGA from "react-ga4";
+
+
 export default class backendAPI {
     constructor() {
-        //LAUNCH
-        //this.baseURL = "https://nefentus.com:8443/api";
-        //DEV
         this.baseURL = process.env.REACT_APP_BASE_ENDPOINT_API;
-
         this.token = Cookies.get("token");
+		ReactGA.initialize(process.env.REACT_APP_GA_ID);
     }
 
     async checkJwt() {
@@ -43,7 +43,13 @@ export default class backendAPI {
             const response = await fetch(url, options);
             if (!response.ok) {
                 throw new Error("Network response was not ok");
-            }
+            } else {
+				ReactGA.event({
+					category: "Registration",
+					action: "registration_active",
+					label: formData.email
+				});
+			}
             return response;
         } catch (error) {
             return null; // or return some default value
@@ -251,6 +257,13 @@ export default class backendAPI {
             localStorage.setItem("country", data.country);
             localStorage.setItem("requireKyc", data.requireKyc);
             localStorage.setItem("userId", data.userId);
+
+			ReactGA.event({
+				category: "User",
+				action: "login",
+				label: data.email
+			});
+
             return response;
         } catch (error) {
             return null; // or return some default value
