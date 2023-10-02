@@ -351,6 +351,7 @@ const Signup = () => {
         <ReCAPTCHA
           ref={recaptchaRef}
           sitekey={process.env.REACT_APP_SITE_KEY}
+          theme="dark"
         />
 
         <div className={styles.buttonWrapper}>
