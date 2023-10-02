@@ -3,8 +3,8 @@ import Button from "../button/button";
 import Input, { SearchOptions} from "../input/input";
 
 import styles from "./signup.module.css";
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom";
+import { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import ReCAPTCHA from "react-google-recaptcha";
 import backendAPI from "../../api/backendAPI";
@@ -227,7 +227,6 @@ const Signup = () => {
   const [Telefon, setTelefon] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-  const [UseOption, setUseOption] = useState("Choose Options");
   const [CountryOption, setCountryOption] = useState("");
   const api = new backendAPI();
 
@@ -237,7 +236,6 @@ const Signup = () => {
     setTelefon("");
     setEmail("");
     setPassword("");
-    setUseOption("Choose Options");
     setCountryOption(t("signUp.option1Placeholder"));
   };
 
@@ -358,12 +356,13 @@ const Signup = () => {
 					setState={setPassword}
 					secure
 				/>
-				<Options
-					label={t("signUp.option1Label") + "*"}
-					value={CountryOption}
-					setValue={setCountryOption}
-					options={country_list}
-				/>
+              <SearchOptions
+                  label={t("signUp.option1Label")}
+                  value={CountryOption}
+                  setValue={setCountryOption}
+                  options={country_list}
+                  placeholder={t("signUp.option1Placeholder")}
+              />
 			</div>
 
 			<ReCAPTCHA
