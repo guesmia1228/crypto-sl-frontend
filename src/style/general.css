@@ -121,6 +121,10 @@ body {
   }
 }
 
+.dashboardContainer {
+	max-width: 1500px !important;
+}
+
 .break {
   margin-top: 7rem;
   margin-bottom: 7rem;

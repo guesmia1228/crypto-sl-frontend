@@ -5,11 +5,11 @@ import Footer from "./footer";
 const Admin = ({ type }) => {
   return (
 	<>
-		<div className="container dashboardFont">
-		<Helmet>
-			<title>Nefentus | Dashboard</title>
-		</Helmet>
-		<AdminBody type={type} />
+		<div className="container dashboardContainer">
+			<Helmet>
+				<title>Nefentus | Dashboard</title>
+			</Helmet>
+			<AdminBody type={type} />
 		</div>
 		<Footer />
 	</>

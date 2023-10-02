@@ -23,14 +23,14 @@ const Pay = () => {
 	}, []);
 
     return (
-        <>
+        <div className="container">
             <Helmet>
                 <title>Pay invoice | Nefentus</title>
             </Helmet>
 			<ThirdwebProvider activeChain="ethereum" supportedWallets={[metamaskWallet()]} clientId="639eea2ebcabed7eab90b56aceeed08b">
 				<PayBody invoice={invoice} />
 			</ThirdwebProvider>
-        </>
+        </div>
     );
 };
 
