@@ -3,7 +3,7 @@ import styles from "./loginBox.module.css";
 
 import Logo from "../../assets/logo/logo2.svg";
 import Button from "./../button/button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { dashboardLink } from "../../utils";
@@ -12,8 +12,10 @@ import backend_API from "../../api/backendAPI";
 
 import CheckBox from "../../assets/icon/whiteCheckmark.svg";
 import Cookies from "js-cookie";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const LoginBox = () => {
+  const recaptchaRef = useRef();
   const [errorMessage, setErrorMessage] = useState(null);
   const [message, setMessage] = useState(null);
   const [Username, setUsername] = useState("");
@@ -75,9 +77,16 @@ const LoginBox = () => {
     }
   };
 
-  function handleClick(e) {
-	e.preventDefault();
-    loginUser(Username, Password, checkBox);
+  function handleClick(event) {
+    event.preventDefault();
+
+    const captchaValue = recaptchaRef.current.getValue();
+
+    if (!captchaValue) {
+      setErrorMessage("Please verify the reCAPTCHA!");
+    } else {
+      loginUser(Username, Password, checkBox);
+    }
   }
 
   return (
@@ -131,6 +140,12 @@ const LoginBox = () => {
 				label={t("signUp.passwordLabel")}
 				placeholder={t("signUp.passwordPlaceholder")}
 				secure
+			/>
+
+			<ReCAPTCHA
+				ref={recaptchaRef}
+				sitekey={process.env.REACT_APP_SITE_KEY}
+				theme="dark"
 			/>
 
 			<div className={styles.rememberInfo}>

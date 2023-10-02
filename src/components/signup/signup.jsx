@@ -4,8 +4,9 @@ import Input, { Options } from "../input/input";
 
 import styles from "./signup.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import ReCAPTCHA from "react-google-recaptcha";
 import backendAPI from "../../api/backendAPI";
 
 var country_list = [
@@ -217,6 +218,7 @@ var country_list = [
 ];
 
 const Signup = () => {
+  const recaptchaRef = useRef();
   const { t } = useTranslation();
   const [errorMessage, setErrorMessage] = useState(null);
   const [message, setMessage] = useState(null);
@@ -277,9 +279,16 @@ const Signup = () => {
     }
   }
 
-  function handleClick(e) {
-	e.preventDefault();
-	submitForm();
+  function handleClick(event) {
+    event.preventDefault();
+
+    const captchaValue = recaptchaRef.current.getValue();
+
+    if (!captchaValue) {
+      setErrorMessage("Please verify the reCAPTCHA!");
+    } else {
+      submitForm();
+    }
   }
 
   return (
@@ -356,6 +365,13 @@ const Signup = () => {
 					options={country_list}
 				/>
 			</div>
+
+			<ReCAPTCHA
+				ref={recaptchaRef}
+				sitekey={process.env.REACT_APP_SITE_KEY}
+				theme="dark"
+			/>
+
 			<div className={styles.buttonWrapper}>
 				<Button className={styles.button} onClick={handleClick}>
 					{t("signUp.formButton")}
