@@ -257,9 +257,19 @@
     max-width: 50rem;
 }
 
-.modal p {
+.modalHeadline {
     font-size: 1.6rem;
     margin-bottom: 2rem;
+}
+
+.tabContent {
+	margin-top: 2rem;
+}
+
+.modalButtonRow {
+	display: flex;
+    justify-content: center;
+    gap: 2rem;
 }
 
 @media (max-width: 900px) {

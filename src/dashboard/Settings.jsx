@@ -6,7 +6,7 @@ const Settings = ({ type = "" }) => {
   return (
     <div>
       <Helmet>
-        <title>Nefentus | Settings</title>
+        <title>{"Nefentus | Settings"}</title>
       </Helmet>
       <SettingsBody type={type} />
     </div>

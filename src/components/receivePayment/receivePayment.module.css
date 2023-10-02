@@ -1,0 +1,167 @@
+.container {
+	margin-top: 14rem;
+    margin-bottom: 14rem;
+}
+
+@media (max-width: 900px){
+	.container {
+		margin-left: 8rem;
+		margin-right: 8rem;
+	}
+}
+
+@media (max-width: 600px){
+	.container {
+		margin-left: 4rem;
+		margin-right: 4rem;
+	}
+}
+
+.infoWrapper {
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+
+.productInfo {
+	border-radius: 0.5rem;
+	margin-bottom: 2rem;
+}
+
+.productImage {
+	border-radius: 0.5rem;
+	margin-bottom: 2rem;
+}
+
+.imageWrapper {
+	height: 23rem;
+	background-color: gray;
+	width: 100%;
+	border-radius: 0.5rem;
+	overflow: hidden;
+	position: relative;
+}
+
+.image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.body {
+	padding: 2rem 3rem 3rem 3rem;
+}
+
+.productBuy h4 {
+	font-size: 2.2rem;
+	margin-bottom: 1.5rem;
+	font-weight: 400;
+}
+
+.productBuy {
+	border-radius: 0.5rem;
+	margin-bottom: 2rem;
+}
+
+.price, .stock {
+	font-weight: 500;
+    font-size: 1.8rem;
+	display: flex;
+	margin: 1rem 0;
+}
+
+.price span, .stock span {
+	flex: 1 1;
+}
+
+.tabNavLogo {
+	height: 1.5rem;
+	margin-right: 0.3rem;
+	vertical-align: baseline;
+}
+
+.tabContent {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 2rem;
+	margin-top: 2rem;
+	margin-bottom: 5rem;
+  }
+
+.center {
+	display: flex;
+  	justify-content: center;
+}
+
+.balance {
+	margin-top: 20px;
+	background-color: #1C1C1C;
+	padding: 3rem;
+	border-radius: 1rem;
+}
+
+/*
+.table {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	margin-top: 3rem;
+  }*/
+
+  .table {
+	display: grid;
+	grid-template-columns: 1fr fit-content(10rem) fit-content(10rem);
+	flex-direction: column;
+	gap: 2rem;
+	margin-top: 3rem;
+  }
+  
+  .line {
+	padding-top: 2rem;
+	border-top: 1px solid rgba(255, 255, 255, 0.05);
+	display: contents;
+	grid-template-columns: 1fr fit-content(10rem) fit-content(10rem);
+	justify-content: space-between;
+	height: 4rem;
+  }
+  
+  .line img {
+	  width: 4rem;
+	  height: auto;
+  }
+  
+  .lineLeft {
+	display: flex;
+	align-items: center;
+	gap: 1.5rem;
+  }
+  
+  .name,
+  .dollar {
+	font-size: 1.6rem;
+	margin-bottom: 0.2rem;
+  }
+  
+  .abbr,
+  .crypto {
+	font-size: 1.2rem;
+	color: var(--gray-color);
+  }
+  
+  .crypto, .dollar {
+	text-align: right;
+  }
+
+.modalInputs {
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+
+.modalButtons {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 2rem;
+}
+
+.modalButtons > div {
+	width: 100%;
+}

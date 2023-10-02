@@ -7,7 +7,6 @@ const Transactions = () => {
       <Helmet>
         <title>Nefentus | Transactions</title>
       </Helmet>
-
       <TransactionsBody />
     </div>
   );

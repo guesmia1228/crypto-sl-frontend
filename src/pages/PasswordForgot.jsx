@@ -1,11 +1,11 @@
 import PassswordForgot from "./../components/passwordForgot/passwordForgot";
-import { Helmet } from "react-helmet";
+import Helmet from "react-helmet";
 
 const Login = () => {
     return (
-        <div>
+        <div className="dashboardFont">
             <Helmet>
-                <title>Nefentus | Password-forgot</title>
+                <title>Nefentus | Password forgotten</title>
             </Helmet>
             <PassswordForgot />
         </div>

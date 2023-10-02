@@ -1,9 +1,9 @@
 import styles from "./input.module.css";
 
-import Image from "../../assets/icon/attachment.svg";
+import AttachmentImage from "../../assets/icon/attachment.svg";
 import { useRef, useState } from "react";
 
-const Input = ({ label, placeholder, type = "text", setState, value }) => {
+const Input = ({ label, placeholder, type = "text", setState, value, disabled }) => {
   const handleChange = (e) => {
     setState(e.target.value);
   };
@@ -19,12 +19,25 @@ const Input = ({ label, placeholder, type = "text", setState, value }) => {
         value={value}
         placeholder={placeholder}
         onChange={handleChange}
+		disabled={disabled === true}
       />
     </div>
   );
 };
 
 export default Input;
+
+export const RawInput = ({ placeholder, type = "text", setState, value, disabled }) => {
+	const handleChange = (e) => {
+		setState(e.target.value);
+	};
+  
+	return (
+		<div className={`${styles.input} ${styles.inputRaw}`}>
+			<input type={type} name="" id="" value={value} placeholder={placeholder} onChange={handleChange} disabled={disabled === true}/>
+		</div>
+	);
+};
 
 export const Attachment = ({ label, onUpload }) => {
   const inputRef = useRef(null);
@@ -60,7 +73,7 @@ export const Attachment = ({ label, onUpload }) => {
         <p>{label}</p>
 
         <div className={styles.attachment} onClick={handleClick}>
-          <img src={Image} alt="input icon" />
+          <img src={AttachmentImage} alt="" />
           <p style={{ color: text ? "#fff" : "#c4c4c4" }}>
             {text ? text : "Add attachment"}
           </p>

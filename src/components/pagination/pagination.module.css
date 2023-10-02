@@ -1,0 +1,49 @@
+.paginationWrapper {
+    display: flex;
+	margin-top: 2rem;
+    margin-bottom: 2rem;
+	font-size: 1.6rem;
+}
+
+.nav {
+	flex: 1 1;
+    display: flex;
+    justify-content: center;
+}
+        
+.pagination {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+        
+.pagination li {
+    margin: 5px 10px;
+	cursor: pointer;
+}
+
+.hide {
+	color: black;
+	cursor: default !important;
+}
+
+.pageInput {
+    background-color: black;
+    color: white;
+    font-size: 1.6rem;
+    border: 1px solid white;
+    border-radius: 1rem;
+    padding: 5px;
+    width: 60px;
+    text-align: center;
+    margin-right: 5px;
+}
+
+.paginationWrapper > div {
+	width: 120px;
+}
+
+.paginationWrapper > div > div {
+	font-size: 1.6rem !important;
+}

@@ -20,17 +20,18 @@ const PasswordForgot = () => {
   async function sendResetMail(username1) {
     try {
       const response = await backendAPI.forgotPassword(username1);
-      if (response == null) {
-        setErrorMessage("Invalid Email!");
+      if(response == null){
+        setErrorMessage("Invalid email address!");
         return;
       }
-      setMessage("Password reset sent!");
+        setMessage("Email sent to reset password!");
     } catch (error) {
       setErrorMessage("There was an error sending the email!");
     }
   }
 
-  function handleClick() {
+  function handleClick(e) {
+	e.preventDefault();
     sendResetMail(Username);
   }
 
@@ -57,20 +58,24 @@ const PasswordForgot = () => {
           </div>
         </div>
 
-        <Input
-          value={Username}
-          setState={setUsername}
-          label={t("signUp.emailLabel")}
-          placeholder={t("signUp.emailPlaceholder")}
-        />
-        <div className={styles.buttonWrapper}>
-          <Button link={null} onClick={handleClick}>
-            {t("forgot-password.button")}
-          </Button>
-        </div>
-        <div className={styles.info}>
-          <p>{t("forgot-password.info")}</p>
-        </div>
+		<form onSubmit={handleClick}>
+			<Input
+			value={Username}
+			setState={setUsername}
+			label={t("signUp.emailLabel")}
+			placeholder={t("signUp.emailPlaceholder")}
+			/>
+			<div className={styles.buttonWrapper}>
+			<Button link={null} onClick={handleClick}>
+				{t("forgot-password.button")}
+			</Button>
+			</div>
+			<div className={styles.info}>
+			<p>{t("forgot-password.info")}</p>
+			</div>
+
+			<button type="submit" hidden />
+		</form>
       </div>
     </div>
   );

@@ -68,19 +68,6 @@ const Home = () => {
         image={Image1}
       />
 
-      {/* <Layout
-        title={
-          <>
-            {t("home.payrollTitleP1")} <br /> {t("home.payrollTitleP2")}
-          </>
-        }
-        description={t("home.payrollDescription")}
-        button={t("home.layoutButton")}
-        subtitle={t("home.payrollSubtitle")}
-        reverse={true}
-        image={Image2}
-      /> */}
-
       <About />
 
       {/* <Reviews /> */}

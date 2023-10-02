@@ -41,7 +41,7 @@
 
 .row {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 2rem;
   margin-bottom: 2rem;
 }
@@ -69,12 +69,16 @@
   gap: 0.5rem;
 
   color: var(--gray-color);
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 
 .info span {
   font-size: 1.4rem;
   font-weight: 500;
+}
+
+.graph {
+	margin-bottom: 2rem;
 }
 
 @media (max-width: 900px) {

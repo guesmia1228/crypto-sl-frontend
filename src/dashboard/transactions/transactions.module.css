@@ -47,28 +47,6 @@
   width: 1.2rem;
 }
 
-.card {
-  border-radius: 1rem;
-}
-
-.table ul {
-  grid-template-columns: 1.5fr 1.2fr 2fr 1fr 1fr 1.2fr 1.2fr 1fr 1fr;
-}
-
-.tableBody li:nth-child(5) {
-  background-color: rgba(21, 149, 194, 0.1);
-  color: #1595c2;
-
-  padding: 0.3rem 1rem;
-  border-radius: 0.2rem;
-  width: max-content;
-}
-
-.tableBody li:last-child {
-  color: #1595c2;
-  cursor: pointer;
-}
-
 @media (max-width: 900px) {
   .top {
     flex-direction: column;
@@ -79,13 +57,5 @@
   .input {
     width: 100%;
     max-width: 50rem;
-  }
-
-  .card {
-    overflow-x: scroll;
-  }
-
-  .card::-webkit-scrollbar {
-    display: none;
   }
 }

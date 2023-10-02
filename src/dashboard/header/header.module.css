@@ -53,6 +53,10 @@
   pointer-events: initial;
 }
 
+.settingsBody {
+	z-index: 10;
+}
+
 .settingsBody p {
   font-size: 1.4rem !important;
 }

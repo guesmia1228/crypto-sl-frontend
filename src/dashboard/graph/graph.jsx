@@ -1,4 +1,5 @@
 import styles from "./graph.module.css";
+import { formatUSDBalance } from "../../utils";
 
 import {
   Chart as ChartJS,
@@ -66,7 +67,7 @@ function  getTotalIncome(totalPrices){
     const sum = values.reduce(function (prev, currentValue) {
       return prev + currentValue;
     },0)
-    return '$' + sum.toLocaleString()
+    return '$' + formatUSDBalance(sum)
   } else {
     return "$0"
   }
@@ -116,7 +117,7 @@ export const options = {
       ticks: {
         // Include a eur sign in the ticks
         callback: function (value, index, ticks) {
-          return value + "K €";
+          return value + " $";
         },
         // beginAtZero: true,
         beginAtZero: true,
@@ -149,24 +150,24 @@ export const options = {
   },
 };
 
-const Graph = (totalPrices) => {
+const Graph = ({data, style}) => {
   return (
-    <div className={`card ${styles.graphCard}`}>
+    <div className={`card ${styles.graphCard}`} style={style}>
       <div className={styles.info}>
         <div className={styles.left}>
-          <div className={styles.label}>Incomes</div>
-          <div className={styles.graphAmount}>{getTotalIncome(totalPrices.data)}</div>
+          <div className={styles.label}>Income</div>
+          <div className={styles.graphAmount}>{getTotalIncome(data)}</div>
         </div>
 
         <div className={styles.datePicker}>
-          <p>{getStartDate(totalPrices.data)}</p>
+          <p>{getStartDate(data)}</p>
           <p> - </p>
-          <p>{getEndDate(totalPrices.data)}</p>
+          <p>{getEndDate(data)}</p>
         </div>
       </div>
 
       <div className={styles.chartContainer}>
-        <Line options={options} data={populateGraph(totalPrices.data)} />
+        <Line options={options} data={populateGraph(data)} />
       </div>
     </div>
   );

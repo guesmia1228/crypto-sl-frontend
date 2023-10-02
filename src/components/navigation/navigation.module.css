@@ -196,7 +196,7 @@
 
 .right p {
   cursor: pointer;
-  color: var(--white-color);
+  color: var(--gray-color);
   pointer-events: initial;
 }
 
@@ -230,6 +230,11 @@
 
 .login:hover p {
   transform: translateY(-100%);
+}
+
+.dashboardButton {
+	font-size: 1rem;
+	padding: 0.4rem 0.8rem;
 }
 
 .mobMenu {

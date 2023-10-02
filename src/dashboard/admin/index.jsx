@@ -1,463 +1,353 @@
 import Button from "../../components/button/button";
 import Input, { Options } from "../../components/input/input";
-import Card from "../card/card";
+import StatsCard from "../statsCard/statsCard";
 import { transformNumber } from "../func/transformNumber";
 import Graph from "../graph/graph";
 import Header from "../header/header";
 import TopInfo from "../topInfo/topInfo";
 import styles from "./admin.module.css";
 import { options } from "./../graph/graph";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import ModalOverlay from "../modal/modalOverlay";
 import adminDashboardApi from "../../api/adminDashboardApi";
 import { useNavigate } from "react-router-dom";
-import diamondDashboardApi from "../../api/diamondDashboardApi";
-import goldDashboardApi from "../../api/goldDashboardApi";
-import ibLeaderDashboardApi from "../../api/ibLeaderDashboardApi";
+import Table from "../../components/table";
+import TablePagination from "../../components/tablePagination";
+import { formatUSDBalance } from "../../utils";
+import { ROLE_TO_NAME } from "../../constants";
+import CopyValue from "../copyValue";
+import { MessageContext } from "../../context/message";
+import MessageComponent from "../../components/message";
+import imputStyles from "../../components/input/input.module.css";
+import { tab } from "@testing-library/user-event/dist/tab";
 
-// const barContent = [
-//   {
-//     role: "Vendor",
-//     percentage: 31,
-//     amount: 311,
-//   },
-//   {
-//     role: "Affiliate",
-//     percentage: 20,
-//     amount: 100,
-//   },
-//   {
-//     role: "Diamond",
-//     percentage: 13,
-//     amount: 21,
-//   },
-//   {
-//     role: "Gold",
-//     percentage: 36,
-//     amount: 550,
-//   },
-// ];
+const header = [
+	"First Name",
+	"Last Name",
+	"Email",
+	"Roles",
+	"Status",
+	"Income ($)",
+	"Joined on",
+	"Actions",
+];
+
+const colSizes = [1, 1, 2, 1, 1, 1, 1, 2];
 
 const AdminBody = ({ type }) => {
+	const [cardInfo, setCardInfo] = useState([]);
+	const [tableData, setTableData] = useState([]);
+	const [filteredData, setFilteredData] = useState([]);
+	const [searchText, setSearchText] = useState("");
+	const [graphData, setGraphData] = useState([]);
+	const [role, setRole] = useState("");
+	const [barContent, setBarContent] = useState([]);
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
+	const [password, setPassword] = useState("");
+	const [email, setEmail] = useState("");
+	const [openModal, setOpenModal] = useState(false);
+	const [showPassword, setShowPassword] = useState(false);
+	const [editEmailAddress, setEditEmailAddress] = useState(null);
 
-  const [totalRegistrations, setTotalRegistrations] = useState(0);
-  const [totalClicks, setTotalClicks] = useState(0);
-  const [totalIncomes, setTotalIncomes] = useState(0);
-  const [totalRegistrationsPercentage, setTotalRegistrationsPercentage] = useState(0);
-  const [totalClicksPercentage, setTotalClicksPercentage] = useState(0);
-  const [totalIncomesPercentage, setTotalIncomesPercentage] = useState(0);
-  const [tableData, setTableData] = useState([]);
-  const [graphData, setGraphData] = useState([]);
-  const [value, setValue] = useState("Filter");
-  const [barContent, setBarContent] = useState([]);
-  const navigate = useNavigate();
-  const [openModal, setOpenModal] = useState(false);
-  const adminApi = new adminDashboardApi();
-  const diamondApi = new diamondDashboardApi();
-  const goldApi = new goldDashboardApi();
-  const ibLeaderApi = new ibLeaderDashboardApi()
-  useEffect(() => {
-    async function fetchData() {
-      if(type === "admin"){
-        fetchAdminData();
-      }else if(type === "diamond"){
-        fetchDiamondData();
-      } else if(type === "gold"){
-        fetchGoldData();
-      } else {
-        fetchIBLeaderData();
-      }
-    }
-    fetchData();
-  }, []); 
+	const { setInfoMessage, setErrorMessage, clearMessages } = useContext(MessageContext);
 
-  const fetchAdminData = async () => {
-      const result = await adminApi.checkPermission();
-      if (result !== true) {
-        console.log("asdasdasdasds");
-        navigate("/login");
-      } else {
-        const getPromises = [
-          adminApi.getTotalRegistrations(),
-          adminApi.getTotalClicks(),
-          adminApi.getTotalIncome(),
-          adminApi.getUsers(),
-          adminApi.getRoleReport(),
-          adminApi.getTotalIncomesPerDay()
-        ]
+	const navigate = useNavigate();
+	const adminApi = new adminDashboardApi(type);
+	const affiliate = type === "affiliate";
+
+	useEffect(() => {
+		fetchAdminData();
+		clearMessages();
+	}, []); 
+
+	const fetchAdminData = async () => {
+		const result = await adminApi.checkPermission();
+		if (result !== true) {
+			navigate("/login");
+		} else {
+			const getPromises = [
+				adminApi.getTotalRegistrations(),
+				adminApi.getTotalClicks(),
+				adminApi.getNumOrders(),
+				adminApi.getTotalIncome(),
+				adminApi.getUsers(),
+				adminApi.getRoleReport(),
+				adminApi.getTotalIncomesPerDay()
+			]
       
-        const getResponses = await Promise.allSettled(getPromises)
-  
-        const dataReg = getResponses[0];
-        if (dataReg.status === 'fulfilled' && dataReg.value !== null) {
-          setTotalRegistrations(dataReg.value.number);
-          setTotalRegistrationsPercentage(dataReg.value.percentage)
-        }
+        	const [dataReg, dataClick, dataOrders, dataInc, dataUsers, reportResp, totalPricePerDate] = await Promise.all(getPromises);
+
+			const cardsContent = [
+				{
+					title: "Total Income",
+					amount: dataInc.number,
+					percentage: dataInc.percentage,
+					isMonetary: true,
+				},
+				{
+					title: "Clicks",
+					amount: dataClick.number,
+					percentage: dataClick.percentage,
+					isMonetary: false,
+				},
+				{
+					title: "Registrations",
+					amount: dataReg.number,
+					percentage: dataReg.percentage,
+					isMonetary: false,
+				},
+			];
+			if (type === "admin" || type === "leader" || type === "seniorbroker" || type === "broker") {
+				cardsContent[1] = {
+					title: "Orders",
+					amount: dataOrders.number,
+					percentage: dataOrders.percentage,
+					isMonetary: false,
+				};
+			}
+
+			console.log(cardsContent)
+			setCardInfo(cardsContent);
     
-        const dataClick = getResponses[1];
-        if (dataClick.status === 'fulfilled' && dataClick.value !== null) {
-          setTotalClicks(dataClick.value.number);
-          setTotalClicksPercentage(dataClick.value.percentage)
-        }
-    
-        const dataInc = getResponses[2];
-        if (dataInc.status === 'fulfilled' && dataInc.value !== null) {
-          setTotalIncomes(dataInc.value.number);
-          setTotalIncomesPercentage(dataInc.value.percentage)
-        }
-    
-        const dataUsers = getResponses[3];
-        if (dataUsers.status === 'fulfilled' && dataUsers.value !== null) {
-          setTableData(dataUsers.value.map(user => [
-            user.fullname,
-            user.roles.join(', '),
-            user.email,
-            user.status,
-            user.income,
-            user.joinedOn.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-          ]))
-        }
-    
-        const reportResp = getResponses[4];
-        if (reportResp.status === 'fulfilled' && reportResp.value !== null) {
-          console.log(reportResp.value);
-          setBarContent(reportResp.value);
-        }
-    
-        const totalPricePerDate = getResponses[5];
-        if (totalPricePerDate.status === 'fulfilled' && totalPricePerDate.value !== null) {
-          setGraphData(totalPricePerDate.value)
-          console.log(totalPricePerDate.value);
-        }
-      }
+			dataUsers.reverse();
+			updateUsers(dataUsers);
+
+			console.log(reportResp);
+			setBarContent(reportResp);
+
+			setGraphData(totalPricePerDate);
+			console.log(totalPricePerDate)
+      	}
     };
 
-  const fetchDiamondData = async () => {
-    const result = await diamondApi.checkPermission();
-    if (result !== true) {
-      navigate("/login");
-    } else {
-      const getPromises = [
-        diamondApi.getTotalRegistrations(),
-        diamondApi.getTotalClicks(),
-        diamondApi.getTotalIncome(),
-        diamondApi.getUsers(),
-        diamondApi.getRoleReport(),
-        diamondApi.getTotalIncomesPerDay()
-      ]
-      const getResponses = await Promise.allSettled(getPromises)
-  
-      const dataReg = getResponses[0];
-      if (dataReg.status === 'fulfilled' && dataReg.value !== null) {
-        setTotalRegistrations(dataReg.value.number);
-        setTotalRegistrationsPercentage(dataReg.value.percentage)
-      }
-  
-      const dataClick = getResponses[1];
-      if (dataClick.status === 'fulfilled' && dataClick.value !== null) {
-        setTotalClicks(dataClick.value.number);
-        setTotalClicksPercentage(dataClick.value.percentage)
-      }
-  
-      const dataInc = getResponses[2];
-      if (dataInc.status === 'fulfilled' && dataInc.value !== null) {
-        setTotalIncomes(dataInc.value.number);
-        setTotalIncomesPercentage(dataInc.value.percentage)
-      }
-  
-      const dataUsers = getResponses[3];
-      if (dataUsers.status === 'fulfilled' && dataUsers.value !== null) {
-        setTableData(dataUsers.value.map(user => [
-          user.fullname,
-          user.roles.join(', '),
-          user.email,
-          user.status,
-          user.income,
-          user.joinedOn.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-        ]))
-      }
-  
-      const reportResp = getResponses[4];
-      if (reportResp.status === 'fulfilled' && reportResp.value !== null) {
-        console.log(reportResp.value);
-        setBarContent(reportResp.value);
-      }
-  
-      const totalPricePerDate = getResponses[5];
-      if (totalPricePerDate.status === 'fulfilled' && totalPricePerDate.value !== null) {
-        setGraphData(totalPricePerDate.value)
-        console.log(totalPricePerDate.value);
-      }
-    }
-  };
+	useEffect(() => {
+		if (searchText === "") {
+			setFilteredData(tableData);
+		} else {
+			const filtered = tableData.filter((item) => {
+				return item[0].toLowerCase().includes(searchText.toLowerCase()) || 
+					item[1].toLowerCase().includes(searchText.toLowerCase()) || 
+					item[2].toLowerCase().includes(searchText.toLowerCase());
+			});
+			setFilteredData(filtered);
+		}
+	}, [searchText, tableData]);
 
-  const fetchIBLeaderData = async () => {
-    const result = await ibLeaderApi.checkPermission();
-    if (result !== true) {
-      navigate("/login");
-    } else {
-      const getPromises = [
-        ibLeaderApi.getTotalRegistrations(),
-        ibLeaderApi.getTotalClicks(),
-        ibLeaderApi.getTotalIncome(),
-        ibLeaderApi.getUsers(),
-        ibLeaderApi.getRoleReport(),
-        ibLeaderApi.getTotalIncomesPerDay()
-      ]
-      const getResponses = await Promise.allSettled(getPromises)
+	function updateUsers(dataUsers) {
+		console.log(dataUsers)
+		if (dataUsers) {
+			const newDataUsers = dataUsers.map(user => [
+				user.firstName,
+				user.lastName, 
+				user.email,
+				user.roles.map(role => ROLE_TO_NAME[role.replace(" ", "")]).join(', '),
+				(
+					<span className={`${styles.box} ${user.activated ? styles.approved : styles.pending}`}>{user.activated ? "active" : "not active"}</span>
+				),
+				formatUSDBalance(user.income),
+				new Date(user.createdAt).toLocaleString(),
+				makeActionsColumn(user)
 
-      const dataReg = getResponses[0];
-      if (dataReg.status === 'fulfilled' && dataReg.value !== null) {
-        setTotalRegistrations(dataReg.value.number);
-        setTotalRegistrationsPercentage(dataReg.value.percentage)
-      }
+			]);
+			console.log(newDataUsers);
 
-      const dataClick = getResponses[1];
-      if (dataClick.status === 'fulfilled' && dataClick.value !== null) {
-        setTotalClicks(dataClick.value.number);
-        setTotalClicksPercentage(dataClick.value.percentage)
-      }
+			setTableData(newDataUsers);
+  		}
+	}
 
-      const dataInc = getResponses[2];
-      if (dataInc.status === 'fulfilled' && dataInc.value !== null) {
-        setTotalIncomes(dataInc.value.number);
-        setTotalIncomesPercentage(dataInc.value.percentage)
-      }
+	function makeActionsColumn(user) {
+		return (
+			<div className={styles.linkWrapper}>
+				{!user.activated ? ( <span className={styles.actionsLink} onClick={() => activateUser(user.email)}>Activate</span> ) : (<span className={styles.actionsLink} onClick={() => deactivateUser(user.email)}>Deactivate</span>) }
+				<span className={styles.actionsLink} onClick={() => editUser(user)}>Edit</span>
+				<span className={styles.deleteLink} onClick={() => deleteUser(user.email)}>Delete</span>
+			</div>
+		);
+	}
 
-      const dataUsers = getResponses[3];
-      if (dataUsers.status === 'fulfilled' && dataUsers.value !== null) {
-        setTableData(dataUsers.value.map(user => [
-          user.fullname,
-          user.roles.join(', '),
-          user.email,
-          user.status,
-          user.income,
-          user.joinedOn.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-        ]))
-      }
+	const modalAddUser = async () => {
+		setEditEmailAddress(null);
 
-      const reportResp = getResponses[4];
-      if (reportResp.status === 'fulfilled' && reportResp.value !== null) {
-        console.log(reportResp.value);
-        setBarContent(reportResp.value);
-      }
+		setFirstName("");
+		setLastName("");
+		setEmail("");
+		setPassword("");
+		setRole("");
 
-      const totalPricePerDate = getResponses[5];
-      if (totalPricePerDate.status === 'fulfilled' && totalPricePerDate.value !== null) {
-        setGraphData(totalPricePerDate.value)
-        console.log(totalPricePerDate.value);
-      }
-    }
-  };
-  
+		setOpenModal(true);
+	}
 
-const fetchGoldData = async () => {
-  const result = await goldApi.checkPermission();
-  if (result !== true) {
-    navigate("/login");
-  } else {
-    const getPromises = [
-      goldApi.getTotalRegistrations(),
-      goldApi.getTotalClicks(),
-      goldApi.getTotalIncome(),
-      goldApi.getRoleReport(),
-      goldApi.getTotalIncomesPerDay(),
-      goldApi.getUsers()
-    ]
-    const getResponses = await Promise.allSettled(getPromises)
-  
-      const dataReg = getResponses[0];
-      if (dataReg.status === 'fulfilled' && dataReg.value !== null) {
-        setTotalRegistrations(dataReg.value.number);
-        setTotalRegistrationsPercentage(dataReg.value.percentage)
-      }
-  
-      const dataClick = getResponses[1];
-      if (dataClick.status === 'fulfilled' && dataClick.value !== null) {
-        setTotalClicks(dataClick.value.number);
-        setTotalClicksPercentage(dataClick.value.percentage)
-      }
-  
-      const dataInc = getResponses[2];
-      if (dataInc.status === 'fulfilled' && dataInc.value !== null) {
-        setTotalIncomes(dataInc.value.number);
-        setTotalIncomesPercentage(dataInc.value.percentage)
-      }
-  
-      const reportResp = getResponses[3];
-      if (reportResp.status === 'fulfilled' && reportResp.value !== null) {
-        console.log(reportResp.value);
-        setBarContent(reportResp.value);
-      }
-  
-      const totalPricePerDate = getResponses[4];
-      if (totalPricePerDate.status === 'fulfilled' && totalPricePerDate.value !== null) {
-        setGraphData(totalPricePerDate.value)
-        console.log(totalPricePerDate.value);
-      }
+	const activateUser = async (userEmail) => {
+		const resp = await adminApi.patchStatus(userEmail);
+		if (resp) {
+			updateUsersTable();
+		}
+	};
 
-      const dataUsers = getResponses[5];
-      if (dataUsers.status === 'fulfilled' && dataUsers.value !== null) {
-        setTableData(dataUsers.value.map(user => [
-          user.fullname,
-          user.roles.join(', '),
-          user.email,
-          user.status,
-          user.income,
-          user.joinedOn.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-        ]))
-      }
-    }
-  };
+	const deactivateUser = async (userEmail) => {
+		const resp = await adminApi.deactivateUser(userEmail);
+		if (resp) {
+			updateUsersTable();
+		}
+	};
 
-  const cardsContent = [
-    {
-      title: "Total Incomes",
-      amount: totalIncomes,
-      percentage: totalIncomesPercentage,
-    },
-    {
-      title: "Total Clicks",
-      amount: totalClicks,
-      percentage: totalClicksPercentage,
-    },
-    {
-      title: "Total Registration",
-      amount: totalRegistrations,
-      percentage: totalRegistrationsPercentage,
-    },
-  ];
+	const editUser = async (user) => {
+		setEditEmailAddress(user.email);
+		setFirstName(user.firstName);
+		setLastName(user.lastName);
+		setEmail(user.email);
+		// Only one role!
+		setRole(ROLE_TO_NAME[user.roles[0]]);
 
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+		setOpenModal(true);
+	}
 
-  const addUser = async () => {
+	const deleteUser = async (userEmail) => {
+		const resp = await adminApi.deleteUser(userEmail);
+		if (resp) {
+			updateUsersTable();
+		}
+	}
 
-    if(type === "admin"){
-      const resp = await adminApi.addUser(email, password, value);
-      if (resp === true) {
-        setOpenModal(false);
-        window.location.reload();
-      }
-    }else if(type === "diamond"){
-      const resp = await diamondApi.addUser(email, password, value);
-      if (resp === true) {
-        setOpenModal(false);
-        window.location.reload();
-      }
-    }else if(type === "gold"){
-      const resp = await goldApi.addUser(email, password, value);
-      if (resp === true) {
-        setOpenModal(false);
-        window.location.reload();
-      }
-    } else {
-      const resp = await ibLeaderApi.addUser(email, password, value);
-      if (resp === true) {
-        setOpenModal(false);
-        window.location.reload();
-      }
-    }
-    
+	const updateUsersTable = async () => {
+		const newUserData = await adminApi.getUsers();
+		newUserData.reverse();
+		updateUsers(newUserData);
+	}
 
-  };
+	const clearAddUserFields = () => {
+		setFirstName("");
+		setLastName("");
+		setEmail("");
+		setPassword("");
+		setRole("");
+	}
 
-  //   [
-  //     "John Smith",
-  //     "Vendor",
-  //     "ruth.sharp@gmail.com",
-  //     true,
-  //     "159200",
-  //     "Jan 6, 2023",
-  //   ],
-  //   [
-  //     "John Smith",
-  //     "Vendor",
-  //     "ruth.sharp@gmail.com",
-  //     true,
-  //     "159200",
-  //     "Jan 6, 2023",
-  //   ],
-  //   [
-  //     "John Smith",
-  //     "Vendor",
-  //     "ruth.sharp@gmail.com",
-  //     true,
-  //     "159200",
-  //     "Jan 6, 2023",
-  //   ],
-  //   [
-  //     "John Smith",
-  //     "Vendor",
-  //     "ruth.sharp@gmail.com",
-  //     true,
-  //     "159200",
-  //     "Jan 6, 2023",
-  //   ],
-  //   [
-  //     "John Smith",
-  //     "Vendor",
-  //     "ruth.sharp@gmail.com",
-  //     false,
-  //     "159200",
-  //     "Jan 6, 2023",
-  //   ],
-  //   [
-  //     "John Smith",
-  //     "Vendor",
-  //     "ruth.sharp@gmail.com",
-  //     false,
-  //     "159200",
-  //     "Jan 6, 2023",
-  //   ],
-  //   [
-  //     "John Smith",
-  //     "Vendor",
-  //     "ruth.sharp@gmail.com",
-  //     false,
-  //     "159200",
-  //     "Jan 6, 2023",
-  //   ],
-  // ];
+	const changeSearchText = async (searchText) => {
+		console.log(searchText)
+		setSearchText(searchText);
+	}
+
+  	const addUser = async () => {
+		if (firstName === "") {
+			setErrorMessage("First name is required");
+			return;
+		}
+		if (lastName === "") {
+			setErrorMessage("Last name is required");
+			return;
+		}
+		if (email === "" && editEmailAddress === null) {
+			setErrorMessage("Email is required");
+			return;
+		}
+		if (password === "" && editEmailAddress === null) {
+			setErrorMessage("Password is required");
+			return;
+		}
+		if (role === "") {
+			setErrorMessage("Role is required");
+			return;
+		}
+
+		if (editEmailAddress) {
+			// Update
+			const resp = await adminApi.updateUser(firstName, lastName, editEmailAddress, role);
+			if (resp) {
+				setInfoMessage("User updated successfully!");
+			} else {
+				setErrorMessage("Could not update user!");
+			}
+
+			updateUsersTable();
+			console.log(tableData)
+		} else {
+			// Add
+			const resp = await adminApi.addUser(firstName, lastName, email, password, role);
+			if (resp) {
+				if (resp.ok) {
+					setOpenModal(false);
+					fetchAdminData();
+					clearAddUserFields();
+					setInfoMessage("User added successfully!");
+					return;
+				} else if (resp.status === 409) {
+					setErrorMessage("User already exists!");
+					return;
+				}
+			}
+	
+			setErrorMessage("Could not add user!");
+		}
+ 	};
+
+	const affiliateLinkCopied = async () => {
+		setInfoMessage("Affiliate link copied to clipboard");
+	}
+
   return (
     <>
       <div className={styles.body}>
-        <Header
-          title={`${type === "admin" ? "Admin" : type === "diamond" ? "Senior IB" : type === "ib_leader" ? "IB Leader" : "IB"
-            } Dashboard`}
-        />
+        <Header title={ROLE_TO_NAME[type] + " Dashboard"} />
+
         <TopInfo
-          title="Overview information"
-          description="Total info data for all users & user management."
+          title="Overview"
+          description="Check information on income, clicks, and registrations."
         >
-          <Button color="white" onClick={() => setOpenModal(true)}>
-            Add User
-          </Button>
+			<div className={styles.topButtonWrapper} style={{gridTemplateColumns: !affiliate ? "1fr 1fr" : "1fr"}}>
+				{!affiliate && (
+					<Button onClick={modalAddUser}>
+						Add User
+					</Button>
+				)}
+				<Button color="white" onClick={() => navigate("/dashboard/vendor")}>
+					Vendor Dashboard
+				</Button>
+			</div>
         </TopInfo>
+
+		<MessageComponent hide={openModal} />
+
+		{affiliate && (
+			<div className={styles.affiliateLink}>
+				<p className={styles.affiliateLabel}>Affiliate link: </p>
+
+				<CopyValue 
+					value={`${window.location.origin}/?affiliate=${localStorage.getItem("affiliateLink")}`}
+					onCopy={() => affiliateLinkCopied(true)}
+					inputStyle={{width: "400px"}}
+					buttonStyle={{padding: "100px !important"}}
+				/>
+			</div>
+		)}
+
         <div className={`${styles.rows}`}>
-          {cardsContent.map((item) => (
-            <Card
+          {cardInfo.map((item) => (
+            <StatsCard
+			  key={item.title}
               title={item.title}
               amount={item.amount}
               percentage={item.percentage}
+			  isMonetary={item.isMonetary}
             />
           ))}
 
-          <Graph
-              data  = {graphData}
-          />
+          <Graph data={graphData} style={{gridColumn: affiliate ? "1/4" : "1/3"}} />
 
+		  { !affiliate && (
           <div className={`${styles.registration} card`}>
             <h3>Registrations Roles</h3>
 
-            <div
-              style={{ display: "flex", width: "100%" }}
+			<div
+              style={{ gridTemplateColumns: barContent.map((item) => `${item.percentage}fr`).join(" ") }}
               className={styles.bar}
             >
               {barContent.map((item) => (
                 <div
-                  style={{ flex: 1, flexBasis: `${item.percentage}%` }}
-                  className={styles.barItem}
+				    key={item.role}
+					className={styles["bar" + ROLE_TO_NAME[item.role].replace(" ", "")]}
                 ></div>
               ))}
             </div>
@@ -481,21 +371,21 @@ const fetchGoldData = async () => {
               <div className={styles.infoBox}>
                 <div className={styles.left}>
                   {barContent.map((item) => (
-                    <div className={styles.leftLine}>
-                      <div className={styles.lineBox}></div>
-                      <div className={styles.name}>{item.role}</div>
+                    <div key={item.role} className={styles.leftLine}>
+                      <div className={styles["lineBox" + ROLE_TO_NAME[item.role].replace(" ", "")]}></div>
+                      <div className={styles.name}>{ROLE_TO_NAME[item.role]}</div>
                     </div>
                   ))}
                 </div>
                 <div className={styles.right}>
                   <div className={styles.amount}>
                     {barContent.map((item) => (
-                      <p>{item.count}</p>
+                      <p key={item.role}>{item.count}</p>
                     ))}
                   </div>
                   <div className={styles.percentage}>
                     {barContent.map((item) => (
-                      <p>{item.percentage}%</p>
+                      <p key={item.role}>{item.percentage}%</p>
                     ))}
                   </div>
                 </div>
@@ -510,101 +400,115 @@ const fetchGoldData = async () => {
               )}
             </div>
           </div>
+		  )}
         </div>
 
-        {(
-          <div className={styles.tableWrapper}>
-            <div className={styles.top}>
-              <h4>User Management</h4>
+		<div className={styles.tableWrapper}>
+			<div className={styles.top}>
+				<h4>User Management</h4>
 
-              <div className={styles.inputs}>
-                <Input placeholder="Search" dashboard />
+				<div className={styles.inputs}>
+					<Input placeholder="Search" dashboard value={searchText} setState={changeSearchText} />
+				</div>
+			</div>
 
-                <Options
-                  value={value}
-                  options={["Roles", "Status", "Incomes"]}
-                  dashboard
-                  setValue={setValue}
-                />
-              </div>
-            </div>
-            <Table data={tableData} type={type} />
-          </div>
-        )}
+			<TablePagination
+				headers={header} 
+				data={filteredData} 
+				colSizes={colSizes}
+				striped 
+			/>
+		</div>
       </div>
 
       <div className={styles.modalWrapper}>
         {openModal && (
           <ModalOverlay>
             <div className={styles.modal}>
-              <h4>Create User</h4>
+				<MessageComponent />
+
+              <h4>{editEmailAddress ? "Edit" : "Create"} User</h4>
 
               <div className={styles.modalInputs}>
-                <Input dashboard label="Email" placeholder={"Enter email"} value={email} setState={setEmail} />
-                <Input
-                  dashboard
-                  label="Password"
-                  placeholder={"Enter password"}
-                  setState={setPassword}
-                  value={password}
-                  secure
-                />
+				<Input dashboard label="First name*" placeholder={"Enter first name"} value={firstName} setState={setFirstName} />
+				<Input dashboard label="Last name*" placeholder={"Enter last name"} value={lastName} setState={setLastName} />
+                <Input dashboard label="Email*" placeholder={"Enter email"} value={email} setState={setEmail} disabled={editEmailAddress !== null} />
+				{editEmailAddress === null && (
+					<div className={imputStyles.inputWrapper}>
+						<p className={`${imputStyles.label} ${imputStyles.dashboardLabel}`}>
+							Password*
+						</p>
 
-                {type === "gold" && <Options
-                  label="Roles"
-                  value={value}
+						<div className={styles.passwordWrapper}>
+							<input
+								className={`${imputStyles.input} ${imputStyles.dashboardInput}`}
+								type={showPassword ? "text" : "password"}
+								placeholder={"Enter password"}
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+							/>
+							<div className={styles.iconEye} alt="View password" onClick={() => setShowPassword(!showPassword)}>
+								<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path style={{fill: "white"}} d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/></svg>
+							</div>
+						</div>
+					</div>
+				)}
+
+                {type === "admin" && <Options
+                  label="Role*"
+                  value={role}
+                  options={[
+                    "Vendor",
+                    "Affiliate",
+                    "Broker",
+                    "Senior Broker",
+                    "Leader",
+                  ]}
+                  dashboard
+                  setValue={setRole}
+                />}
+				{type === "leader" && <Options
+                    label="Role*"
+                    value={role}
+                    options={[
+                      "Vendor",
+                      "Affiliate",
+                      "Broker",
+                      "Senior Broker",
+                    ]}
+                    dashboard
+                    setValue={setRole}
+                />}
+                {type === "seniorbroker" && <Options
+                  label="Role*"
+                  value={role}
+                  options={[
+                    "Vendor",
+                    "Affiliate",
+                    "Broker"
+                  ]}
+                  dashboard
+                  setValue={setRole}
+                />}
+				{type === "broker" && <Options
+                  label="Role*"
+                  value={role}
                   options={[
                     "Vendor",
                     "Affiliate"
                   ]}
                   dashboard
-                  setValue={setValue}
-                />}
-                {type === "admin" && <Options
-                  label="Roles"
-                  value={value}
-                  options={[
-                    "Vendor",
-                    "Affiliate",
-                    "IB",
-                    "Senior IB",
-                    "IB Leader",
-                  ]}
-                  dashboard
-                  setValue={setValue}
-                />}
-                {type === "diamond" && <Options
-                  label="Roles"
-                  value={value}
-                  options={[
-                    "Vendor",
-                    "Affiliate",
-                    "IB"
-                  ]}
-                  dashboard
-                  setValue={setValue}
-                />}
-                {type === "ib_leader" && <Options
-                    label="Roles"
-                    value={value}
-                    options={[
-                      "Vendor",
-                      "Affiliate",
-                      "IB",
-                      "Senior IB",
-                    ]}
-                    dashboard
-                    setValue={setValue}
+                  setValue={setRole}
                 />}
               </div>
               <div className={styles.modalButtons}>
                 <div
                   className={styles.button}
-                  onClick={() => setOpenModal(false)}
+                  onClick={() => { clearMessages(); clearAddUserFields(); setOpenModal(false)}}
                 >
                   Cancel
                 </div>
-                <Button onClick={addUser} color="white">Add User</Button>
+                <Button onClick={addUser} color="white">{editEmailAddress ? "Edit" : "Create"} User</Button>
               </div>
             </div>
           </ModalOverlay>
@@ -615,101 +519,3 @@ const fetchGoldData = async () => {
 };
 
 export default AdminBody;
-
-const header = [
-  <li>Name</li>,
-  <li>Roles</li>,
-  <li>Email</li>,
-  <li>Status</li>,
-  <li>Incomes</li>,
-  <li>Join on</li>,
-  <li>Action</li>,
-];
-
-const Table = ({ data, type }) => {
-  const [tableHeader, setTableHeader] = useState(header);
-  const [modifiedData, setModifiedData] = useState(data);
-  const adminApi = new adminDashboardApi();
-  const diamondApi = new diamondDashboardApi();
-  const goldApi = new goldDashboardApi();
-  useEffect(() => {
-    if (type === "admin") {
-      setTableHeader(header);
-    }else if (type ==="gold"){
-      setTableHeader((prev) => {
-        const arr = header.slice(0, header.length - 1);
-        return [...arr];
-      });
-    }else if (type === "diamond" || type === "ib_leader") {
-      setTableHeader((prev) => {
-        const arr = header.slice(0, header.length - 1);
-        return [...arr];
-      });
-    }
-    setModifiedData(data);
-  }, [data, type, modifiedData]);
-
-  const toggleUserStatus = async (index) => {
-    const newData = [...modifiedData];
-
-    if(type === "admin"){
-      const resp = await adminApi.patchStatus(newData[index][2]);
-      if (resp !== true) {
-        return;
-      }
-    }else if (type ==="gold") {
-      const resp = await goldApi.patchStatus(newData[index][2]);
-      if (resp !== true) {
-        return;
-      }
-    }else {
-      const resp = await diamondApi.patchStatus(newData[index][2]);
-      if (resp !== true) {
-        return;
-      }
-    }
-    newData[index][3] = !newData[index][3];
-    setModifiedData(newData);
-  };
-
-  return (
-    <div className={`${styles.tableCard} card`}>
-      <div
-        className={`${styles.table} ${type === "admin" ? styles.tableAdmin : styles.tableDiamond
-          } dashboard-table`}
-      >
-        <div className={styles.tableHead}>
-          <ul>{tableHeader}</ul>
-        </div>
-        <div className={styles.tableBody}>
-          {modifiedData.map((items, lineIndex) => (
-            <ul key={lineIndex}>
-              {items.map((item, itemIndex) => (
-                <>
-                  {itemIndex === 3 ? (
-                    <li
-                      style={{ opacity: modifiedData[lineIndex][3] ? 1 : 0.2 }}
-                      className={`${styles.box} ${item ? styles.approved : styles.pending
-                        }`}
-                    >
-                      {item ? "Enabled" : "Disabled"}
-                    </li>
-                  ) : (
-                    <li style={{ opacity: modifiedData[lineIndex][3] ? 1 : 0.2 }}>
-                      {itemIndex === 4 ? `$${transformNumber(item, false)}` : item}
-                    </li>
-                  )}
-                </>
-              ))}
-              {type === "admin" && (
-                <li onClick={() => {
-                  toggleUserStatus(lineIndex);
-                }}>{modifiedData[lineIndex][3] ? "Disable" : "Enable"}</li>
-              )}
-            </ul>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};

@@ -1,0 +1,50 @@
+.messagewrapper > div {
+	display: flex;
+	gap: 1rem;
+}
+
+.messagewrapper p {
+	flex: 1 1;
+}
+
+.errormessagecontainer {
+	background-color: #ffcccc;
+	color: black;
+	border: 1px solid red;
+	padding: 1rem;
+	margin-bottom: 1rem;
+	border-radius: 4px;
+}
+  
+.messagecontainer {
+	background-color: #ccffcc;
+	color: black;
+	border: 1px solid green;
+	padding: 1rem;
+	margin-bottom: 1rem;
+	border-radius: 4px;
+}
+
+.icon {
+	width: 1rem;
+	height: 1rem;
+	margin-right: 1rem;
+	color: rgb(100, 100, 100)
+}
+
+.icon:hover {
+	cursor: pointer;
+	color: black;
+}
+
+.closeButton {
+	background: rgba(0, 0, 0, 0) !important;
+}
+
+.closeButton > div {
+	padding: 0 !important;
+}
+
+.hide {
+	display: none;
+}

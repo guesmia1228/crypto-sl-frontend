@@ -1,13 +1,13 @@
 import Cookies from "js-cookie";
 import setCookie from "../components/setCookie/setCookie";
+import ReactGA from "react-ga4";
+
+
 export default class backendAPI {
     constructor() {
-        //LAUNCH
-        //this.baseURL = "https://nefentus.com:8443/api";
-        //DEV
         this.baseURL = process.env.REACT_APP_BASE_ENDPOINT_API;
-
         this.token = Cookies.get("token");
+		ReactGA.initialize(process.env.REACT_APP_GA_ID);
     }
 
     async checkJwt() {
@@ -43,7 +43,13 @@ export default class backendAPI {
             const response = await fetch(url, options);
             if (!response.ok) {
                 throw new Error("Network response was not ok");
-            }
+            } else {
+				ReactGA.event({
+					category: "Registration",
+					action: "registration_active",
+					label: formData.email
+				});
+			}
             return response;
         } catch (error) {
             return null; // or return some default value
@@ -70,7 +76,7 @@ export default class backendAPI {
         }
     }
 
-    async forgotPasswordDashboard(pass, oldpass) {
+    async changePasswordDashboard(pass, oldpass) {
         try {
             const request = {
                 newPassword: pass,
@@ -95,32 +101,7 @@ export default class backendAPI {
         }
     }
 
-    async resetPassword(newPassword, token) {
-        try {
-            const request = {
-                token: token,
-                newPassword: newPassword,
-            };
-            const url = `${this.baseURL}/auth/reset-password`;
-            const options = {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${this.token}`,
-                },
-                body: JSON.stringify(request),
-            };
-            const response = await fetch(url, options);
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
-            }
-            return response;
-        } catch (error) {
-            return null; // or return some default value
-        }
-    }
-
-    async resetPasswordDashboard(token) {
+    async changePasswordConfirmDashboard(token) {
         try {
             const request = {
                 token: token,
@@ -193,7 +174,7 @@ export default class backendAPI {
 
             const data = await response.json();
             localStorage.setItem("profile_pic", data.message);
-            return response;
+            return data.message;
         } catch (error) {
             console.error("There was an error uploading the file:", error);
             return null;
@@ -276,6 +257,13 @@ export default class backendAPI {
             localStorage.setItem("country", data.country);
             localStorage.setItem("requireKyc", data.requireKyc);
             localStorage.setItem("userId", data.userId);
+
+			ReactGA.event({
+				category: "User",
+				action: "login",
+				label: data.email
+			});
+
             return response;
         } catch (error) {
             return null; // or return some default value
@@ -300,6 +288,31 @@ export default class backendAPI {
             return data;
         } catch (error) {
             console.error("There was an error activating the account:", error);
+            return null; // or return some default value
+        }
+    }
+
+	async checkPassword(password){
+        try{
+            const url = `${this.baseURL}/auth/checkPassword`;
+			const requestBody = {
+				password: password
+			}
+            const options = {
+                method: "POST",
+                headers: {
+					"Content-Type": "application/json",
+                    Authorization: `Bearer ${this.token}`
+                },
+				body: JSON.stringify(requestBody)
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
             return null; // or return some default value
         }
     }
@@ -432,7 +445,7 @@ export default class backendAPI {
 
     async countAffiliate(affiliate) {
         try {
-            const url = `${this.baseURL}/clicks/?affLink=${affiliate}`;
+            const url = `${this.baseURL}/clicks/${affiliate}`;
             const options = {
                 method: "GET",
                 headers: {
@@ -502,4 +515,250 @@ export default class backendAPI {
             return null; // or return some default value
         }
     }
+
+	async getWalletAddresses(){
+        try{
+            const url = `${this.baseURL}/wallet/addresses`;
+            const options = {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${this.token}`
+                },
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            return null; // or return some default value
+        }
+    }
+
+	async send(tokenAddress, amount, toAddress, password){
+        try{
+            const url = `${this.baseURL}/wallet/send`;
+			const requestBody = {
+				tokenAddress: tokenAddress,
+				amount: amount,
+				toAddress: toAddress,
+				password: password
+			}
+            const options = {
+                method: "POST",
+                headers: {
+					"Content-Type": "application/json",
+                    Authorization: `Bearer ${this.token}`
+                },
+				body: JSON.stringify(requestBody)
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            return null; // or return some default value
+        }
+    }
+
+	async getProduct(productLink){
+        try{
+            const url = `${this.baseURL}/product/${productLink}`;
+			let headers = {}
+			if (this.token) {
+				headers = {
+                    Authorization: `Bearer ${this.token}`
+                }
+			}
+
+            const options = {
+                method: "GET",
+                headers: headers,
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            return null; // or return some default value
+        }
+    }
+
+	async getProductImage(productLink){
+        try{
+            const url = `${this.baseURL}/productImage/${productLink}`;
+			let headers = {}
+			if (this.token) {
+				headers = {
+                    Authorization: `Bearer ${this.token}`
+                }
+			}
+
+            const options = {
+                method: "GET",
+                headers: headers,
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            return null; // or return some default value
+        }
+    }
+
+	async getHierarchy(userId){
+        try{
+            const url = `${this.baseURL}/hierarchy/${userId}`;
+			let headers = {}
+			if (this.token) {
+				headers = {
+                    Authorization: `Bearer ${this.token}`
+                }
+			}
+
+            const options = {
+                method: "GET",
+                headers: headers,
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            return null; // or return some default value
+        }
+    }
+
+	async setTransactionInfo(transactionInfo, buyerAddress, productOrInvoiceId){
+        try{
+            const url = `${this.baseURL}/transaction`;
+			let headers = {}
+			if (this.token) {
+				headers = {
+					"Content-Type": "application/json",
+                    Authorization: `Bearer ${this.token}`
+                }
+			}
+
+			const body = {
+				transactionInfo: transactionInfo,
+				buyerAddress: buyerAddress,
+				...productOrInvoiceId
+			};
+
+            const options = {
+                method: "POST",
+                headers: headers,
+				body: JSON.stringify(body)
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+			console.log(error);
+            return null; // or return some default value
+        }
+    }
+
+	async getInvoice(invoiceLink){
+        try{
+            const url = `${this.baseURL}/invoice/${invoiceLink}`;
+			let headers = {}
+			if (this.token) {
+				headers = {
+                    Authorization: `Bearer ${this.token}`
+                }
+			}
+
+            const options = {
+                method: "GET",
+                headers: headers,
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            return null; // or return some default value
+        }
+    }
+
+	async makePayment(currencyAddress, amount, quantity, password, stablecoinAddress, transInfoArg) {
+		try{
+            const url = `${this.baseURL}/payment`;
+			let headers = {}
+			if (this.token) {
+				headers = {
+					"Content-Type": "application/json",
+                    Authorization: `Bearer ${this.token}`
+                }
+			}
+
+			const body = {
+				currencyAddress: currencyAddress,
+				stablecoinAddress: stablecoinAddress,
+				amount: amount,
+				quantity: quantity,
+				password: password,
+				...transInfoArg
+			};
+
+            const options = {
+                method: "POST",
+                headers: headers,
+				body: JSON.stringify(body)
+            };
+            const response = await fetch(url, options);
+			if (response.status === 412) {
+				return "insufficientFunds";
+			}
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            return null; // or return some default value
+        }
+	}
+
+	async registerWalletAddress(address) {
+		try {
+            const url = `${this.baseURL}/wallet/address/${address}`;
+			let headers = {}
+			if (this.token) {
+				headers = {
+                    Authorization: `Bearer ${this.token}`
+                }
+			}
+
+            const options = {
+                method: "GET",
+                headers: headers,
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            return null; // or return some default value
+        }
+	}
 }

@@ -1,457 +1,461 @@
 import { Attachment, Authentificator } from "../input/input";
 import styles from "./settings.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 
 import Logo from "../../assets/logo/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import backend_API from "../../api/backendAPI";
 import Cookies from "universal-cookie";
-import InputComponent from "../input/input";
+import InputComponent, {RawInput} from "../input/input";
 import backendAPI from "../../api/backendAPI";
 import Header from "../header/header";
 import BlobPicture from "../../components/blobPicture/blobPicture";
 import { KYC } from "./components/KYC";
 import { Buttons } from "./components/buttons";
+import Button from "../../components/button/button";
+import { dashboardLink } from "../../utils";
+import MessageComponent from "../../components/message";
+import { MessageContext } from "../../context/message";
+import TopInfo from "../topInfo/topInfo";
+import Tabs from "../../components/tabs/index";
 
-const nav = [
-  "Profile",
-  "Change Password",
-  <div>
-    <span className={styles.rest}>Know Your Customer(</span>KYC
-    <span className={styles.rest}>)</span>
-  </div>,
+let nav = [
+    "Profile",
+    "Change password",
 ];
 
-const nav_kyc = ["Profile", "Change Password"];
+const nav_kyc = [
+	"Profile",
+    "Change password",
+    <div>
+        <span className={styles.rest}>Know Your Customer(</span>KYC
+        <span className={styles.rest}>)</span>
+    </div>,
+];
 
 const instruction = [
-  {
-    title: "Personal information",
-    description:
-      "Some of fields can’t be changed here. Please contact our support for that.",
-  },
-  {
-    title: "Password",
-    description:
-      "Please enter your current password and security code to change your password",
-  },
-  {
-    title: "Confirm",
-    description:
-      "Please confirm your identity. Company registration and utility bill can't be older than 6 months.",
-  },
+    {
+        title: "Personal information",
+        description:
+            "Change your personal information in the fields below.",
+    },
+    {
+        title: "Password",
+        description:
+            "Please enter your current password to change it.",
+    },
+    {
+        title: "Confirm",
+        description:
+            "Please confirm your identity. Company registration and utility bill can't be older than 6 months.",
+    },
 ];
 
 const SettingsBody = ({ type }) => {
-  const backendapi = new backendAPI();
-  const [active, setActive] = useState(0);
-  const [requireKyc, setRequireKyc] = useState(
-    localStorage.getItem("requireKyc")
-  );
-  const [profilePicUrl, setProfilePicUrl] = useState(
-    localStorage.getItem("profile_pic")
-  );
-  const [counter, setCounter] = useState(0);
-  const navigate = useNavigate();
-  useEffect(() => {
-    const handleStorageChange = () => {
-      setProfilePicUrl(localStorage.getItem("profile_pic"));
-      setCounter(counter + 1);
-      setRequireKyc(localStorage.setItem("requireKyc"));
-    };
+    const backendapi = new backendAPI();
+    const [active, setActive] = useState(0);
+    const [requireKyc, setRequireKyc] = useState(localStorage.getItem("requireKyc"));
+    const [profilePicUrl, setProfilePicUrl] = useState(
+        localStorage.getItem("profile_pic")
+    );
+    const [counter, setCounter] = useState(0);
+    const navigate = useNavigate();
+	const { clearMessages } = useContext(MessageContext);
 
-    async function checkJwtAndNavigate() {
-      const jwtIsValid = await backendapi.checkJwt();
-      if (jwtIsValid) {
-        const roles = localStorage.getItem("roles");
-        const roleArray = roles.split(","); // Konvertiert den String in ein Array von Strings
-        const isAdmin = roleArray.includes("ROLE_ADMIN"); // Überprüft, ob "ROLE_ADMIN" im Array enthalten ist
-        const isVendor = roleArray.includes("ROLE_VENDOR"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
-        const isAffiliate = roleArray.includes("ROLE_AFFILIATE"); // Überprüft, ob "ROLE_VENDOR" im Array enthalten ist
+    useEffect(() => {
+        const handleStorageChange = () => {
+            setProfilePicUrl(localStorage.getItem("profile_pic"));
+            setCounter(counter + 1);
+            setRequireKyc(localStorage.setItem("requireKyc"));
+        };
 
-        console.log(requireKyc);
-
-        if (isAdmin) {
-          setLink("/dashboard/admin");
-        } else if (isAffiliate) {
-          setLink("/dashboard/affiliate");
-        } else if (isVendor) {
-          setLink("/dashboard/vendor");
+        async function checkJwtAndNavigate() {
+            const jwtIsValid = await backendapi.checkJwt();
+            if (jwtIsValid) {
+				const newLink = dashboardLink(localStorage);
+				setLink(newLink);
+            } else {
+                navigate("/login");
+            }
         }
-      } else {
-        navigate("/login");
-      }
-    }
 
-    checkJwtAndNavigate();
+        checkJwtAndNavigate();
 
-    window.addEventListener("storage", handleStorageChange);
+        window.addEventListener("storage", handleStorageChange);
 
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, [counter]);
+        return () => {
+            window.removeEventListener("storage", handleStorageChange);
+        };
+    }, [counter]);
 
-  const cookies = new Cookies();
-  const [link, setLink] = useState("");
-  return (
-    <div
-      className={`${styles.body} ${
-        type === "vendor" ? "dashboard-body" : "container"
-      }`}
-      style={{ paddingTop: type === "vendor" ? "0" : "2rem" }}
-    >
-      {type === "vendor" ? (
-        <Header title={"Settings"} />
-      ) : (
-        <>
-          <div className={styles.navigation}>
-            <img src={Logo} alt="nefentus logo" />
+	useEffect(() => {
+		if (requireKyc === "true") {
+			nav = nav_kyc;
+		}
+	}, [requireKyc]);
 
-            <div className={styles.button}>
-              <Link to={link} color="white">
-                Back to dashboard
-              </Link>
+    const cookies = new Cookies();
+    const [link, setLink] = useState("");
+    return (
+        <div
+            className={`${styles.body} ${
+                type === "vendor" ? "dashboard-body" : "container"
+            }`}
+            style={{ paddingTop: type === "vendor" ? "0" : "2rem" }}
+        >
+            {type === "vendor" ? (
+                <Header title={"Settings"} />
+            ) : (
+                <>
+                    <div className={styles.navigation}>
+                        <img src={Logo} alt="" />
+
+                        <div className={styles.button}>
+                            <Link to={link} color="white">
+                                To Dashboard
+                            </Link>
+                        </div>
+                    </div>
+                </>
+            )}
+
+			{type !== "vendor" && (
+            <div className={styles.profile} style={{justifyContent: type === "vendor" ? "start" : "end"}}>
+                <div className={styles.avatar} style={{width: type === "vendor" ? "10rem" : "7rem", "height": type === "vendor" ? "10rem" : "7rem"}}>
+                    <BlobPicture />
+                </div>
+
+                <div className={styles.info}>
+                    <p className={styles.name}>
+                        {localStorage.getItem("firstName") +
+                            " " +
+                            localStorage.getItem("lastName")}
+                    </p>
+                    <p className={styles.email}>
+                        {localStorage.getItem("email")}
+                    </p>
+                </div>
             </div>
-          </div>
-        </>
-      )}
+			)}
 
-      <div className={styles.profile}>
-        <div className={styles.avatar}>
-          <BlobPicture />
+			<Tabs 
+				tabIds={nav}
+				initActiveTab={nav[active]}
+				getHeader={(tabId) => tabId}
+				getBody={(tabId) => {
+					if (tabId === nav[0])
+						return (
+							<ProfileBody active={active} afterUpdateSettings={() => setProfilePicUrl(localStorage.getItem("profile_pic"))} />
+						);
+					else if (tabId === nav[1])
+						return (
+							<PasswordBody active={active} />
+						);
+					else
+						return (
+							<KYC />
+						);
+				}}
+			/>
         </div>
-
-        <div className={styles.info}>
-          <p className={styles.name}>
-            {localStorage.getItem("firstName") +
-              " " +
-              localStorage.getItem("lastName")}
-          </p>
-          <p className={styles.email}>{localStorage.getItem("email")}</p>
-        </div>
-      </div>
-
-      <div className={`${styles.settingsBody} card`}>
-        <div className={styles.settingsNav}>
-          {requireKyc === "true" &&
-            nav.map((item, index) => (
-              <div
-                className={styles.item}
-                onClick={() => setActive(index)}
-                style={{
-                  borderColor: active === index ? "#fff" : "transparent",
-                  color: active === index ? "#fff" : "#c4c4c4",
-                }}
-              >
-                {item}
-              </div>
-            ))}
-          {requireKyc === "false" &&
-            nav_kyc.map((item, index) => (
-              <div
-                className={styles.item}
-                onClick={() => setActive(index)}
-                style={{
-                  borderColor: active === index ? "#fff" : "transparent",
-                  color: active === index ? "#fff" : "#c4c4c4",
-                }}
-              >
-                {item}
-              </div>
-            ))}
-        </div>
-
-        <div className={styles.info}>
-          <h4>{instruction[active].title}</h4>
-          <p>{instruction[active].description}</p>
-        </div>
-
-        {active === 0 ? (
-          <ProfileBody />
-        ) : active === 1 ? (
-          <PasswordBody />
-        ) : (
-          <KYC />
-        )}
-      </div>
-    </div>
-  );
+    );
 };
 
 export default SettingsBody;
 
-const ProfileBody = () => {
-  const [file, setFile] = useState(null);
-  const [fullName, setFullName] = useState(
-    localStorage.getItem("firstName") + " " + localStorage.getItem("lastName")
-  );
-  const [business, setBusiness] = useState(localStorage.getItem("business"));
-  const [phoneNumber, setPhoneNumber] = useState(
-    localStorage.getItem("phoneNumber")
-  );
-  const [email, setEmail] = useState(localStorage.getItem("email"));
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [message, setMessage] = useState(null);
+const ProfileBody = ({afterUpdateSettings, active}) => {
+    const [file, setFile] = useState(null);
+	const [firstName, setFirstName] = useState(localStorage.getItem("firstName"));
+	const [lastName, setLastName] = useState(localStorage.getItem("lastName"));
+    const [business, setBusiness] = useState(localStorage.getItem("business"));
+    const [phoneNumber, setPhoneNumber] = useState(
+        localStorage.getItem("phoneNumber")
+    );
+    const [email, setEmail] = useState(localStorage.getItem("email"));
+	const { setErrorMessage, setInfoMessage } = useContext(MessageContext);
 
-  const profileContent = [
-    {
-      label: "Full Name",
-      type: "text",
-      value: fullName,
-      onChange: setFullName,
-    },
-    {
-      label: "Email Address",
-      type: "text",
-      value: email,
-      onChange: setEmail,
-    },
-    {
-      label: "Business",
-      type: "text",
-      value: business,
-      onChange: setBusiness,
-    },
-    {
-      label: "Phone Number",
-      type: "text",
-      value: phoneNumber,
-      onChange: setPhoneNumber,
-    },
-  ];
+    const profileContent = [
+        {
+            label: "First Name",
+            type: "text",
+            value: firstName,
+            onChange: setFirstName,
+			required: true,
+        },
+		{
+            label: "Last Name",
+            type: "text",
+            value: lastName,
+            onChange: setLastName,
+			required: true,
+        },
+        {
+            label: "Business",
+            type: "text",
+            value: business,
+            onChange: setBusiness,
+			required: false
+        },
+        {
+            label: "Phone Number",
+            type: "text",
+            value: phoneNumber,
+            onChange: setPhoneNumber,
+			required: false
+        },
+    ];
 
-  const backendAPI = new backend_API();
+    const backendAPI = new backend_API();
 
-  const handleUpload = (uploadedFile) => {
-    setFile(uploadedFile);
-  };
-
-  const checkErrors = () => {
-    if (!fullName || !fullName.trim()) {
-      setErrorMessage("Full name is required.");
-      return null;
-    }
-
-    if (!business || !business.trim()) {
-      setErrorMessage("Business name is required.");
-      return null;
-    }
-
-    if (!phoneNumber || !phoneNumber.trim()) {
-      setErrorMessage("Phone number is required.");
-      return null;
-    }
-
-    if (!email || !email.trim()) {
-      setErrorMessage("Email is required.");
-      return null;
-    }
-
-    return true;
-  };
-
-  const handleConfirm = async () => {
-    if (checkErrors() == null) {
-      return;
-    }
-    setErrorMessage(null);
-
-    const requestData = {
-      fullName: fullName,
-      phoneNumber: phoneNumber,
-      email: email,
-      business: business,
+    const handleUpload = (uploadedFile) => {
+        setFile(uploadedFile);
     };
 
-    if (file) {
-      const response = await backendAPI.uploadFile(file);
-      if (response == null) {
-        setErrorMessage("Error on uploading the profile picture");
-        return;
-      }
-    }
+    const checkErrors = () => {
+        if (!firstName) {
+            setErrorMessage("First name is required.");
+            return null;
+        }
 
-    const response2 = await backendAPI.update(requestData);
-    if (response2 == null) {
-      setErrorMessage("Error on updating data");
-      return;
-    }
-    window.location.reload();
-  };
+		if (!lastName) {
+            setErrorMessage("Last name is required.");
+            return null;
+        }
 
-  const resetValues = () => {
-    setFullName(
-      localStorage.getItem("firstName") + " " + localStorage.getItem("lastName")
-    );
-    setBusiness(localStorage.getItem("business"));
-    setPhoneNumber(localStorage.getItem("phoneNumber"));
-    setEmail(localStorage.getItem("email"));
-  };
+        if (!email || !email.trim()) {
+            setErrorMessage("Email is required.");
+            return null;
+        }
 
-  return (
-    <div>
-      <div>
-        {errorMessage && (
-          <div className={styles.errormessagecontainer}>
-            <p style={{ color: "red" }}> {errorMessage}</p>
-          </div>
-        )}
-        {message && (
-          <div className={styles.messagecontainer}>
-            <p style={{ color: "green" }}>{message}</p>
-          </div>
-        )}
-      </div>
-      {profileContent.map((item) => (
-        <div>
-          <InputComponent
-            label={item.label}
-            placeholder={item.placeholder}
-            type={item.type}
-            value={item.value}
-            setState={item.onChange}
-          />
-        </div>
-      ))}
+        return true;
+    };
 
-      <Attachment label="Upload logo image" onUpload={handleUpload} />
+    const handleConfirm = async () => {
+        if (checkErrors() == null) {
+            return;
+        }
+        setErrorMessage(null);
 
-      <Buttons
-        functions={[resetValues, handleConfirm]}
-        buttons={["Reset", "Confirm"]}
-      />
-    </div>
-  );
-};
+        const requestData = {
+			firstName: firstName,
+			lastName: lastName,
+			phoneNumber: phoneNumber,
+            email: email,
+            business: business,
+        };
 
-const PasswordBody = () => {
-  const [openBox, setOpenBox] = useState(false);
-  const [currentPassword, setCurrentPassword] = useState(null);
-  const [newPassword, setNewPassword] = useState(null);
-  const [confirmPassword, setConfirmPassword] = useState(null);
-  const [verificationCode, setVerificationCode] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [message, setMessage] = useState(null);
-  const [errorMessageBox, setErrorMessageBox] = useState(null);
+		let response = 1;
+        if (file) {
+            const response = await backendAPI.uploadFile(file);
+            if (response == null) {
+                setErrorMessage("Error on uploading the profile picture");
+            }
+        }
 
-  const backendAPI = new backend_API();
+        const response2 = await backendAPI.update(requestData);
+        if (response2 == null) {
+            setErrorMessage("Error on updating data");
+        }
+        
+		resetValues();
+		afterUpdateSettings();
 
-  const passwordContent = [
-    {
-      label: "Current Password",
-      placeholder: "Enter your password",
-      type: "password",
-      value: currentPassword,
-      onChange: setCurrentPassword,
-    },
-    {
-      label: "New Password",
-      placeholder: "Enter new password",
-      type: "password",
-      value: newPassword,
-      onChange: setNewPassword,
-    },
-    {
-      label: "Confirm Password",
-      placeholder: "Confirm new password",
-      type: "password",
-      value: confirmPassword,
-      onChange: setConfirmPassword,
-    },
-  ];
+		if (response !== null && response2 !== null) {
+			setInfoMessage("Settings updated successfully!");
+		}
+    };
 
-  const handleConfirm = async () => {
-    if (newPassword !== confirmPassword) {
-      setErrorMessage("Passwords are not equal");
-      return;
-    }
+    const resetValues = () => {
+		setFirstName(localStorage.getItem("firstName"));
+		setLastName(localStorage.getItem("lastName"));
+        setBusiness(localStorage.getItem("business"));
+        setPhoneNumber(localStorage.getItem("phoneNumber"));
+        setEmail(localStorage.getItem("email"));
+    };
 
-    const response = await backendAPI.forgotPasswordDashboard(
-      newPassword,
-      currentPassword
-    );
-    if (response == null) {
-      setErrorMessage("Old password is not the right one!");
-      return;
-    }
-    setErrorMessage(null);
-    setOpenBox(true);
-  };
+    return (
+        <div className={styles.tabContent}>
+            <MessageComponent />
 
-  const handleConfirmCode = async () => {
-    const response = await backendAPI.resetPasswordDashboard(verificationCode);
-    if (response == null) {
-      setErrorMessageBox("Code is not valid or too old!");
-      return;
-    }
-    setErrorMessageBox(null);
-    setMessage("Password succesfully changed!");
-    resetValues();
-    setOpenBox(false);
-  };
+			<TopInfo
+				title={instruction[active].title}
+				description={instruction[active].description}
+			/>
 
-  const resetValues = () => {
-    setConfirmPassword(null);
-    setCurrentPassword(null);
-    setNewPassword(null);
-  };
+            {profileContent.map((item) => (
+                <div>
+                    <InputComponent
+                        label={item.label + (item.required ? "*" : "")}
+                        placeholder={item.placeholder}
+                        type={item.type}
+                        value={item.value}
+                        setState={item.onChange}
+                    />
+                </div>
+            ))}
 
-  const handleClose = () => {
-    setOpenBox(false);
-  };
+			<div>
+				<InputComponent
+					disabled
+					label={"Email Address"}
+					placeholder={email}
+					type={"text"}
+					value={email}
+				/>
+			</div>
 
-  return (
-    <div>
-      {openBox && (
-        <div className={styles.modal}>
-          <div className={`${styles.popup} card`}>
-            <p>Enter verification code:</p>
-            {errorMessageBox && (
-              <div className={styles.errormessagecontainer}>
-                <p style={{ color: "red" }}> {errorMessage}</p>
-              </div>
-            )}
-            <InputComponent
-              value={verificationCode}
-              setState={setVerificationCode}
-            />
+            <Attachment label="Upload logo image" onUpload={handleUpload} />
 
             <Buttons
-              functions={[handleClose, handleConfirmCode]}
-              buttons={["Cancel", "Confirm"]}
+                functions={[resetValues, handleConfirm]}
+                buttons={["Reset", "Confirm"]}
             />
-          </div>
         </div>
-      )}
-      {errorMessage && (
-        <div className={styles.errormessagecontainer}>
-          <p style={{ color: "red" }}> {errorMessage}</p>
+    );
+};
+
+const PasswordBody = ({active}) => {
+    const [openBox, setOpenBox] = useState(false);
+    const [currentPassword, setCurrentPassword] = useState("");
+    const [newPassword, setNewPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [verificationCode, setVerificationCode] = useState(null);
+	const { setErrorMessage, setInfoMessage } = useContext(MessageContext);
+
+    const backendAPI = new backend_API();
+
+    const passwordContent = [
+        {
+            label: "Current Password",
+            placeholder: "Enter your password",
+            type: "password",
+            value: currentPassword,
+            onChange: setCurrentPassword,
+			required: true
+        },
+        {
+            label: "New Password",
+            placeholder: "Enter new password",
+            type: "password",
+            value: newPassword,
+            onChange: setNewPassword,
+			required: true
+        },
+        {
+            label: "Confirm Password",
+            placeholder: "Confirm new password",
+            type: "password",
+            value: confirmPassword,
+            onChange: setConfirmPassword,
+			required: true
+        },
+    ];
+
+    const handleConfirm = async () => {
+        if (newPassword !== confirmPassword) {
+            setErrorMessage("Passwords are not equal");
+            return;
+        }
+
+        const response = await backendAPI.changePasswordDashboard(
+            newPassword,
+            currentPassword
+        );
+        if (response == null) {
+            setErrorMessage("Old password is not the right one!");
+            return;
+        }
+        setErrorMessage(null);
+        setOpenBox(true);
+    };
+
+    const handleConfirmCode = async () => {
+        const response = await backendAPI.changePasswordConfirmDashboard(
+            verificationCode
+        );
+        if (response == null) {
+            setErrorMessage("Code is not valid or too old!");
+            return;
+        }
+        setInfoMessage("Password succesfully changed!");
+        resetValues();
+		setVerificationCode("");
+        setOpenBox(false);
+    };
+
+    const resetValues = () => {
+        setConfirmPassword("");
+        setCurrentPassword("");
+        setNewPassword("");
+    };
+
+    const handleClose = () => {
+        setOpenBox(false);
+		setVerificationCode("");
+    };
+
+    return (
+        <div className={styles.tabContent}>
+            {openBox && (
+                <div className={styles.modal}>
+                    <div className={`${styles.popup} card`}>
+						<MessageComponent />
+
+                        <p className={styles.modalHeadline}>Enter verification code:</p>
+
+                        <RawInput
+                            value={verificationCode}
+                            setState={setVerificationCode}
+							type="text"
+                        />
+
+						<div className={styles.modalButtonRow}>
+							<Button
+								onClick={handleClose}
+								color="black"
+							>
+								Cancel
+							</Button>
+							<Button
+								onClick={handleConfirmCode}
+								color="white"
+							>
+								Confirm
+							</Button>
+						</div>
+                    </div>
+                </div>
+            )}
+
+			<MessageComponent hide={openBox} />
+		
+			<TopInfo
+				title={instruction[active].title}
+				description={instruction[active].description}
+			/>
+
+            {passwordContent.map((item) => (
+                <div>
+                    <InputComponent
+                        label={item.label + (item.required ? "*" : "")}
+                        placeholder={item.placeholder}
+                        type={item.type}
+                        setState={item.onChange}
+                        value={item.value}
+                        secure
+                    />
+                </div>
+            ))}
+			{/*
+            <Authentificator
+                placeholder={"Google Authentificator"}
+                connected={true}
+                handleClick={() => {}}
+			/>*/}
+            <Buttons
+                functions={["", handleConfirm]}
+                buttons={["Reset", "Confirm"]}
+            />
         </div>
-      )}
-      {message && (
-        <div className={styles.messagecontainer}>
-          <p style={{ color: "green" }}>{message}</p>
-        </div>
-      )}
-      {passwordContent.map((item) => (
-        <div>
-          <InputComponent
-            label={item.label}
-            placeholder={item.placeholder}
-            type={item.type}
-            setState={item.onChange}
-            value={item.value}
-            secure
-          />
-        </div>
-      ))}
-      <Authentificator
-        placeholder={"Google Authentificator"}
-        connected={true}
-        handleClick={() => {}}
-      />
-      <Buttons functions={["", handleConfirm]} buttons={["Reset", "Confirm"]} />
-    </div>
-  );
+    );
 };

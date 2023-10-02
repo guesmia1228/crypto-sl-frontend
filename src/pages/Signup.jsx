@@ -7,7 +7,7 @@ const SignUp = () => {
       <Helmet>
         <title>Nefentus | SignUp</title>
       </Helmet>
-      <Signup />
+      <Signup className="dashboardFont" />
     </div>
   );
 };

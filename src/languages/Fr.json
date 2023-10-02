@@ -125,7 +125,7 @@
     ],
     "dataContent": [
       {
-        "title": "Commission de 3,5 ",
+        "title": "Commission de 3%",
         "description": "Bénéficiez d'un traitement des paiements inégalé, avec des taux de conversion élevés, des méthodes de paiement populaires et intuitives, et des transactions rapides et sûres. ",
         "list": [
           "Taux de conversion élevés ",
@@ -168,7 +168,7 @@
     "paymentTitleP1": "0€ de frais initiaux, 0€ de frais mensuels  ",
     "paymentTitleP2": "Payez uniquement pour les résultats ",
     "paymentCard1Title": "Basique - Vendeur ",
-    "paymentCard1Description": "3,5 % de commission ",
+    "paymentCard1Description": "3% de commission",
     "paymentCard2Title": "Customized - Enterpriser",
     "paymentCard2Description": "100,000+ EUR monthly transaction ",
     "paymentButton": "Sign Up For Free",
@@ -245,6 +245,7 @@
   },
   "login": {
     "title": "Bienvenue ",
+	"remember": "Se souvenir de moi",
     "button": "S'inscrire",
     "info": "Vous n'avez pas de compte ? ",
     "infoButton": "S'inscrire",
@@ -266,16 +267,13 @@
             "text": "Home"
           },
           {
-            "text": "Payroll"
-          },
-          {
-            "text": "Payment"
+            "text": "Solutions de paiement"
           },
           {
             "text": "Ressources "
           },
           {
-            "text": "Affiliate"
+            "text": "Programme d'affiliation"
           }
         ]
       },
@@ -283,7 +281,7 @@
         "label": "Connexion",
         "links": [
           {
-            "text": "Log in"
+            "text": "Login"
           },
           {
             "text": "S'inscrire "

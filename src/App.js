@@ -20,12 +20,14 @@ import Support from "./pages/Support";
 import Privacy from "./pages/Privacy";
 import Imprint from "./pages/Imprint";
 import PasswordForgot from "./pages/PasswordForgot";
+import Product from "./pages/Product";
+import Pay from "./pages/Pay";
 import { useEffect, useState } from "react";
 import AffiliateDashboard from "./dashboard/Affiliate";
 import Settings from "./dashboard/Settings";
 import Vendor from "./dashboard/Vendor";
 import ResetPassword from "./pages/ResetPassword";
-import Product from "./dashboard/Product";
+import Products from "./dashboard/Products";
 import DashboardLayout from "./dashboard/dashboardLayout/dashboardLayout";
 import Transactions from "./dashboard/Transactions";
 import PaymentDashboard from "./dashboard/Payment";
@@ -35,6 +37,7 @@ import Admin from "./dashboard/Admin";
 import Kyc from "./dashboard/Kyc";
 import CookieBanner from "./components/cookieBanner/cookieBanner";
 import Cookies from "js-cookie";
+import { MessageContextProvider } from "./context/message";
 
 function App() {
   useEffect(() => {
@@ -75,6 +78,7 @@ function App() {
 
   return (
     <div className="App">
+	<MessageContextProvider>
       <BrowserRouter>
         <ScrollToTop>
           <Routes>
@@ -193,7 +197,7 @@ function App() {
                 path="/dashboard/product"
                 element={
                   <DashboardLayout>
-                    <Product />
+                    <Products />
                   </DashboardLayout>
                 }
               />
@@ -244,29 +248,30 @@ function App() {
               />
 
               <Route
-                path="/dashboard/diamond"
+                path="/dashboard/seniorbroker"
                 element={
                   <>
-                    <Admin type={"diamond"} />
+                    <Admin type={"seniorbroker"} />
                   </>
                 }
               />
 
               <Route
-                path="/dashboard/gold"
+                path="/dashboard/broker"
                 element={
                   <>
-                    <Admin type={"gold"} />
+                    <Admin type={"broker"} />
                   </>
                 }
               />
 
-              <Route
-                path="/dashboard/ib-leader"
+            <Route
+                path="/dashboard/leader"
                 element={
-                  <>
-                    <Admin type={"ib_leader"} />
-                  </>
+                    <>
+                        <Admin type={"leader"} />
+                    </>
+
                 }
               />
 
@@ -288,12 +293,35 @@ function App() {
                 }
               />
             </Route>
+			<Route 
+			  	path="/product/:productLink"
+			  	element={
+					<>
+						<Navigation />
+						
+						<Product />
+						<Footer />
+				  	</>
+				}
+			  />
+			<Route 
+			  	path="/pay/:payLink"
+			  	element={
+					<>
+						<Navigation />
+						
+						<Pay />
+						<Footer />
+				  	</>
+				}
+			  />
           </Routes>
         </ScrollToTop>
 
         {/* COOKIE BANNER */}
         {!ck && <CookieBanner close={() => setCK(true)} />}
       </BrowserRouter>
+	</MessageContextProvider>
     </div>
   );
 }
