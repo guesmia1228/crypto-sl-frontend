@@ -137,7 +137,6 @@ export const SearchOptions = (
                         e.preventDefault();
                     }}
                     onFocus={() => setOpen(true)}
-                    onBlur={() => setOpen(false)}
                     type="text"
                     placeholder={placeholder}
                     value={value}
