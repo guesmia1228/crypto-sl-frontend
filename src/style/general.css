@@ -122,7 +122,9 @@ body {
 }
 
 .dashboardContainer {
-	max-width: 1500px !important;
+	max-width: 1800px !important;
+	padding-left: 50px;
+	padding-right: 50px;
 }
 
 .break {
