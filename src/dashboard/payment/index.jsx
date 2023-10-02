@@ -28,7 +28,7 @@ const PaymentBody = () => {
 	const [email, setEmail] = useState("");
 	const [name, setName] = useState("");
 	const [company, setCompany] = useState("");
-	const [adress, setAdress] = useState("");
+	const [address, setAddress] = useState("");
 	const [taxNumber, setTaxNumber] = useState("");
 	const [invoiceData, setInvoiceData] = useState([]);
 	const { clearMessages, setErrorMessage, setInfoMessage } = useContext(MessageContext);
@@ -56,8 +56,8 @@ const PaymentBody = () => {
 			setErrorMessage("Please enter a valid company");
 			return;
 		}
-		if(!adress){
-			setErrorMessage("Please enter a valid adress");
+		if(!address){
+			setErrorMessage("Please enter a valid address");
 			return;
 		}
 		if(!taxNumber){
@@ -70,7 +70,7 @@ const PaymentBody = () => {
 			email,
 			name,
 			company,
-			adress,
+			address,
 			taxNumber
 		}
 
@@ -107,7 +107,7 @@ const PaymentBody = () => {
 			setEmail(invoice.email);
 			setName(invoice.name);
 			setCompany(invoice.company);
-			setAdress(invoice.adress);
+			setAddress(invoice.address);
 			setTaxNumber(invoice.taxNumber);
 			setQRModalOpen(true);
 		}
@@ -176,7 +176,7 @@ const PaymentBody = () => {
 					<Input setState={setEmail} placeholder={"Email"} dashboard value={email} />
 					<Input setState={setName} placeholder={"Name"} dashboard value={name} />
 					<Input setState={setCompany} placeholder={"Company"} dashboard value={company} />
-					<Input setState={setAdress} placeholder={"Adress"} dashboard value={adress} />
+					<Input setState={setAddress} placeholder={"Address"} dashboard value={address} />
 					<Input setState={setTaxNumber} placeholder={"Tax number"} dashboard value={taxNumber} />
 
 					<div className={styles.button} onClick={createInvoice}>
@@ -235,7 +235,7 @@ const PaymentBody = () => {
 			email={email}
 			name={name}
 			company={company}
-			adress={adress}
+			address={address}
 			taxNumber={taxNumber}
 			qrValue={qrValue}
 			onClose={() => { setQRModalOpen(false); clearMessages(); fetchInvoices() } }
@@ -247,7 +247,7 @@ const PaymentBody = () => {
 
 export default PaymentBody;
 
-const Modal = ({ amount, email, name, company, adress, taxNumber, qrValue, onClose }) => {
+const Modal = ({ amount, email, name, company, address, taxNumber, qrValue, onClose }) => {
 	const { setInfoMessage } = useContext(MessageContext);
 
 	return (
@@ -265,7 +265,7 @@ const Modal = ({ amount, email, name, company, adress, taxNumber, qrValue, onClo
 						["Email:", `${email}`],
 						["Name:", `${name}`],
 						["Company:", `${company}`],
-						["Adress:", `${adress}`],
+						["Address:", `${address}`],
 						["Tax number:", `${taxNumber}`],
 						["Link:", <CopyValue value={qrValue} onCopy={() => setInfoMessage("Payment link copied to clipboard!")} />]
 					]} 

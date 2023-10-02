@@ -308,6 +308,7 @@ export default class vendorDashboardApi {
 				body: JSON.stringify(requestBody)
             };
             const response = await fetch(url, options);
+            console.log(response);
             if (!response.ok) {
                 throw new Error("Network response was not ok");
             }
