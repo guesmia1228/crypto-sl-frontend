@@ -18,6 +18,7 @@ import MessageComponent from "../../components/message";
 import { MessageContext } from "../../context/message";
 import TopInfo from "../topInfo/topInfo";
 import Tabs from "../../components/tabs/index";
+import CropDialog, { dataURLtoFile } from "../../components/cropDialog/cropDialog";
 
 let nav = [
     "Profile",
@@ -173,6 +174,7 @@ const ProfileBody = ({afterUpdateSettings, active}) => {
     );
     const [email, setEmail] = useState(localStorage.getItem("email"));
 	const { setErrorMessage, setInfoMessage } = useContext(MessageContext);
+    const [cropDialogOpen, setCropDialogOpen] = useState(false);
 
     const profileContent = [
         {
@@ -209,6 +211,7 @@ const ProfileBody = ({afterUpdateSettings, active}) => {
 
     const handleUpload = (uploadedFile) => {
         setFile(uploadedFile);
+        setCropDialogOpen(true);
     };
 
     const checkErrors = () => {
@@ -305,6 +308,17 @@ const ProfileBody = ({afterUpdateSettings, active}) => {
 			</div>
 
             <Attachment label="Upload logo image" onUpload={handleUpload} />
+
+            <CropDialog
+                open={cropDialogOpen}
+                file={file}
+                style={{ width: 600, height: 400 }}
+                onClose={() => setCropDialogOpen(false)}
+                onSave={(croppedImageData) => {
+                    setCropDialogOpen(false);
+                    setFile(dataURLtoFile(croppedImageData, file.name));
+                }}
+            />
 
             <Buttons
                 functions={[resetValues, handleConfirm]}

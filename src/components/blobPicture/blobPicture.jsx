@@ -8,11 +8,11 @@ const BlobPicture = () => {
   }, [localStorage.getItem("profile_pic")]);
 
     return (
-    <div>
+    <div style={{width: '100%', height: '100%'}}>
       {base64Data !== 'null' &&(
         <img
           src={`${base64Data}`}
-          style={{ maxWidth: '100%', height: 'auto' }}
+          style={{ height: '100%', width: '100%' }}
         />
       )}
     </div>
