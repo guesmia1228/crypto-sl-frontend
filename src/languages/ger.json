@@ -11,35 +11,35 @@
   "home": {
     "heroTitle": "Akzeptieren Sie Krypto Zahlungen",
     "heroTitleGradient": "Ohne Risiko",
-    "heroDescription": "Mit unserer innovativen Automatisierung und sicheren Krypto-Checkouts, die es Ihnen ermöglichen, sich auf Ihr Geschäft zu konzentrieren, ohne sich um die Schwankungen des Krypto-Marktes sorgen zu müssen. Lassen Sie manuelle Zahlungen der Vergangenheit angehören und lassen Sie uns alles vereinfachen.",
+    "heroDescription": "Mit unserer revolutionären, hochmodernen Automatisierung und sicherem Krypto-Check out können Sie sich auf Ihr Kerngeschäft konzentrieren und gleichzeitig Ihre Einnahmen maximieren. Lassen Sie manuelle Zahlungen hinter sich und begrüßen Sie die Zukunft des Bezahlens noch heute.",
     "heroButton": "Starte Jetzt - Kostenlos!",
     "heroButton2": "Jetzt Downloaden",
     "heroAvailable": "Verfügbar für:",
     "cardSubtitle": "Ihr Schritt zu einem modernen Zahlungsverkehr",
     "cardTitleP1": "Mit moderner Zahlungsverarbeitung",
-    "cardTitleP2": "Wettbewerbsfähig bleiben",
+    "cardTitleP2": "wettbewerbsfähig bleiben",
     "cardList": [
       {
-        "title": "Erstklassige Unterstützung:",
+        "title": "Erstklassige\n Unterstützung",
         "description": "Ihre Zufriedenheit, unsere Priorität: Führend mit exzellentem Support."
       },
       {
-        "title": "Erschließen Sie\n neue Märkte:",
+        "title": "Erschließen Sie\n neue Märkte",
         "description": "Entfesseln Sie die Kraft des Wachstums und machen Sie sich fit für die Zukunft."
       },
       {
-        "title": "Optimieren Sie\n Ihren Workflow:",
+        "title": "Optimieren Sie\n Ihren Workflow",
         "description": "Unsere Lösung, alles in einem: Ihre Abkürzung zu sicheren Krypto-Zahlungen"
       }
     ],
-    "layoutButton": "Jetzt kostenlos einsteigen",
-    "simplifySubtitle": "Vereinfachen Sie",
-    "simplifyTitle": "Mühelose Krypto-Transaktionen mit Rechnungsstellung",
+    "layoutButton": "Jetzt kostenlos registrieren",
+    "simplifySubtitle": "Einfach für Sie",
+    "simplifyTitle": "Mühelose Kryptozahlungen mit integrierter Rechnungsstellung",
     "simplifyDescription": "Erleben Sie eine nahtlose und sichere Transaktions-Umwandlung und eine automatisierte Rechnungsstellung mit Nefentus - entwickelt für Sie, um den vielfältigen Anforderungen von Unternehmen und Kunden gerecht zu werden.",
     "aboutCard1Subtitle": "Schnelle Annahme",
-    "aboutCard1Title": "Akzeptieren Sie\n eine Vielfalt an Kryptowährungen",
-    "aboutCard1TitleGradient": "ohne Risiko",
-    "aboutCard1Description": "Unsere auf Smart Contracts basierende Technologie eliminiert die Volatilität von Kryptowährungen durch die sofortige Umwandlung von Kryptowährungszahlungen in stabile Coins in Ihrer Wallet. So akzeptieren Sie sicher eine Reihe von Kryptowährungen und bieten Sie Ihren Kunden Zahlungsflexibilität.",
+    "aboutCard1Title": "Akzeptieren Sie eine Vielzahl an Kryptowährungen und bieten Ihren Kunden",
+    "aboutCard1TitleGradient": "Zahlungsflexibilität",
+    "aboutCard1Description": "Unsere auf Smart Contracts basierende Technologie eliminiert die Volatilität von Kryptowährungen durch die sofortige Umwandlung von Kryptowährungszahlungen in Stable Coins in Ihrer Wallet. So akzeptieren Sie sicher eine Reihe von Kryptowährungen und bieten Sie Ihren Kunden Zahlungsflexibilität.",
     "aboutCard2Subtitle": "Tracking",
     "aboutCard2TitleP1": "Alles was Sie brauchen",
     "aboutCard2TitleP2": "an einem Ort",
@@ -47,7 +47,7 @@
     "aboutCard3Subtitle": "Integration",
     "aboutCard3TitleP1": "Nahtlose Verbindungen ",
     "aboutCard3TitleP2": "mit all Ihren\n anderen Tools",
-    "aboutCard3Description": "Die Integration in unsere Plattform bietet Zugang zu mehr als 200 Krypto-Wallets, optimiert die Abläufe und verbessert die Finanzkontrolle.",
+    "aboutCard3Description": "Die Integration mit unserer Plattform bietet Zugang zu mehr als 200 Krypto-Wallets, optimiert die Abläufe und verbessert die Finanzkontrolle.",
     "aboutCardButton": "Jetzt Account erstellen",
     "reviewList": [],
     "helpTitle": "Sie brauchen mehr Hilfe",
@@ -56,28 +56,28 @@
     "helpCard1Text": "Nutzen Sie den E-Mail-Support mit unseren freundlichen Kundendienstmitarbeitern, die Ihnen zur Verfügung stehen.",
     "helpCard1Button": "Jetzt Kontakt aufnehmen",
     "helpCard2Title": "FAQs",
-    "helpCard2Text": " Detaillierte Anweisungen zu allen Funktionen finden Sie in den FAQs.",
-    "helpCard2Button": "Jetzt anschauen"
+    "helpCard2Text": " Detaillierte Anleitungen zu allen Funktionen finden Sie in den FAQs.",
+    "helpCard2Button": "Jetzt informieren"
   },
   "payment": {
     "heroHeadingGradient": "Der neue Weg",
     "heroHeading": "mit Krypto Währungen zu bezahlen",
-    "heroDescription": "Erleben Sie die Zukunft des Finanzwesens, indem Sie Ihre Rechnungs- und Zahlungsprozesse mit unseren fortschrittlichen Automatisierungstools und sicheren kryptobasierten Checkouts revolutionieren, welches Finanzmanagement vereinfachen und das Umsatzpotenzial maximieren.",
+    "heroDescription": "Erleben Sie die Zukunft des Bezahlens, indem Sie Ihre Rechnungs- und Zahlungsprozesse mit unseren fortschrittlichen Automatisierungstools und sicheren kryptobasierten Checkouts revolutionieren, Ihr Finanzmanagement vereinfachen und das Umsatzpotenzial maximieren.",
     "heroButton": "Starten Sie Jetzt - Es ist Kostenlos!",
     "growSubtitle": "Wachsen Sie mit Uns",
-    "growTitle": "Maximieren Sie \nIhre Verkäufe",
+    "growTitle": "Maximieren Sie \nIhre Verkäufe ",
     "growTitle2": "mit Nefentus!",
     "growContent": [
       {
         "title": "Mühelose und sichere Annahme einer breiten Palette von Kryptowährungen:",
-        "descriptionP1": "Unsere Smart-Contract-Technologie wurde entwickelt, um die Achterbahnfahrt der Kryptowährungspreise zu bewältigen. Wenn Ihre Kunden Zahlungen mit Kryptowährungen tätigen, treten unsere intelligenten Verträge in Aktion und wandeln diese Zahlungen nahtlos in Stablecoins um.",
+        "descriptionP1": "Unsere Smart-Contract-Technologie wurde entwickelt, um die Achterbahnfahrt der Kryptowährungspreise zu bewältigen. Wenn Ihre Kunden Zahlungen mit Kryptowährungen tätigen, treten unsere intelligenten Verträge in Aktion und wandeln diese Zahlungen nahtlos in Stable Coins um.",
         "descriptionP2": "Diese sofortige Umrechnung stellt sicher, dass der Wert der erhaltenen Zahlungen konstant bleibt und schützt Ihr Unternehmen effektiv vor den unvorhersehbaren Preisschwankungen, die oft mit dem Kryptomarkt verbunden sind.",
         "button": "Jetzt Starten"
       },
       {
         "title": "Starten Sie in weniger als 5 Minuten:",
-        "descriptionP1": "Bei Nefentus wissen wir Ihre Zeit zu schätzen. Deshalb haben wir den Prozess gestrafft, damit Sie Ihr Konto in weniger als 5 Minuten einrichten und Ihr Wallet anschließen können. Für EU-Bürger ist ein KYC-Prozess erforderlich.",
-        "descriptionP2": "Machen Sie sich keine Sorgen, wenn Sie noch keine Wallet haben! Nefentus erstellt automatisch eine für Sie. Wenn Sie es jedoch vorziehen, Ihre bestehende Wallet zu verwenden, können Sie diese einfach mit unserem System verbinden. Beginnen Sie Ihre Reise mit Nefentus noch heute und erleben Sie die Freiheit und Flexibilität, die Kryptowährungen bieten!",
+        "descriptionP1": "Bei Nefentus wissen wir Ihre Zeit zu schätzen. Deshalb haben wir den Prozess gestrafft, damit Sie Ihr Konto in weniger als 5 Minuten einrichten und Ihre Wallet anschließen können. Für EU-Bürger ist ein KYC-Prozess erforderlich.",
+        "descriptionP2": "Machen Sie sich keine Sorgen, wenn Sie noch keine Wallet haben! Nefentus erstellt automatisch eine für Sie. Wenn Sie es jedoch vorziehen, Ihre bestehende Wallet zu verwenden, können Sie diese einfach mit unserem System verbinden. Beginnen Sie Ihre Reise mit Nefentus noch heute und erleben Sie die Freiheit und Flexibilität von Kryptowährungen für Ihr Unternehmen und Ihre Kunden!",
         "button": "Jetzt Starten"
       },
       {
@@ -88,8 +88,8 @@
       }
     ],
     "iconTitleP1": "Stärken Sie Ihr Unternehmen",
-    "iconSubtitle": "Seien Sie Teil der Zukunfte",
-    "iconDescription": "Unsere Plattform ist nicht nur ein Gateway, sondern ein Kraftwerk der Flexibilität und Skalierbarkeit. Passen Sie Ihre Zahlungsfunktionen an Ihre individuellen Bedürfnisse an und nutzen Sie die Chancen, die sich in der dynamischen und sich ständig verändernden Zahlungslandschaft von heute bieten. Bleiben Sie der Zeit voraus und transformieren Sie Ihr Geschäft.",
+    "iconSubtitle": "Seien Sie Teil der Zukunft",
+    "iconDescription": "Unsere Plattform ist nicht nur ein Gateway, sondern ein Kraftwerk der Flexibilität und Skalierbarkeit. Passen Sie Ihre Zahlungsfunktionen an Ihre individuellen Bedürfnisse an und nutzen Sie die Chancen, die sich in der dynamischen und sich ständig verändernden Zahlungslandschaft von heute bieten.",
     "whyTitle": "Warum Nefentus?",
     "whyButton": "Jetzt kostenlos loslegen",
     "whyContent": [
@@ -196,10 +196,11 @@
     "telefonLabel": "Telefonnummer",
     "emailLabel": "E-Mail Adresse",
     "emailPlaceholder": "you@email.com",
-    "passwordLabel": "Dein Passwort",
+    "passwordLabel": "Passwort",
     "passwordPlaceholder": "Passwort",
     "optionLabel": "Für was möchten Sie sich anmelden?",
-    "option1Label": "Ihr Heimatland",
+    "option1Label": "Land",
+	"option1Placeholder": "Land auswählen",
     "option2Label": "Ihr Programm",
     "option1": "Vendor",
     "option2": "Affiliate",
@@ -210,6 +211,7 @@
     "titleP1": "Willkommen",
     "titleP2": "bei Nefentus",
     "description": "Geben Sie Ihre Anmeldedaten unten ein, um auf Ihr Nefentus-Konto zuzugreifen und eine Welt voller Möglichkeiten zu erschließen.",
+	"remember": "Angemeldet bleiben",
     "button": "Anmelden",
     "info": "Noch keinen Account? ",
     "infoButton": "Registrieren Sie sich",
@@ -250,7 +252,7 @@
         "description": "Behalten Sie den Überblick über Ihre Provisionen und lassen Sie sich mit unserer App über Verkäufe benachrichtigen."
       }
     ],
-    "compareTitle": "Herausforderungen\n für andere: Unsere Lösungen",
+    "compareTitle": "Herausforderungen bei anderen Partnerprogrammen: Unsere Lösungen",
     "compareSubtitle": "Lösungen",
     "compareContent": [
       {
@@ -259,7 +261,7 @@
         "description": "Bei der Vielzahl von Partnerprogrammen und traditionellen Produkten kann es für Partner schwierig sein, sich und ihre Angebote von der Konkurrenz abzuheben. Dies kann zu geringerem Engagement und weniger Verkäufen führen, was es schwieriger macht, Provisionen zu verdienen."
       },
       {
-        "title": "Heben sie sich von der Konkurrenz auf einem überfüllten Markt ab",
+        "title": "Heben Sie sich von der Konkurrenz auf einem überfüllten Markt ab",
         "description": "Nefentus ist eine revolutionäre Plattform und bietet seinen Affiliates eine Reihe von Marketingmaterialien, einschließlich Bannern und Landing Pages, die ihnen helfen, sich zu differenzieren und in einem überfüllten Markt hervorzuheben. Darüber hinaus bietet das Programm attraktive Provisionen und ein revolutionäres Produkt, das beworben werden kann und den Affiliates einen Wettbewerbsvorteil verschafft."
       },
       {
@@ -296,8 +298,8 @@
     "contact": {
       "title": "Für weitere Hilfe, kontaktieren Sie uns!",
       "description": "Wenn Sie einen persönlicheren Kontakt bevorzugen, stehen wir Ihnen jederzeit per Telefon oder E-Mail zur Verfügung. Ganz gleich, ob Sie eine kurze Frage haben oder eine ausführlichere Unterstützung benötigen, wir sind nur einen Anruf oder einen Klick entfernt.",
-      "button1Text": "Schreiben Sie auf Instagram",
-      "button1Description": "Sie können auf instagram schreiben",
+      "button1Text": "Kontaktieren Sie uns per Chat",
+      "button1Description": "Schreiben Sie uns unkompliziert und schnell per Chat.",
       "button2Description": "Ihre Anfrage wird innerhalb eines Tages beantwortet."
     },
     "introduction": {

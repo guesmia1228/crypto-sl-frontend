@@ -226,7 +226,7 @@ const Signup = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [UseOption, setUseOption] = useState("Choose Options");
-  const [CountryOption, setCountryOption] = useState("Choose country");
+  const [CountryOption, setCountryOption] = useState(t("signUp.option1Placeholder"));
   const api = new backendAPI();
 
   const resetForm = () => {
@@ -236,7 +236,7 @@ const Signup = () => {
     setEmail("");
     setPassword("");
     setUseOption("Choose Options");
-    setCountryOption("Choose country");
+    setCountryOption(t("signUp.option1Placeholder"));
   };
 
   async function submitForm() {
@@ -252,7 +252,7 @@ const Signup = () => {
 	} else if (Password === "") {
 		setErrorMessage("Please enter your password");
 		return;
-	} else if (CountryOption === "Choose country") {
+	} else if (CountryOption === t("signUp.option1Placeholder")) {
 		setErrorMessage("Please choose a country");
 		return;
 	}

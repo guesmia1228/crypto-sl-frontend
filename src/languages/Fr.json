@@ -245,6 +245,7 @@
   },
   "login": {
     "title": "Bienvenue ",
+	"remember": "Se souvenir de moi",
     "button": "S'inscrire",
     "info": "Vous n'avez pas de compte ? ",
     "infoButton": "S'inscrire",
