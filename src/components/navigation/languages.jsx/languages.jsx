@@ -1,10 +1,10 @@
 import Globe from "../../../assets/icon/globe.svg";
 import USA from "../../../assets/icon/flags/usa.svg";
 import DE from "../../../assets/icon/flags/de.svg";
-import ES from "../../../assets/icon/flags/es.svg";
-import AR from "../../../assets/icon/flags/ar.svg";
+// import ES from "../../../assets/icon/flags/es.svg";
+// import AR from "../../../assets/icon/flags/ar.svg";
 import UK from "../../../assets/icon/flags/uk.svg";
-import FR from "../../../assets/icon/flags/fr.svg";
+// import FR from "../../../assets/icon/flags/fr.svg";
 
 import styles from "./languages.module.css";
 import { useLocation } from "react-router-dom";
@@ -33,14 +33,11 @@ const Languages = () => {
   const query = useLocation();
   const [langList, setLangList] = useState(list);
 
-  const [language, setLanguage] = useState("EN");
-
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   const handleTrans = (code) => {
     i18n.changeLanguage(code);
 
-    setLanguage(code.toUpperCase());
   };
 
   useEffect(() => {
