@@ -131,13 +131,13 @@ const LoginBox = () => {
 			<Input
 				value={Username}
 				setState={setUsername}
-				label={t("signUp.emailLabel")}
+				label={t("signUp.emailLabel") + "*"}
 				placeholder={t("signUp.emailPlaceholder")}
 			/>
 			<Input
 				value={Password}
 				setState={setPassword}
-				label={t("signUp.passwordLabel")}
+				label={t("signUp.passwordLabel") + "*"}
 				placeholder={t("signUp.passwordPlaceholder")}
 				secure
 			/>
