@@ -273,8 +273,9 @@
     "titleP1": "Welcome Back",
     "titleP2": "to Nefentus",
     "description": "Enter your credentials below to access your Nefentus account and unlock a world of possibilities.",
-	"remember": "Remember me",
+	  "remember": "Remember me",
     "button": "Sign in",
+    "close": "Close",
     "info": "Don't have an account? ",
     "infoButton": "Sign up",
     "forgot": "Forgot password?"

@@ -286,7 +286,7 @@ const Signup = () => {
     <div className={`${styles.signup}`}>
       <div className={styles.closeWrapper}>
         <Button link={"/"} color={"white"}>
-          Close
+          {t("login.close")}
         </Button>
       </div>
       <div className={styles.left}>

@@ -84,7 +84,7 @@ const LoginBox = () => {
     <div className={`${styles.login}`}>
       <div className={styles.closeWrapper}>
         <Button link={"/"} color={"white"}>
-          Close
+          {t("login.close")}
         </Button>
       </div>
       <div className={styles.left}>
@@ -117,43 +117,43 @@ const LoginBox = () => {
           </div>
         )}
 
-		<form onSubmit={handleClick}>
-			<div className={styles.inputWrapper}>
-			<Input
-				value={Username}
-				setState={setUsername}
-				label={t("signUp.emailLabel")}
-				placeholder={t("signUp.emailPlaceholder")}
-			/>
-			<Input
-				value={Password}
-				setState={setPassword}
-				label={t("signUp.passwordLabel")}
-				placeholder={t("signUp.passwordPlaceholder")}
-				secure
-			/>
+        <form onSubmit={handleClick}>
+          <div className={styles.inputWrapper}>
+            <Input
+              value={Username}
+              setState={setUsername}
+              label={t("signUp.emailLabel")}
+              placeholder={t("signUp.emailPlaceholder")}
+            />
+            <Input
+              value={Password}
+              setState={setPassword}
+              label={t("signUp.passwordLabel")}
+              placeholder={t("signUp.passwordPlaceholder")}
+              secure
+            />
 
-			<div className={styles.rememberInfo}>
-				<div onClick={() => setCheckBox((prev) => !prev)}>
-				<div className={styles.checkBox}>
-					{checkBox && <img src={CheckBox} alt="checkbox" />}
-				</div>
-				<p>{t("login.remember")}</p>
-				</div>
+            <div className={styles.rememberInfo}>
+              <div onClick={() => setCheckBox((prev) => !prev)}>
+                <div className={styles.checkBox}>
+                  {checkBox && <img src={CheckBox} alt="checkbox" />}
+                </div>
+                <p>{t("login.remember")}</p>
+              </div>
 
-				<Link to="/forgot-password">
-				<p>{t("login.forgot")}</p>
-				</Link>
-			</div>
-			</div>
-			<div className={styles.buttonWrapper}>
-			<Button className={styles.button} onClick={handleClick}>
-				{t("login.button")}
-			</Button>
-			</div>
+              <Link to="/forgot-password">
+                <p>{t("login.forgot")}</p>
+              </Link>
+            </div>
+          </div>
+          <div className={styles.buttonWrapper}>
+            <Button className={styles.button} onClick={handleClick}>
+              {t("login.button")}
+            </Button>
+          </div>
 
-			<button type="submit" hidden />
-		</form>
+          <button type="submit" hidden />
+        </form>
       </div>
     </div>
   );

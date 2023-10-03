@@ -236,7 +236,8 @@
     },
     "login": {
       "title": "Bienvenido",
-	  "remember": "Recuérdame",
+	    "remember": "Recuérdame",
+      "close": "Cerrar",
       "button": "Iniciar sesión",
       "info": "¿No tienes una cuenta? ",
       "infoButton": "Registrarse",
