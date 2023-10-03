@@ -36,6 +36,19 @@
   right: 2rem;
 }
 
+.searchInput {
+    color: var(--white-color);
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 1.4rem;
+}
+
+.searchInput::placeholder {
+    font-family: Euclid, sans-serif;
+    font-size: 1.4rem;
+}
+
 .option {
   cursor: pointer;
 }

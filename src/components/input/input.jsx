@@ -48,27 +48,27 @@ const Input = ({
 export default Input;
 
 export const Options = ({
-  value,
-  options = [],
-  setValue,
-  label = "",
-  dashboard,
-}) => {
-  const [open, setOpen] = useState(false);
+                            value,
+                            options = [],
+                            setValue,
+                            label = "",
+                            dashboard,
+                        }) => {
+    const [open, setOpen] = useState(false);
 
-  const { t } = useTranslation();
+    const {t} = useTranslation();
 
-  return (
-    <div className={`${styles.inputWrapper} ${styles.option}`}>
-      {label.length > 0 && (
-        <p
-          className={`${styles.label} ${
-            dashboard ? styles.dashboardLabel : ""
-          }`}
-        >
-          {label.length > 0 ? label : t("signUp.optionLabel")}
-        </p>
-      )}
+    return (
+        <div className={`${styles.inputWrapper} ${styles.option}`}>
+            {label.length > 0 && (
+                <p
+                    className={`${styles.label} ${
+                        dashboard ? styles.dashboardLabel : ""
+                    }`}
+                >
+                    {label.length > 0 ? label : t("signUp.optionLabel")}
+                </p>
+            )}
 
       <div
         className={`option ${styles.input} ${
@@ -101,6 +101,66 @@ export const Options = ({
   );
 };
 
+export const SearchOptions = (
+    {
+        value,
+        options = [],
+        setValue,
+        label = "",
+        dashboard,
+        placeholder = "",
+    }) => {
+    const [open, setOpen] = useState(false);
+    const {t} = useTranslation();
+
+    const filteredOptions = options.filter((item) => item.toLowerCase().includes(value.toLowerCase()));
+
+    return (
+        <div className={`${styles.inputWrapper} ${styles.option}`}>
+            {label.length > 0 && (
+                <p
+                    className={`${styles.label} ${
+                        dashboard ? styles.dashboardLabel : ""
+                    }`}
+                >
+                    {label.length > 0 ? label : t("signUp.optionLabel")}
+                </p>
+            )}
+
+            <div
+                className={`option ${styles.input} ${
+                    dashboard ? styles.dashboardInput : ""
+                }`}
+                onClick={() => setOpen((prev) => !prev)}
+            >
+                <input
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                    }}
+                    onFocus={() => setOpen(true)}
+                    type="text"
+                    placeholder={placeholder}
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                    className={styles.searchInput}
+                />  <img src={dropDown} alt=""/>
+                {open && (
+                    <div className={`card ${styles.body}`}>
+                        {
+                            filteredOptions.map((item) => (
+                                <p onClick={() => setValue(item)} key={item}>
+                                    {item}
+                                </p>
+                            ))
+                        }
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+};
+
 export const Textarea = ({
 	label,
 	placeholder,
@@ -113,7 +173,7 @@ export const Textarea = ({
 	const handleChange = (e) => {
 	  setState(e.target.value);
 	};
-  
+
 	return (
 	  <div className={styles.textareaWrapper}>
 		{label && (
@@ -125,7 +185,7 @@ export const Textarea = ({
 			{label}
 		  </p>
 		)}
-  
+
 		<textarea
 		  className={`${styles.textarea} ${dashboard ? styles.dashboardTextarea : ""}`}
 		  placeholder={placeholder}
@@ -140,19 +200,19 @@ export const Textarea = ({
 
  export const Attachment = ({ label, onUpload, onDelete, value, dashboard }) => {
 	const inputRef = useRef(null);
-  
+
 	const [text, setText] = useState(value ? value : false);
-  
+
 	const handleClick = () => {
 		inputRef.current.click();
 	};
-  
+
 	const allowedExtensions = ["jpg", "jpeg", "png", "JPG", "PNG", "JPEG"];
-  
+
 	function checkFileExtension(extension) {
 		return allowedExtensions.includes(extension);
 	}
-  
+
 	const handleChange = () => {
 		const file = inputRef.current.files[0];
 		const fileName = inputRef.current.value.split("\\").pop();
@@ -165,7 +225,7 @@ export const Textarea = ({
 			//todo throw new Error maybe with toast!
 		}
 	};
-  
+
 	return (
 		<div className={styles.attachmentWrapper}>
 			{label && (

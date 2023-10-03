@@ -1,10 +1,10 @@
 import Logo from "../../assets/logo/logo2.svg";
 import Button from "../button/button";
-import Input, { Options } from "../input/input";
+import Input, { SearchOptions} from "../input/input";
 
 import styles from "./signup.module.css";
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom";
+import { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import ReCAPTCHA from "react-google-recaptcha";
 import backendAPI from "../../api/backendAPI";
@@ -198,11 +198,11 @@ var country_list = [
   "Timor L'Este",
   "Togo",
   "Tonga",
-  "Trinidad & Tobago",
+  "Trinidad &amp; Tobago",
   "Tunisia",
   "Turkey",
   "Turkmenistan",
-  "Turks & Caicos",
+  "Turks &amp; Caicos",
   "Uganda",
   "Ukraine",
   "United Arab Emirates",
@@ -227,8 +227,7 @@ const Signup = () => {
   const [Telefon, setTelefon] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-  const [UseOption, setUseOption] = useState("Choose Options");
-  const [CountryOption, setCountryOption] = useState(t("signUp.option1Placeholder"));
+  const [CountryOption, setCountryOption] = useState("");
   const api = new backendAPI();
 
   const resetForm = () => {
@@ -237,7 +236,6 @@ const Signup = () => {
     setTelefon("");
     setEmail("");
     setPassword("");
-    setUseOption("Choose Options");
     setCountryOption(t("signUp.option1Placeholder"));
   };
 
@@ -358,12 +356,13 @@ const Signup = () => {
 					setState={setPassword}
 					secure
 				/>
-				<Options
-					label={t("signUp.option1Label") + "*"}
-					value={CountryOption}
-					setValue={setCountryOption}
-					options={country_list}
-				/>
+              <SearchOptions
+                  label={t("signUp.option1Label")}
+                  value={CountryOption}
+                  setValue={setCountryOption}
+                  options={country_list}
+                  placeholder={t("signUp.option1Placeholder")}
+              />
 			</div>
 
 			<ReCAPTCHA
