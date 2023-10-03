@@ -57,9 +57,12 @@ export const KYC = () => {
     [KYC_TYPE.ADRESS]: null,
   });
 
+  const requiredFields = [KYC_TYPE.PASSPORT, KYC_TYPE.PERSONAL_PICTURE];
+
   const fetchFYC = async () => {
+    const userId = localStorage.getItem("userId");
     const arrayWithResults = await Promise.all(
-      Object.values(KYC_TYPE).map((type) => backendapi.getByKYC(type))
+      Object.values(KYC_TYPE).map((type) => backendapi.getByKYC(type, userId))
     );
 
     const transformedResults = arrayWithResults
@@ -117,15 +120,11 @@ export const KYC = () => {
     <div className={styles.kyc}>
       {files[selectingType] && files[selectingType]["url"] ? (
         <div className={styles.kycImageContainer}>
-          <img
-            className={styles.kycImage}
-            src={files[selectingType]["url"]}
-            alt="url"
-          />
+          <img className={styles.kycImage} src={files[selectingType]["url"]} />
         </div>
       ) : (
         <div className={styles.kycDrop}>
-          <img src={File} alt="file" />
+          <img src={File} alt="" />
 
           <input
             onChange={onChange}
@@ -152,15 +151,24 @@ export const KYC = () => {
               selectingType === item.id ? styles.itemActive : ""
             }`}
             key={index}
-            onClick={() => handleSelectType(item.id)}
+            onClick={() => {
+              handleSelectType(item.id);
+              setStatusIndex(index);
+            }}
           >
             <div className={styles.kycLabelSection}>
-              <div className={styles.kycLabel}>{item.label}</div>
+              <div className={styles.kycLabel}>
+                {item.label}{" "}
+                {requiredFields.includes(item.id) &&
+                  !files[item.id]?.verify && (
+                    <span className={styles.kycRequired}>*</span>
+                  )}
+              </div>
 
               <div className={styles.kycStatus}>
                 {files[item.id]?.url &&
                   (files[item.id].verify ? (
-                    <img src={Correct} alt="correct" />
+                    <img src={Correct} alt="" />
                   ) : (
                     "(waiting verification)"
                   ))}
@@ -175,7 +183,7 @@ export const KYC = () => {
                 <p>
                   {uploadingFiles[item.id] ? uploadingFiles[item.id].name : ""}
                 </p>
-                <img src={Fail} alt="fail" />
+                <img src={Fail} alt="" />
               </div>
             )}
           </div>

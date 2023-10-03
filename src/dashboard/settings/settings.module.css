@@ -140,6 +140,10 @@
     padding-top: 3rem;
 }
 
+.kycRequired {
+    color: red;;
+}
+
 .kycDrop {
     text-align: center;
     border-radius: 1rem;
