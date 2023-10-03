@@ -243,7 +243,6 @@ export default class backendAPI {
             const data = await response.json();
             console.log(data);
             setCookie("token", data.jwtToken);
-            localStorage.setItem("token", data.jwtToken);
             localStorage.setItem("email", data.email);
             localStorage.setItem("contactEmail", data.contactEmail);
             localStorage.setItem("affiliateLink", data.affiliateLink);

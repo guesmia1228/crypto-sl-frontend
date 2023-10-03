@@ -8,6 +8,8 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Helmet } from "react-helmet";
 import HeroAff from "../components/heroAff/heroAff";
+import Cookie from "js-cookie"
+
 
 const Affiliate = () => {
   useEffect(() => {
@@ -15,9 +17,10 @@ const Affiliate = () => {
   });
 
   const checkPermissions = async () => {
-    const token = localStorage.getItem("token");
+    const token = Cookie.getItem('token');
 
-    if (!token) {
+
+      if (!token) {
       // Der Benutzer ist nicht angemeldet
       return;
     }

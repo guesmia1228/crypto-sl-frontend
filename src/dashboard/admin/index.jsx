@@ -1,18 +1,14 @@
 import Button from "../../components/button/button";
 import Input, { Options } from "../../components/input/input";
 import StatsCard from "../statsCard/statsCard";
-import { transformNumber } from "../func/transformNumber";
 import Graph from "../graph/graph";
 import Header from "../header/header";
 import TopInfo from "../topInfo/topInfo";
 import styles from "./admin.module.css";
-import { options } from "./../graph/graph";
 import { useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
 import ModalOverlay from "../modal/modalOverlay";
 import adminDashboardApi from "../../api/adminDashboardApi";
 import { useNavigate } from "react-router-dom";
-import Table from "../../components/table";
 import TablePagination from "../../components/tablePagination";
 import { formatUSDBalance } from "../../utils";
 import { ROLE_TO_NAME } from "../../constants";
@@ -20,7 +16,6 @@ import CopyValue from "../copyValue";
 import { MessageContext } from "../../context/message";
 import MessageComponent from "../../components/message";
 import imputStyles from "../../components/input/input.module.css";
-import { tab } from "@testing-library/user-event/dist/tab";
 
 const header = [
 	"First Name",
@@ -60,7 +55,7 @@ const AdminBody = ({ type }) => {
 	useEffect(() => {
 		fetchAdminData();
 		clearMessages();
-	}, []); 
+	}, []);
 
 	const fetchAdminData = async () => {
 		const result = await adminApi.checkPermission();
@@ -76,7 +71,7 @@ const AdminBody = ({ type }) => {
 				adminApi.getRoleReport(),
 				adminApi.getTotalIncomesPerDay()
 			]
-      
+
         	const [dataReg, dataClick, dataOrders, dataInc, dataUsers, reportResp, totalPricePerDate] = await Promise.all(getPromises);
 
 			const cardsContent = [
@@ -110,7 +105,7 @@ const AdminBody = ({ type }) => {
 
 			console.log(cardsContent)
 			setCardInfo(cardsContent);
-    
+
 			dataUsers.reverse();
 			updateUsers(dataUsers);
 
@@ -127,8 +122,8 @@ const AdminBody = ({ type }) => {
 			setFilteredData(tableData);
 		} else {
 			const filtered = tableData.filter((item) => {
-				return item[0].toLowerCase().includes(searchText.toLowerCase()) || 
-					item[1].toLowerCase().includes(searchText.toLowerCase()) || 
+				return item[0].toLowerCase().includes(searchText.toLowerCase()) ||
+					item[1].toLowerCase().includes(searchText.toLowerCase()) ||
 					item[2].toLowerCase().includes(searchText.toLowerCase());
 			});
 			setFilteredData(filtered);
@@ -140,7 +135,7 @@ const AdminBody = ({ type }) => {
 		if (dataUsers) {
 			const newDataUsers = dataUsers.map(user => [
 				user.firstName,
-				user.lastName, 
+				user.lastName,
 				user.email,
 				user.roles.map(role => ROLE_TO_NAME[role.replace(" ", "")]).join(', '),
 				(
@@ -278,7 +273,7 @@ const AdminBody = ({ type }) => {
 					return;
 				}
 			}
-	
+
 			setErrorMessage("Could not add user!");
 		}
  	};
@@ -314,7 +309,7 @@ const AdminBody = ({ type }) => {
 			<div className={styles.affiliateLink}>
 				<p className={styles.affiliateLabel}>Affiliate link: </p>
 
-				<CopyValue 
+				<CopyValue
 					value={`${window.location.origin}/?affiliate=${localStorage.getItem("affiliateLink")}`}
 					onCopy={() => affiliateLinkCopied(true)}
 					inputStyle={{width: "400px"}}
@@ -413,10 +408,10 @@ const AdminBody = ({ type }) => {
 			</div>
 
 			<TablePagination
-				headers={header} 
-				data={filteredData} 
+				headers={header}
+				data={filteredData}
 				colSizes={colSizes}
-				striped 
+				striped
 			/>
 		</div>
       </div>

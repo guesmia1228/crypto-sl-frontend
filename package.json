@@ -15,6 +15,7 @@
     "assert": "^2.0.0",
     "chart.js": "^4.2.1",
     "classnames": "^2.3.2",
+    "crypto-js": "^4.1.1",
     "ethers": "^5.7.2",
     "gh-pages": "^5.0.0",
     "i18next": "^22.4.13",
@@ -36,7 +37,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-	"build:staging": "env-cmd -f ./.env.staging npm run-script build",
+    "build:staging": "env-cmd -f ./.env.staging npm run-script build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
