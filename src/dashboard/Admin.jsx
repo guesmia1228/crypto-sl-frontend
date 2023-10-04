@@ -4,15 +4,15 @@ import Footer from "./footer";
 
 const Admin = ({ type }) => {
   return (
-	<>
-		<div className="container dashboardFont">
-		<Helmet>
-			<title>Nefentus | Dashboard</title>
-		</Helmet>
-		<AdminBody type={type} />
-		</div>
-		<Footer />
-	</>
+    <>
+      <div className="container dashboardFont">
+        <Helmet>
+          <title>Nefentus | Dashboard</title>
+        </Helmet>
+        <AdminBody type={type} />
+      </div>
+      <Footer />
+    </>
   );
 };
 

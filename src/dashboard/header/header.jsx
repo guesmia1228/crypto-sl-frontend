@@ -16,7 +16,7 @@ const Header = ({ title, logo }) => {
   const logOut = async () => {
     try {
       const data = await backendAPI.signout();
-	  navigate("/");
+      navigate("/");
     } catch (error) {
       console.error(error);
     }
@@ -24,13 +24,9 @@ const Header = ({ title, logo }) => {
 
   return (
     <div className={styles.navigation}>
-		{ logo && (
-			<img src={Logo} alt="Nefentus payment solutions" />
-		)}
+      {logo && <img src={Logo} alt="Nefentus payment solutions" />}
 
-	    { title && (
-			<h2>{title}</h2>
-		)}
+      {title && <h2>{title}</h2>}
 
       <div className={styles.right}>
         <div className={`${styles.settingsBody} card`}>

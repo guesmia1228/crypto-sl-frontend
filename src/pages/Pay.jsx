@@ -6,32 +6,35 @@ import PayBody from "../components/payBody";
 import { ThirdwebProvider, metamaskWallet } from "@thirdweb-dev/react";
 
 const Pay = () => {
-	const [invoice, setInvoice] = useState({});
-	const params = useParams();
-	const payLink = params.payLink;
-	const backend_API = new backendAPI();
+  const [invoice, setInvoice] = useState({});
+  const params = useParams();
+  const payLink = params.payLink;
+  const backend_API = new backendAPI();
 
-	async function loadInvoice() {
-		const newInvoice = await backend_API.getInvoice(payLink);
-		if (newInvoice)
-			setInvoice(newInvoice);
-		console.log(newInvoice);
-	}
+  async function loadInvoice() {
+    const newInvoice = await backend_API.getInvoice(payLink);
+    if (newInvoice) setInvoice(newInvoice);
+    console.log(newInvoice);
+  }
 
-	useEffect(() => {
-		loadInvoice();
-	}, []);
+  useEffect(() => {
+    loadInvoice();
+  }, []);
 
-    return (
-        <>
-            <Helmet>
-                <title>Pay invoice | Nefentus</title>
-            </Helmet>
-			<ThirdwebProvider activeChain="ethereum" supportedWallets={[metamaskWallet()]} clientId="639eea2ebcabed7eab90b56aceeed08b">
-				<PayBody invoice={invoice} />
-			</ThirdwebProvider>
-        </>
-    );
+  return (
+    <>
+      <Helmet>
+        <title>Pay invoice | Nefentus</title>
+      </Helmet>
+      <ThirdwebProvider
+        activeChain="ethereum"
+        supportedWallets={[metamaskWallet()]}
+        clientId="639eea2ebcabed7eab90b56aceeed08b"
+      >
+        <PayBody invoice={invoice} />
+      </ThirdwebProvider>
+    </>
+  );
 };
 
 export default Pay;

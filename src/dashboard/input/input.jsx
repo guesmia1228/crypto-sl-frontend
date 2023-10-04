@@ -3,7 +3,14 @@ import styles from "./input.module.css";
 import AttachmentImage from "../../assets/icon/attachment.svg";
 import { useRef, useState } from "react";
 
-const Input = ({ label, placeholder, type = "text", setState, value, disabled }) => {
+const Input = ({
+  label,
+  placeholder,
+  type = "text",
+  setState,
+  value,
+  disabled,
+}) => {
   const handleChange = (e) => {
     setState(e.target.value);
   };
@@ -19,7 +26,7 @@ const Input = ({ label, placeholder, type = "text", setState, value, disabled })
         value={value}
         placeholder={placeholder}
         onChange={handleChange}
-		disabled={disabled === true}
+        disabled={disabled === true}
       />
     </div>
   );
@@ -27,16 +34,30 @@ const Input = ({ label, placeholder, type = "text", setState, value, disabled })
 
 export default Input;
 
-export const RawInput = ({ placeholder, type = "text", setState, value, disabled }) => {
-	const handleChange = (e) => {
-		setState(e.target.value);
-	};
-  
-	return (
-		<div className={`${styles.input} ${styles.inputRaw}`}>
-			<input type={type} name="" id="" value={value} placeholder={placeholder} onChange={handleChange} disabled={disabled === true}/>
-		</div>
-	);
+export const RawInput = ({
+  placeholder,
+  type = "text",
+  setState,
+  value,
+  disabled,
+}) => {
+  const handleChange = (e) => {
+    setState(e.target.value);
+  };
+
+  return (
+    <div className={`${styles.input} ${styles.inputRaw}`}>
+      <input
+        type={type}
+        name=""
+        id=""
+        value={value}
+        placeholder={placeholder}
+        onChange={handleChange}
+        disabled={disabled === true}
+      />
+    </div>
+  );
 };
 
 export const Attachment = ({ label, onUpload }) => {

@@ -226,7 +226,9 @@ const Signup = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [UseOption, setUseOption] = useState("Choose Options");
-  const [CountryOption, setCountryOption] = useState(t("signUp.option1Placeholder"));
+  const [CountryOption, setCountryOption] = useState(
+    t("signUp.option1Placeholder"),
+  );
   const api = new backendAPI();
 
   const resetForm = () => {
@@ -240,22 +242,22 @@ const Signup = () => {
   };
 
   async function submitForm() {
-	if (FirstName === "") {
-		setErrorMessage("Please enter your first name");
-		return;
-	} else if (LastName === "") {
-		setErrorMessage("Please enter your last name");
-		return;
-	} else if (Email === "") {
-		setErrorMessage("Please enter your email");
-		return;
-	} else if (Password === "") {
-		setErrorMessage("Please enter your password");
-		return;
-	} else if (CountryOption === t("signUp.option1Placeholder")) {
-		setErrorMessage("Please choose a country");
-		return;
-	}
+    if (FirstName === "") {
+      setErrorMessage("Please enter your first name");
+      return;
+    } else if (LastName === "") {
+      setErrorMessage("Please enter your last name");
+      return;
+    } else if (Email === "") {
+      setErrorMessage("Please enter your email");
+      return;
+    } else if (Password === "") {
+      setErrorMessage("Please enter your password");
+      return;
+    } else if (CountryOption === t("signUp.option1Placeholder")) {
+      setErrorMessage("Please choose a country");
+      return;
+    }
 
     const requestData = {
       firstName: FirstName,
@@ -278,8 +280,8 @@ const Signup = () => {
   }
 
   function handleClick(e) {
-	e.preventDefault();
-	submitForm();
+    e.preventDefault();
+    submitForm();
   }
 
   return (
@@ -309,64 +311,64 @@ const Signup = () => {
         </div>
       </div>
 
-	  <form onSubmit={handleClick}>
-		<div className={styles.right}>
-			{errorMessage && (
-			<div className={styles.errormessagecontainer}>
-				<p>{errorMessage}</p>
-			</div>
-			)}
-			{message && (
-			<div className={styles.messagecontainer}>
-				<p>{message}</p>
-			</div>
-			)}
+      <form onSubmit={handleClick}>
+        <div className={styles.right}>
+          {errorMessage && (
+            <div className={styles.errormessagecontainer}>
+              <p>{errorMessage}</p>
+            </div>
+          )}
+          {message && (
+            <div className={styles.messagecontainer}>
+              <p>{message}</p>
+            </div>
+          )}
 
-			<div className={styles.row}>
-				<Input
-					label={t("signUp.firstNameLabel") + "*"}
-					placeholder={t("signUp.firstNamePlaceholder")}
-					value={FirstName}
-					setState={setFirstName}
-				/>
+          <div className={styles.row}>
+            <Input
+              label={t("signUp.firstNameLabel") + "*"}
+              placeholder={t("signUp.firstNamePlaceholder")}
+              value={FirstName}
+              setState={setFirstName}
+            />
 
-				<Input
-					label={t("signUp.telefonLabel")}
-					placeholder="(979) 268-4143"
-					value={Telefon}
-					setState={setTelefon}
-				/>
-				<Input
-					label={t("signUp.emailLabel") + "*"}
-					placeholder={t("signUp.emailPlaceholder")}
-					value={Email}
-					setState={setEmail}
-				/>
-				<Input
-					label={t("signUp.passwordLabel") + "*"}
-					placeholder={t("signUp.passwordPlaceholder")}
-					value={Password}
-					setState={setPassword}
-					secure
-				/>
-				<Options
-					label={t("signUp.option1Label") + "*"}
-					value={CountryOption}
-					setValue={setCountryOption}
-					options={country_list}
-				/>
-			</div>
-			<div className={styles.buttonWrapper}>
-				<Button className={styles.button} onClick={handleClick}>
-					{t("signUp.formButton")}
-				</Button>
-			</div>
+            <Input
+              label={t("signUp.telefonLabel")}
+              placeholder="(979) 268-4143"
+              value={Telefon}
+              setState={setTelefon}
+            />
+            <Input
+              label={t("signUp.emailLabel") + "*"}
+              placeholder={t("signUp.emailPlaceholder")}
+              value={Email}
+              setState={setEmail}
+            />
+            <Input
+              label={t("signUp.passwordLabel") + "*"}
+              placeholder={t("signUp.passwordPlaceholder")}
+              value={Password}
+              setState={setPassword}
+              secure
+            />
+            <Options
+              label={t("signUp.option1Label") + "*"}
+              value={CountryOption}
+              setValue={setCountryOption}
+              options={country_list}
+            />
+          </div>
+          <div className={styles.buttonWrapper}>
+            <Button className={styles.button} onClick={handleClick}>
+              {t("signUp.formButton")}
+            </Button>
+          </div>
 
-			<p className={styles.formAgreement}>{t("signUp.formInfo")}</p>
+          <p className={styles.formAgreement}>{t("signUp.formInfo")}</p>
 
-			<button type="submit" hidden />
-      	</div>
-	  </form>
+          <button type="submit" hidden />
+        </div>
+      </form>
     </div>
   );
 };

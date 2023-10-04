@@ -17,135 +17,162 @@ import useInternalWallet from "../../hooks/internalWallet";
 import { MessageContext } from "../../context/message";
 import inputStyles from "../../components/input/input.module.css";
 import { formatUSDBalance } from "../../utils";
-import { useConnect, useDisconnect, metamaskWallet, useConnectionStatus, useAddress } from "@thirdweb-dev/react";
+import {
+  useConnect,
+  useDisconnect,
+  metamaskWallet,
+  useConnectionStatus,
+  useAddress,
+} from "@thirdweb-dev/react";
 import MessageComponent from "../../components/message";
 
-const headers = ["Created at", "Price ($)", "Status", "QR code", "Actions"]
+const headers = ["Created at", "Price ($)", "Status", "QR code", "Actions"];
 const colSizes = [1.5, 1, 1.5, 1.5, 1.5];
 
 const PaymentBody = () => {
-	const [amount, setAmount] = useState("");
-	const [invoiceData, setInvoiceData] = useState([]);
-	const { clearMessages, setErrorMessage, setInfoMessage } = useContext(MessageContext);
-	const [successfulModal, setSuccessfulModal] = useState(false);
-	const [qrModalOpen, setQRModalOpen] = useState(false);
-	const [qrValue, setQRValue] = useState("");
+  const [amount, setAmount] = useState("");
+  const [invoiceData, setInvoiceData] = useState([]);
+  const { clearMessages, setErrorMessage, setInfoMessage } =
+    useContext(MessageContext);
+  const [successfulModal, setSuccessfulModal] = useState(false);
+  const [qrModalOpen, setQRModalOpen] = useState(false);
+  const [qrValue, setQRValue] = useState("");
 
-	const vendorAPI = new vendorDashboardApi();
+  const vendorAPI = new vendorDashboardApi();
 
-	async function createInvoice() {
-		// Check data
-		if (!amount) {
-			setErrorMessage("Please enter a valid amount");
-			return;
-		}
+  async function createInvoice() {
+    // Check data
+    if (!amount) {
+      setErrorMessage("Please enter a valid amount");
+      return;
+    }
 
-		// Create invoice
-		const invoiceLinkPart = await vendorAPI.createInvoice(amount);
+    // Create invoice
+    const invoiceLinkPart = await vendorAPI.createInvoice(amount);
 
-		if (invoiceLinkPart) {
-			const invoiceLink = window.location.origin + "/pay/" + invoiceLinkPart;
-			setQRValue(invoiceLink);
-			setQRModalOpen(true);
-		} else {
-			setErrorMessage("Could not create an invoice!");
-		}
-	}
+    if (invoiceLinkPart) {
+      const invoiceLink = window.location.origin + "/pay/" + invoiceLinkPart;
+      setQRValue(invoiceLink);
+      setQRModalOpen(true);
+    } else {
+      setErrorMessage("Could not create an invoice!");
+    }
+  }
 
-	// List of invoices
+  // List of invoices
 
-	async function fetchInvoices() {
-		let newInvoices = await vendorAPI.getInvoices();
-		// Reverse the array
-		newInvoices = newInvoices.reverse();
-		console.log(newInvoices)
+  async function fetchInvoices() {
+    let newInvoices = await vendorAPI.getInvoices();
+    // Reverse the array
+    newInvoices = newInvoices.reverse();
+    console.log(newInvoices);
 
-		if (newInvoices) {
-			const newInvoiceData = newInvoices.map((item) => invoiceToArray(item));
-			setInvoiceData(newInvoiceData);
-		}
-	}
+    if (newInvoices) {
+      const newInvoiceData = newInvoices.map((item) => invoiceToArray(item));
+      setInvoiceData(newInvoiceData);
+    }
+  }
 
-	function invoiceToArray(invoice) {
-		function openModalWithInvoiceData() {
-			setQRValue(window.location.origin + "/pay/" + invoice.link);
-			setAmount(invoice.price);
-			setQRModalOpen(true);
-		}
+  function invoiceToArray(invoice) {
+    function openModalWithInvoiceData() {
+      setQRValue(window.location.origin + "/pay/" + invoice.link);
+      setAmount(invoice.price);
+      setQRModalOpen(true);
+    }
 
-		return [
-			new Date(invoice.createdAt).toLocaleString(),
-			invoice.price,
-			(
-				<span style={{color: invoice.paidAt ? "var(--success-color)" : "var(--error-color)"}}>{invoice.paidAt ? "paid" : "open"}</span>
-			),
-			(
-				<img className={styles.qr} src={QR} alt="QR" onClick={openModalWithInvoiceData} />
-			),
-			(
-				<span className={styles.deleteLink} onClick={() => deleteInvoice(invoice.link)}>Delete</span>
-			)
-		];
-	}
+    return [
+      new Date(invoice.createdAt).toLocaleString(),
+      invoice.price,
+      <span
+        style={{
+          color: invoice.paidAt ? "var(--success-color)" : "var(--error-color)",
+        }}
+      >
+        {invoice.paidAt ? "paid" : "open"}
+      </span>,
+      <img
+        className={styles.qr}
+        src={QR}
+        alt="QR"
+        onClick={openModalWithInvoiceData}
+      />,
+      <span
+        className={styles.deleteLink}
+        onClick={() => deleteInvoice(invoice.link)}
+      >
+        Delete
+      </span>,
+    ];
+  }
 
-	function invoiceDataToTotalValue(invoiceData) {
-		let totalValue = 0;
-		for (const invoice of invoiceData) {
-			totalValue += invoice[1];
-		}
-		return totalValue;
-	}
+  function invoiceDataToTotalValue(invoiceData) {
+    let totalValue = 0;
+    for (const invoice of invoiceData) {
+      totalValue += invoice[1];
+    }
+    return totalValue;
+  }
 
-	async function deleteInvoice(link) {
-		const result = await vendorAPI.deleteInvoice(link);
-		if (result) {
-			fetchInvoices();
-			setInfoMessage("Invoice deleted!");
-		} else {
-			fetchInvoices();
-			setErrorMessage("Could not delete invoice!");
-		}
-	}
+  async function deleteInvoice(link) {
+    const result = await vendorAPI.deleteInvoice(link);
+    if (result) {
+      fetchInvoices();
+      setInfoMessage("Invoice deleted!");
+    } else {
+      fetchInvoices();
+      setErrorMessage("Could not delete invoice!");
+    }
+  }
 
-	useEffect(() => {
-		fetchInvoices();
-	}, []);
+  useEffect(() => {
+    fetchInvoices();
+  }, []);
 
   return (
     <>
       <div>
         <Header title={"Receive payment"} />
 
-		<MessageComponent hide={qrModalOpen} />
+        <MessageComponent hide={qrModalOpen} />
 
         <TopInfo
           title={"Invoices"}
           description={
-			<>
-				You have <span>{invoiceData.length}</span> invoices with a total value of <span>{formatUSDBalance(invoiceDataToTotalValue(invoiceData))} $</span>!
-			</>
-		  }
+            <>
+              You have <span>{invoiceData.length}</span> invoices with a total
+              value of{" "}
+              <span>
+                {formatUSDBalance(invoiceDataToTotalValue(invoiceData))} $
+              </span>
+              !
+            </>
+          }
         />
 
         <div className={`card ${styles.card}`}>
           <div className={styles.title}>Create a new invoice</div>
 
           <div className={styles.body}>
-			<div className={styles.columns}>
-				<Input setState={setAmount} placeholder={"Enter amount in $"} dashboard value={amount} />
-				<div className={styles.button} onClick={createInvoice}>
-					<center>Create invoice</center>
-				</div>
-			</div>
+            <div className={styles.columns}>
+              <Input
+                setState={setAmount}
+                placeholder={"Enter amount in $"}
+                dashboard
+                value={amount}
+              />
+              <div className={styles.button} onClick={createInvoice}>
+                <center>Create invoice</center>
+              </div>
+            </div>
           </div>
         </div>
 
-		<Table 
-	  		headers={headers} 
-	  		data={invoiceData}
-			colSizes={colSizes}
-			striped 
-		/>
+        <Table
+          headers={headers}
+          data={invoiceData}
+          colSizes={colSizes}
+          striped
+        />
       </div>
 
       {successfulModal && (
@@ -185,10 +212,14 @@ const PaymentBody = () => {
 
       {qrModalOpen && (
         <Modal
-			amount={amount}
-			qrValue={qrValue}
-			onClose={() => { setQRModalOpen(false); clearMessages(); fetchInvoices() } }
-		/>
+          amount={amount}
+          qrValue={qrValue}
+          onClose={() => {
+            setQRModalOpen(false);
+            clearMessages();
+            fetchInvoices();
+          }}
+        />
       )}
     </>
   );
@@ -197,40 +228,48 @@ const PaymentBody = () => {
 export default PaymentBody;
 
 const Modal = ({ amount, qrValue, onClose }) => {
-	const { setInfoMessage } = useContext(MessageContext);
+  const { setInfoMessage } = useContext(MessageContext);
 
-	return (
-		<ModalOverlay>
-			<div className={styles.modal}>
-				<MessageComponent />
-				<TopInfo
-					title={"Invoice"}
-					description={`Please scan the QR code below to pay the invoice`}
-				/>
+  return (
+    <ModalOverlay>
+      <div className={styles.modal}>
+        <MessageComponent />
+        <TopInfo
+          title={"Invoice"}
+          description={`Please scan the QR code below to pay the invoice`}
+        />
 
-				<Table 
-					data={[
-						["Amount:", `${amount} USD`],
-						["Link:", <CopyValue value={qrValue} onCopy={() => setInfoMessage("Payment link copied to clipboard!")} />]
-					]} 
-					colSizes={[1, 3]}
-				/>
+        <Table
+          data={[
+            ["Amount:", `${amount} USD`],
+            [
+              "Link:",
+              <CopyValue
+                value={qrValue}
+                onCopy={() =>
+                  setInfoMessage("Payment link copied to clipboard!")
+                }
+              />,
+            ],
+          ]}
+          colSizes={[1, 3]}
+        />
 
-				<div className={styles.qrWrapper}>
-					<QRCode
-						size={256}
-						style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-						value={qrValue}
-						viewBox={`0 0 256 256`}
-					/>
-				</div>
+        <div className={styles.qrWrapper}>
+          <QRCode
+            size={256}
+            style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+            value={qrValue}
+            viewBox={`0 0 256 256`}
+          />
+        </div>
 
-				<div className={styles.modalButtons}>
-					<Button onClick={onClose} color="white">
-						Close
-					</Button>
-				</div>
-			</div>
-		</ModalOverlay>
-	);
+        <div className={styles.modalButtons}>
+          <Button onClick={onClose} color="white">
+            Close
+          </Button>
+        </div>
+      </div>
+    </ModalOverlay>
+  );
 };

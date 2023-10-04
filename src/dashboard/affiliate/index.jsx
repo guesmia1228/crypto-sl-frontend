@@ -181,8 +181,8 @@ const AffiliateHeader = () => {
             onClick={() => {
               navigator.clipboard.writeText(
                 `https://nefentus.com/?affiliate=${localStorage.getItem(
-                  "affiliateLink"
-                )}`
+                  "affiliateLink",
+                )}`,
               );
               setCopied(true);
             }}
@@ -240,7 +240,7 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
 export const options = {
