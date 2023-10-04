@@ -57,8 +57,6 @@ export const KYC = () => {
     [KYC_TYPE.ADRESS]: null,
   });
 
-  const requiredFields = [KYC_TYPE.PASSPORT, KYC_TYPE.PERSONAL_PICTURE];
-
   const fetchFYC = async () => {
     const userId = localStorage.getItem("userId");
     const arrayWithResults = await Promise.all(
@@ -72,6 +70,7 @@ export const KYC = () => {
       })
       .reduce((acc, curr) => ({ ...acc, ...curr }), {});
     setFiles(transformedResults);
+    console.log(transformedResults)
   };
 
   useEffect(() => {
@@ -159,10 +158,9 @@ export const KYC = () => {
             <div className={styles.kycLabelSection}>
               <div className={styles.kycLabel}>
                 {item.label}{" "}
-                {requiredFields.includes(item.id) &&
-                  !files[item.id]?.verify && (
-                    <span className={styles.kycRequired}>*</span>
-                  )}
+                {files[item.id]?.required && !files[item.id]?.verify && (
+                  <span className={styles.kycRequired}>*</span>
+                )}
               </div>
 
               <div className={styles.kycStatus}>

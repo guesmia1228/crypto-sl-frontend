@@ -25,6 +25,7 @@ const KycBody = () => {
   const adminApi = new adminDashboardApi("admin");
   const fetchFYC = async () => {
     const users = await adminApi.getUsers();
+    const usersKYC = await adminApi.getUsersWithKYC();
     const arrayWithResults = await Promise.all(
       users.map(async (user) => {
         const userId = user.id;
@@ -59,8 +60,8 @@ const KycBody = () => {
         ];
       })
     );
-
-    console.log(arrayWithResults.filter(item => item !== undefined));
+      console.log(arrayWithResults.filter(item => item !== undefined))
+      console.log(usersKYC)
     setData(arrayWithResults.filter(item => item !== undefined));
   };
 

@@ -135,6 +135,27 @@ export default class adminDashboardApi {
         }
     }
 
+    async getUsersWithKYC(){
+        try{
+            const url = `${this.baseURL}/users_kyc`;
+            const options = {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${this.token}`
+                },
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            return null; // or return some default value
+        }
+    }
+
     async patchStatus(email){
         try{
             const request = {
