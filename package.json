@@ -18,6 +18,7 @@
     "ethers": "^5.7.2",
     "gh-pages": "^5.0.0",
     "i18next": "^22.4.13",
+    "i18next-browser-languagedetector": "^7.1.0",
     "js-cookie": "^3.0.1",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
@@ -37,7 +38,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-	"build:staging": "env-cmd -f ./.env.staging npm run-script build",
+    "build:staging": "env-cmd -f ./.env.staging npm run-script build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
