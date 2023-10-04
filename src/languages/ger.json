@@ -211,8 +211,9 @@
     "titleP1": "Willkommen",
     "titleP2": "bei Nefentus",
     "description": "Geben Sie Ihre Anmeldedaten unten ein, um auf Ihr Nefentus-Konto zuzugreifen und eine Welt voller Möglichkeiten zu erschließen.",
-	"remember": "Angemeldet bleiben",
+    "remember": "Angemeldet bleiben",
     "button": "Anmelden",
+    "close": "Schließen",
     "info": "Noch keinen Account? ",
     "infoButton": "Registrieren Sie sich",
     "forgot": "Passwort vergessen?"

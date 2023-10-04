@@ -93,7 +93,7 @@ const LoginBox = () => {
     <div className={`${styles.login}`}>
       <div className={styles.closeWrapper}>
         <Button link={"/"} color={"white"}>
-          Close
+          {t("login.close")}
         </Button>
       </div>
       <div className={styles.left}>
@@ -127,7 +127,7 @@ const LoginBox = () => {
         )}
 
 		<form onSubmit={handleClick}>
-			<div className={styles.inputWrapper}>
+		  <div className={styles.inputWrapper}>
 			<Input
 				value={Username}
 				setState={setUsername}
@@ -156,19 +156,19 @@ const LoginBox = () => {
 				<p>{t("login.remember")}</p>
 				</div>
 
-				<Link to="/forgot-password">
-				<p>{t("login.forgot")}</p>
-				</Link>
-			</div>
-			</div>
-			<div className={styles.buttonWrapper}>
-			<Button className={styles.button} onClick={handleClick}>
-				{t("login.button")}
-			</Button>
-			</div>
+              <Link to="/forgot-password">
+                <p>{t("login.forgot")}</p>
+              </Link>
+            </div>
+          </div>
+          <div className={styles.buttonWrapper}>
+            <Button className={styles.button} onClick={handleClick}>
+              {t("login.button")}
+            </Button>
+          </div>
 
-			<button type="submit" hidden />
-		</form>
+          <button type="submit" hidden />
+        </form>
       </div>
     </div>
   );
