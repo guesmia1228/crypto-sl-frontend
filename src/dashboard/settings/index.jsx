@@ -307,12 +307,16 @@ const ProfileBody = ({afterUpdateSettings, active}) => {
 				/>
 			</div>
 
-            <Attachment label="Upload logo image" onUpload={handleUpload} />
+            <Attachment
+                label="Upload logo image" 
+                onUpload={handleUpload}
+				onDelete={() => { setFile(null); }}
+            />
 
             <CropDialog
                 open={cropDialogOpen}
                 file={file}
-                style={{ width: 600, height: 400 }}
+                showAspectRatioOptions={false}
                 onClose={() => setCropDialogOpen(false)}
                 onSave={(croppedImageData) => {
                     setCropDialogOpen(false);

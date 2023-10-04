@@ -1,4 +1,5 @@
 import styles from "./input.module.css";
+import Delete from "../../assets/icon/delete.svg";
 
 import AttachmentImage from "../../assets/icon/attachment.svg";
 import { useRef, useState } from "react";
@@ -39,7 +40,7 @@ export const RawInput = ({ placeholder, type = "text", setState, value, disabled
 	);
 };
 
-export const Attachment = ({ label, onUpload }) => {
+export const Attachment = ({ label, onUpload, onDelete }) => {
   const inputRef = useRef(null);
 
   const [text, setText] = useState(false);
@@ -71,12 +72,14 @@ export const Attachment = ({ label, onUpload }) => {
     <>
       <div className={styles.input}>
         <p>{label}</p>
-
-        <div className={styles.attachment} onClick={handleClick}>
-          <img src={AttachmentImage} alt="" />
-          <p style={{ color: text ? "#fff" : "#c4c4c4" }}>
-            {text ? text : "Add attachment"}
-          </p>
+          <div className={styles.attachment}>
+            <div className={styles.left} onClick={handleClick}>
+              <img src={AttachmentImage} alt="" />
+              <p style={{ color: text ? "#fff" : "#c4c4c4" }}>
+                {text ? text : "Add attachment"}
+              </p>
+            </div>
+          <img src={Delete} alt="Delete attachment" onClick={() => { onDelete(); setText(null)} } className={styles.deleteLogo} />
         </div>
       </div>
       <input

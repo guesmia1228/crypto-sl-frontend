@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Cropper from "react-easy-crop";
 import styles from "./cropDialog.module.css";
 import { Buttons } from "../../dashboard/settings/components/buttons";
+import Input from "../input/input";
 
 export const dataURLtoFile = (dataurl, filename) => {
    var arr = dataurl.split(","),
@@ -15,11 +16,27 @@ export const dataURLtoFile = (dataurl, filename) => {
    return new File([u8arr], filename, { type: mime });
 };
 
-const CropDialog = ({ open, file, style, onSave, onClose }) => {
+const aspectRatioOptions = [
+   { label: "1 : 1", value: 1 / 1 },
+   { label: "16: 9", value: 16 / 9.0 },
+   { label: "9: 16", value: 9 / 16.0 },
+   { label: "custom", value: "custom" },
+];
+
+const CropDialog = ({
+   open,
+   file,
+   showAspectRatioOptions = true,
+   onSave,
+   onClose,
+}) => {
    const [crop, setCrop] = useState({ x: 0, y: 0 });
    const [zoom, setZoom] = useState(1);
    const [cropArea, setCropArea] = useState(null);
    const [image, setImage] = useState(undefined);
+   const [aspectRatio, setAspectRatio] = useState(1);
+   const [aspectWidth, setAspectWidth] = useState(1);
+   const [aspectHeight, setAspectHeight] = useState(1);
 
    useEffect(() => {
       if (open && file) {
@@ -35,7 +52,7 @@ const CropDialog = ({ open, file, style, onSave, onClose }) => {
       setCropArea(croppedAreaPixels);
    };
 
-   const handleSave = () => {
+   const handleCrop = () => {
       const img = new Image();
       img.src = image;
 
@@ -51,17 +68,28 @@ const CropDialog = ({ open, file, style, onSave, onClose }) => {
       };
    };
 
+   const handleAspectRatioChange = (e) => {
+      setAspectRatio(e.target.value);
+   };
+
    return open ? (
       <div className={styles["modal-root"]}>
          <div className={styles["modal-mask"]}></div>
          <div className={styles["modal-wrap"]}>
-            <div className={styles["modal"]} style={style}>
+            <div
+               className={styles["modal"]}
+               style={{ width: 600, height: 600 }}
+            >
                <div className={styles["crop-container"]}>
                   <Cropper
                      image={image}
                      crop={crop}
                      zoom={zoom}
-                     aspect={4 / 3}
+                     aspect={
+                        aspectRatio === "custom"
+                           ? aspectWidth / (aspectHeight * 1.0)
+                           : aspectRatio
+                     }
                      onCropChange={setCrop}
                      onCropComplete={onCropComplete}
                      onZoomChange={setZoom}
@@ -82,10 +110,50 @@ const CropDialog = ({ open, file, style, onSave, onClose }) => {
                   />
                </div>
 
+               {showAspectRatioOptions && (
+                  <>
+                     <div className={styles["aspect-ratio-button-group"]}>
+                        {aspectRatioOptions.map((option) => (
+                           <div key={option.value} className={styles["radio"]}>
+                              <input
+                                 type="radio"
+                                 id={option.label}
+                                 name="aspect-ratio"
+                                 value={option.value}
+                                 onChange={handleAspectRatioChange}
+                                 checked={aspectRatio == option.value}
+                              />
+                              <label htmlFor={option.label}>
+                                 {option.label}
+                              </label>
+                              <br />
+                           </div>
+                        ))}
+
+                        {aspectRatio === "custom" && (
+                           <div
+                              style={{ width: "200px", display: "flex" }}
+                              className={styles["custom"]}
+                           >
+                              <Input
+                                 value={aspectWidth}
+                                 setState={setAspectWidth}
+                              />
+                              /
+                              <Input
+                                 value={aspectHeight}
+                                 setState={setAspectHeight}
+                              />
+                           </div>
+                        )}
+                     </div>
+                  </>
+               )}
+
                <div className={styles["modal-footer"]}>
                   <Buttons
-                     functions={[onClose, handleSave]}
-                     buttons={["Close", "Save"]}
+                     functions={[onClose, handleCrop]}
+                     buttons={["Keep original image", "Crop"]}
                   />
                </div>
             </div>

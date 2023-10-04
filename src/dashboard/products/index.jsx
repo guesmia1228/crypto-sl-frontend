@@ -252,7 +252,6 @@ const ProductBody = () => {
 			<CropDialog
 				open={cropDialogOpen}
 				file={image}
-				style={{ width: 600, height: 400 }}
 				onClose={() => setCropDialogOpen(false)}
 				onSave={(croppedImageData) => {
 					setCropDialogOpen(false);
