@@ -1,31 +1,33 @@
 import { useEffect, useState } from 'react';
-import { currencies } from "../../constants";
-import { uniswapApi } from "../../api/web3Api";
+import { coinList } from "../../constants";
 import styles from "./prices.module.css";
 
 const Prices = () => {
   const [prices, setPrices] = useState([]);
-  const uniswap = new uniswapApi();
 
   useEffect(()=>{
-    const getData = async () => {
-      try {
-        const data = currencies.map(async (currency) => {
-          const data = await uniswap.getUSDCPriceForToken(currency.address);
-          return { ...currency, price: data };
-        });
-        const prices = await Promise.all(data);
-        setPrices(prices);
-      } catch (err) {
-        console.log(err);
-      }
+    const getPrices = async () => {
+      const prices = await Promise.all(
+        coinList.map(async (coin) => {
+          const price = await fetch(
+            `https://api.coingecko.com/api/v3/coins/${coin.url}`
+          );
+          const priceJson = await price.json();
+          return {
+            ...coin,
+            price: priceJson.market_data.current_price.usd,
+            priceChange: priceJson.market_data.price_change_percentage_24h,
+          };
+        })
+      );
+      setPrices(prices);
     };
-    getData();
+    getPrices()
 
   },[])
   return (
     prices && <div className={styles.container}>
-        {prices.map(price=>{
+        {prices?.map(price=>{
           return (
             <div className={styles.price_box}>
               <div className={styles.main_info}>
@@ -39,7 +41,7 @@ const Prices = () => {
                 </p>
               </div>
               <span className={styles.abbr}>${price.price.toFixed(2)}</span>
-              <span className={`${styles.abbr} ${styles.positive}`}>{price.price.toFixed(2)}%</span>
+              <span className={`${styles.abbr} ${price.priceChange>=0 ? styles.positive : styles.negative}`}>{price.priceChange.toFixed(2)}%</span>
             </div>
           );
         })}

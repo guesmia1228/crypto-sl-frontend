@@ -49,20 +49,20 @@ export const currencies = [
     address: "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
     decimals: 8,
   },
-  // {
-  //   icon: Binance,
-  //   name: "Binance Coin",
-  //   abbr: "BNB",
-  //   address: "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
-  //   decimals: 18,
-  // },
-  // {
-  //   icon: Ripple,
-  //   name: "Ripple",
-  //   abbr: "XRP",
-  //   address: "0x1d2f0da169ceb9fc7b3144628db156f3f6c60dbe",
-  //   decimals: 18,
-  // },
+  {
+    icon: Binance,
+    name: "Binance Coin",
+    abbr: "BNB",
+    address: "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+    decimals: 18,
+  },
+  {
+    icon: Ripple,
+    name: "Ripple",
+    abbr: "XRP",
+    address: "0x1d2f0da169ceb9fc7b3144628db156f3f6c60dbe",
+    decimals: 18,
+  },
   {
     icon: DAI,
     name: "DAI",
@@ -70,13 +70,13 @@ export const currencies = [
     address: "0x6b175474e89094c44da98b954eedeac495271d0f",
     decimals: 18,
   },
-  // {
-  //   icon: Polygon,
-  //   name: "Polygon",
-  //   abbr: "MATIC",
-  //   address: "0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0",
-  //   decimals: 18,
-  // },
+  {
+    icon: Polygon,
+    name: "Polygon",
+    abbr: "MATIC",
+    address: "0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0",
+    decimals: 18,
+  },
 ];
 
 export const ownerAddress = "0xBE011f8F08d05feCc83abeabb6C38b987B9bdD45";
@@ -93,3 +93,42 @@ export const contractDeposits = [
 		abi: SwapAndDistribute2
 	}
 ];
+
+export const coinList = [
+  {
+    icon: Ethereum,
+    name: "Ethereum",
+    abbr: "ETH",
+    url: "ethereum"
+  },
+  {
+    icon: Bitcoin,
+    name: "Bitcoin",
+    abbr: "BTC",
+    url: "bitcoin"
+  },
+  {
+    icon: Cardano,
+    name: "Cardano",
+    abbr: "ADA",
+    url: "cardano"
+  },
+  {
+    icon: Binance,
+    name: "Binance Coin",
+    abbr: "BNB",
+    url: "binancecoin"
+  },
+  {
+    icon: Ripple,
+    name: "Ripple",
+    abbr: "XRP",
+    url: "ripple"
+  },
+  {
+    icon: Polygon,
+    name: "Polygon",
+    abbr: "MATIC",
+    url: "matic-network"
+  }
+]
