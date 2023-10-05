@@ -85,8 +85,8 @@ const Navigation = () => {
 		} else {
 			return (
 				<>
-					<Button link="/signUp " color="white">
-						Sign Up
+					<Button link="/signUp">
+					{t("navigation.signUp")}
 					</Button>
 				</>
 			);

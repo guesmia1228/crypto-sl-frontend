@@ -1,11 +1,11 @@
 {
   "navigation": {
     "home": "Startseite",
-    "solutions": "Unsere Solution",
-    "resources": "Resourcen",
-    "affiliate": "Affiliate",
-    "login": "Log in",
-    "signUp": "Sign up",
+    "solutions": "Zahlungslösungen",
+    "resources": "Ressourcen",
+    "affiliate": "Affiliateprogramm",
+    "login": "Login",
+    "signUp": "Registrierung",
     "menu": "Registrierung"
   },
   "home": {
