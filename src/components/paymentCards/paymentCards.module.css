@@ -1,5 +1,6 @@
 .sectionWrapper {
-  background: url(../../assets/image/gradient.webp);
+  /*background: url(../../assets/image/gradient.webp);*/
+  background: radial-gradient(farthest-corner at 100% 100%, #1593C0 5%, #111 50%);
   background-position: center;
   background-size: cover;
   padding-bottom: 10rem;

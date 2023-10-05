@@ -10,7 +10,7 @@
 }
 
 .contentWrapper {
-  background: rgba(0, 0, 0, 0.95);
+  background: #090909;
   backdrop-filter: blur(10px);
   position: relative;
   z-index: 100;
@@ -247,7 +247,7 @@
 }
 
 .mobileMenu {
-  background: rgba(0, 0, 0, 1);
+  background: #111;
   backdrop-filter: blur(10px);
   padding: 2rem 2.5rem;
   transition: 0.5s ease-out;
