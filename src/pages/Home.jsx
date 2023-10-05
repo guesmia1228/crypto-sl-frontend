@@ -8,6 +8,7 @@ import Reviews from "../components/reviews/reviews";
 import backendAPI from "../api/backendAPI";
 import Cookies from "universal-cookie";
 import HomeHeroVideo from "../assets/video/homeHero.mp4";
+import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
 
 import { Helmet } from "react-helmet";
 
@@ -31,6 +32,17 @@ const Home = () => {
       api.countAffiliate(paramValue);
     }
   }, []);
+
+  useEffect(()=>{
+    if (window.Tawk_API && window.Tawk_API.showWidget) {
+      window.Tawk_API?.showWidget();
+    }
+    return () => {
+      if (window.Tawk_API) {
+        window.Tawk_API.hideWidget();
+      }
+    }
+  },[])
 
   return (
     <>
@@ -75,6 +87,11 @@ const Home = () => {
       {/* <Help /> */}
 
       <PaymentCards />
+
+      <TawkMessengerReact
+        propertyId="651eae886fcfe87d54b6cbb6"
+        widgetId="1hbvtji86"
+      />
     </>
   );
 };

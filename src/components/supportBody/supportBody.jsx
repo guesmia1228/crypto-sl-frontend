@@ -1,16 +1,28 @@
 import styles from "./supportBody.module.css";
 
 import Image1 from "../../assets/image/support/image1.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import IntroductionVideo from "../../assets/video/introduction.mp4";
 import { useTranslation } from "react-i18next";
+import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
 
 const SupportBody = () => {
   const [active, setActive] = useState(0);
 
   const { t } = useTranslation();
+
+  useEffect(() => {
+    if (window.Tawk_API && window.Tawk_API.showWidget) {
+      window.Tawk_API?.showWidget();
+    }
+    return () => {
+      if (window.Tawk_API) {
+        window.Tawk_API.hideWidget();
+      }
+    };
+  }, []);
 
   const content = t("support.sideBar", { returnObjects: true });
 
@@ -63,6 +75,11 @@ const SupportBody = () => {
       </div>
 
       <div className={styles.blueBG}></div>
+
+      <TawkMessengerReact
+        propertyId="651eae886fcfe87d54b6cbb6"
+        widgetId="1hbvtji86"
+      />
     </div>
   );
 };

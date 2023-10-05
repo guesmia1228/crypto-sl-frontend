@@ -8,11 +8,23 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Helmet } from "react-helmet";
 import HeroAff from "../components/heroAff/heroAff";
+import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
 
 const Affiliate = () => {
   useEffect(() => {
     checkPermissions();
-  });
+  }, []);
+
+  useEffect(() => {
+    if (window.Tawk_API && window.Tawk_API.showWidget) {
+      window.Tawk_API?.showWidget();
+    }
+    return () => {
+      if (window.Tawk_API) {
+        window.Tawk_API.hideWidget();
+      }
+    };
+  }, []);
 
   const checkPermissions = async () => {
     const token = localStorage.getItem("token");
@@ -74,6 +86,11 @@ const Affiliate = () => {
       />
 
       <Compare />
+
+      <TawkMessengerReact
+        propertyId="651eae886fcfe87d54b6cbb6"
+        widgetId="1hbvtji86"
+      />
     </div>
   );
 };
