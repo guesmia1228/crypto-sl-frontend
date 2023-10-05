@@ -6,6 +6,7 @@ import IconRow from "./../components/iconRow/iconRow";
 import Why from "../components/why/why";
 import DataCards from "../components/dataCards/dataCards";
 import PaymentCards from "./../components/paymentCards/paymentCards";
+import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
 
 import Logo1 from "../assets/icon/methods/logo1.svg";
 import Logo2 from "../assets/icon/methods/logo2.svg";
@@ -15,6 +16,7 @@ import Logo5 from "../assets/icon/methods/logo5.svg";
 import Logo6 from "../assets/icon/methods/logo6.svg";
 import Logo7 from "../assets/icon/methods/logo7.svg";
 import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 import HeroImage from "../assets/image/paymentHero.png";
 import WhyImage from "../assets/image/whyNew.png";
@@ -24,6 +26,17 @@ const list = [Logo1, Logo2, Logo3, Logo4, Logo5, Logo6, Logo7];
 
 const Payment = () => {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    if (window.Tawk_API && window.Tawk_API.showWidget) {
+      window.Tawk_API?.showWidget();
+    }
+    return () => {
+      if (window.Tawk_API) {
+        window.Tawk_API.hideWidget();
+      }
+    };
+  }, []);
 
   const content = t("payment.whyContent", { returnObjects: true });
 
@@ -66,6 +79,11 @@ const Payment = () => {
       <DataCards />
 
       <PaymentCards />
+
+      <TawkMessengerReact
+        propertyId="651eae886fcfe87d54b6cbb6"
+        widgetId="1hbvtji86"
+      />
     </div>
   );
 };
