@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Cropper from "react-easy-crop";
+import ReactCrop, { centerCrop, makeAspectCrop } from "react-image-crop";
 import styles from "./cropDialog.module.css";
 import { Buttons } from "../../dashboard/settings/components/buttons";
-import Input from "../input/input";
+import "react-image-crop/dist/ReactCrop.css";
 
 export const dataURLtoFile = (dataurl, filename) => {
    var arr = dataurl.split(","),
@@ -16,27 +16,28 @@ export const dataURLtoFile = (dataurl, filename) => {
    return new File([u8arr], filename, { type: mime });
 };
 
-const aspectRatioOptions = [
-   { label: "1 : 1", value: 1 / 1 },
-   { label: "16: 9", value: 16 / 9.0 },
-   { label: "9: 16", value: 9 / 16.0 },
-   { label: "custom", value: "custom" },
-];
-
-const CropDialog = ({
-   open,
-   file,
-   showAspectRatioOptions = true,
-   onSave,
-   onClose,
-}) => {
-   const [crop, setCrop] = useState({ x: 0, y: 0 });
+const CropDialog = ({ open, file, aspect, onSave, onClose }) => {
+   const [crop, setCrop] = useState({
+      unit: "%",
+      x: 0,
+      y: 0,
+      width: 100,
+      height: 100,
+   });
    const [zoom, setZoom] = useState(1);
-   const [cropArea, setCropArea] = useState(null);
    const [image, setImage] = useState(undefined);
-   const [aspectRatio, setAspectRatio] = useState(1);
-   const [aspectWidth, setAspectWidth] = useState(1);
-   const [aspectHeight, setAspectHeight] = useState(1);
+   const [completedCrop, setCompletedCrop] = useState({
+      unit: "px",
+      x: 0,
+      y: 0,
+      width: 0,
+      height: 0,
+   });
+
+   useEffect(() => {
+      if (open && aspect) {
+      }
+   }, [open, aspect]);
 
    useEffect(() => {
       if (open && file) {
@@ -44,13 +45,29 @@ const CropDialog = ({
          imageReader.readAsDataURL(file);
          imageReader.onloadend = () => {
             setImage(imageReader.result);
+            const img = new Image();
+            img.src = imageReader.result;
+
+            if (aspect) {
+               setCrop(
+                  centerCrop(
+                     makeAspectCrop(
+                        {
+                           unit: "%",
+                           width: 100,
+                        },
+                        aspect,
+                        img.width,
+                        img.height
+                     ),
+                     img.width,
+                     img.height
+                  )
+               );
+            }
          };
       }
    }, [open, file]);
-
-   const onCropComplete = (croppedArea, croppedAreaPixels) => {
-      setCropArea(croppedAreaPixels);
-   };
 
    const handleCrop = () => {
       const img = new Image();
@@ -59,17 +76,44 @@ const CropDialog = ({
       img.onload = function () {
          const canvas = document.createElement("canvas");
          const ctx = canvas.getContext("2d");
-         const { x, y, width, height } = cropArea;
-         canvas.width = width;
-         canvas.height = height;
-         ctx.drawImage(img, x, y, width, height, 0, 0, width, height);
+
+         const scaleX = img.naturalWidth / img.width;
+         const scaleY = img.naturalHeight / img.height;
+         const pixelRatio = window.devicePixelRatio;
+
+         canvas.width = Math.floor(completedCrop.width * scaleX * pixelRatio);
+         canvas.height = Math.floor(completedCrop.height * scaleY * pixelRatio);
+
+         ctx.scale(pixelRatio, pixelRatio);
+         ctx.imageSmoothingQuality = "high";
+
+         const cropX = completedCrop.x * scaleX;
+         const cropY = completedCrop.y * scaleY;
+
+         const centerX = img.naturalWidth / 2;
+         const centerY = img.naturalHeight / 2;
+
+         ctx.save();
+
+         ctx.translate(-cropX, -cropY);
+         ctx.translate(centerX, centerY);
+         ctx.scale(zoom, zoom);
+         ctx.translate(-centerX, -centerY);
+         ctx.drawImage(
+            img,
+            0,
+            0,
+            img.naturalWidth,
+            img.naturalHeight,
+            0,
+            0,
+            img.naturalWidth,
+            img.naturalHeight
+         );
          const croppedImageData = canvas.toDataURL("image/jpeg");
+
          onSave(croppedImageData);
       };
-   };
-
-   const handleAspectRatioChange = (e) => {
-      setAspectRatio(e.target.value);
    };
 
    return open ? (
@@ -81,19 +125,24 @@ const CropDialog = ({
                style={{ width: 600, height: 600 }}
             >
                <div className={styles["crop-container"]}>
-                  <Cropper
-                     image={image}
+                  <ReactCrop
                      crop={crop}
+                     onChange={(_, percentCrop) => setCrop(percentCrop)}
                      zoom={zoom}
-                     aspect={
-                        aspectRatio === "custom"
-                           ? aspectWidth / (aspectHeight * 1.0)
-                           : aspectRatio
-                     }
-                     onCropChange={setCrop}
-                     onCropComplete={onCropComplete}
-                     onZoomChange={setZoom}
-                  />
+                     onComplete={(c) => setCompletedCrop(c)}
+                     maxWidth={580}
+                     maxHeight={480}
+                     aspect={aspect}
+                  >
+                     <img
+                        src={image}
+                        style={{
+                           transform: `scale(${zoom})`,
+                           maxWidth: 580,
+                           maxHeight: 480,
+                        }}
+                     />
+                  </ReactCrop>
                </div>
                <div className={styles["controls"]}>
                   <input
@@ -109,46 +158,6 @@ const CropDialog = ({
                      className={styles["zoom-range"]}
                   />
                </div>
-
-               {showAspectRatioOptions && (
-                  <>
-                     <div className={styles["aspect-ratio-button-group"]}>
-                        {aspectRatioOptions.map((option) => (
-                           <div key={option.value} className={styles["radio"]}>
-                              <input
-                                 type="radio"
-                                 id={option.label}
-                                 name="aspect-ratio"
-                                 value={option.value}
-                                 onChange={handleAspectRatioChange}
-                                 checked={aspectRatio == option.value}
-                              />
-                              <label htmlFor={option.label}>
-                                 {option.label}
-                              </label>
-                              <br />
-                           </div>
-                        ))}
-
-                        {aspectRatio === "custom" && (
-                           <div
-                              style={{ width: "200px", display: "flex" }}
-                              className={styles["custom"]}
-                           >
-                              <Input
-                                 value={aspectWidth}
-                                 setState={setAspectWidth}
-                              />
-                              /
-                              <Input
-                                 value={aspectHeight}
-                                 setState={setAspectHeight}
-                              />
-                           </div>
-                        )}
-                     </div>
-                  </>
-               )}
 
                <div className={styles["modal-footer"]}>
                   <Buttons

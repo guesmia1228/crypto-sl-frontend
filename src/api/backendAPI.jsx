@@ -155,6 +155,31 @@ export default class backendAPI {
         }
     }
 
+
+
+	async deleteProfileImage() {
+		try{
+			const url = `${this.baseURL}/auth/deleteImage`;
+			const options = {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${this.token}`
+				},
+				body: null
+			};
+			const response = await fetch(url, options);
+			if (!response.ok) {
+				throw new Error("Network response was not ok");
+			}
+			const data = await response.json();
+            localStorage.setItem("profile_pic", "null");
+			return data;
+		} catch (error) {
+			return null; // or return some default value
+		}
+	}
+
     async uploadFile(file) {
         try {
             const formData = new FormData();

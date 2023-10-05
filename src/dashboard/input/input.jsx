@@ -2,112 +2,145 @@ import styles from "./input.module.css";
 import Delete from "../../assets/icon/delete.svg";
 
 import AttachmentImage from "../../assets/icon/attachment.svg";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const Input = ({ label, placeholder, type = "text", setState, value, disabled }) => {
-  const handleChange = (e) => {
-    setState(e.target.value);
-  };
+const Input = ({
+   label,
+   placeholder,
+   type = "text",
+   setState,
+   value,
+   disabled,
+}) => {
+   const handleChange = (e) => {
+      setState(e.target.value);
+   };
 
-  return (
-    <div className={styles.input}>
-      <p>{label}</p>
+   return (
+      <div className={styles.input}>
+         <p>{label}</p>
 
-      <input
-        type={type}
-        name=""
-        id=""
-        value={value}
-        placeholder={placeholder}
-        onChange={handleChange}
-		disabled={disabled === true}
-      />
-    </div>
-  );
+         <input
+            type={type}
+            name=""
+            id=""
+            value={value}
+            placeholder={placeholder}
+            onChange={handleChange}
+            disabled={disabled === true}
+         />
+      </div>
+   );
 };
 
 export default Input;
 
-export const RawInput = ({ placeholder, type = "text", setState, value, disabled }) => {
-	const handleChange = (e) => {
-		setState(e.target.value);
-	};
-  
-	return (
-		<div className={`${styles.input} ${styles.inputRaw}`}>
-			<input type={type} name="" id="" value={value} placeholder={placeholder} onChange={handleChange} disabled={disabled === true}/>
-		</div>
-	);
+export const RawInput = ({
+   placeholder,
+   type = "text",
+   setState,
+   value,
+   disabled,
+}) => {
+   const handleChange = (e) => {
+      setState(e.target.value);
+   };
+
+   return (
+      <div className={`${styles.input} ${styles.inputRaw}`}>
+         <input
+            type={type}
+            name=""
+            id=""
+            value={value}
+            placeholder={placeholder}
+            onChange={handleChange}
+            disabled={disabled === true}
+         />
+      </div>
+   );
 };
 
-export const Attachment = ({ label, onUpload, onDelete }) => {
-  const inputRef = useRef(null);
+export const Attachment = ({ label, onUpload, onDelete, value }) => {
+   const inputRef = useRef(null);
 
-  const [text, setText] = useState(false);
+   const [text, setText] = useState(false);
 
-  const handleClick = () => {
-    inputRef.current.click();
-  };
+   useEffect(() => {
+      if (value) setText(value);
+   }, [value]);
 
-  const allowedExtensions = ["jpg", "jpeg", "png", "JPG", "PNG", "JPEG"];
+   const handleClick = () => {
+      inputRef.current.click();
+   };
 
-  function checkFileExtension(extension) {
-    return allowedExtensions.includes(extension);
-  }
+   const allowedExtensions = ["jpg", "jpeg", "png", "JPG", "PNG", "JPEG"];
 
-  const handleChange = () => {
-    const file = inputRef.current.files[0];
-    const fileName = inputRef.current.value.split("\\").pop();
-    var extension = fileName.split(".").pop();
-    console.log(extension);
-    if (checkFileExtension(extension)) {
-      setText(fileName);
-      onUpload(file);
-    } else {
-      //todo throw new Error maybe with toast!
-    }
-  };
+   function checkFileExtension(extension) {
+      return allowedExtensions.includes(extension);
+   }
 
-  return (
-    <>
-      <div className={styles.input}>
-        <p>{label}</p>
-          <div className={styles.attachment}>
-            <div className={styles.left} onClick={handleClick}>
-              <img src={AttachmentImage} alt="" />
-              <p style={{ color: text ? "#fff" : "#c4c4c4" }}>
-                {text ? text : "Add attachment"}
-              </p>
+   const handleChange = () => {
+      const file = inputRef.current.files[0];
+      const fileName = inputRef.current.value.split("\\").pop();
+      var extension = fileName.split(".").pop();
+      console.log(extension);
+      if (checkFileExtension(extension)) {
+         setText(fileName);
+         onUpload(file);
+      } else {
+         //todo throw new Error maybe with toast!
+      }
+   };
+
+   return (
+      <>
+         <div className={styles.input}>
+            <p>{label}</p>
+            <div className={styles.attachment}>
+               <div className={styles.left} onClick={handleClick}>
+                  <img src={AttachmentImage} alt="" />
+                  <p style={{ color: text ? "#fff" : "#c4c4c4" }}>
+                     {text ? text : "Add attachment"}
+                  </p>
+               </div>
+               <img
+                  src={Delete}
+                  alt="Delete attachment"
+                  onClick={() => {
+                     onDelete();
+                     setText(null);
+                  }}
+                  className={styles.deleteLogo}
+               />
             </div>
-          <img src={Delete} alt="Delete attachment" onClick={() => { onDelete(); setText(null)} } className={styles.deleteLogo} />
-        </div>
-      </div>
-      <input
-        ref={inputRef}
-        className={styles.hideInput}
-        type="file"
-        onChange={handleChange}
-      />
-    </>
-  );
+         </div>
+         <input
+            ref={inputRef}
+            className={styles.hideInput}
+            type="file"
+            onChange={handleChange}
+         />
+      </>
+   );
 };
 
 export const Authentificator = ({ handleClick, placeholder, connected }) => {
-  return (
-    <div className={styles.input}>
-      <p>Authentificator</p>
+   return (
+      <div className={styles.input}>
+         <p>Authentificator</p>
 
-      <div
-        className={styles.attachment}
-        style={{ color: connected ? "#fff" : "#c4c4c4" }}
-        onClick={handleClick}
-      >
-        {placeholder}
+         <div
+            className={styles.attachment}
+            style={{ color: connected ? "#fff" : "#c4c4c4" }}
+            onClick={handleClick}
+         >
+            {placeholder}
 
-        <div className={styles.status}>
-          {connected ? "Connected" : "Not connected"}
-        </div>
+            <div className={styles.status}>
+               {connected ? "Connected" : "Not connected"}
+            </div>
+         </div>
       </div>
-    </div>
-  );
+   );
 };
