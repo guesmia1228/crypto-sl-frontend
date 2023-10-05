@@ -295,12 +295,10 @@ export default class vendorDashboardApi {
         }
     }
 	
-	async createInvoice(amountUSD){
+	async createInvoice(requestBody){
+        console.log("DATA", requestBody);
         try{
             const url = `${this.baseURL}/invoice`;
-			const requestBody = {
-				amountUSD: amountUSD
-			}
             const options = {
                 method: "POST",
                 headers: {
@@ -310,6 +308,7 @@ export default class vendorDashboardApi {
 				body: JSON.stringify(requestBody)
             };
             const response = await fetch(url, options);
+            console.log(response);
             if (!response.ok) {
                 throw new Error("Network response was not ok");
             }

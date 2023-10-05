@@ -13,6 +13,8 @@
 }
 
 .modalBox {
+  max-height: 90%;
+  overflow: auto;
   border-radius: 1rem;
   padding: 3rem;
   display: flex;
