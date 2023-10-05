@@ -18,11 +18,11 @@ const LoginBox = () => {
     const [errorMessage, setErrorMessage] = useState(null);
     const [message, setMessage] = useState(null);
     const [Username, setUsername] = useState(Cookies.get("nefentus-username"));
-    const [Password, setPassword] = useState(decryptData(Cookies.get("nefentus-password")));
+    const [Password, setPassword] = useState(Cookies.get("nefentus-password") ? decryptData(Cookies.get("nefentus-password")) : "");
     const navigate = useNavigate();
     const backendAPI = new backend_API();
     const {t} = useTranslation();
-    const [checkBox, setCheckBox] = useState(Cookies.get("nefentus-remember-me") && JSON.parse(Cookies.get("nefentus-remember-me")));
+    const [checkBox, setCheckBox] = useState(Cookies.get("nefentus-remember-me") ? JSON.parse(Cookies.get("nefentus-remember-me")) : false);
 
     useEffect(() => {
 
