@@ -22,7 +22,7 @@ const LoginBox = () => {
     const navigate = useNavigate();
     const backendAPI = new backend_API();
     const {t} = useTranslation();
-    const [checkBox, setCheckBox] = useState(JSON.parse(Cookies.get("nefentus-remember-me")));
+    const [checkBox, setCheckBox] = useState(Cookies.get("nefentus-remember-me") && JSON.parse(Cookies.get("nefentus-remember-me")));
 
     useEffect(() => {
 
