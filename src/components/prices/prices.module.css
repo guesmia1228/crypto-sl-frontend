@@ -39,3 +39,16 @@
 .negative{
     color: rgb(213, 0, 0);
 }
+
+.descriptionWrapper {
+	display: flex;
+	justify-content: start;
+}
+
+.description {
+	font-size: 1.2rem;
+	color: #ddd;
+	background-color: #161616;
+	padding: 1rem;
+	border-radius: 0.5rem;
+}

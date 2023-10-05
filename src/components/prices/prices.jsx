@@ -45,6 +45,9 @@ const Prices = () => {
             </div>
           );
         })}
+		<div className={styles.descriptionWrapper}>
+			<span className={styles.description}>Price change last 24h</span>
+		</div>
       </div>
   )
 }
