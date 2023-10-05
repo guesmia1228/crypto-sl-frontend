@@ -10,7 +10,7 @@
 }
 
 .contentWrapper {
-  background: #090909;
+  background: #0c0c0c;
   backdrop-filter: blur(10px);
   position: relative;
   z-index: 100;
@@ -48,7 +48,7 @@
 .navigation ul {
   display: flex;
   align-items: center;
-  gap: 5rem;
+  gap: 6rem;
 }
 
 .navigation ul li {
@@ -245,7 +245,7 @@
 }
 
 .content {
-  background: rgba(0, 0, 0, 1);
+  background: #0c0c0c;
   z-index: 5;
 }
 
