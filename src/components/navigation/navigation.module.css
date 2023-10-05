@@ -10,7 +10,7 @@
 }
 
 .contentWrapper {
-  background: rgba(0, 0, 0, 0.95);
+  background: #0c0c0c;
   backdrop-filter: blur(10px);
   position: relative;
   z-index: 100;
@@ -23,6 +23,9 @@
   position: relative;
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
+  max-width: 1500px !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
 }
 
 .content > div {
@@ -45,7 +48,7 @@
 .navigation ul {
   display: flex;
   align-items: center;
-  gap: 5rem;
+  gap: 6rem;
 }
 
 .navigation ul li {
@@ -242,12 +245,12 @@
 }
 
 .content {
-  background: rgba(0, 0, 0, 1);
+  background: #0c0c0c;
   z-index: 5;
 }
 
 .mobileMenu {
-  background: rgba(0, 0, 0, 1);
+  background: #111;
   backdrop-filter: blur(10px);
   padding: 2rem 2.5rem;
   transition: 0.5s ease-out;
