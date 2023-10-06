@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactCrop, { centerCrop, makeAspectCrop } from "react-image-crop";
+import Resizer from "react-image-file-resizer";
 import styles from "./cropDialog.module.css";
 import { Buttons } from "../../dashboard/settings/components/buttons";
 import "react-image-crop/dist/ReactCrop.css";
@@ -15,6 +16,23 @@ export const dataURLtoFile = (dataurl, filename) => {
    }
    return new File([u8arr], filename, { type: mime });
 };
+
+
+const resizeFile = (file) =>
+  new Promise((resolve) => {
+    Resizer.imageFileResizer(
+      file,
+      580,
+      480,
+      "JPEG",
+      100,
+      0,
+      (uri) => {
+        resolve(uri);
+      },
+      "base64"
+    );
+  });
 
 const CropDialog = ({ open, file, aspect, onSave, onClose }) => {
    const [crop, setCrop] = useState({
@@ -69,9 +87,10 @@ const CropDialog = ({ open, file, aspect, onSave, onClose }) => {
       }
    }, [open, file]);
 
-   const handleCrop = () => {
+   const handleCrop = async () => {
       const img = new Image();
-      img.src = image;
+      const resizef = await resizeFile(file);
+      img.src = resizef;
 
       img.onload = function () {
          const canvas = document.createElement("canvas");
@@ -130,8 +149,6 @@ const CropDialog = ({ open, file, aspect, onSave, onClose }) => {
                      onChange={(_, percentCrop) => setCrop(percentCrop)}
                      zoom={zoom}
                      onComplete={(c) => setCompletedCrop(c)}
-                     maxWidth={580}
-                     maxHeight={480}
                      aspect={aspect}
                   >
                      <img
