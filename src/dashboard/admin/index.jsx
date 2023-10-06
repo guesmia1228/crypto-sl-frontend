@@ -1,18 +1,14 @@
 import Button from "../../components/button/button";
 import Input, { Options } from "../../components/input/input";
 import StatsCard from "../statsCard/statsCard";
-import { transformNumber } from "../func/transformNumber";
 import Graph from "../graph/graph";
 import Header from "../header/header";
 import TopInfo from "../topInfo/topInfo";
 import styles from "./admin.module.css";
-import { options } from "./../graph/graph";
 import { useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
 import ModalOverlay from "../modal/modalOverlay";
 import adminDashboardApi from "../../api/adminDashboardApi";
 import { useNavigate } from "react-router-dom";
-import Table from "../../components/table";
 import TablePagination from "../../components/tablePagination";
 import { formatUSDBalance } from "../../utils";
 import { ROLE_TO_NAME } from "../../constants";
@@ -20,7 +16,6 @@ import CopyValue from "../copyValue";
 import { MessageContext } from "../../context/message";
 import MessageComponent from "../../components/message";
 import imputStyles from "../../components/input/input.module.css";
-import { tab } from "@testing-library/user-event/dist/tab";
 
 const header = [
   "First Name",

@@ -5,7 +5,7 @@ import Footer from "./footer";
 const Affiliate = () => {
   return (
     <>
-      <div className="container dashboardFont">
+      <div className="container dashboardContainer">
         <Helmet>
           <title>Nefentus | Dashboard</title>
         </Helmet>

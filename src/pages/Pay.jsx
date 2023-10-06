@@ -22,7 +22,7 @@ const Pay = () => {
   }, []);
 
   return (
-    <>
+    <div className="container">
       <Helmet>
         <title>Pay invoice | Nefentus</title>
       </Helmet>
@@ -33,7 +33,7 @@ const Pay = () => {
       >
         <PayBody invoice={invoice} />
       </ThirdwebProvider>
-    </>
+    </div>
   );
 };
 

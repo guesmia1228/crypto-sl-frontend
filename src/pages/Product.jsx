@@ -22,7 +22,7 @@ const Product = () => {
   }, []);
 
   return (
-    <>
+    <div className="container">
       <Helmet>
         <title>{product.name ? product.name : ""} | Nefentus</title>
       </Helmet>
@@ -33,7 +33,7 @@ const Product = () => {
       >
         <ProductBody product={product} />
       </ThirdwebProvider>
-    </>
+    </div>
   );
 };
 

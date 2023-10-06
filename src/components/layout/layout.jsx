@@ -26,6 +26,7 @@ const Layout = ({
   video,
   list,
   full,
+  children,
 }) => {
   const { t } = useTranslation();
 
@@ -120,7 +121,7 @@ const Layout = ({
           )}
         </div>
       </div>
-      {!video && (
+      {!video && !children && (
         <img
           className={`${
             heading || load ? "" : reverse ? "slide-right" : "slide-left"
@@ -131,7 +132,7 @@ const Layout = ({
         />
       )}
 
-      {video && (
+      {video && !children && (
         <video
           onLoadedData={handleLoad}
           ref={videoRef}
@@ -145,6 +146,17 @@ const Layout = ({
         >
           <source src={video} type="video/mp4" />
         </video>
+      )}
+
+      {children && (
+        <div
+          className={`${
+            heading || load ? "" : reverse ? "slide-right" : "slide-left"
+          } ${full ? styles.full : ""}`}
+          style={{ order: reverse ? 1 : 2 }}
+        >
+          {children}
+        </div>
       )}
     </div>
   );

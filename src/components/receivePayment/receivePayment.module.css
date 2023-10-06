@@ -1,8 +1,6 @@
 .container {
   margin-top: 14rem;
   margin-bottom: 14rem;
-  margin-left: 16.5rem;
-  margin-right: 16.5rem;
 }
 
 @media (max-width: 900px) {

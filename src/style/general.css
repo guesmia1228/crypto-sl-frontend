@@ -19,7 +19,7 @@
 
 /* Variable */
 :root {
-  --black-color: #000;
+  --black-color: #111;
   --white-color: #fff;
   --gray-color: #c4c4c4;
   --blue-color: #0784b5;
@@ -119,6 +119,12 @@ body {
     padding-left: 5rem;
     padding-right: 5rem;
   }
+}
+
+.dashboardContainer {
+  max-width: 1800px !important;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .break {
@@ -225,7 +231,7 @@ h3 {
 /* Card */
 
 .card {
-  background-color: #101010;
+  background-color: #161616;
   border: 1px solid rgba(255, 255, 255, 0.01);
   border-radius: 2.5rem;
 }

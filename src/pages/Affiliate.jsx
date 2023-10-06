@@ -12,7 +12,7 @@ import HeroAff from "../components/heroAff/heroAff";
 const Affiliate = () => {
   useEffect(() => {
     checkPermissions();
-  });
+  }, []);
 
   const checkPermissions = async () => {
     const token = localStorage.getItem("token");
