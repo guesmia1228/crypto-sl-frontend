@@ -125,10 +125,10 @@ export const coinList = [
     abbr: "XRP",
     url: "ripple",
   },
-  {
-    icon: Polygon,
-    name: "Polygon",
-    abbr: "MATIC",
-    url: "matic-network",
-  },
+  //   {
+  //     icon: Polygon,
+  //     name: "Polygon",
+  //     abbr: "MATIC",
+  //     url: "matic-network",
+  //   },
 ];
