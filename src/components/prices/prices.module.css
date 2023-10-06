@@ -3,12 +3,15 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  margin: 2rem 3.5rem 1rem 3.5rem;
+}
+
+.priceCard {
+  padding: 2rem 3.5rem 1rem 3.5rem;
 }
 
 .price_box {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 3.5fr 2fr 1fr;
   align-items: center;
 }
 
@@ -27,14 +30,20 @@
   color: rgba(255, 255, 255, 0.42);
 }
 
-.abbr {
+.abbr,
+.change {
   font-size: 1.6rem;
   color: white;
   font-weight: bold;
 }
 
+.change {
+  text-align: end;
+}
+
 @media (max-width: 900px) {
-  .abbr {
+  .abbr,
+  .change {
     font-size: 1.4rem;
   }
 }

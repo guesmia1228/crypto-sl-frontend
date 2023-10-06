@@ -28,7 +28,7 @@ const Prices = () => {
   }, []);
   return (
     prices && (
-      <div className="card">
+      <div className={`card ${styles.priceCard}`}>
         <div className={styles.container}>
           {prices?.map((price) => {
             return (
@@ -46,7 +46,7 @@ const Prices = () => {
                 </div>
                 <span className={styles.abbr}>${price.price.toFixed(2)}</span>
                 <span
-                  className={`${styles.abbr} ${
+                  className={`${styles.change} ${
                     price.priceChange >= 0 ? styles.positive : styles.negative
                   }`}
                 >
