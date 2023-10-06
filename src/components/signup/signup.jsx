@@ -370,7 +370,7 @@ const Signup = () => {
 
           <ReCAPTCHA
             ref={recaptchaRef}
-            sitekey={process.env.REACT_APP_SITE_KEY}
+            sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
             theme="dark"
           />
 
