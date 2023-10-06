@@ -6,6 +6,7 @@
   cursor: pointer;
   overflow: hidden;
   position: relative;
+  background-color: var(--black-color);
 }
 
 .background {
