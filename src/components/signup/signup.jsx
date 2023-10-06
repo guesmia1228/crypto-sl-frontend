@@ -1,10 +1,9 @@
 import Logo from "../../assets/logo/logo2.svg";
 import Button from "../button/button";
 import Input, { Options } from "../input/input";
-
 import styles from "./signup.module.css";
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import backendAPI from "../../api/backendAPI";
 
@@ -225,7 +224,6 @@ const Signup = () => {
   const [Telefon, setTelefon] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-  const [UseOption, setUseOption] = useState("Choose Options");
   const [CountryOption, setCountryOption] = useState(t("signUp.option1Placeholder"));
   const api = new backendAPI();
 
@@ -235,7 +233,6 @@ const Signup = () => {
     setTelefon("");
     setEmail("");
     setPassword("");
-    setUseOption("Choose Options");
     setCountryOption(t("signUp.option1Placeholder"));
   };
 
@@ -278,8 +275,8 @@ const Signup = () => {
   }
 
   function handleClick(e) {
-	e.preventDefault();
-	submitForm();
+    e.preventDefault();
+    submitForm();
   }
 
   return (
@@ -328,6 +325,13 @@ const Signup = () => {
 					placeholder={t("signUp.firstNamePlaceholder")}
 					value={FirstName}
 					setState={setFirstName}
+				/>
+
+				<Input
+					label={t("signUp.lastNameLabel") + "*"}
+					placeholder={t("signUp.lastNamePlaceholder")}
+					value={LastName}
+					setState={setLastName}
 				/>
 
 				<Input
