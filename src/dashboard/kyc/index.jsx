@@ -25,6 +25,7 @@ const KycBody = () => {
   const adminApi = new adminDashboardApi("admin");
   const fetchFYC = async () => {
     const users = await adminApi.getUsers();
+    console.log(users, "NON KYC USER")
     const usersKYC = await adminApi.getUsersWithKYC();
     const arrayWithResults = await Promise.all(
       users.map(async (user) => {
@@ -49,7 +50,7 @@ const KycBody = () => {
         return [
           {
             img: user.s3Url,
-            name: user.firstName + " " + user.lastName,
+            name: `${user.firstName} ${user.lastName}`,
             id: user.id,
           },
           user.email,
@@ -60,8 +61,8 @@ const KycBody = () => {
         ];
       })
     );
-      console.log(arrayWithResults.filter(item => item !== undefined))
-      console.log(usersKYC)
+      console.log(arrayWithResults.filter(item => item !== undefined), "NON KYC ENDPOINT")
+      console.log(usersKYC, "KYC ENDPOINT")
     setData(arrayWithResults.filter(item => item !== undefined));
   };
 
