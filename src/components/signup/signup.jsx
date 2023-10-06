@@ -6,6 +6,10 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import backendAPI from "../../api/backendAPI";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import isMobilePhone from "../../func/isMobilePhone";
 
 var country_list = [
   "Afghanistan",
@@ -219,52 +223,80 @@ const Signup = () => {
   const { t } = useTranslation();
   const [errorMessage, setErrorMessage] = useState(null);
   const [message, setMessage] = useState(null);
-  const [FirstName, setFirstName] = useState("");
-  const [LastName, setLastName] = useState("");
-  const [Telefon, setTelefon] = useState("");
-  const [Email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
-  const [CountryOption, setCountryOption] = useState(t("signUp.option1Placeholder"));
+  const [CountryOption, setCountryOption] = useState(
+    t("signUp.option1Placeholder")
+  );
   const api = new backendAPI();
 
+  const schema = z
+    .object({
+      firstName: z.string().min(1, { message: "Please enter your first name" }),
+      lastName: z.string().min(1, { message: "Please enter your last name" }),
+      telNr: z
+        .string()
+        .min(1, { message: "Please enter your phone number" })
+        .refine(isMobilePhone, {
+          message: "Please enter a valid phone number",
+        }),
+      email: z
+        .string()
+        .min(1, { message: "Please enter your email" })
+        .email({ message: "Please enter a valid email" }),
+      password: z
+        .string()
+        .min(1, { message: "Please enter your password" })
+        .min(8, { message: "Password must be at least 8 characters" })
+        .refine(
+          (value) =>
+            /^(?=(.*[a-z]){1,})(?=(.*[A-Z]){1,})(?=(.*\d){1,})(?=(.*[@#$%^&+=!_]){1,}).{8,}$/.test(
+              value
+            ),
+          {
+            message:
+              "Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",
+          }
+        ),
+      confirmPassword: z
+        .string()
+        .nonempty({ message: "Confirm your password" }),
+    })
+    .refine(
+      (schemaData) => schemaData.password === schemaData.confirmPassword,
+      {
+        message: "Passwords must match",
+        path: ["confirmPassword"],
+      }
+    );
+
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    setError,
+    clearErrors,
+    reset,
+    formState: { errors, isValid },
+  } = useForm({ resolver: zodResolver(schema), mode: "onSubmit" });
+
   const resetForm = () => {
-    setFirstName("");
-    setLastName("");
-    setTelefon("");
-    setEmail("");
-    setPassword("");
+    reset();
     setCountryOption(t("signUp.option1Placeholder"));
   };
 
-  async function submitForm() {
-	if (FirstName === "") {
-		setErrorMessage("Please enter your first name");
-		return;
-	} else if (LastName === "") {
-		setErrorMessage("Please enter your last name");
-		return;
-	} else if (Email === "") {
-		setErrorMessage("Please enter your email");
-		return;
-	} else if (Password === "") {
-		setErrorMessage("Please enter your password");
-		return;
-	} else if (CountryOption === t("signUp.option1Placeholder")) {
-		setErrorMessage("Please choose a country");
-		return;
-	}
+  async function submitForm(data) {
+    if (CountryOption === t("signUp.option1Placeholder")) {
+      setErrorMessage("Please choose a country");
+      return;
+    }
 
     const requestData = {
-      firstName: FirstName,
-      lastName: LastName,
-      telNr: Telefon,
-      email: Email,
-      password: Password,
+      ...data,
       roles: ["Affiliate"],
       country: CountryOption,
       affiliateLink: localStorage.getItem("affiliateJoined"),
     };
     resetForm();
+    setErrorMessage(null);
 
     const response = await api.register(requestData);
     if (response == null) {
@@ -272,11 +304,6 @@ const Signup = () => {
     } else {
       setMessage("Please confirm your email address to proceed.");
     }
-  }
-
-  function handleClick(e) {
-    e.preventDefault();
-    submitForm();
   }
 
   return (
@@ -306,71 +333,88 @@ const Signup = () => {
         </div>
       </div>
 
-	  <form onSubmit={handleClick}>
-		<div className={styles.right}>
-			{errorMessage && (
-			<div className={styles.errormessagecontainer}>
-				<p>{errorMessage}</p>
-			</div>
-			)}
-			{message && (
-			<div className={styles.messagecontainer}>
-				<p>{message}</p>
-			</div>
-			)}
+      <form onSubmit={handleSubmit(submitForm)} className={styles.right}>
+        {(errorMessage ||
+          errors.firstName?.message ||
+          errors.lastName?.message ||
+          errors.telNr?.message ||
+          errors.email?.message ||
+          errors.password?.message ||
+          errors.confirmPassword?.message) && (
+          <div className={styles.errormessagecontainer}>
+            <p>
+              {errorMessage ||
+                errors.firstName?.message ||
+                errors.lastName?.message ||
+                errors.telNr?.message ||
+                errors.email?.message ||
+                errors.password?.message ||
+                errors.confirmPassword?.message}
+            </p>
+          </div>
+        )}
+        {message && (
+          <div className={styles.messagecontainer}>
+            <p>{message}</p>
+          </div>
+        )}
 
-			<div className={styles.row}>
-				<Input
-					label={t("signUp.firstNameLabel") + "*"}
-					placeholder={t("signUp.firstNamePlaceholder")}
-					value={FirstName}
-					setState={setFirstName}
-				/>
+        <div className={styles.row}>
+          <Input
+            label={t("signUp.firstNameLabel") + "*"}
+            placeholder={t("signUp.firstNamePlaceholder")}
+            register={register}
+            name={"firstName"}
+          />
 
-				<Input
-					label={t("signUp.lastNameLabel") + "*"}
-					placeholder={t("signUp.lastNamePlaceholder")}
-					value={LastName}
-					setState={setLastName}
-				/>
+          <Input
+            label={t("signUp.lastNameLabel") + "*"}
+            placeholder={t("signUp.lastNamePlaceholder")}
+            register={register}
+            name={"lastName"}
+          />
 
-				<Input
-					label={t("signUp.telefonLabel")}
-					placeholder="(979) 268-4143"
-					value={Telefon}
-					setState={setTelefon}
-				/>
-				<Input
-					label={t("signUp.emailLabel") + "*"}
-					placeholder={t("signUp.emailPlaceholder")}
-					value={Email}
-					setState={setEmail}
-				/>
-				<Input
-					label={t("signUp.passwordLabel") + "*"}
-					placeholder={t("signUp.passwordPlaceholder")}
-					value={Password}
-					setState={setPassword}
-					secure
-				/>
-				<Options
-					label={t("signUp.option1Label") + "*"}
-					value={CountryOption}
-					setValue={setCountryOption}
-					options={country_list}
-				/>
-			</div>
-			<div className={styles.buttonWrapper}>
-				<Button className={styles.button} onClick={handleClick}>
-					{t("signUp.formButton")}
-				</Button>
-			</div>
+          <Input
+            label={t("signUp.telefonLabel")}
+            placeholder="(979) 268-4143"
+            register={register}
+            name={"telNr"}
+          />
+          <Input
+            label={t("signUp.emailLabel") + "*"}
+            placeholder={t("signUp.emailPlaceholder")}
+            register={register}
+            name={"email"}
+          />
+          <Input
+            label={t("signUp.passwordLabel") + "*"}
+            placeholder={t("signUp.passwordPlaceholder")}
+            register={register}
+            name={"password"}
+            secure
+          />
+          <Input
+            label={t("signUp.confirmPasswordLabel") + "*"}
+            placeholder={t("signUp.confirmPasswordPlaceholder")}
+            register={register}
+            name={"confirmPassword"}
+            secure
+          />
+          <Options
+            label={t("signUp.option1Label") + "*"}
+            value={CountryOption}
+            setValue={setCountryOption}
+            options={country_list}
+          />
+        </div>
+        <div className={styles.buttonWrapper}>
+          <Button className={styles.button} type="submit">
+            {t("signUp.formButton")}
+          </Button>
+        </div>
 
-			<p className={styles.formAgreement}>{t("signUp.formInfo")}</p>
-
-			<button type="submit" hidden />
-      	</div>
-	  </form>
+        <p className={styles.formAgreement}>{t("signUp.formInfo")}</p>
+      </form>
     </div>
   );
 };

@@ -197,6 +197,8 @@
     "emailPlaceholder": "your@email.com",
     "passwordLabel": "Ваш пароль",
     "passwordPlaceholder": "Пароль",
+    "confirmPasswordLabel": "Підтвердіть ваш пароль",
+    "confirmPasswordPlaceholder": "Пароль",
     "optionLabel": "Для чого ви хочете зареєструватися?",
     "option1Label": "Ваша країна",
 	"option1Placeholder": "Виберіть країну",

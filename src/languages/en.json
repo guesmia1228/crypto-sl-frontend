@@ -260,6 +260,8 @@
     "emailPlaceholder": "you@email.com",
     "passwordLabel": "Your password",
     "passwordPlaceholder": "Password",
+    "confirmPasswordLabel": "Confirm your password",
+    "confirmPasswordPlaceholder": "Password",
     "optionLabel": "What do you want to register for?",
     "option1Label": "Country",
 	"option1Placeholder": "Chose country",
