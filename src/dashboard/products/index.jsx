@@ -16,6 +16,9 @@ import { MessageContext } from "../../context/message";
 import { Attachment } from "../../components/input/input";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
+import CropDialog, {
+  dataURLtoFile,
+} from "../../components/cropDialog/cropDialog";
 
 const ProductBody = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -28,6 +31,7 @@ const ProductBody = () => {
   const [productId, setProductId] = useState(null); // Set to productId if updating product
   const [products, setProducts] = useState([]);
   const [signedImagePaths, setSignedImagePaths] = useState([]);
+  const [cropDialogOpen, setCropDialogOpen] = useState(false);
 
   const { setInfoMessage, setErrorMessage, clearMessages } =
     useContext(MessageContext);
@@ -185,6 +189,7 @@ const ProductBody = () => {
                   onUpload={(file) => {
                     setImage(file);
                     setImageChanged(true);
+                    setCropDialogOpen(true);
                   }}
                   onDelete={() => {
                     setImage(null);
@@ -244,6 +249,16 @@ const ProductBody = () => {
           </ModalOverlay>
         )}
       </div>
+
+      <CropDialog
+        open={cropDialogOpen}
+        file={image}
+        onClose={() => setCropDialogOpen(false)}
+        onSave={(croppedImageData) => {
+          setCropDialogOpen(false);
+          setImage(dataURLtoFile(croppedImageData, image.name));
+        }}
+      />
     </>
   );
 };
