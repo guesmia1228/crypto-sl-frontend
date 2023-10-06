@@ -18,6 +18,9 @@ import MessageComponent from "../../components/message";
 import { MessageContext } from "../../context/message";
 import TopInfo from "../topInfo/topInfo";
 import Tabs from "../../components/tabs/index";
+import CropDialog, {
+  dataURLtoFile,
+} from "../../components/cropDialog/cropDialog";
 
 let nav = ["Profile", "Change password"];
 
@@ -176,6 +179,14 @@ const ProfileBody = ({ afterUpdateSettings, active }) => {
   );
   const [email, setEmail] = useState(localStorage.getItem("email"));
   const { setErrorMessage, setInfoMessage } = useContext(MessageContext);
+  const [cropDialogOpen, setCropDialogOpen] = useState(false);
+  const [imageName, setImageName] = useState(null);
+  const [imageChanged, setImageChanged] = useState(false); // Set to true if image changed (was added or deleted))
+
+  useEffect(() => {
+    const profilePic = localStorage.getItem("profile_pic");
+    if (profilePic !== "null") setImageName(profilePic.split("_").pop());
+  }, []);
 
   const profileContent = [
     {
@@ -212,6 +223,8 @@ const ProfileBody = ({ afterUpdateSettings, active }) => {
 
   const handleUpload = (uploadedFile) => {
     setFile(uploadedFile);
+    setCropDialogOpen(true);
+    setImageChanged(true);
   };
 
   const checkErrors = () => {
@@ -248,11 +261,18 @@ const ProfileBody = ({ afterUpdateSettings, active }) => {
     };
 
     let response = 1;
-    if (file) {
-      const response = await backendAPI.uploadFile(file);
-      if (response == null) {
+
+    if (imageChanged) {
+      let resp2;
+      if (file) {
+        resp2 = await backendAPI.uploadFile(file);
+      } else {
+        resp2 = await backendAPI.deleteProfileImage(file);
+      }
+      if (resp2 == null) {
         setErrorMessage("Error on uploading the profile picture");
       }
+      setImageChanged(false);
     }
 
     const response2 = await backendAPI.update(requestData);
@@ -307,7 +327,26 @@ const ProfileBody = ({ afterUpdateSettings, active }) => {
         />
       </div>
 
-      <Attachment label="Upload logo image" onUpload={handleUpload} />
+      <Attachment
+        label="Upload logo image"
+        onUpload={handleUpload}
+        value={imageName}
+        onDelete={() => {
+          setFile(null);
+          setImageChanged(true);
+        }}
+      />
+
+      <CropDialog
+        open={cropDialogOpen}
+        file={file}
+        aspect={1}
+        onClose={() => setCropDialogOpen(false)}
+        onSave={(croppedImageData) => {
+          setCropDialogOpen(false);
+          setFile(dataURLtoFile(croppedImageData, file.name));
+        }}
+      />
 
       <Buttons
         functions={[resetValues, handleConfirm]}

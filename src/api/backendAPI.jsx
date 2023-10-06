@@ -154,32 +154,6 @@ export default class backendAPI {
     }
   }
 
-  async uploadFile(file) {
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-
-      const response = await fetch(`${this.baseURL}/auth/upload`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${this.token}`,
-        },
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const data = await response.json();
-      localStorage.setItem("profile_pic", data.message);
-      return data.message;
-    } catch (error) {
-      console.error("There was an error uploading the file:", error);
-      return null;
-    }
-  }
-
   async signout() {
     try {
       const url = `${this.baseURL}/auth/signout`;
@@ -466,6 +440,32 @@ export default class backendAPI {
     }
   }
 
+  async uploadFile(file) {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await fetch(`${this.baseURL}/auth/upload`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      localStorage.setItem("profile_pic", data.message);
+      return data.message;
+    } catch (error) {
+      console.error("There was an error uploading the file:", error);
+      return null;
+    }
+  }
+
   async uploadKYCByType(type, file) {
     try {
       if (!file) {
@@ -487,6 +487,29 @@ export default class backendAPI {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
+      return data;
+    } catch (error) {
+      return null; // or return some default value
+    }
+  }
+
+  async deleteProfileImage() {
+    try {
+      const url = `${this.baseURL}/auth/deleteImage`;
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${this.token}`,
+        },
+        body: null,
+      };
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      localStorage.setItem("profile_pic", "null");
       return data;
     } catch (error) {
       return null; // or return some default value

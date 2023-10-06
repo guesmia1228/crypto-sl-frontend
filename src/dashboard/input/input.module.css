@@ -38,8 +38,14 @@
 
 .attachment {
   display: flex;
+  justify-content: space-between;
   gap: 1.5rem;
   cursor: pointer;
+}
+
+.attachment .left {
+  display: flex;
+  gap: 1.5rem;
 }
 
 .attachment p {
