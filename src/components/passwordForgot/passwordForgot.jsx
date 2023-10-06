@@ -3,36 +3,41 @@ import styles from "./passwordForgot.module.css";
 
 import Logo from "../../assets/logo/logo.svg";
 import Button from "../button/button";
-import { useState, useEffect } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import backend_API from "../../api/backendAPI";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
 const PasswordForgot = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [message, setMessage] = useState(null);
-  const [Username, setUsername] = useState("");
-  const navigate = useNavigate();
   const backendAPI = new backend_API();
   const { t } = useTranslation();
 
-  async function sendResetMail(username1) {
+  const schema = z.object({
+    email: z.string().min(1, { message: "Please enter your email" }),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: zodResolver(schema), mode: "onSubmit" });
+
+  async function sendResetMail(data) {
     try {
-      const response = await backendAPI.forgotPassword(username1);
-      if(response == null){
+      const response = await backendAPI.forgotPassword(data.email);
+      if (response == null) {
         setErrorMessage("Invalid email address!");
         return;
       }
-        setMessage("Email sent to reset password!");
+      setMessage("Email sent to reset password!");
     } catch (error) {
       setErrorMessage("There was an error sending the email!");
     }
-  }
-
-  function handleClick(e) {
-	e.preventDefault();
-    sendResetMail(Username);
   }
 
   return (
@@ -45,9 +50,9 @@ const PasswordForgot = () => {
         </div>
         <div className={styles.top}>
           <div className={styles.message}>
-            {errorMessage && (
+            {(errorMessage || errors.email?.message) && (
               <div className={styles.errormessagecontainer}>
-                <p> {errorMessage}</p>
+                <p> {errorMessage || errors.email?.message}</p>
               </div>
             )}
             {message && (
@@ -58,24 +63,22 @@ const PasswordForgot = () => {
           </div>
         </div>
 
-		<form onSubmit={handleClick}>
-			<Input
-			value={Username}
-			setState={setUsername}
-			label={t("signUp.emailLabel")}
-			placeholder={t("signUp.emailPlaceholder")}
-			/>
-			<div className={styles.buttonWrapper}>
-			<Button link={null} onClick={handleClick}>
-				{t("forgot-password.button")}
-			</Button>
-			</div>
-			<div className={styles.info}>
-			<p>{t("forgot-password.info")}</p>
-			</div>
-
-			<button type="submit" hidden />
-		</form>
+        <form onSubmit={handleSubmit(sendResetMail)}>
+          <Input
+            register={register}
+            name="email"
+            label={t("signUp.emailLabel")}
+            placeholder={t("signUp.emailPlaceholder")}
+          />
+          <div className={styles.buttonWrapper}>
+            <Button link={null} type="submit">
+              {t("forgot-password.button")}
+            </Button>
+          </div>
+          <div className={styles.info}>
+            <p>{t("forgot-password.info")}</p>
+          </div>
+        </form>
       </div>
     </div>
   );

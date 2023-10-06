@@ -241,7 +241,7 @@
   },
   "reset-password": {
     "title": "Reset Password",
-    "button": "reset",
+    "button": "Reset",
     "info": "Don't want to reset your password? Login instead.",
     "button-label-confirm": "Confirm password"
   },
@@ -264,7 +264,7 @@
     "confirmPasswordPlaceholder": "Password",
     "optionLabel": "What do you want to register for?",
     "option1Label": "Country",
-	"option1Placeholder": "Chose country",
+    "option1Placeholder": "Chose country",
     "option2Label": "Your Program",
     "option1": "Vendor",
     "option2": "Affiliate",
@@ -275,7 +275,7 @@
     "titleP1": "Welcome Back",
     "titleP2": "to Nefentus",
     "description": "Enter your credentials below to access your Nefentus account and unlock a world of possibilities.",
-	"remember": "Remember me",
+    "remember": "Remember me",
     "button": "Sign in",
     "info": "Don't have an account? ",
     "infoButton": "Sign up",
