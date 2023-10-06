@@ -76,6 +76,31 @@ export default class backendAPI {
         }
     }
 
+    async changeEmailDashboard(email, oldEmail) {
+        try {
+            const request = {
+                newEmail: email,
+                oldEmail: oldEmail,
+            };
+            const url = `${this.baseURL}/auth`;
+            const options = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${this.token}`,
+                },
+                body: JSON.stringify(request),
+            };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response;
+        } catch (error) {
+            return null; // or return some default value
+        }
+    }
+
     async changePasswordDashboard(pass, oldpass) {
         try {
             const request = {

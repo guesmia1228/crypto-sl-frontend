@@ -5,7 +5,6 @@ import { useEffect, useState, useContext } from "react";
 import Logo from "../../assets/logo/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import backend_API from "../../api/backendAPI";
-import Cookies from "universal-cookie";
 import InputComponent, {RawInput} from "../input/input";
 import backendAPI from "../../api/backendAPI";
 import Header from "../header/header";
@@ -22,11 +21,13 @@ import Tabs from "../../components/tabs/index";
 let nav = [
     "Profile",
     "Change password",
+    "Change email",
 ];
 
 const nav_kyc = [
 	"Profile",
     "Change password",
+    "Change email",
     <div>
         <span className={styles.rest}>Know Your Customer(</span>KYC
         <span className={styles.rest}>)</span>
@@ -94,7 +95,6 @@ const SettingsBody = ({ type }) => {
 		}
 	}, [requireKyc]);
 
-    const cookies = new Cookies();
     const [link, setLink] = useState("");
     return (
         <div
@@ -138,23 +138,31 @@ const SettingsBody = ({ type }) => {
             </div>
 			)}
 
-			<Tabs 
+			<Tabs
 				tabIds={nav}
 				initActiveTab={nav[active]}
 				getHeader={(tabId) => tabId}
 				getBody={(tabId) => {
-					if (tabId === nav[0])
-						return (
-							<ProfileBody active={active} afterUpdateSettings={() => setProfilePicUrl(localStorage.getItem("profile_pic"))} />
-						);
-					else if (tabId === nav[1])
-						return (
-							<PasswordBody active={active} />
-						);
-					else
-						return (
-							<KYC />
-						);
+
+                    switch (tabId) {
+                        case nav[0]:
+                            return (
+                                <ProfileBody active={active} afterUpdateSettings={() => setProfilePicUrl(localStorage.getItem("profile_pic"))} />
+                            );
+                        case nav[1]:
+                            return (
+                                <PasswordBody active={active} />
+                            );
+                        case nav[2]:
+                            return (
+                                <EmailBody active={active} />
+                            );
+                        default:
+                            return (
+                                <KYC />
+                            );
+
+                    }
 				}}
 			/>
         </div>
@@ -256,7 +264,7 @@ const ProfileBody = ({afterUpdateSettings, active}) => {
         if (response2 == null) {
             setErrorMessage("Error on updating data");
         }
-        
+
 		resetValues();
 		afterUpdateSettings();
 
@@ -377,7 +385,7 @@ const PasswordBody = ({active}) => {
             setErrorMessage("Code is not valid or too old!");
             return;
         }
-        setInfoMessage("Password succesfully changed!");
+        setInfoMessage("Password successfully changed!");
         resetValues();
 		setVerificationCode("");
         setOpenBox(false);
@@ -428,7 +436,142 @@ const PasswordBody = ({active}) => {
             )}
 
 			<MessageComponent hide={openBox} />
-		
+
+			<TopInfo
+				title={instruction[active].title}
+				description={instruction[active].description}
+			/>
+
+            {passwordContent.map((item) => (
+                <div>
+                    <InputComponent
+                        label={item.label + (item.required ? "*" : "")}
+                        placeholder={item.placeholder}
+                        type={item.type}
+                        setState={item.onChange}
+                        value={item.value}
+                        secure
+                    />
+                </div>
+            ))}
+			{/*
+            <Authentificator
+                placeholder={"Google Authentificator"}
+                connected={true}
+                handleClick={() => {}}
+			/>*/}
+            <Buttons
+                functions={["", handleConfirm]}
+                buttons={["Reset", "Confirm"]}
+            />
+        </div>
+    );
+};
+
+const EmailBody = ({active}) => {
+    const [openBox, setOpenBox] = useState(false);
+    const [newEmail, setNewEmail] = useState("");
+    const [confirmEmail, setConfirmEmail] = useState("");
+    const [verificationCode, setVerificationCode] = useState(null);
+	const { setErrorMessage, setInfoMessage } = useContext(MessageContext);
+
+    const backendAPI = new backend_API();
+
+    const passwordContent = [
+        {
+            label: "New Email",
+            placeholder: "Enter new email",
+            type: "email",
+            value: newEmail,
+            onChange: setNewEmail,
+			required: true
+        },
+        {
+            label: "Confirm Email",
+            placeholder: "Confirm new email",
+            type: "email",
+            value: confirmEmail,
+            onChange: setConfirmEmail,
+			required: true
+        },
+    ];
+
+    const logOut = async () => {
+        try {
+            const data = await backendAPI.signout();
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const handleConfirm = async () => {
+        if (newEmail !== confirmEmail) {
+            setErrorMessage("Emails are not equal");
+            return;
+        }
+
+        const response = await backendAPI.changeEmailDashboard(
+            newEmail,
+            JSON.stringify(localStorage.getItem("email"))
+        );
+        if (response == null) {
+            setErrorMessage("Old email is not the right one!");
+            return;
+        }else {
+            setInfoMessage("Email successfully changed!");
+            await logOut();
+            resetValues();
+        }
+        setErrorMessage(null);
+        setOpenBox(true);
+    };
+
+
+    const resetValues = () => {
+        setNewEmail("");
+        setConfirmEmail("")
+    };
+
+    const handleClose = () => {
+        setOpenBox(false);
+		setVerificationCode("");
+    };
+
+    return (
+        <div className={styles.tabContent}>
+            {openBox && (
+                <div className={styles.modal}>
+                    <div className={`${styles.popup} card`}>
+						<MessageComponent />
+
+                        <p className={styles.modalHeadline}>Enter verification code:</p>
+
+                        <RawInput
+                            value={verificationCode}
+                            setState={setVerificationCode}
+							type="text"
+                        />
+
+						<div className={styles.modalButtonRow}>
+							<Button
+								onClick={handleClose}
+								color="black"
+							>
+								Cancel
+							</Button>
+							<Button
+								onClick={handleConfirm}
+								color="white"
+							>
+								Confirm
+							</Button>
+						</div>
+                    </div>
+                </div>
+            )}
+
+			<MessageComponent hide={openBox} />
+
 			<TopInfo
 				title={instruction[active].title}
 				description={instruction[active].description}
