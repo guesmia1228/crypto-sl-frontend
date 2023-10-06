@@ -10,7 +10,7 @@
 }
 
 .contentWrapper {
-  background: #0c0c0c;
+  background: #111;
   backdrop-filter: blur(10px);
   position: relative;
   z-index: 100;
@@ -24,8 +24,8 @@
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
   max-width: 1500px !important;
-  padding-left: 20px !important;
-  padding-right: 20px !important;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
 }
 
 .content > div {
@@ -42,13 +42,12 @@
   cursor: pointer;
   pointer-events: initial;
   transform: translateY(-1px);
-  margin-right: -20px;
 }
 
 .navigation ul {
   display: flex;
   align-items: center;
-  gap: 6rem;
+  gap: 4.5rem;
 }
 
 .navigation ul li {
@@ -245,7 +244,7 @@
 }
 
 .content {
-  background: #0c0c0c;
+  background: #111;
   z-index: 5;
 }
 
