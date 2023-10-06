@@ -271,11 +271,8 @@ const Signup = () => {
   const {
     register,
     handleSubmit,
-    getValues,
-    setError,
-    clearErrors,
     reset,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm({ resolver: zodResolver(schema), mode: "onSubmit" });
 
   const resetForm = () => {
