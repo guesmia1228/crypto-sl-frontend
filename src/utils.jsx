@@ -1,4 +1,5 @@
 import { ethers } from "ethers";
+import CryptoJS from "crypto-js";
 
 export function formatTokenBalance(x) {
   const parsedFloat = parseFloat(x);
@@ -64,3 +65,26 @@ export function getRole(localStorage) {
 export function dashboardLink(localStorage) {
   return "/dashboard/" + getRole(localStorage);
 }
+
+export const encryptData = (password) => {
+  try {
+    return CryptoJS.AES.encrypt(
+      JSON.stringify(password),
+      process.env.REACT_APP_SECRET_WORD,
+    ).toString();
+  } catch (error) {
+    console.error("Encryption failed. Please check your input.");
+  }
+};
+
+export const decryptData = (password) => {
+  try {
+    const bytes = CryptoJS.AES.decrypt(
+      password,
+      process.env.REACT_APP_SECRET_WORD,
+    );
+    return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+  } catch (error) {
+    console.error("Decryption failed. Please check your input.");
+  }
+};

@@ -3,27 +3,48 @@ import styles from "./loginBox.module.css";
 
 import Logo from "../../assets/logo/logo2.svg";
 import Button from "./../button/button";
-import { useState, useEffect, useRef } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { dashboardLink } from "../../utils";
+import { dashboardLink, decryptData, encryptData } from "../../utils";
 
 import backend_API from "../../api/backendAPI";
 
 import CheckBox from "../../assets/icon/whiteCheckmark.svg";
 import Cookies from "js-cookie";
+import setCookie from "../setCookie/setCookie";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const LoginBox = () => {
   const recaptchaRef = useRef();
   const [errorMessage, setErrorMessage] = useState(null);
   const [message, setMessage] = useState(null);
-  const [Username, setUsername] = useState("");
-  const [Password, setPassword] = useState("");
+  const [Username, setUsername] = useState(Cookies.get("nefentus-username"));
+  const [Password, setPassword] = useState(
+    Cookies.get("nefentus-password")
+      ? decryptData(Cookies.get("nefentus-password"))
+      : "",
+  );
   const navigate = useNavigate();
   const backendAPI = new backend_API();
   const { t } = useTranslation();
-  const [checkBox, setCheckBox] = useState(false);
+  const [checkBox, setCheckBox] = useState(
+    Cookies.get("nefentus-remember-me")
+      ? JSON.parse(Cookies.get("nefentus-remember-me"))
+      : false,
+  );
+
+  useEffect(() => {
+    if (checkBox) {
+      setCookie("nefentus-username", Username, 365);
+      setCookie("nefentus-password", encryptData(Password), 365);
+      setCookie("nefentus-remember-me", checkBox, 365);
+    } else {
+      setCookie("nefentus-username", "", 365);
+      setCookie("nefentus-password", "", 365);
+      setCookie("nefentus-remember-me", false, 365);
+    }
+  }, [checkBox, loginUser]);
 
   function navigateDashboard() {
     const link = dashboardLink(localStorage);
