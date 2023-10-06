@@ -4,7 +4,7 @@ import styles from "./loginBox.module.css";
 import Logo from "../../assets/logo/logo2.svg";
 import Button from "./../button/button";
 import { useState, useEffect } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { dashboardLink } from "../../utils";
 
@@ -12,21 +12,33 @@ import backend_API from "../../api/backendAPI";
 
 import CheckBox from "../../assets/icon/whiteCheckmark.svg";
 import Cookies from "js-cookie";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
 const LoginBox = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [message, setMessage] = useState(null);
-  const [Username, setUsername] = useState("");
-  const [Password, setPassword] = useState("");
   const navigate = useNavigate();
   const backendAPI = new backend_API();
   const { t } = useTranslation();
   const [checkBox, setCheckBox] = useState(false);
 
   function navigateDashboard() {
-	const link = dashboardLink(localStorage);
-	navigate(link);
+    const link = dashboardLink(localStorage);
+    navigate(link);
   }
+
+  const schema = z.object({
+    email: z.string().min(1, { message: "Please enter your email" }),
+    password: z.string().min(1, { message: "Please enter your password" }),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: zodResolver(schema), mode: "onSubmit" });
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -39,19 +51,24 @@ const LoginBox = () => {
     async function checkJwtAndNavigate() {
       const jwtIsValid = await backendAPI.checkJwt();
       if (jwtIsValid) {
-		navigateDashboard();
+        navigateDashboard();
       }
     }
 
     checkJwtAndNavigate();
   }, []);
 
-  async function loginUser(username1, password1, checkbox) {
+  async function loginUser(data, checkbox) {
+    console.log(data, checkBox);
     if (Cookies.get("acceptCookie") !== true) {
       checkbox = false;
     }
     try {
-      const response = await backendAPI.login(username1, password1, checkbox);
+      const response = await backendAPI.login(
+        data.email,
+        data.password,
+        checkbox
+      );
       if (response == null) {
         setErrorMessage("Invalid login data");
         return;
@@ -74,11 +91,6 @@ const LoginBox = () => {
       setErrorMessage("Error on activating account: ");
     }
   };
-
-  function handleClick(e) {
-	e.preventDefault();
-    loginUser(Username, Password, checkBox);
-  }
 
   return (
     <div className={`${styles.login}`}>
@@ -106,9 +118,15 @@ const LoginBox = () => {
       </div>
 
       <div className={styles.right}>
-        {errorMessage && (
+        {(errorMessage ||
+          errors.email?.message ||
+          errors.password?.message) && (
           <div className={styles.errormessagecontainer}>
-            <p>{errorMessage}</p>
+            <p>
+              {errorMessage ||
+                errors.email?.message ||
+                errors.password?.message}
+            </p>
           </div>
         )}
         {message && (
@@ -117,43 +135,41 @@ const LoginBox = () => {
           </div>
         )}
 
-		<form onSubmit={handleClick}>
-			<div className={styles.inputWrapper}>
-			<Input
-				value={Username}
-				setState={setUsername}
-				label={t("signUp.emailLabel")}
-				placeholder={t("signUp.emailPlaceholder")}
-			/>
-			<Input
-				value={Password}
-				setState={setPassword}
-				label={t("signUp.passwordLabel")}
-				placeholder={t("signUp.passwordPlaceholder")}
-				secure
-			/>
+        <form onSubmit={handleSubmit(loginUser)}>
+          <div className={styles.inputWrapper}>
+            <Input
+              register={register}
+              name={"email"}
+              label={t("signUp.emailLabel")}
+              placeholder={t("signUp.emailPlaceholder")}
+            />
+            <Input
+              register={register}
+              name={"password"}
+              label={t("signUp.passwordLabel")}
+              placeholder={t("signUp.passwordPlaceholder")}
+              secure
+            />
 
-			<div className={styles.rememberInfo}>
-				<div onClick={() => setCheckBox((prev) => !prev)}>
-				<div className={styles.checkBox}>
-					{checkBox && <img src={CheckBox} alt="checkbox" />}
-				</div>
-				<p>{t("login.remember")}</p>
-				</div>
+            <div className={styles.rememberInfo}>
+              <div onClick={() => setCheckBox((prev) => !prev)}>
+                <div className={styles.checkBox}>
+                  {checkBox && <img src={CheckBox} alt="checkbox" />}
+                </div>
+                <p>{t("login.remember")}</p>
+              </div>
 
-				<Link to="/forgot-password">
-				<p>{t("login.forgot")}</p>
-				</Link>
-			</div>
-			</div>
-			<div className={styles.buttonWrapper}>
-			<Button className={styles.button} onClick={handleClick}>
-				{t("login.button")}
-			</Button>
-			</div>
-
-			<button type="submit" hidden />
-		</form>
+              <Link to="/forgot-password">
+                <p>{t("login.forgot")}</p>
+              </Link>
+            </div>
+          </div>
+          <div className={styles.buttonWrapper}>
+            <Button className={styles.button} type="submit">
+              {t("login.button")}
+            </Button>
+          </div>
+        </form>
       </div>
     </div>
   );
