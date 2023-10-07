@@ -300,12 +300,9 @@ export default class vendorDashboardApi {
     }
   }
 
-  async createInvoice(amountUSD) {
+  async createInvoice(requestBody) {
     try {
       const url = `${this.baseURL}/invoice`;
-      const requestBody = {
-        amountUSD: amountUSD,
-      };
       const options = {
         method: "POST",
         headers: {
