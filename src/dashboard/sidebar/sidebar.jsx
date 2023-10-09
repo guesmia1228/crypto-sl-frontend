@@ -2,7 +2,7 @@ import styles from "./sidebar.module.css";
 
 import Logo from "../../assets/logo/logo_wide.svg";
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import Hamburger from "../../assets/icon/hamburger.svg";
 import Button from "../../components/button/button";
@@ -138,18 +138,10 @@ const items = [
 ];
 
 const Sidebar = () => {
-  const [active, setActive] = useState();
   const [open, setOpen] = useState(window.innerWidth < 900 ? false : true);
 
-  const query = useLocation();
   const role = getRole(localStorage);
   const roleName = ROLE_TO_NAME[role];
-
-  useEffect(() => {
-    if (query.pathname === "/dashboard/settings") {
-      setActive(6);
-    } else setActive(0);
-  }, []);
 
   useEffect(() => {
     const resize = () => {
@@ -168,8 +160,6 @@ const Sidebar = () => {
   }, []);
 
   const handleClick = (index) => {
-    setActive(index);
-
     if (window.innerWidth < 900) {
       setOpen(false);
     }
@@ -200,23 +190,24 @@ const Sidebar = () => {
             </div>
             <div className={styles.items}>
               {items.map((item, index) => (
-                <Link
+                <NavLink
+                  end
                   key={index}
                   to={item.link}
-                  className={`${styles.item} ${
-                    active === index ? styles.active : ""
-                  }`}
+                  className={`${styles.item} ${({ isActive }) =>
+                    isActive ? styles.active : ""}`}
                   onClick={() => handleClick(index)}
-                  style={{
-                    background:
-                      active === index
+                  style={({ isActive }) => {
+                    return {
+                      background: isActive
                         ? "linear-gradient(90deg, #1595C2 0%, #66BFDE 100%)"
                         : "transparent",
+                    };
                   }}
                 >
                   {item.icon}
                   <p>{item.text}</p>
-                </Link>
+                </NavLink>
               ))}
             </div>
           </div>
