@@ -2,6 +2,7 @@ import styles from "./kyc.module.css";
 import Header from "../header/header";
 
 import Search from "../../assets/icon/search.svg";
+import Correct from "../../assets/icon/correct.svg";
 
 import ModalOverlay from "../modal/modalOverlay";
 
@@ -25,8 +26,6 @@ const KycBody = () => {
   const adminApi = new adminDashboardApi("admin");
   const fetchFYC = async () => {
     const users = await adminApi.getUsers();
-    console.log(users, "NON KYC USER")
-    const usersKYC = await adminApi.getUsersWithKYC();
     const arrayWithResults = await Promise.all(
       users.map(async (user) => {
         const userId = user.id;
@@ -42,10 +41,19 @@ const KycBody = () => {
           return {
             type: fileType.charAt(0).toUpperCase() + fileType.slice(1),
             file: item[key].data.url,
+            verify: item[key].data.verify,
           };
         });
 
-        if(transformedResults.every(item => item.file === null || item.file === undefined)) return;
+        if (
+          transformedResults.every(
+            (item) =>
+              item.file === null ||
+              item.file === undefined ||
+              item.verify === true
+          )
+        )
+          return;
 
         return [
           {
@@ -61,9 +69,7 @@ const KycBody = () => {
         ];
       })
     );
-      console.log(arrayWithResults.filter(item => item !== undefined), "NON KYC ENDPOINT")
-      console.log(usersKYC, "KYC ENDPOINT")
-    setData(arrayWithResults.filter(item => item !== undefined));
+    setData(arrayWithResults.filter((item) => item !== undefined));
   };
 
   useEffect(() => {
@@ -87,17 +93,33 @@ const KycBody = () => {
         </div>
       </div>
 
-      <Table data={data} />
+      <Table data={data} setData={setData} />
     </div>
   );
 };
 
 export default KycBody;
 
-const Table = ({ data }) => {
+const Table = ({ data, setData }) => {
   const [checkModal, setCheckModal] = useState(false);
   const [feedbackModal, setFeedbackModal] = useState(false);
-  const [selectedId, setSelectedId]=useState(null)
+  const [selectedId, setSelectedId] = useState(null);
+  const adminApi = new adminDashboardApi("admin");
+
+  const acceptKYC = async (id) => {
+    try {
+      await adminApi.acceptKYC(id);
+      setData(data.filter((item) => item[0].id !== id));
+    } catch {}
+  };
+
+  const declineKYC = async (id) => {
+    setFeedbackModal(false);
+    try {
+      await adminApi.declineKYC(id);
+      setData(data.filter((item) => item[0].id !== id));
+    } catch {}
+  };
 
   return (
     <>
@@ -131,7 +153,14 @@ const Table = ({ data }) => {
                         </div>
                       </li>
                     ) : index === 2 ? (
-                      <li onClick={() => {setCheckModal(true); setSelectedId(items[0].id)}}>Check</li>
+                      <li
+                        onClick={() => {
+                          setCheckModal(true);
+                          setSelectedId(items[0].id);
+                        }}
+                      >
+                        Check
+                      </li>
                     ) : (
                       <li>{item}</li>
                     )}
@@ -139,8 +168,15 @@ const Table = ({ data }) => {
                 ))}
 
                 <li>
-                  <p>Accept</p>
-                  <p onClick={() => setFeedbackModal(true)}>Decline</p>
+                  <p onClick={() => acceptKYC(items[0].id)}>Accept</p>
+                  <p
+                    onClick={() => {
+                      setFeedbackModal(true);
+                      setSelectedId(items[0].id);
+                    }}
+                  >
+                    Decline
+                  </p>
                 </li>
               </ul>
             ))}
@@ -155,23 +191,34 @@ const Table = ({ data }) => {
               <h4>Check verification</h4>
 
               <div className={styles.lines}>
-                {data.find(item => {
+                {data
+                  .find((item) => {
                     if (Array.isArray(item) && item.length > 0) {
                       const firstElement = item[0];
-                      if (firstElement && typeof firstElement === 'object' && 'id' in firstElement) {
+                      if (
+                        firstElement &&
+                        typeof firstElement === "object" &&
+                        "id" in firstElement
+                      ) {
                         return firstElement.id === selectedId;
                       }
                     }
                     return false;
-                  })[2].map((item) => (
-                  <div className={styles.line}>
-                    <p>{item.type}</p>
+                  })[2]
+                  .map((item) => (
+                    <div className={styles.line}>
+                      <div className={styles.row}>
+                        <p>{item.type}</p>
+                        {item.verify && <img src={Correct} alt="" />}
+                      </div>
 
-                    {item.file && <a href={item.file} download>
-                        <img src={Download} alt="" />
-                      </a>}
-                  </div>
-                ))}
+                      {item.file && (
+                        <a href={item.file} download>
+                          <img src={Download} alt="" />
+                        </a>
+                      )}
+                    </div>
+                  ))}
               </div>
 
               <div className={styles.checkButton}>
@@ -210,7 +257,7 @@ const Table = ({ data }) => {
                   Cancel
                 </div>
 
-                <Button onClick={() => setCheckModal(false)} color="white">
+                <Button onClick={() => declineKYC(selectedId)} color="white">
                   Confirm
                 </Button>
               </div>

@@ -70,7 +70,6 @@ export const KYC = () => {
       })
       .reduce((acc, curr) => ({ ...acc, ...curr }), {});
     setFiles(transformedResults);
-    console.log(transformedResults)
   };
 
   useEffect(() => {
