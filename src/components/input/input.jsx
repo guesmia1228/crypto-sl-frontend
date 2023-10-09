@@ -16,6 +16,7 @@ const Input = ({
   dashboard,
   number,
   date,
+  style,
 }) => {
   const handleChange = (e) => {
     setState(e.target.value);
@@ -35,6 +36,7 @@ const Input = ({
 
       <input
         className={`${styles.input} ${dashboard ? styles.dashboardInput : ""}`}
+        style={style}
         type={secure ? "password" : number ? "number" : date ? "date" : "text"}
         placeholder={placeholder}
         value={value}

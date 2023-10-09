@@ -260,6 +260,8 @@ const ProfileBody = ({ afterUpdateSettings, active }) => {
       phoneNumber: phoneNumber,
       email: email,
       business: business,
+      isMfa: isTotp,
+      requireOtp: isOtp,
     };
 
     let response = 1;

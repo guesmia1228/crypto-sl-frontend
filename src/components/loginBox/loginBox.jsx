@@ -23,7 +23,11 @@ const ConfirmMeEmail = ({ email, code, setCode, handleClick }) => {
         We have sent a 6-digits code to {email}. The code expires shortly, so
         please enter it soon.
       </p>
-      <Input value={code} setState={setCode} />
+      <Input
+        value={code}
+        setState={setCode}
+        style={{ backgroundColor: "#161616" }}
+      />
       <div className={styles["button-group"]}>
         <div className={`${styles.buttonWrapper} ${styles.buttonWrapperOTP}`}>
           <Button className={styles.button} onClick={handleClick}>
