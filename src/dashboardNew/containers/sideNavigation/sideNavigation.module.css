@@ -1,0 +1,72 @@
+.container {
+  background-color: #161616;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  overflow-y: auto;
+  height: 100%;
+  padding: 1rem;
+  width: 20rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  font-size: 1.2rem;
+  gap: 1rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  transition: 0.5s ease-out;
+  opacity: 0.6;
+}
+
+.item p {
+  padding-top: 2px;
+  line-height: 100%;
+}
+
+.item:hover:not(.active) {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.active {
+  background-color: rgba(255, 255, 255, 0.08);
+  opacity: 1;
+}
+
+.item svg {
+  fill: white;
+  transition: 0.5s ease-out;
+}
+
+.active svg {
+  fill: #8cd1ea;
+}
+
+.soon {
+  font-size: 0.7rem;
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 0.5rem 0.7rem;
+  border-radius: 0.2rem;
+}
+
+.mobItems {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .soon {
+    font-size: 0.6rem;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .container {
+    width: 100vw;
+  }
+
+  .mobItems {
+    display: initial;
+  }
+}

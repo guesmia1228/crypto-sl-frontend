@@ -38,6 +38,10 @@ import Kyc from "./dashboard/Kyc";
 import CookieBanner from "./components/cookieBanner/cookieBanner";
 import Cookies from "js-cookie";
 import { MessageContextProvider } from "./context/message";
+import MainDashboard from "./dashboardNew/screens/mainDashboard";
+import ScreenLayout from "./dashboardNew/containers/screenLayout/screenLayout";
+import ProfileDashboard from "./dashboardNew/screens/profileDashboard";
+import SecuritySettings from "./dashboardNew/containers/securitySettings/securitySettings";
 
 function App() {
   useEffect(() => {
@@ -312,6 +316,32 @@ function App() {
                     <Pay />
                     <Footer />
                   </>
+                }
+              />
+
+              <Route
+                path="/dashboardNew/"
+                element={
+                  <ScreenLayout>
+                    <MainDashboard />
+                  </ScreenLayout>
+                }
+              />
+
+              <Route
+                path="/dashboardNew/profile"
+                element={
+                  <ScreenLayout>
+                    <ProfileDashboard />
+                  </ScreenLayout>
+                }
+              />
+              <Route
+                path="/dashboardNew/security"
+                element={
+                  <ScreenLayout>
+                    <SecuritySettings />
+                  </ScreenLayout>
                 }
               />
             </Routes>
