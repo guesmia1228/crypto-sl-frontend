@@ -65,6 +65,22 @@
   font-size: 1.2rem;
 }
 
+.radio-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.radio label {
+  font-size: 1.6rem;
+}
+
 @media (max-width: 900px) {
   .input {
     padding: 2rem 0;

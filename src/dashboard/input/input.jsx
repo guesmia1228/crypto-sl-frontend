@@ -2,7 +2,7 @@ import styles from "./input.module.css";
 import Delete from "../../assets/icon/delete.svg";
 
 import AttachmentImage from "../../assets/icon/attachment.svg";
-import { useEffect, useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 const Input = ({
   label,
@@ -11,6 +11,7 @@ const Input = ({
   setState,
   value,
   disabled,
+  options,
 }) => {
   const handleChange = (e) => {
     setState(e.target.value);
@@ -20,15 +21,40 @@ const Input = ({
     <div className={styles.input}>
       <p>{label}</p>
 
-      <input
-        type={type}
-        name=""
-        id=""
-        value={value}
-        placeholder={placeholder}
-        onChange={handleChange}
-        disabled={disabled === true}
-      />
+      {type === "radio" ? (
+        <div className={styles["radio-group"]}>
+          {options.map((option) => (
+            <div key={option.value} className={styles["radio"]}>
+              {console.log(
+                "checked",
+                value,
+                option.value,
+                value === option.value,
+              )}
+              <input
+                type="radio"
+                id={`${label} - ${option.name}`}
+                name={label}
+                value={option.value}
+                onChange={handleChange}
+                checked={value === option.value}
+              />
+              <label htmlFor={`${label} - ${option.name}`}>{option.name}</label>
+              <br />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <input
+          type={type}
+          name=""
+          id=""
+          value={value}
+          placeholder={placeholder}
+          onChange={handleChange}
+          disabled={disabled === true}
+        />
+      )}
     </div>
   );
 };

@@ -196,6 +196,29 @@
   }
 } */
 
+.confirm-email {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.confirm-email .button-group {
+  display: flex;
+  justify-content: start;
+}
+
+.confirm-email p {
+  font-size: 1.4rem !important;
+}
+
+.confirm-email h3 {
+  font-size: 3.2rem;
+}
+
+.buttonWrapperOTP {
+  margin-top: 0 !important;
+}
+
 @media (max-width: 900px) {
   .login {
     display: flex;

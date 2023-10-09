@@ -182,6 +182,8 @@ const ProfileBody = ({ afterUpdateSettings, active }) => {
   const [cropDialogOpen, setCropDialogOpen] = useState(false);
   const [imageName, setImageName] = useState(null);
   const [imageChanged, setImageChanged] = useState(false); // Set to true if image changed (was added or deleted))
+  const [isTotp, setIsTotp] = useState(localStorage.getItem("isMfa"));
+  const [isOtp, setIsOtp] = useState(localStorage.getItem("requireOtp"));
 
   useEffect(() => {
     const profilePic = localStorage.getItem("profile_pic");
@@ -296,6 +298,16 @@ const ProfileBody = ({ afterUpdateSettings, active }) => {
     setEmail(localStorage.getItem("email"));
   };
 
+  const requestData = {
+    firstName: firstName,
+    lastName: lastName,
+    phoneNumber: phoneNumber,
+    email: email,
+    business: business,
+    isMfa: isTotp,
+    requireOtp: isOtp,
+  };
+
   return (
     <div className={styles.tabContent}>
       <MessageComponent />
@@ -324,6 +336,31 @@ const ProfileBody = ({ afterUpdateSettings, active }) => {
           placeholder={email}
           type={"text"}
           value={email}
+        />
+      </div>
+
+      <div>
+        <InputComponent
+          disabled
+          label="Time-based one-time password"
+          type="radio"
+          value={isTotp}
+          options={[
+            { name: "Yes", value: "true" },
+            { name: "No", value: "false" },
+          ]}
+          setState={setIsTotp}
+        />
+        <InputComponent
+          disabled
+          label="One-time passwords via email"
+          type="radio"
+          value={isOtp}
+          options={[
+            { name: "Yes", value: "true" },
+            { name: "No", value: "false" },
+          ]}
+          setState={setIsOtp}
         />
       </div>
 
