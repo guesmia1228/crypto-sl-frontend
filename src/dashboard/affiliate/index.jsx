@@ -92,8 +92,9 @@ const AffiliateBody = () => {
       <AffiliateHeader />
 
       <div className={styles.row}>
-        {cardsContent.map((item) => (
+        {cardsContent.map((item, index) => (
           <Card
+            key={index}
             title={item.title}
             amount={item.amount}
             percentage={item.percentage}
@@ -346,8 +347,8 @@ const Footer = () => {
   return (
     <div className={styles.footer}>
       <ul>
-        {list.map((item) => (
-          <li>
+        {list.map((item, index) => (
+          <li key={index}>
             <Link to={item.link}>{item.text}</Link>
           </li>
         ))}

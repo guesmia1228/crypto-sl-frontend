@@ -39,6 +39,7 @@ const SupportBody = () => {
             <div className={styles.list}>
               {content.map((item, index) => (
                 <div
+                  key={index}
                   onClick={() => handleChange(index)}
                   className={`card ${styles.card} ${
                     active === index ? styles.active : ""

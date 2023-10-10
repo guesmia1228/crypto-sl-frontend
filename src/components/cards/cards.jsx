@@ -97,6 +97,7 @@ const Cards = () => {
       <div className={styles.cards} ref={sectionRef}>
         {list.map((item, index) => (
           <div
+            key={index}
             className={`${styles.card} card`}
             // onMouseEnter={() => handleEnter(videoRefs[index])}
             // onMouseLeave={() => handleLeave(videoRefs[index])}

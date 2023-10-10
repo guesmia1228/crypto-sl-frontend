@@ -30,13 +30,13 @@ const Logos = () => {
       </div>
       <div className={styles.logoImage}>
         <div className={`${styles.line1} line1`}>
-          {list.map((logo) => (
-            <img src={logo} alt="crypto logo" />
+          {list.map((logo, index) => (
+            <img key={index} src={logo} alt="crypto logo" />
           ))}
         </div>
         <div className={`${styles.line2} line2`}>
-          {list.map((logo) => (
-            <img src={logo} alt="crypto logo" />
+          {list.map((logo, index) => (
+            <img key={index} src={logo} alt="crypto logo" />
           ))}
         </div>
       </div>

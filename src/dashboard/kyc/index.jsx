@@ -8,7 +8,7 @@ import ModalOverlay from "../modal/modalOverlay";
 
 import Download from "../../assets/icon/download.svg";
 import Button from "../../components/button/button";
-import { useState } from "react";
+import React, { useState } from "react";
 
 // const data = [
 //   [
@@ -311,10 +311,10 @@ const Table = ({ data }) => {
             </ul>
           </div>
           <div className={styles.tableBody}>
-            {data.map((items) => (
-              <ul>
+            {data.map((items, index) => (
+              <ul key={index}>
                 {items.map((item, index) => (
-                  <>
+                  <React.Fragment key={index}>
                     {index === 0 ? (
                       <li className={styles.profile}>
                         <div className={styles.profileImage}>
@@ -331,7 +331,7 @@ const Table = ({ data }) => {
                     ) : (
                       <li>{item}</li>
                     )}
-                  </>
+                  </React.Fragment>
                 ))}
 
                 <li>
@@ -351,8 +351,8 @@ const Table = ({ data }) => {
               <h4>Check verification</h4>
 
               <div className={styles.lines}>
-                {data[0][2].map((item) => (
-                  <div className={styles.line}>
+                {data[0][2].map((item, index) => (
+                  <div key={index} className={styles.line}>
                     <p>{item.type}</p>
 
                     <img src={Download} alt="download" />

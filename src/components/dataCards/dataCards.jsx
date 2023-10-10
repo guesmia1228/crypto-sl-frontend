@@ -32,6 +32,7 @@ const DataCards = () => {
     <div className={`container break ${styles.section}`}>
       {content.map((item, index) => (
         <Card
+          key={index}
           side={index % 2 ? "slide-left" : "slide-right"}
           image={imageContent[index].icon}
           title={item.title}
@@ -56,8 +57,8 @@ const Card = ({ image, title, description, list, side }) => {
         <p className={styles.description}>{description}</p>
 
         <div className={styles.list}>
-          {list.map((item) => (
-            <div>
+          {list.map((item, index) => (
+            <div key={index}>
               <img src={Checkmark} alt="checkmark" />
               <p>{item}</p>
             </div>

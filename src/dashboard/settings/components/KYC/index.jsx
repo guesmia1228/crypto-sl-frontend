@@ -148,10 +148,10 @@ export const KYC = () => {
       <div className={styles.kycList}>
         {KYCContent.map((item, index) => (
           <div
+            key={index}
             className={`${styles.kycItem} ${
               selectingType === item.id ? styles.itemActive : ""
             }`}
-            key={index}
             onClick={() => handleSelectType(item.id)}
           >
             <div className={styles.kycLabelSection}>
