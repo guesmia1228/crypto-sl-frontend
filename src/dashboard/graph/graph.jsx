@@ -14,6 +14,7 @@ import {
 import {Line} from "react-chartjs-2";
 import {Options} from "../../components/input/input";
 import {useState} from "react";
+import {months} from "../../constants";
 
 
 const today = new Date();
@@ -159,21 +160,23 @@ const Graph = ({data, style}) => {
 
     const [period, setPeriod] = useState("Choose period");
 
-    const months = [
-        "All Time",
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-    ];
+
+    const extractUniqueMonthsAndYears = (data) => {
+        return Object.keys(data).reduce((uniqueDates, date) => {
+            const dateParts = date.split('-');
+            const month = months[parseInt(dateParts[1], 10)-1];
+            const year = dateParts[0];
+            const key = `${month} ${year}`;
+
+            if (!uniqueDates.includes(key)) {
+                uniqueDates.push(key);
+            }
+
+            return uniqueDates;
+        }, []);
+    };
+
+    const options = ["All Time", ...extractUniqueMonthsAndYears(data)]
 
     const filterDataByPeriod = (data, selectedPeriod) => {
         if (selectedPeriod === "All Time" || selectedPeriod === "Choose period") {
@@ -182,14 +185,18 @@ const Graph = ({data, style}) => {
             const filteredData = {};
             for (const date in data) {
                 const dateParts = date.split('-');
-                const month = months[parseInt(dateParts[1], 10)];
-                if (month === selectedPeriod) {
+                const month = months[parseInt(dateParts[1], 10) - 1];
+                const year = `${dateParts[0]}`;
+                const key = `${month} ${year}`;
+
+                if (key === selectedPeriod) {
                     filteredData[date] = data[date];
                 }
             }
             return filteredData;
         }
     };
+
 
     const graphData = filterDataByPeriod({...data}, period);
 
@@ -203,7 +210,7 @@ const Graph = ({data, style}) => {
 
                 <div className={styles.dropdownWrap}>
                     <div className={styles.dropdownBorder}>
-                        <Options label={""} value={period} options={months} setValue={setPeriod}/>
+                        <Options label={""} value={period} options={options} setValue={setPeriod}/>
                     </div>
                     <div className={styles.datePicker}>
                         <p>{getStartDate(graphData)}</p>
