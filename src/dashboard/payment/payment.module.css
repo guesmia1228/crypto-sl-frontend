@@ -81,9 +81,9 @@
 }
 
 .columns {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
 }
 
 .modalImage {
@@ -174,14 +174,14 @@
 }
 
 .qr {
-	height: 2rem;
-	cursor: pointer;
+  height: 2rem;
+  cursor: pointer;
 }
 
 .deleteLink {
-	text-decoration: underline;
-	color: var(--error-color);
-	cursor: pointer;
+  text-decoration: underline;
+  color: var(--error-color);
+  cursor: pointer;
 }
 
 @media (max-width: 900px) {
@@ -214,14 +214,14 @@
 }
 
 .qrWrapper {
-	height: auto;
-	margin: 0 auto;
-	max-width: 500px;
-	width: 100%;
-	margin-top: 3rem;
-	margin-bottom: 3rem;
+  height: auto;
+  margin: 0 auto;
+  max-width: 500px;
+  width: 100%;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
 .modalButtons > div {
-	width: 100%;
+  width: 100%;
 }

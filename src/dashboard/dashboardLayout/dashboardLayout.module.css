@@ -1,8 +1,8 @@
 .content {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .content > div:first-child {
-	flex: 1;
+  flex: 1;
 }

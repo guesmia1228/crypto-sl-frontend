@@ -3,29 +3,81 @@ import styles from "./loginBox.module.css";
 
 import Logo from "../../assets/logo/logo2.svg";
 import Button from "./../button/button";
-import { useState, useEffect } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { dashboardLink } from "../../utils";
+import { dashboardLink, decryptData, encryptData } from "../../utils";
 
 import backend_API from "../../api/backendAPI";
 
 import CheckBox from "../../assets/icon/whiteCheckmark.svg";
 import Cookies from "js-cookie";
+import setCookie from "../setCookie/setCookie";
+import ReCAPTCHA from "react-google-recaptcha";
+
+const ConfirmMeEmail = ({ email, code, setCode, handleClick }) => {
+  return (
+    <div className={styles["confirm-email"]}>
+      <h3>Check your email for a code</h3>
+      <p>
+        We have sent a 6-digits code to {email}. The code expires shortly, so
+        please enter it soon.
+      </p>
+      <form onSubmit={handleClick}>
+        <Input
+          value={code}
+          setState={setCode}
+          style={{ backgroundColor: "#161616" }}
+        />
+        <div className={styles["button-group"]}>
+          <div className={`${styles.buttonWrapper} ${styles.buttonWrapperOTP}`}>
+            <Button className={styles.button} onClick={handleClick}>
+              Confirm
+            </Button>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
+};
 
 const LoginBox = () => {
+  const recaptchaRef = useRef();
   const [errorMessage, setErrorMessage] = useState(null);
   const [message, setMessage] = useState(null);
-  const [Username, setUsername] = useState("");
-  const [Password, setPassword] = useState("");
+  const [Username, setUsername] = useState(Cookies.get("nefentus-username"));
+  const [Password, setPassword] = useState(
+    Cookies.get("nefentus-password")
+      ? decryptData(Cookies.get("nefentus-password"))
+      : "",
+  );
   const navigate = useNavigate();
   const backendAPI = new backend_API();
   const { t } = useTranslation();
-  const [checkBox, setCheckBox] = useState(false);
+  const [checkBox, setCheckBox] = useState(
+    Cookies.get("nefentus-remember-me")
+      ? JSON.parse(Cookies.get("nefentus-remember-me"))
+      : false,
+  );
+
+  useEffect(() => {
+    if (checkBox) {
+      setCookie("nefentus-username", Username, 365);
+      setCookie("nefentus-password", encryptData(Password), 365);
+      setCookie("nefentus-remember-me", checkBox, 365);
+    } else {
+      setCookie("nefentus-username", "", 365);
+      setCookie("nefentus-password", "", 365);
+      setCookie("nefentus-remember-me", false, 365);
+    }
+  }, [checkBox, loginUser]);
+  const [showConfirmMeEmail, setShowConfirmMeEmail] = useState(false);
+  const [email, setEmail] = useState(null);
+  const [code, setCode] = useState("");
 
   function navigateDashboard() {
-	const link = dashboardLink(localStorage);
-	navigate(link);
+    const link = dashboardLink(localStorage);
+    navigate(link);
   }
 
   useEffect(() => {
@@ -39,7 +91,7 @@ const LoginBox = () => {
     async function checkJwtAndNavigate() {
       const jwtIsValid = await backendAPI.checkJwt();
       if (jwtIsValid) {
-		navigateDashboard();
+        navigateDashboard();
       }
     }
 
@@ -54,6 +106,26 @@ const LoginBox = () => {
       const response = await backendAPI.login(username1, password1, checkbox);
       if (response == null) {
         setErrorMessage("Invalid login data");
+        return;
+      } else if (response.requireOtp) {
+        setShowConfirmMeEmail(true);
+        setEmail(response.email);
+      } else {
+        navigateDashboard();
+      }
+    } catch (error) {
+      setErrorMessage("There was an error logging in");
+    }
+  }
+
+  async function verifyOtpCode(email, code, checkbox) {
+    if (Cookies.get("acceptCookie") !== true) {
+      checkbox = false;
+    }
+    try {
+      const response = await backendAPI.verifyOTP(email, code, checkbox);
+      if (response == null) {
+        setErrorMessage("Failed to Confirm");
         return;
       }
       navigateDashboard();
@@ -75,16 +147,28 @@ const LoginBox = () => {
     }
   };
 
-  function handleClick(e) {
-	e.preventDefault();
-    loginUser(Username, Password, checkBox);
+  function handleClick(event) {
+    event.preventDefault();
+
+    const captchaValue = recaptchaRef.current.getValue();
+
+    if (!captchaValue) {
+      setErrorMessage("Please verify the reCAPTCHA!");
+    } else {
+      loginUser(Username, Password, checkBox);
+    }
   }
+
+  const handleConfrimCode = (e) => {
+    e.preventDefault();
+    verifyOtpCode(email, code, checkBox);
+  };
 
   return (
     <div className={`${styles.login}`}>
       <div className={styles.closeWrapper}>
         <Button link={"/"} color={"white"}>
-          Close
+          {t("login.close")}
         </Button>
       </div>
       <div className={styles.left}>
@@ -106,54 +190,70 @@ const LoginBox = () => {
       </div>
 
       <div className={styles.right}>
-        {errorMessage && (
-          <div className={styles.errormessagecontainer}>
-            <p>{errorMessage}</p>
-          </div>
+        <>
+          {errorMessage && (
+            <div className={styles.errormessagecontainer}>
+              <p>{errorMessage}</p>
+            </div>
+          )}
+          {message && (
+            <div className={styles.messagecontainer}>
+              <p>{message}</p>
+            </div>
+          )}
+        </>
+        {showConfirmMeEmail ? (
+          <ConfirmMeEmail
+            email={email}
+            code={code}
+            setCode={setCode}
+            handleClick={handleConfrimCode}
+          />
+        ) : (
+          <form onSubmit={handleClick}>
+            <div className={styles.inputWrapper}>
+              <Input
+                value={Username}
+                setState={setUsername}
+                label={t("signUp.emailLabel") + "*"}
+                placeholder={t("signUp.emailPlaceholder")}
+              />
+              <Input
+                value={Password}
+                setState={setPassword}
+                label={t("signUp.passwordLabel")}
+                placeholder={t("signUp.passwordPlaceholder")}
+                secure
+              />
+
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+                theme="dark"
+              />
+
+              <div className={styles.rememberInfo}>
+                <div onClick={() => setCheckBox((prev) => !prev)}>
+                  <div className={styles.checkBox}>
+                    {checkBox && <img src={CheckBox} alt="checkbox" />}
+                  </div>
+                  <p>{t("login.remember")}</p>
+                </div>
+
+                <Link to="/forgot-password">
+                  <p>{t("login.forgot")}</p>
+                </Link>
+              </div>
+            </div>
+            <div className={styles.buttonWrapper}>
+              <Button className={styles.button} onClick={handleClick}>
+                {t("login.button")}
+              </Button>
+            </div>
+
+            <button type="submit" hidden />
+          </form>
         )}
-        {message && (
-          <div className={styles.messagecontainer}>
-            <p>{message}</p>
-          </div>
-        )}
-
-		<form onSubmit={handleClick}>
-			<div className={styles.inputWrapper}>
-			<Input
-				value={Username}
-				setState={setUsername}
-				label={t("signUp.emailLabel")}
-				placeholder={t("signUp.emailPlaceholder")}
-			/>
-			<Input
-				value={Password}
-				setState={setPassword}
-				label={t("signUp.passwordLabel")}
-				placeholder={t("signUp.passwordPlaceholder")}
-				secure
-			/>
-
-			<div className={styles.rememberInfo}>
-				<div onClick={() => setCheckBox((prev) => !prev)}>
-				<div className={styles.checkBox}>
-					{checkBox && <img src={CheckBox} alt="checkbox" />}
-				</div>
-				<p>{t("login.remember")}</p>
-				</div>
-
-				<Link to="/forgot-password">
-				<p>{t("login.forgot")}</p>
-				</Link>
-			</div>
-			</div>
-			<div className={styles.buttonWrapper}>
-			<Button className={styles.button} onClick={handleClick}>
-				{t("login.button")}
-			</Button>
-			</div>
-
-			<button type="submit" hidden />
-		</form>
       </div>
     </div>
   );

@@ -73,38 +73,38 @@
 }
 
 .button {
-	width: 100%;
-	height: 100%;
-	border: 1px solid rgba(255, 255, 255, 0.2);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 1.6rem;
-	border-radius: 1rem;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  border-radius: 1rem;
 }
 
 .modal h4 {
-	font-size: 2.5rem;
-	font-weight: 500;
-	margin-bottom: 3rem;
+  font-size: 2.5rem;
+  font-weight: 500;
+  margin-bottom: 3rem;
 }
 
 .modalInputs {
-	display: flex;
-	flex-direction: column;
-	gap: 2rem;
-	margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 3rem;
 }
 
 .modalButtons {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 2rem;
-	cursor: pointer;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  cursor: pointer;
 }
 
 .modalButtons > div {
-	width: 100%;
+  width: 100%;
 }
 
 @media (max-width: 900px) {

@@ -1,9 +1,9 @@
-import Contact from "./components/contact/contact";
 import Footer from "./components/footer/footer";
-import Home from "./pages/Home";
 import "./style/general.css";
 import Navigation from "./components/navigation/navigation";
 import setCookies from "./components/setCookie/setCookie";
+import DashboardLayout from "./dashboard/dashboardLayout/dashboardLayout";
+import React, { useEffect, useState, Suspense } from "react";
 import {
   Route,
   HashRouter,
@@ -11,33 +11,42 @@ import {
   useLocation,
   BrowserRouter,
 } from "react-router-dom";
-import SignUp from "./pages/Signup";
-import Layout from "./pages/Layout";
-import Login from "./pages/Login";
-import Payment from "./pages/Payment";
-import Affiliate from "./pages/Affiliate";
-import Support from "./pages/Support";
-import Privacy from "./pages/Privacy";
-import Imprint from "./pages/Imprint";
-import PasswordForgot from "./pages/PasswordForgot";
-import Product from "./pages/Product";
-import Pay from "./pages/Pay";
-import { useEffect, useState } from "react";
-import AffiliateDashboard from "./dashboard/Affiliate";
-import Settings from "./dashboard/Settings";
-import Vendor from "./dashboard/Vendor";
-import ResetPassword from "./pages/ResetPassword";
-import Products from "./dashboard/Products";
-import DashboardLayout from "./dashboard/dashboardLayout/dashboardLayout";
-import Transactions from "./dashboard/Transactions";
-import PaymentDashboard from "./dashboard/Payment";
-import PayrollDashboard from "./dashboard/Payroll";
-import Wallet from "./dashboard/Wallet";
-import Admin from "./dashboard/Admin";
-import Kyc from "./dashboard/Kyc";
 import CookieBanner from "./components/cookieBanner/cookieBanner";
 import Cookies from "js-cookie";
 import { MessageContextProvider } from "./context/message";
+import RingLoader from "react-spinners/RingLoader";
+
+const Contact = React.lazy(() => import("./components/contact/contact"));
+const Home = React.lazy(() => import("./pages/Home"));
+const SignUp = React.lazy(() => import("./pages/Signup"));
+const Layout = React.lazy(() => import("./pages/Layout"));
+const Login = React.lazy(() => import("./pages/Login"));
+const Payment = React.lazy(() => import("./pages/Payment"));
+const Affiliate = React.lazy(() => import("./pages/Affiliate"));
+const Support = React.lazy(() => import("./pages/Support"));
+const Privacy = React.lazy(() => import("./pages/Privacy"));
+const Imprint = React.lazy(() => import("./pages/Imprint"));
+const PasswordForgot = React.lazy(() => import("./pages/PasswordForgot"));
+const Product = React.lazy(() => import("./pages/Product"));
+const Pay = React.lazy(() => import("./pages/Pay"));
+const AffiliateDashboard = React.lazy(() => import("./dashboard/Affiliate"));
+const Settings = React.lazy(() => import("./dashboard/Settings"));
+const Vendor = React.lazy(() => import("./dashboard/Vendor"));
+const ResetPassword = React.lazy(() => import("./pages/ResetPassword"));
+const Products = React.lazy(() => import("./dashboard/Products"));
+const Transactions = React.lazy(() => import("./dashboard/Transactions"));
+const PaymentDashboard = React.lazy(() => import("./dashboard/Payment"));
+const PayrollDashboard = React.lazy(() => import("./dashboard/Payroll"));
+const Wallet = React.lazy(() => import("./dashboard/Wallet"));
+const Admin = React.lazy(() => import("./dashboard/Admin"));
+const Kyc = React.lazy(() => import("./dashboard/Kyc"));
+
+const override = {
+  position: "fixed",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+};
 
 function App() {
   useEffect(() => {
@@ -78,250 +87,262 @@ function App() {
 
   return (
     <div className="App">
-	<MessageContextProvider>
-      <BrowserRouter>
-        <ScrollToTop>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Layout>
-                  <Home />
-                </Layout>
-              }
-            />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/login" element={<Login />} />
-            <Route
-              path="/forgot-password"
-              element={
-                <>
-                  <PasswordForgot />
-                </>
-              }
-            />
-            <Route
-              path="/reset-password"
-              element={
-                <>
-                  <ResetPassword />
-                </>
-              }
-            />
-
-            <Route
-              path="/payment"
-              element={
-                <>
-                  <Navigation />
-
-                  <Payment />
-                  <Footer />
-                </>
-              }
-            />
-            {/* <Route
-              path="/payroll"
-              element={
-                <Layout>
-                  <Payroll />
-                </Layout>
-              }
-            /> */}
-            <Route
-              path="/affiliate"
-              element={
-                <Layout affiliate={true}>
-                  <Affiliate />
-                </Layout>
-              }
-            />
-            <Route
-              path="/support"
-              element={
-                <>
-                  <Navigation />
-
-                  <Support />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path="/privacy"
-              element={
-                <>
-                  <Navigation />
-                  <Privacy />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path="/imprint"
-              element={
-                <>
-                  <Navigation />
-                  <Imprint />
-                  <Footer />
-                </>
-              }
-            />
-            <Route path="/dashboard">
-              <Route
-                path="/dashboard/affiliate"
-                element={
-                  <>
-                    <AffiliateDashboard />
-                  </>
-                }
+      <MessageContextProvider>
+        <BrowserRouter>
+          <Suspense
+            fallback={
+              <RingLoader
+                color="#ffffff"
+                loading={true}
+                cssOverride={override}
+                size={150}
+                aria-label="Loading Spinner"
+                data-testid="loader"
               />
-              <Route
-                path="/dashboard/settings"
-                element={
-                  <>
-                    <Settings />
-                  </>
-                }
-              />
-              <Route
-                path="/dashboard/vendor"
-                element={
-                  <DashboardLayout>
-                    <Vendor />
-                  </DashboardLayout>
-                }
-              />
-
-              <Route
-                path="/dashboard/product"
-                element={
-                  <DashboardLayout>
-                    <Products />
-                  </DashboardLayout>
-                }
-              />
-
-              <Route
-                path="/dashboard/transactions"
-                element={
-                  <DashboardLayout>
-                    <Transactions />
-                  </DashboardLayout>
-                }
-              />
-
-              <Route
-                path="/dashboard/payment"
-                element={
-                  <DashboardLayout>
-                    <PaymentDashboard />
-                  </DashboardLayout>
-                }
-              />
-
-              <Route
-                path="/dashboard/payroll"
-                element={
-                  <DashboardLayout>
-                    <PayrollDashboard />
-                  </DashboardLayout>
-                }
-              />
-
-              <Route
-                path="/dashboard/wallet"
-                element={
-                  <DashboardLayout>
-                    <Wallet />
-                  </DashboardLayout>
-                }
-              />
-
-              <Route
-                path="/dashboard/admin"
-                element={
-                  <>
-                    <Admin type={"admin"} />
-                  </>
-                }
-              />
-
-              <Route
-                path="/dashboard/seniorbroker"
-                element={
-                  <>
-                    <Admin type={"seniorbroker"} />
-                  </>
-                }
-              />
-
-              <Route
-                path="/dashboard/broker"
-                element={
-                  <>
-                    <Admin type={"broker"} />
-                  </>
-                }
-              />
-
-            <Route
-                path="/dashboard/leader"
-                element={
+            }
+          >
+            <ScrollToTop>
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <Layout>
+                      <Home />
+                    </Layout>
+                  }
+                />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/login" element={<Login />} />
+                <Route
+                  path="/forgot-password"
+                  element={
                     <>
-                        <Admin type={"leader"} />
+                      <PasswordForgot />
                     </>
+                  }
+                />
+                <Route
+                  path="/reset-password"
+                  element={
+                    <>
+                      <ResetPassword />
+                    </>
+                  }
+                />
 
-                }
-              />
+                <Route
+                  path="/payment"
+                  element={
+                    <>
+                      <Navigation />
 
-              <Route
-                path="/dashboard/kyc"
-                element={
-                  <>
-                    <Kyc />
-                  </>
-                }
-              />
+                      <Payment />
+                      <Footer />
+                    </>
+                  }
+                />
+                {/* <Route
+                    path="/payroll"
+                    element={
+                      <Layout>
+                        <Payroll />
+                      </Layout>
+                    }
+                  /> */}
+                <Route
+                  path="/affiliate"
+                  element={
+                    <Layout affiliate={true}>
+                      <Affiliate />
+                    </Layout>
+                  }
+                />
+                <Route
+                  path="/support"
+                  element={
+                    <>
+                      <Navigation />
 
-              <Route
-                path="/dashboard/vendor/settings"
-                element={
-                  <DashboardLayout>
-                    <Settings type="vendor" />
-                  </DashboardLayout>
-                }
-              />
-            </Route>
-			<Route 
-			  	path="/product/:productLink"
-			  	element={
-					<>
-						<Navigation />
-						
-						<Product />
-						<Footer />
-				  	</>
-				}
-			  />
-			<Route 
-			  	path="/pay/:payLink"
-			  	element={
-					<>
-						<Navigation />
-						
-						<Pay />
-						<Footer />
-				  	</>
-				}
-			  />
-          </Routes>
-        </ScrollToTop>
+                      <Support />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/privacy"
+                  element={
+                    <>
+                      <Navigation />
+                      <Privacy />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/imprint"
+                  element={
+                    <>
+                      <Navigation />
+                      <Imprint />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route path="/dashboard">
+                  <Route
+                    path="/dashboard/affiliate"
+                    element={
+                      <>
+                        <AffiliateDashboard />
+                      </>
+                    }
+                  />
+                  <Route
+                    path="/dashboard/settings"
+                    element={
+                      <>
+                        <Settings />
+                      </>
+                    }
+                  />
+                  <Route
+                    path="/dashboard/vendor"
+                    element={
+                      <DashboardLayout>
+                        <Vendor />
+                      </DashboardLayout>
+                    }
+                  />
 
-        {/* COOKIE BANNER */}
-        {!ck && <CookieBanner close={() => setCK(true)} />}
-      </BrowserRouter>
-	</MessageContextProvider>
+                  <Route
+                    path="/dashboard/product"
+                    element={
+                      <DashboardLayout>
+                        <Products />
+                      </DashboardLayout>
+                    }
+                  />
+
+                  <Route
+                    path="/dashboard/transactions"
+                    element={
+                      <DashboardLayout>
+                        <Transactions />
+                      </DashboardLayout>
+                    }
+                  />
+
+                  <Route
+                    path="/dashboard/payment"
+                    element={
+                      <DashboardLayout>
+                        <PaymentDashboard />
+                      </DashboardLayout>
+                    }
+                  />
+
+                  <Route
+                    path="/dashboard/payroll"
+                    element={
+                      <DashboardLayout>
+                        <PayrollDashboard />
+                      </DashboardLayout>
+                    }
+                  />
+
+                  <Route
+                    path="/dashboard/wallet"
+                    element={
+                      <DashboardLayout>
+                        <Wallet />
+                      </DashboardLayout>
+                    }
+                  />
+
+                  <Route
+                    path="/dashboard/admin"
+                    element={
+                      <>
+                        <Admin type={"admin"} />
+                      </>
+                    }
+                  />
+
+                  <Route
+                    path="/dashboard/seniorbroker"
+                    element={
+                      <>
+                        <Admin type={"seniorbroker"} />
+                      </>
+                    }
+                  />
+
+                  <Route
+                    path="/dashboard/broker"
+                    element={
+                      <>
+                        <Admin type={"broker"} />
+                      </>
+                    }
+                  />
+
+                  <Route
+                    path="/dashboard/leader"
+                    element={
+                      <>
+                        <Admin type={"leader"} />
+                      </>
+                    }
+                  />
+
+                  <Route
+                    path="/dashboard/kyc"
+                    element={
+                      <>
+                        <Kyc />
+                      </>
+                    }
+                  />
+
+                  <Route
+                    path="/dashboard/vendor/settings"
+                    element={
+                      <DashboardLayout>
+                        <Settings type="vendor" />
+                      </DashboardLayout>
+                    }
+                  />
+                </Route>
+                <Route
+                  path="/product/:productLink"
+                  element={
+                    <>
+                      <Navigation />
+
+                      <Product />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/pay/:payLink"
+                  element={
+                    <>
+                      <Navigation />
+
+                      <Pay />
+                      <Footer />
+                    </>
+                  }
+                />
+              </Routes>
+            </ScrollToTop>
+
+            {/* COOKIE BANNER */}
+            {!ck && <CookieBanner close={() => setCK(true)} />}
+          </Suspense>
+        </BrowserRouter>
+      </MessageContextProvider>
     </div>
   );
 }

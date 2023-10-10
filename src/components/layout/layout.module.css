@@ -30,6 +30,10 @@
   width: 46rem;
 }
 
+.full {
+  width: 55rem !important;
+}
+
 .buttonWrapper {
   display: flex;
   gap: 1rem;

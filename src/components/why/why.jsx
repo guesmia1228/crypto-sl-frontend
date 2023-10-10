@@ -9,8 +9,8 @@ const Why = ({ title, content, image = Image, button }) => {
       <div className={`${styles.content}`}>
         <h3 className="slide-left">{title}</h3>
 
-        {content.map((item) => (
-          <div className={`${styles.item} slide-left`}>
+        {content.map((item, index) => (
+          <div key={index} className={`${styles.item} slide-left`}>
             <h4>{item.title}</h4>
             <p>{item.description}</p>
           </div>

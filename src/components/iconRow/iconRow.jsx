@@ -29,8 +29,8 @@ const IconRow = ({ subtitle, title, description, list }) => {
         <p className={`${styles.description}`}>{description}</p>
       </div>
       <div className={`${styles.logos}`} ref={sectionRef}>
-        {list.map((image) => (
-          <div>
+        {list.map((image, index) => (
+          <div key={index}>
             <img src={image} alt="partner logo" />
           </div>
         ))}
