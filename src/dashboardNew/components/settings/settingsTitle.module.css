@@ -1,0 +1,122 @@
+.wrapper {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: rgba(16, 16, 16, 0.3);
+}
+
+.popupBox {
+  width: max-content;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.popupBox .title {
+  margin-bottom: 2rem;
+}
+
+.input {
+  background-color: transparent;
+  outline: 0px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1rem 1rem;
+  width: 30rem;
+  color: white;
+  border-radius: 0.5rem;
+}
+
+.buttons {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 2rem;
+}
+
+.itemWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 1.8rem;
+}
+
+.label {
+  font-size: 1.6rem;
+}
+
+.description {
+  font-size: 1.2rem;
+  opacity: 0.6;
+}
+
+.left {
+  width: 45rem;
+}
+
+.right {
+  width: 35rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.value {
+  font-size: 1.4rem;
+  opacity: 0.6;
+}
+
+.imageWrapper {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.imageWrapper img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.enableIcon {
+  height: 2rem;
+}
+
+.enableWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.text {
+  opacity: 0.6;
+  font-size: 1.4rem;
+  padding-top: 3px;
+}
+
+@media (max-width: 900px) {
+  .itemWrapper {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .left,
+  .right {
+    width: 100%;
+  }
+}
