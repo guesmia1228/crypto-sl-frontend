@@ -503,7 +503,7 @@ const EmailBody = ({ active }) => {
 
     const response = await backendAPI.changeEmailDashboard(newEmail);
     if (response == null) {
-      setErrorMessage("Old email is not the right one!");
+      setErrorMessage("Email is already in use!");
       return;
     } else {
       setInfoMessage("Email successfully changed!");
@@ -523,12 +523,12 @@ const EmailBody = ({ active }) => {
   };
 
   const handleCode = async () => {
-    if (verificationCode.length === 0) {
+    if (verificationCode.trim().length === 0) {
       setErrorMessage("Enter confirmation code!");
       return;
     } else {
       const response = await backendAPI.confirmEmail(
-        verificationCode,
+        verificationCode.trim(),
         newEmail
       );
       if (response == null) {

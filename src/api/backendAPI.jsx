@@ -84,7 +84,7 @@ export default class backendAPI {
           "Content-Type": "application/json",
           Authorization: `Bearer ${this.token}`,
         },
-        body: JSON.stringify(newEmail),
+        body: newEmail,
       };
       const response = await fetch(url, options);
       if (!response.ok) {
