@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 import backend_API from "../../api/backendAPI";
+import Error from "../error/error";
 
 const ResetPassword = () => {
   const [errorMessage, setErrorMessage] = useState(null);
@@ -82,17 +83,13 @@ const ResetPassword = () => {
 
           <h3>{t("reset-password.title")}</h3>
           <div>
-            {(errorMessage ||
-              errors.password?.message ||
-              errors.confirmPassword?.message) && (
-              <div className={styles.errormessagecontainer}>
-                <p style={{ color: "red" }}>
-                  {errorMessage ||
-                    errors.password?.message ||
-                    errors.confirmPassword?.message}
-                </p>
-              </div>
-            )}
+            <Error
+              error={
+                errorMessage ||
+                errors.password?.message ||
+                errors.confirmPassword?.message
+              }
+            />
             {message && (
               <div className={styles.messagecontainer}>
                 <p style={{ color: "green" }}>{message}</p>

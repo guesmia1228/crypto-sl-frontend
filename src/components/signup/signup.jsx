@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import isMobilePhone from "../../func/isMobilePhone";
+import Error from "../error/error";
 
 var country_list = [
   "Afghanistan",
@@ -331,25 +332,17 @@ const Signup = () => {
       </div>
 
       <form onSubmit={handleSubmit(submitForm)} className={styles.right}>
-        {(errorMessage ||
-          errors.firstName?.message ||
-          errors.lastName?.message ||
-          errors.telNr?.message ||
-          errors.email?.message ||
-          errors.password?.message ||
-          errors.confirmPassword?.message) && (
-          <div className={styles.errormessagecontainer}>
-            <p>
-              {errorMessage ||
-                errors.firstName?.message ||
-                errors.lastName?.message ||
-                errors.telNr?.message ||
-                errors.email?.message ||
-                errors.password?.message ||
-                errors.confirmPassword?.message}
-            </p>
-          </div>
-        )}
+        <Error
+          error={
+            errorMessage ||
+            errors.firstName?.message ||
+            errors.lastName?.message ||
+            errors.telNr?.message ||
+            errors.email?.message ||
+            errors.password?.message ||
+            errors.confirmPassword?.message
+          }
+        />
         {message && (
           <div className={styles.messagecontainer}>
             <p>{message}</p>

@@ -15,6 +15,7 @@ import Cookies from "js-cookie";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import Error from "../error/error";
 
 const LoginBox = () => {
   const [errorMessage, setErrorMessage] = useState(null);
@@ -118,17 +119,11 @@ const LoginBox = () => {
       </div>
 
       <div className={styles.right}>
-        {(errorMessage ||
-          errors.email?.message ||
-          errors.password?.message) && (
-          <div className={styles.errormessagecontainer}>
-            <p>
-              {errorMessage ||
-                errors.email?.message ||
-                errors.password?.message}
-            </p>
-          </div>
-        )}
+        <Error
+          error={
+            errorMessage || errors.email?.message || errors.password?.message
+          }
+        />
         {message && (
           <div className={styles.messagecontainer}>
             <p>{message}</p>

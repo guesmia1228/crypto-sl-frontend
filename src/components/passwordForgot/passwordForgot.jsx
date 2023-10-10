@@ -10,6 +10,7 @@ import backend_API from "../../api/backendAPI";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import Error from "../error/error";
 
 const PasswordForgot = () => {
   const [errorMessage, setErrorMessage] = useState(null);
@@ -50,11 +51,7 @@ const PasswordForgot = () => {
         </div>
         <div className={styles.top}>
           <div className={styles.message}>
-            {(errorMessage || errors.email?.message) && (
-              <div className={styles.errormessagecontainer}>
-                <p> {errorMessage || errors.email?.message}</p>
-              </div>
-            )}
+            <Error error={errorMessage || errors.email?.message} />
             {message && (
               <div className={styles.messagecontainer}>
                 <p>{message}</p>
