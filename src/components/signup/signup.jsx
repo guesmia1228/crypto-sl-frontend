@@ -268,14 +268,15 @@ const Signup = () => {
       country: CountryOption,
       affiliateLink: localStorage.getItem("affiliateJoined"),
     };
-    resetForm();
 
     const response = await api.register(requestData);
     if (response == null) {
       setErrorMessage("Error when registering");
+      return;
     } else {
       setMessage("Please confirm your email address to proceed.");
     }
+    resetForm();
   }
 
   function handleClick(event) {
