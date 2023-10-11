@@ -1,23 +1,13 @@
-import Button from "./../../components/button/button";
-import { Link, useNavigate } from "react-router-dom";
-
-import Negative from "../../assets/icon/negative.svg";
-import Positive from "../../assets/icon/positive.svg";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./vendor.module.css";
-
-import UrlLink from "../../assets/icon/link.svg";
 
 import backend_API from "../../api/backendAPI";
 
 import { useEffect, useState } from "react";
-import { unstable_renderSubtreeIntoContainer } from "react-dom";
-import ProfileBox from "../profileBox/profileBox";
 import Header from "../header/header";
 import Graph from "../graph/graph";
 import StatsCard from "../statsCard/statsCard";
-import { transformNumber } from "../func/transformNumber";
-import { formatUSDBalance } from "../../utils";
 import vendorDashboardApi from "../../api/vendorDashboardApi";
 
 const VendorBody = () => {
@@ -47,7 +37,7 @@ const VendorBody = () => {
         dashboardApi.getTotalIncomesPerDay(),
       ];
       const [sales, numOrders, totalPricePerDate] =
-        await Promise.all(getPromises);
+        await Promise.allSettled(getPromises);
 
       console.log(sales);
       console.log(numOrders);
@@ -55,14 +45,14 @@ const VendorBody = () => {
       const cardsContent = [
         {
           title: "Sales: Total",
-          amount: sales.total?.number,
-          percentage: sales.total?.percentage,
+          amount: sales?.value?.total?.number,
+          percentage: sales?.value?.total?.percentage,
           isIncome: true,
         },
         {
           title: "Payments",
-          amount: numOrders?.number,
-          percentage: numOrders?.percentage,
+          amount: numOrders?.value?.number,
+          percentage: numOrders?.value?.percentage,
           isIncome: false,
         },
         {
@@ -83,7 +73,7 @@ const VendorBody = () => {
       setCardInfo(cardsContent);
 
       console.log(totalPricePerDate);
-      setGraphData(totalPricePerDate);
+      setGraphData(totalPricePerDate.value);
     }
   };
 
