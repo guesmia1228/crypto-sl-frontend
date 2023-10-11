@@ -1,39 +1,39 @@
 .body {
-    padding-bottom: 5rem;
+  padding-bottom: 5rem;
 }
 
 .navigation {
-    padding-top: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  padding-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .navigation img {
-    height: 2.8rem;
+  height: 2.8rem;
 }
 
 .errormessagecontainer {
-    background-color: #ffcccc;
-    color: red;
-    border: 1px solid red;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 4px;
+  background-color: #ffcccc;
+  color: red;
+  border: 1px solid red;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
 }
 
 .messagecontainer {
-    background-color: #ccffcc;
-    color: green;
-    border: 1px solid green;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 4px;
+  background-color: #ccffcc;
+  color: green;
+  border: 1px solid green;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
 }
 
 .navigation p {
-    font-size: 1.6rem;
-    cursor: pointer;
+  font-size: 1.6rem;
+  cursor: pointer;
 }
 
 /* .body h2 {
@@ -41,381 +41,384 @@
 } */
 
 .profile {
-    margin-top: 4.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
+  margin-top: 4.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 
-    margin-bottom: 3rem;
+  margin-bottom: 3rem;
 }
 
 .avatar {
-    border-radius: 50%;
-    height: 10rem;
-    width: 10rem;
-    border: 2px solid #1595c2;
-    overflow: hidden;
+  border-radius: 50%;
+  height: 10rem;
+  width: 10rem;
+  border: 2px solid #1595c2;
+  overflow: hidden;
 }
 
 .avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .email {
-    font-size: 1.6rem !important;
-    color: var(--gray-color);
+  font-size: 1.6rem !important;
+  color: var(--gray-color);
 }
 
 .settingsBody {
-    border-radius: 0.5rem;
-    padding: 3rem 3rem 5rem 3rem;
+  border-radius: 0.5rem;
+  padding: 3rem 3rem 5rem 3rem;
 }
 
 .settingsNav {
-    display: flex;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    gap: 5rem;
-    font-size: 1.6rem;
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 5rem;
+  font-size: 1.6rem;
 }
 
 .item {
-    transform: translateY(0.1rem);
-    padding: 0 1rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid transparent;
-    cursor: pointer;
-    transition: 0.3s ease;
+  transform: translateY(0.1rem);
+  padding: 0 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid transparent;
+  cursor: pointer;
+  transition: 0.3s ease;
 }
 
 .info {
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
 .info h4 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    font-weight: 500;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
 }
 
 .info p {
-    line-height: 140%;
-    font-size: 1.4rem;
-    color: var(--gray-color);
+  line-height: 140%;
+  font-size: 1.4rem;
+  color: var(--gray-color);
 }
 
 .name {
-    font-size: 2rem !important;
-    margin-bottom: 0.5rem !important;
-    color: var(--white-color) !important;
+  font-size: 2rem !important;
+  margin-bottom: 0.5rem !important;
+  color: var(--white-color) !important;
 }
 
 .buttons {
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-    justify-content: flex-end;
-    font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  justify-content: flex-end;
+  font-size: 1.6rem;
 
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .button1 {
-    color: var(--gray-color);
-    cursor: pointer;
+  color: var(--gray-color);
+  cursor: pointer;
 }
 
 .button2 {
-    color: var(--black-color);
-    border-radius: 1rem;
-    padding: 1.4rem 2.3rem;
-    background-color: var(--white-color);
-    cursor: pointer;
+  color: var(--black-color);
+  border-radius: 1rem;
+  padding: 1.4rem 2.3rem;
+  background-color: var(--white-color);
+  cursor: pointer;
 }
 
 .kyc {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 3rem;
 }
 
 .kycDrop {
-    text-align: center;
-    border-radius: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 10rem 0;
+  text-align: center;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10rem 0;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
 
-    cursor: pointer;
-    position: relative;
+  cursor: pointer;
+  position: relative;
 }
 
 .kycDrop img {
-    width: 2rem;
+  width: 2rem;
 }
 
 .main {
-    font-size: 1.6rem;
-    line-height: 140% !important;
-    margin-bottom: 1rem;
+  font-size: 1.6rem;
+  line-height: 140% !important;
+  margin-bottom: 1rem;
 }
 
 .size {
-    font-size: 1.4rem;
-    color: var(--gray-color);
-    text-align: center;
+  font-size: 1.4rem;
+  color: var(--gray-color);
+  text-align: center;
 }
 
 .attachment {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: red;
-    opacity: 0;
-    cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  opacity: 0;
+  cursor: pointer;
 }
 
 .kycList {
-    padding-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 3rem;
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 3rem;
 }
 
 .kycItem {
-    padding: 2rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
 }
 
 .itemActive {
-    background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .kycLabelSection {
-    display: flex;
-    justify-content: flex-start;
-    gap: 0.5rem;
-    align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  align-items: center;
 }
 
 .kycStatus {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  cursor: pointer;
 }
 
 .kycStatus p {
-    font-size: 1.4rem;
-    color: var(--gray-color);
+  font-size: 1.4rem;
+  color: var(--gray-color);
 }
 
 .kycLabel {
-    font-size: 1.6rem;
-    color: var(--white-color);
+  font-size: 1.6rem;
+  color: var(--white-color);
 }
 
 .button {
-    background-color: var(--white-color);
-    color: var(--black-color);
-    border-radius: 0.5rem;
-    font-size: 1.4rem;
-    padding: 1rem 2rem;
+  background-color: var(--white-color);
+  color: var(--black-color);
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+  padding: 1rem 2rem;
 }
 
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-    background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .popup {
-    text-align: center;
-    border-radius: 1rem;
-    padding: 3rem;
-    width: 100%;
-    margin: 2.5rem;
-    max-width: 50rem;
+  border-radius: 1rem;
+  padding: 3rem;
+  width: 100%;
+  margin: 2.5rem;
+  max-width: 50rem;
+}
+
+.popup > p {
+  text-align: center;
 }
 
 .modalHeadline {
-    font-size: 1.6rem;
-    margin-bottom: 2rem;
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
 }
 
 .tabContent {
-	margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .modalButtonRow {
-	display: flex;
-    justify-content: center;
-    gap: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
 }
 
 @media (max-width: 900px) {
-    .navigation img {
-        height: 2.2rem;
-    }
+  .navigation img {
+    height: 2.2rem;
+  }
 
-    .navigation > div p {
-        font-size: 1.4rem !important;
-    }
+  .navigation > div p {
+    font-size: 1.4rem !important;
+  }
 
-    .navigation > div a {
-        padding: 0px !important;
-    }
+  .navigation > div a {
+    padding: 0px !important;
+  }
 
-    .button {
-        padding: 1rem 1.5rem;
-    }
+  .button {
+    padding: 1rem 1.5rem;
+  }
 
-    .profile {
-        gap: 1.5rem;
+  .profile {
+    gap: 1.5rem;
 
-        margin-bottom: 2rem;
-    }
+    margin-bottom: 2rem;
+  }
 
-    .avatar {
-        border-radius: 50%;
-        height: 7.5rem;
-        width: 7.5rem;
-    }
+  .avatar {
+    border-radius: 50%;
+    height: 7.5rem;
+    width: 7.5rem;
+  }
 
-    .name {
-        font-size: 1.6rem !important;
+  .name {
+    font-size: 1.6rem !important;
 
-        margin-bottom: 0.1rem !important;
-    }
+    margin-bottom: 0.1rem !important;
+  }
 
-    .email {
-        font-size: 1.2rem !important;
-        color: var(--gray-color);
-    }
+  .email {
+    font-size: 1.2rem !important;
+    color: var(--gray-color);
+  }
 
-    .settingsBody {
-        border-radius: 0.5rem;
-        padding: 2rem 2rem 3rem 2rem;
-    }
+  .settingsBody {
+    border-radius: 0.5rem;
+    padding: 2rem 2rem 3rem 2rem;
+  }
 
-    .settingsNav {
-        gap: 1.5rem;
-        text-align: center;
-        font-size: 1.4rem;
-    }
+  .settingsNav {
+    gap: 1.5rem;
+    text-align: center;
+    font-size: 1.4rem;
+  }
 
-    .item {
-        padding-bottom: 1rem;
-    }
+  .item {
+    padding-bottom: 1rem;
+  }
 
-    .info {
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-    }
+  .info {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
 
-    .info h4 {
-        margin-bottom: 0.5rem;
-    }
+  .info h4 {
+    margin-bottom: 0.5rem;
+  }
 
-    .buttons {
-        gap: 2rem;
-        font-size: 1.4rem;
-    }
+  .buttons {
+    gap: 2rem;
+    font-size: 1.4rem;
+  }
 
-    .button2 {
-        border-radius: 0.5rem;
-        padding: 1rem 2rem;
-    }
+  .button2 {
+    border-radius: 0.5rem;
+    padding: 1rem 2rem;
+  }
 
-    .kyc {
-        padding-top: 2rem;
-    }
+  .kyc {
+    padding-top: 2rem;
+  }
 
-    .kycDrop {
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 10rem 2.5rem;
-        border-radius: 0.5rem;
+  .kycDrop {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10rem 2.5rem;
+    border-radius: 0.5rem;
 
-        gap: 1rem;
-    }
+    gap: 1rem;
+  }
 
-    .kycList {
-        padding-bottom: 2rem;
-    }
+  .kycList {
+    padding-bottom: 2rem;
+  }
 
-    .kycItem {
-        padding: 1.5rem 0;
-    }
+  .kycItem {
+    padding: 1.5rem 0;
+  }
 
-    .kycStatus {
-        gap: 1rem;
-    }
+  .kycStatus {
+    gap: 1rem;
+  }
 
-    .kycStatus p {
-        font-size: 1.4rem;
-        color: var(--gray-color);
-    }
+  .kycStatus p {
+    font-size: 1.4rem;
+    color: var(--gray-color);
+  }
 }
 
 @media (max-width: 550px) {
-    .rest {
-        display: none;
-    }
+  .rest {
+    display: none;
+  }
 
-    .buttons {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-    }
+  .buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 
-    .button1 {
-        text-align: center;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 0.5rem;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
+  .button1 {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
 
-    .button2 {
-        text-align: center;
-        width: 100%;
-    }
+  .button2 {
+    text-align: center;
+    width: 100%;
+  }
 
-    .kycStatus p {
-        width: 10rem;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+  .kycStatus p {
+    width: 10rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 .kycImageContainer {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 2.5rem;
-    border-radius: 0.5rem;
-    display: flex;
-    justify-content: center;
-    .kycImage {
-        height: 25rem;
-    }
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  .kycImage {
+    height: 25rem;
+  }
 }
