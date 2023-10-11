@@ -184,6 +184,9 @@ const ProfileBody = ({ afterUpdateSettings, active }) => {
   const [imageChanged, setImageChanged] = useState(false); // Set to true if image changed (was added or deleted))
   const [isTotp, setIsTotp] = useState(localStorage.getItem("isMfa"));
   const [isOtp, setIsOtp] = useState(localStorage.getItem("requireOtp"));
+  const [phishingCode, setPhishingCode] = useState(
+    localStorage.getItem("antiPhishingCode"),
+  );
 
   useEffect(() => {
     const profilePic = localStorage.getItem("profile_pic");
@@ -262,6 +265,7 @@ const ProfileBody = ({ afterUpdateSettings, active }) => {
       business: business,
       isMfa: isTotp,
       requireOtp: isOtp,
+      antiPhishingCode: phishingCode,
     };
 
     let response = 1;
@@ -298,16 +302,6 @@ const ProfileBody = ({ afterUpdateSettings, active }) => {
     setBusiness(localStorage.getItem("business"));
     setPhoneNumber(localStorage.getItem("phoneNumber"));
     setEmail(localStorage.getItem("email"));
-  };
-
-  const requestData = {
-    firstName: firstName,
-    lastName: lastName,
-    phoneNumber: phoneNumber,
-    email: email,
-    business: business,
-    isMfa: isTotp,
-    requireOtp: isOtp,
   };
 
   return (
@@ -365,6 +359,14 @@ const ProfileBody = ({ afterUpdateSettings, active }) => {
           setState={setIsOtp}
         />
       </div>
+
+      <InputComponent
+        label="Anti Phishing Code"
+        placeholder="Anti Phishing Code"
+        type="text"
+        value={phishingCode}
+        setState={setPhishingCode}
+      />
 
       <Attachment
         label="Upload logo image"

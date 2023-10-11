@@ -148,6 +148,7 @@ export default class backendAPI {
       localStorage.setItem("business", data.business);
       localStorage.setItem("phoneNumber", data.phoneNumber);
       localStorage.setItem("username", data.username);
+      localStorage.setItem("antiPhishingCode", data.antiPhishingCode);
       return response;
     } catch (error) {
       return null; // or return some default value
@@ -232,6 +233,7 @@ export default class backendAPI {
         localStorage.setItem("requireKyc", data.requireKyc);
         localStorage.setItem("requireOtp", data.requireOtp);
         localStorage.setItem("userId", data.userId);
+        localStorage.setItem("antiPhishingCode", data.antiPhishingCode);
       }
 
       ReactGA.event({
@@ -282,6 +284,7 @@ export default class backendAPI {
       localStorage.setItem("requireKyc", data.requireKyc);
       localStorage.setItem("requireOtp", data.requireOtp);
       localStorage.setItem("userId", data.userId);
+      localStorage.setItem("antiPhishingCode", data.antiPhishingCode);
 
       ReactGA.event({
         category: "User",
