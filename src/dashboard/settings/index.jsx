@@ -378,9 +378,8 @@ const PasswordBody = ({ active }) => {
   };
 
   const handleConfirmCode = async () => {
-    const response = await backendAPI.changePasswordConfirmDashboard(
-      verificationCode
-    );
+    const response =
+      await backendAPI.changePasswordConfirmDashboard(verificationCode);
     if (response == null) {
       setErrorMessage("Code is not valid or too old!");
       return;
@@ -467,6 +466,7 @@ const EmailBody = ({ active }) => {
   const { setErrorMessage, setInfoMessage } = useContext(MessageContext);
 
   const backendAPI = new backend_API();
+  const navigate = useNavigate();
 
   const passwordContent = [
     {
@@ -490,6 +490,9 @@ const EmailBody = ({ active }) => {
   const logOut = async () => {
     try {
       await backendAPI.signout();
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
     } catch (error) {
       console.error(error);
     }
