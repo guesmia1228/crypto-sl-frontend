@@ -205,18 +205,23 @@ const Table = ({ data, setData }) => {
                     }
                     return false;
                   })[2]
-                  .map((item) => (
-                    <div className={styles.line}>
-                      <div className={styles.row}>
-                        <p>{item.type}</p>
-                        {item.verify && <img src={Correct} alt="" />}
-                      </div>
+                  .map((item, index) => (
+                    <div>
+                      {index === 0 && <h5 className={styles.level}>Level 1</h5>}
+                      {index === 3 && <h5 className={styles.level}>Level 2</h5>}
+                      {index === 4 && <h5 className={styles.level}>Level 3</h5>}
+                      <div className={styles.line} key={index}>
+                        <div className={styles.row}>
+                          <p>{item.type}</p>
+                          {item.verify && <img src={Correct} alt="" />}
+                        </div>
 
-                      {item.file && (
-                        <a href={item.file} download>
-                          <img src={Download} alt="" />
-                        </a>
-                      )}
+                        {item.file && (
+                          <a href={item.file} download>
+                            <img src={Download} alt="" />
+                          </a>
+                        )}
+                      </div>
                     </div>
                   ))}
               </div>

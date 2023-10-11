@@ -139,6 +139,11 @@
   font-size: 1.4rem;
 }
 
+.modal .level {
+  font-size: 1.6rem;
+  margin-bottom: 1.2rem;
+}
+
 .modal img {
   width: 1.6rem;
   cursor: pointer;
