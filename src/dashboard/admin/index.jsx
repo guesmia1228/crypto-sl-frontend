@@ -86,20 +86,20 @@ const AdminBody = ({ type }) => {
       const cardsContent = [
         {
           title: "Total Income",
-          amount: dataInc.number,
-          percentage: dataInc.percentage,
+          amount: dataInc?.number,
+          percentage: dataInc?.percentage,
           isMonetary: true,
         },
         {
           title: "Clicks",
-          amount: dataClick.number,
-          percentage: dataClick.percentage,
+          amount: dataClick?.number,
+          percentage: dataClick?.percentage,
           isMonetary: false,
         },
         {
           title: "Registrations",
-          amount: dataReg.number,
-          percentage: dataReg.percentage,
+          amount: dataReg?.number,
+          percentage: dataReg?.percentage,
           isMonetary: false,
         },
       ];
@@ -111,8 +111,8 @@ const AdminBody = ({ type }) => {
       ) {
         cardsContent[1] = {
           title: "Orders",
-          amount: dataOrders.number,
-          percentage: dataOrders.percentage,
+          amount: dataOrders?.number,
+          percentage: dataOrders?.percentage,
           isMonetary: false,
         };
       }
