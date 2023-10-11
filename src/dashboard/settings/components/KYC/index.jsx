@@ -47,6 +47,7 @@ const INITIAL_FILES = {
 export const KYC = () => {
   const backendapi = new backendAPI();
   const [statusIndex, setStatusIndex] = useState(0);
+  const [level, setLevel] = useState(0);
   const [uploadingFiles, setUploadingFiles] = useState(INITIAL_FILES);
 
   const [files, setFiles] = useState({
@@ -59,6 +60,8 @@ export const KYC = () => {
 
   const fetchFYC = async () => {
     const userId = localStorage.getItem("userId");
+    const level = await backendapi.getKYCLevel(userId);
+
     const arrayWithResults = await Promise.all(
       Object.values(KYC_TYPE).map((type) => backendapi.getByKYC(type, userId))
     );
@@ -70,6 +73,7 @@ export const KYC = () => {
       })
       .reduce((acc, curr) => ({ ...acc, ...curr }), {});
     setFiles(transformedResults);
+    setLevel(level.data.kycLevel);
   };
 
   useEffect(() => {
@@ -116,6 +120,7 @@ export const KYC = () => {
 
   return (
     <div className={styles.kyc}>
+      <h4 className={styles.name}>Current KYC level: {level}</h4>
       {files[selectingType] && files[selectingType]["url"] ? (
         <div className={styles.kycImageContainer}>
           <img className={styles.kycImage} src={files[selectingType]["url"]} />

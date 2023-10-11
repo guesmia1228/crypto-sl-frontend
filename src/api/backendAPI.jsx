@@ -503,6 +503,26 @@ export default class backendAPI {
     }
   }
 
+  async getKYCLevel(userId) {
+    try {
+      const url = `${this.baseURL}/auth/${userId}/kyc-level`;
+      const options = {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      };
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return null; // or return some default value
+    }
+  }
+
   async getWalletAddresses() {
     try {
       const url = `${this.baseURL}/wallet/addresses`;
