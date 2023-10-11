@@ -1,6 +1,6 @@
 .error {
-  background-color: #d7263d;
-  border: 1px solid #d7263d;
+  background-color: var(--error-color);
+  border: 1px solid var(--error-color);
   padding: 1rem;
   border-radius: 4px;
   margin-bottom: 1rem;
