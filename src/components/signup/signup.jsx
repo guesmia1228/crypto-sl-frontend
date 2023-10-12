@@ -254,7 +254,7 @@ const Signup = () => {
             ),
           {
             message:
-              "Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",
+              "Password must include characters from 3 of the following 4 groups: uppercase letters, lowercase letters, numbers, and special characters",
           }
         ),
       confirmPassword: z
