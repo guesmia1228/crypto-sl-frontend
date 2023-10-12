@@ -5,7 +5,7 @@ import Graph from "../graph/graph";
 import Header from "../header/header";
 import TopInfo from "../topInfo/topInfo";
 import styles from "./admin.module.css";
-import { useEffect, useState, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import ModalOverlay from "../modal/modalOverlay";
 import adminDashboardApi from "../../api/adminDashboardApi";
 import { useNavigate } from "react-router-dom";
@@ -63,25 +63,25 @@ const AdminBody = ({ type }) => {
     if (result !== true) {
       navigate("/login");
     } else {
-      const getPromises = [
-        adminApi.getTotalRegistrations(),
+      const getPromisesGraph = [
         adminApi.getTotalClicks(),
-        adminApi.getNumOrders(),
-        adminApi.getTotalIncome(),
-        adminApi.getUsers(),
         adminApi.getRoleReport(),
         adminApi.getTotalIncomesPerDay(),
       ];
 
-      const [
-        dataReg,
-        dataClick,
-        dataOrders,
-        dataInc,
-        dataUsers,
-        reportResp,
-        totalPricePerDate,
-      ] = await Promise.allSettled(getPromises);
+      const getPromisesCards = [
+        adminApi.getTotalIncome(),
+        adminApi.getNumOrders(),
+        adminApi.getTotalRegistrations(),
+      ];
+
+      const [dataInc, dataOrders, dataReg] =
+        await Promise.allSettled(getPromisesCards);
+
+      const [dataClick, reportResp, totalPricePerDate] =
+        await Promise.allSettled(getPromisesGraph);
+
+      const [dataUsers] = await Promise.allSettled([adminApi.getUsers()]);
 
       console.log(
         dataReg,
