@@ -28,12 +28,12 @@ const ResetPassword = () => {
         .refine(
           (value) =>
             /^(?=(.*[a-z]){1,})(?=(.*[A-Z]){1,})(?=(.*\d){1,})(?=(.*[@#$%^&+=!_]){1,}).{8,}$/.test(
-              value
+              value,
             ),
           {
             message:
               "Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",
-          }
+          },
         ),
       confirmPassword: z
         .string()
@@ -44,7 +44,7 @@ const ResetPassword = () => {
       {
         message: "Passwords must match",
         path: ["confirmPassword"],
-      }
+      },
     );
 
   const {

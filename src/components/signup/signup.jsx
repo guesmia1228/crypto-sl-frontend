@@ -3,8 +3,9 @@ import Button from "../button/button";
 import Input, { Options } from "../input/input";
 import styles from "./signup.module.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import ReCAPTCHA from "react-google-recaptcha";
 import backendAPI from "../../api/backendAPI";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -201,11 +202,11 @@ var country_list = [
   "Timor L'Este",
   "Togo",
   "Tonga",
-  "Trinidad & Tobago",
+  "Trinidad &amp; Tobago",
   "Tunisia",
   "Turkey",
   "Turkmenistan",
-  "Turks & Caicos",
+  "Turks &amp; Caicos",
   "Uganda",
   "Ukraine",
   "United Arab Emirates",
@@ -221,11 +222,12 @@ var country_list = [
 ];
 
 const Signup = () => {
+  const recaptchaRef = useRef();
   const { t } = useTranslation();
   const [errorMessage, setErrorMessage] = useState(null);
   const [message, setMessage] = useState(null);
   const [CountryOption, setCountryOption] = useState(
-    t("signUp.option1Placeholder")
+    t("signUp.option1Placeholder"),
   );
   const api = new backendAPI();
 
@@ -250,12 +252,12 @@ const Signup = () => {
         .refine(
           (value) =>
             /^(?:(?=.*[a-z])(?=.*[A-Z])(?=.*\d)|(?=.*[a-z])(?=.*[A-Z])(?=.*[.\$\/@!%&*_,#*-+;`])|(?=.*[a-z])(?=.*\d)(?=.*[.\$\/@!%&*_,#*-+;`])|(?=.*[A-Z])(?=.*\d)(?=.*[.\$\/@!%&*_,#*-+;`])|(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[.\$\/@!%&*_,#*-+;`])).*$/.test(
-              value
+              value,
             ),
           {
             message:
               "Password must include characters from 3 of the following 4 groups: uppercase letters, lowercase letters, numbers, and special characters",
-          }
+          },
         ),
       confirmPassword: z
         .string()
@@ -266,7 +268,7 @@ const Signup = () => {
       {
         message: "Passwords must match",
         path: ["confirmPassword"],
-      }
+      },
     );
 
   const {
@@ -287,20 +289,26 @@ const Signup = () => {
       return;
     }
 
-    const requestData = {
-      ...data,
-      roles: ["Affiliate"],
-      country: CountryOption,
-      affiliateLink: localStorage.getItem("affiliateJoined"),
-    };
-    resetForm();
-    setErrorMessage(null);
+    const captchaValue = recaptchaRef.current.getValue();
 
-    const response = await api.register(requestData);
-    if (response == null) {
-      setErrorMessage("Error when registering");
+    if (!captchaValue) {
+      setErrorMessage("Please verify the reCAPTCHA!");
     } else {
-      setMessage("Please confirm your email address to proceed.");
+      const requestData = {
+        ...data,
+        roles: ["Affiliate"],
+        country: CountryOption,
+        affiliateLink: localStorage.getItem("affiliateJoined"),
+      };
+
+      const response = await api.register(requestData);
+      if (response == null) {
+        setErrorMessage("Error when registering");
+      } else {
+        setMessage("Please confirm your email address to proceed.");
+      }
+      resetForm();
+      setErrorMessage(null);
     }
   }
 
@@ -308,7 +316,7 @@ const Signup = () => {
     <div className={`${styles.signup}`}>
       <div className={styles.closeWrapper}>
         <Button link={"/"} color={"white"}>
-          Close
+          {t("login.close")}
         </Button>
       </div>
       <div className={styles.left}>
@@ -397,6 +405,12 @@ const Signup = () => {
             options={country_list}
           />
         </div>
+
+        <ReCAPTCHA
+          ref={recaptchaRef}
+          sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+          theme="dark"
+        />
         <div className={styles.buttonWrapper}>
           <Button className={styles.button} type="submit">
             {t("signUp.formButton")}

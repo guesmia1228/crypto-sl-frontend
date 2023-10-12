@@ -18,6 +18,7 @@ const Input = ({
   date,
   register,
   name,
+  style,
 }) => {
   const handleChange = (e) => {
     if (setState) {
@@ -45,6 +46,7 @@ const Input = ({
         placeholder={placeholder}
         {...(isRegistered ? register(name) : null)}
         value={value}
+        style={style}
         onChange={handleChange}
         disabled={disabled}
       />
@@ -108,6 +110,66 @@ export const Options = ({
                 </p>
               </>
             )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export const SearchOptions = ({
+  value,
+  options = [],
+  setValue,
+  label = "",
+  dashboard,
+  placeholder = "",
+}) => {
+  const [open, setOpen] = useState(false);
+  const { t } = useTranslation();
+
+  const filteredOptions = options.filter((item) =>
+    item.toLowerCase().includes(value.toLowerCase()),
+  );
+
+  return (
+    <div className={`${styles.inputWrapper} ${styles.option}`}>
+      {label.length > 0 && (
+        <p
+          className={`${styles.label} ${
+            dashboard ? styles.dashboardLabel : ""
+          }`}
+        >
+          {label.length > 0 ? label : t("signUp.optionLabel")}
+        </p>
+      )}
+
+      <div
+        className={`option ${styles.input} ${
+          dashboard ? styles.dashboardInput : ""
+        }`}
+        onClick={() => setOpen((prev) => !prev)}
+      >
+        <input
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+          }}
+          onFocus={() => setOpen(true)}
+          type="text"
+          placeholder={placeholder}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          className={styles.searchInput}
+        />{" "}
+        <img src={dropDown} alt="" />
+        {open && (
+          <div className={`card ${styles.body}`}>
+            {filteredOptions.map((item) => (
+              <p onClick={() => setValue(item)} key={item}>
+                {item}
+              </p>
+            ))}
           </div>
         )}
       </div>

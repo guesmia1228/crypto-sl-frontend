@@ -1,0 +1,11 @@
+*.png
+*.webp
+*.mp4
+*.ttf
+*.svg
+*.jpg
+
+.gitignore
+.prettierignore
+/build
+/public

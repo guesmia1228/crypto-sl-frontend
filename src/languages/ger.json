@@ -1,11 +1,11 @@
 {
   "navigation": {
     "home": "Startseite",
-    "solutions": "Unsere Solution",
-    "resources": "Resourcen",
-    "affiliate": "Affiliate",
-    "login": "Log in",
-    "signUp": "Sign up",
+    "solutions": "Zahlungslösungen",
+    "resources": "Ressourcen",
+    "affiliate": "Affiliateprogramm",
+    "login": "Login",
+    "signUp": "Registrierung",
     "menu": "Registrierung"
   },
   "home": {
@@ -15,6 +15,7 @@
     "heroButton": "Starte Jetzt - Kostenlos!",
     "heroButton2": "Jetzt Downloaden",
     "heroAvailable": "Verfügbar für:",
+    "priceChange": "Preisveränderung der letzten 24h",
     "cardSubtitle": "Ihr Schritt zu einem modernen Zahlungsverkehr",
     "cardTitleP1": "Mit moderner Zahlungsverarbeitung",
     "cardTitleP2": "wettbewerbsfähig bleiben",
@@ -213,8 +214,9 @@
     "titleP1": "Willkommen",
     "titleP2": "bei Nefentus",
     "description": "Geben Sie Ihre Anmeldedaten unten ein, um auf Ihr Nefentus-Konto zuzugreifen und eine Welt voller Möglichkeiten zu erschließen.",
-	"remember": "Angemeldet bleiben",
+    "remember": "Angemeldet bleiben",
     "button": "Anmelden",
+    "close": "Schließen",
     "info": "Noch keinen Account? ",
     "infoButton": "Registrieren Sie sich",
     "forgot": "Passwort vergessen?"

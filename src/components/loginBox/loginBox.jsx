@@ -3,10 +3,10 @@ import styles from "./loginBox.module.css";
 
 import Logo from "../../assets/logo/logo2.svg";
 import Button from "./../button/button";
-import { useState, useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { dashboardLink } from "../../utils";
+import { dashboardLink, encryptData } from "../../utils";
 
 import backend_API from "../../api/backendAPI";
 
@@ -16,19 +16,47 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import Error from "../error/error";
+import setCookie from "../setCookie/setCookie";
+import ReCAPTCHA from "react-google-recaptcha";
+
+const ConfirmMeEmail = ({ email, code, setCode, handleClick }) => {
+  return (
+    <div className={styles["confirm-email"]}>
+      <h3>Check your email for a code</h3>
+      <p>
+        We have sent a 6-digits code to {email}. The code expires shortly, so
+        please enter it soon.
+      </p>
+      <form onSubmit={handleClick}>
+        <Input
+          value={code}
+          setState={setCode}
+          style={{ backgroundColor: "#161616" }}
+        />
+        <div className={styles["button-group"]}>
+          <div className={`${styles.buttonWrapper} ${styles.buttonWrapperOTP}`}>
+            <Button className={styles.button} onClick={handleClick}>
+              Confirm
+            </Button>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
+};
 
 const LoginBox = () => {
+  const recaptchaRef = useRef();
   const [errorMessage, setErrorMessage] = useState(null);
   const [message, setMessage] = useState(null);
   const navigate = useNavigate();
   const backendAPI = new backend_API();
   const { t } = useTranslation();
-  const [checkBox, setCheckBox] = useState(false);
-
-  function navigateDashboard() {
-    const link = dashboardLink(localStorage);
-    navigate(link);
-  }
+  const [checkBox, setCheckBox] = useState(
+    Cookies.get("nefentus-remember-me")
+      ? JSON.parse(Cookies.get("nefentus-remember-me"))
+      : false,
+  );
 
   const schema = z.object({
     email: z.string().min(1, { message: "Please enter your email" }),
@@ -38,8 +66,29 @@ const LoginBox = () => {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm({ resolver: zodResolver(schema), mode: "onSubmit" });
+
+  useEffect(() => {
+    if (checkBox) {
+      setCookie("nefentus-username", getValues("email"), 365);
+      setCookie("nefentus-password", encryptData(getValues("password")), 365);
+      setCookie("nefentus-remember-me", checkBox, 365);
+    } else {
+      setCookie("nefentus-username", "", 365);
+      setCookie("nefentus-password", "", 365);
+      setCookie("nefentus-remember-me", false, 365);
+    }
+  }, [checkBox, getValues]);
+  const [showConfirmMeEmail, setShowConfirmMeEmail] = useState(false);
+  const [email, setEmail] = useState(null);
+  const [code, setCode] = useState("");
+
+  function navigateDashboard() {
+    const link = dashboardLink(localStorage);
+    navigate(link);
+  }
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -60,18 +109,43 @@ const LoginBox = () => {
   }, []);
 
   async function loginUser(data, checkbox) {
-    console.log(data, checkBox);
+    const captchaValue = recaptchaRef.current.getValue();
+
+    if (!captchaValue) {
+      setErrorMessage("Please verify the reCAPTCHA!");
+    } else {
+      if (Cookies.get("acceptCookie") !== true) {
+        checkbox = false;
+      }
+      try {
+        const response = await backendAPI.login(
+          data.email,
+          data.password,
+          checkbox,
+        );
+        if (response == null) {
+          setErrorMessage("Invalid login data");
+          return;
+        } else if (response.requireOtp) {
+          setShowConfirmMeEmail(true);
+          setEmail(response.email);
+        } else {
+          navigateDashboard();
+        }
+      } catch (error) {
+        setErrorMessage("There was an error logging in");
+      }
+    }
+  }
+
+  async function verifyOtpCode(email, code, checkbox) {
     if (Cookies.get("acceptCookie") !== true) {
       checkbox = false;
     }
     try {
-      const response = await backendAPI.login(
-        data.email,
-        data.password,
-        checkbox
-      );
+      const response = await backendAPI.verifyOTP(email, code, checkbox);
       if (response == null) {
-        setErrorMessage("Invalid login data");
+        setErrorMessage("Failed to Confirm");
         return;
       }
       navigateDashboard();
@@ -93,11 +167,16 @@ const LoginBox = () => {
     }
   };
 
+  const handleConfrimCode = (e) => {
+    e.preventDefault();
+    verifyOtpCode(email, code, checkBox);
+  };
+
   return (
     <div className={`${styles.login}`}>
       <div className={styles.closeWrapper}>
         <Button link={"/"} color={"white"}>
-          Close
+          {t("login.close")}
         </Button>
       </div>
       <div className={styles.left}>
@@ -130,41 +209,56 @@ const LoginBox = () => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit(loginUser)}>
-          <div className={styles.inputWrapper}>
-            <Input
-              register={register}
-              name={"email"}
-              label={t("signUp.emailLabel")}
-              placeholder={t("signUp.emailPlaceholder")}
-            />
-            <Input
-              register={register}
-              name={"password"}
-              label={t("signUp.passwordLabel")}
-              placeholder={t("signUp.passwordPlaceholder")}
-              secure
-            />
+        {showConfirmMeEmail ? (
+          <ConfirmMeEmail
+            email={email}
+            code={code}
+            setCode={setCode}
+            handleClick={handleConfrimCode}
+          />
+        ) : (
+          <form onSubmit={handleSubmit(loginUser)}>
+            <div className={styles.inputWrapper}>
+              <Input
+                register={register}
+                name={"email"}
+                label={t("signUp.emailLabel")}
+                placeholder={t("signUp.emailPlaceholder")}
+              />
+              <Input
+                register={register}
+                name={"password"}
+                label={t("signUp.passwordLabel")}
+                placeholder={t("signUp.passwordPlaceholder")}
+                secure
+              />
 
-            <div className={styles.rememberInfo}>
-              <div onClick={() => setCheckBox((prev) => !prev)}>
-                <div className={styles.checkBox}>
-                  {checkBox && <img src={CheckBox} alt="checkbox" />}
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+                theme="dark"
+              />
+
+              <div className={styles.rememberInfo}>
+                <div onClick={() => setCheckBox((prev) => !prev)}>
+                  <div className={styles.checkBox}>
+                    {checkBox && <img src={CheckBox} alt="checkbox" />}
+                  </div>
+                  <p>{t("login.remember")}</p>
                 </div>
-                <p>{t("login.remember")}</p>
-              </div>
 
-              <Link to="/forgot-password">
-                <p>{t("login.forgot")}</p>
-              </Link>
+                <Link to="/forgot-password">
+                  <p>{t("login.forgot")}</p>
+                </Link>
+              </div>
             </div>
-          </div>
-          <div className={styles.buttonWrapper}>
-            <Button className={styles.button} type="submit">
-              {t("login.button")}
-            </Button>
-          </div>
-        </form>
+            <div className={styles.buttonWrapper}>
+              <Button className={styles.button} type="submit">
+                {t("login.button")}
+              </Button>
+            </div>
+          </form>
+        )}
       </div>
     </div>
   );

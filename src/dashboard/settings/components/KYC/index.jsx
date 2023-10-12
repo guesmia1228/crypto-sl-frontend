@@ -59,7 +59,7 @@ export const KYC = () => {
 
   const fetchFYC = async () => {
     const arrayWithResults = await Promise.all(
-      Object.values(KYC_TYPE).map((type) => backendapi.getByKYC(type))
+      Object.values(KYC_TYPE).map((type) => backendapi.getByKYC(type)),
     );
 
     const transformedResults = arrayWithResults
@@ -96,8 +96,8 @@ export const KYC = () => {
   const handleUpload = async () => {
     const arrayWithResults = await Promise.all(
       Object.keys(uploadingFiles).map((type) =>
-        backendapi.uploadKYCByType(type, uploadingFiles[type])
-      )
+        backendapi.uploadKYCByType(type, uploadingFiles[type]),
+      ),
     );
     if (arrayWithResults) {
       fetchFYC();
@@ -148,10 +148,10 @@ export const KYC = () => {
       <div className={styles.kycList}>
         {KYCContent.map((item, index) => (
           <div
+            key={index}
             className={`${styles.kycItem} ${
               selectingType === item.id ? styles.itemActive : ""
             }`}
-            key={index}
             onClick={() => handleSelectType(item.id)}
           >
             <div className={styles.kycLabelSection}>

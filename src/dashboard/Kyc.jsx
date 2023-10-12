@@ -3,12 +3,12 @@ import Footer from "./footer";
 
 const Kyc = () => {
   return (
-	<>
-		<div className="container dashboardFont">
-			<KycBody />
-		</div>
-		<Footer />
-	</>
+    <>
+      <div className="container dashboardFont">
+        <KycBody />
+      </div>
+      <Footer />
+    </>
   );
 };
 

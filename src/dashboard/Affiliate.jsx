@@ -4,15 +4,15 @@ import Footer from "./footer";
 
 const Affiliate = () => {
   return (
-	<>
-		<div className="container dashboardFont">
-			<Helmet>
-				<title>Nefentus | Dashboard</title>
-			</Helmet>
-			<AdminBody type={"affiliate"} />
-		</div>
-		<Footer />
-	</>
+    <>
+      <div className="container dashboardContainer">
+        <Helmet>
+          <title>Nefentus | Dashboard</title>
+        </Helmet>
+        <AdminBody type={"affiliate"} />
+      </div>
+      <Footer />
+    </>
   );
 };
 
