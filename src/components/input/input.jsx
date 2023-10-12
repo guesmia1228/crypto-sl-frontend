@@ -16,11 +16,17 @@ const Input = ({
   dashboard,
   number,
   date,
+  register,
+  name,
   style,
 }) => {
   const handleChange = (e) => {
-    setState(e.target.value);
+    if (setState) {
+      setState(e.target.value);
+    }
   };
+
+  const isRegistered = register !== undefined && name !== undefined;
 
   return (
     <div className={styles.inputWrapper}>
@@ -36,10 +42,11 @@ const Input = ({
 
       <input
         className={`${styles.input} ${dashboard ? styles.dashboardInput : ""}`}
-        style={style}
         type={secure ? "password" : number ? "number" : date ? "date" : "text"}
         placeholder={placeholder}
+        {...(isRegistered ? register(name) : null)}
         value={value}
+        style={style}
         onChange={handleChange}
         disabled={disabled}
       />

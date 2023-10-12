@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@hookform/resolvers": "^3.3.1",
     "@openzeppelin/contracts": "^4.9.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -28,6 +29,7 @@
     "react-ga4": "^2.1.0",
     "react-google-recaptcha": "^3.1.0",
     "react-helmet": "^6.1.0",
+    "react-hook-form": "^7.47.0",
     "react-i18next": "^12.2.0",
     "react-image-crop": "^10.1.8",
     "react-image-file-resizer": "^0.4.8",
@@ -37,7 +39,8 @@
     "react-spinners": "^0.13.8",
     "stream": "^0.0.2",
     "universal-cookie": "^4.0.4",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "zod": "^3.22.4"
   },
   "scripts": {
     "start": "react-scripts start",
