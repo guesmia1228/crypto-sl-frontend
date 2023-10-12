@@ -6,7 +6,7 @@ import Button from "./../button/button";
 import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { dashboardLink, encryptData } from "../../utils";
+import { dashboardLink, decryptData, encryptData } from "../../utils";
 
 import backend_API from "../../api/backendAPI";
 
@@ -68,7 +68,18 @@ const LoginBox = () => {
     handleSubmit,
     getValues,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(schema), mode: "onSubmit" });
+  } = useForm({
+    resolver: zodResolver(schema),
+    mode: "onSubmit",
+    defaultValues: {
+      email: Cookies.get("nefentus-username")
+        ? Cookies.get("nefentus-username")
+        : "",
+      password: Cookies.get("nefentus-password")
+        ? decryptData(Cookies.get("nefentus-password"))
+        : "",
+    },
+  });
 
   useEffect(() => {
     if (checkBox) {
