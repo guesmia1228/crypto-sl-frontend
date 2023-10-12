@@ -16,8 +16,8 @@ const KYC_TYPE = {
   PASSPORT: "PASSPORT",
   PERSONAL_PICTURE: "PERSONAL_PICTURE",
   COMPANY_REGISTRATION: "COMPANY_REGISTRATION",
-  UTILITY_BILL: "UTILITY_BILL",
   ADRESS: "ADRESS",
+  UTILITY_BILL: "UTILITY_BILL",
 };
 
 const KycBody = () => {
@@ -212,7 +212,13 @@ const Table = ({ data, setData }) => {
                       {index === 4 && <h5 className={styles.level}>Level 3</h5>}
                       <div className={styles.line} key={index}>
                         <div className={styles.row}>
-                          <p>{item.type}</p>
+                          <p>
+                            {item.type === "Adress"
+                              ? "Proof of adress"
+                              : item.type === "Utility bill"
+                              ? "Due deligence"
+                              : item.type}
+                          </p>
                           {item.verify && <img src={Correct} alt="" />}
                         </div>
 

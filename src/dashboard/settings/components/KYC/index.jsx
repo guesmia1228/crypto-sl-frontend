@@ -16,23 +16,23 @@ const KYC_TYPE = {
 const KYCContent = [
   {
     id: KYC_TYPE.PASSPORT,
-    label: "Upload Passport",
+    label: "Passport or ID card",
   },
   {
     id: KYC_TYPE.PERSONAL_PICTURE,
-    label: "Picture of You",
+    label: "Picture with passport/ID",
   },
   {
     id: KYC_TYPE.COMPANY_REGISTRATION,
-    label: "Company Registration",
-  },
-  {
-    id: KYC_TYPE.UTILITY_BILL,
-    label: "Utility Bill",
+    label: "Company registration",
   },
   {
     id: KYC_TYPE.ADRESS,
-    label: "Address verification",
+    label: "Proof of address",
+  },
+  {
+    id: KYC_TYPE.UTILITY_BILL,
+    label: "Due deligence",
   },
 ];
 
