@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./countdown.module.css";
 
 function Countdown({ children }) {
-  const expirationDate = new Date("October 14, 2023 23:59:59");
+  const expirationDate = new Date("November 1, 2023 0:0:0");
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,

@@ -199,6 +199,8 @@
     "emailPlaceholder": "you@email.com",
     "passwordLabel": "Passwort",
     "passwordPlaceholder": "Passwort",
+    "confirmPasswordLabel": "Passwort-Bestätigung",
+    "confirmPasswordPlaceholder": "Passwort",
     "optionLabel": "Für was möchten Sie sich anmelden?",
     "option1Label": "Land",
     "option1Placeholder": "Land auswählen",

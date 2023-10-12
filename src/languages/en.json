@@ -242,7 +242,7 @@
   },
   "reset-password": {
     "title": "Reset Password",
-    "button": "reset",
+    "button": "Reset",
     "info": "Don't want to reset your password? Login instead.",
     "button-label-confirm": "Confirm password"
   },
@@ -261,6 +261,8 @@
     "emailPlaceholder": "you@email.com",
     "passwordLabel": "Password",
     "passwordPlaceholder": "Password",
+    "confirmPasswordLabel": "Confirm your password",
+    "confirmPasswordPlaceholder": "Password",
     "optionLabel": "What do you want to register for?",
     "option1Label": "Country",
     "option1Placeholder": "Chose country",

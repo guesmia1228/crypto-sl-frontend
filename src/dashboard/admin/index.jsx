@@ -81,25 +81,35 @@ const AdminBody = ({ type }) => {
         dataUsers,
         reportResp,
         totalPricePerDate,
-      ] = await Promise.all(getPromises);
+      ] = await Promise.allSettled(getPromises);
+
+      console.log(
+        dataReg,
+        dataClick,
+        dataOrders,
+        dataInc,
+        dataUsers,
+        reportResp,
+        totalPricePerDate,
+      );
 
       const cardsContent = [
         {
           title: "Total Income",
-          amount: dataInc?.number,
-          percentage: dataInc?.percentage,
+          amount: dataInc?.value?.number,
+          percentage: dataInc?.value?.percentage,
           isMonetary: true,
         },
         {
           title: "Clicks",
-          amount: dataClick?.number,
-          percentage: dataClick?.percentage,
+          amount: dataClick?.value?.number,
+          percentage: dataClick?.value?.percentage,
           isMonetary: false,
         },
         {
           title: "Registrations",
-          amount: dataReg?.number,
-          percentage: dataReg?.percentage,
+          amount: dataReg?.value?.number,
+          percentage: dataReg?.value?.percentage,
           isMonetary: false,
         },
       ];
@@ -111,8 +121,8 @@ const AdminBody = ({ type }) => {
       ) {
         cardsContent[1] = {
           title: "Orders",
-          amount: dataOrders?.number,
-          percentage: dataOrders?.percentage,
+          amount: dataOrders?.value?.number,
+          percentage: dataOrders?.value?.percentage,
           isMonetary: false,
         };
       }
@@ -120,84 +130,13 @@ const AdminBody = ({ type }) => {
       console.log(cardsContent);
       setCardInfo(cardsContent);
 
-      dataUsers.reverse();
-      updateUsers(dataUsers);
+      dataUsers.value.reverse();
+      updateUsers(dataUsers.value);
 
       console.log(reportResp);
-      setBarContent(reportResp);
+      setBarContent(reportResp.value);
 
-      setGraphData(totalPricePerDate);
-
-      // TODO: DATA FOR TEST
-
-      // setGraphData({
-      // 	"2023-01-12": 5,
-      // 	"2023-01-13": 50,
-      // 	"2023-01-14": 30,
-      // 	"2023-01-15": 1,
-      // 	"2023-01-16": 33,
-      // 	"2023-02-12": 11,
-      // 	"2023-02-13": 143,
-      // 	"2023-02-14": 56,
-      // 	"2023-02-15": 13,
-      // 	"2023-02-16": 145,
-      // 	"2023-03-12": 345,
-      // 	"2023-03-13": 145,
-      // 	"2023-03-14": 123,
-      // 	"2023-03-15": 135,
-      // 	"2023-03-16": 15,
-      // 	"2023-04-12": 20,
-      // 	"2023-04-13": 267,
-      // 	"2023-04-14": 76,
-      // 	"2023-04-15": 66,
-      // 	"2023-04-16": 44,
-      // 	"2023-05-12": 22,
-      // 	"2023-05-13": 25,
-      // 	"2023-05-14": 34,
-      // 	"2023-05-15": 89,
-      // 	"2023-05-16": 56,
-      // 	"2023-06-12": 23,
-      // 	"2023-06-13": 45,
-      // 	"2023-06-14": 56,
-      // 	"2023-06-15": 360,
-      // 	"2023-06-16": 3670,
-      // 	"2023-07-12": 66,
-      // 	"2023-07-13": 433,
-      // 	"2023-07-14": 35,
-      // 	"2023-07-15": 564,
-      // 	"2023-07-16": 35,
-      // 	"2023-08-12": 4450,
-      // 	"2023-08-13": 40,
-      // 	"2023-08-14": 543,
-      // 	"2023-08-15": 40,
-      // 	"2023-08-16": 345,
-      // 	"2023-09-12": 45,
-      // 	"2023-09-13": 345,
-      // 	"2023-09-14": 16,
-      // 	"2023-09-15": 45,
-      // 	"2023-09-16": 33,
-      // 	"2023-10-12": 50,
-      // 	"2023-10-13": 3453,
-      // 	"2023-10-14": 50,
-      // 	"2023-10-15": 36,
-      // 	"2023-10-16": 4444,
-      // 	"2023-11-12": 55,
-      // 	"2023-11-13": 457,
-      // 	"2023-11-14": 55,
-      // 	"2023-11-15": 555,
-      // 	"2023-11-16": 525,
-      // 	"2023-12-12": 2,
-      // 	"2023-12-13": 60,
-      // 	"2023-12-14": 433,
-      // 	"2023-12-15": 60,
-      // 	"2023-12-16": 345,
-      // 	"2022-01-12": 5,
-      // 	"2022-01-13": 50,
-      // 	"2022-01-14": 30,
-      // 	"2022-01-15": 1000,
-      // 	"2022-01-16": 33,
-      // });
-
+      setGraphData(totalPricePerDate.value);
       console.log(totalPricePerDate);
     }
   };
