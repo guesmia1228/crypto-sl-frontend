@@ -40,7 +40,10 @@ const ProductBody = () => {
 
   async function loadProducts() {
     const newProducts = await dashboardApi.getProducts();
-    if (newProducts) setProducts(newProducts);
+    if (newProducts) {
+      setProducts(newProducts);
+      console.log(newProducts, "newProducts");
+    }
 
     // Get signed image paths
     const newSignedImagePaths = await Promise.all(
