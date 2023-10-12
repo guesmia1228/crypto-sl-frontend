@@ -58,7 +58,7 @@
 }
 
 .table ul {
-  grid-template-columns: 1.5fr 2fr 0.8fr 1fr 1fr 1fr 1.2fr;
+  grid-template-columns: 1.5fr 2fr 0.8fr 1fr 1fr 0.5fr 1fr 1.2fr;
 }
 
 .tableBody li:last-child {

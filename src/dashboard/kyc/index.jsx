@@ -29,6 +29,7 @@ const KycBody = () => {
     const arrayWithResults = await Promise.all(
       users.map(async (user) => {
         const userId = user.id;
+        const level = await backendapi.getKYCLevel(userId);
         const userKYCData = await Promise.all(
           Object.values(KYC_TYPE).map((type) =>
             backendapi.getByKYC(type, userId)
@@ -65,6 +66,7 @@ const KycBody = () => {
           transformedResults,
           user.tel,
           user.business,
+          level.data.kycLevel,
           new Date(user.createdAt).toISOString().substring(0, 10),
         ];
       })
@@ -132,6 +134,7 @@ const Table = ({ data, setData }) => {
               <li>Verify</li>
               <li>Phone</li>
               <li>Business</li>
+              <li>Level</li>
               <li>Join On</li>
               <li>Actions</li>
             </ul>
