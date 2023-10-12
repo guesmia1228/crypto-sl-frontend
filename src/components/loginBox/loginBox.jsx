@@ -195,14 +195,14 @@ const LoginBox = () => {
 
         <div>
           <h2>
-            <span className="gradient">{t("login.titleP1")}</span>
+            <span className="gradient">{t("login.titleP1") + "*"}</span>
           </h2>
           <p>{t("login.description")}</p>
 
           <p>
             {t("login.info")}
             <u>
-              <Link to="/signUp">{t("login.infoButton")}</Link>
+              <Link to="/signUp">{t("login.infoButton") + "*"}</Link>
             </u>
           </p>
         </div>
