@@ -13,7 +13,6 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
-
 const today = new Date();
 
 // Anzahl der Tage zwischen heute und dem 1. April 2023
@@ -22,7 +21,7 @@ const days = Math.round((today - new Date("Apr 01 2023")) / oneDay);
 
 // Erstelle die Labels für den Chart
 const labels1 = [];
-let labels = []
+let labels = [];
 for (let i = 0; i < days; i += 2) {
   const date = new Date("Apr 01 2023");
   date.setDate(date.getDate() + i);
@@ -38,8 +37,8 @@ if (labels1[labels1.length - 1] !== today.toLocaleDateString()) {
 
 const randomData = Array.from({ length: days }, () => 0);
 function populateGraph(totalPrices) {
-  labels = totalPrices ? Object.keys(totalPrices) : []
-  const values = totalPrices ? Object.values(totalPrices) : []
+  labels = totalPrices ? Object.keys(totalPrices) : [];
+  const values = totalPrices ? Object.values(totalPrices) : [];
   return {
     labels,
     datasets: [
@@ -51,34 +50,34 @@ function populateGraph(totalPrices) {
         tension: 0.1,
       },
     ],
-  }
+  };
 }
 function getStartDate(data) {
   if (data == null) {
-    return "2023-04-01"
+    return "2023-04-01";
   } else {
-    return Object.keys(data)[0]
+    return Object.keys(data)[0];
   }
 }
 
-function  getTotalIncome(totalPrices){
-  if(totalPrices){
-    const values = Object.values(totalPrices)
+function getTotalIncome(totalPrices) {
+  if (totalPrices) {
+    const values = Object.values(totalPrices);
     const sum = values.reduce(function (prev, currentValue) {
       return prev + currentValue;
-    },0)
-    return '$' + formatUSDBalance(sum)
+    }, 0);
+    return "$" + formatUSDBalance(sum);
   } else {
-    return "$0"
+    return "$0";
   }
 }
 
 function getEndDate(data) {
   if (data == null) {
-    return "2023-04-30"
+    return "2023-04-30";
   } else {
-    const keys = Object.keys(data)
-    return keys[keys.length - 1]
+    const keys = Object.keys(data);
+    return keys[keys.length - 1];
   }
 }
 
@@ -90,7 +89,7 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
 export const options = {
@@ -150,7 +149,7 @@ export const options = {
   },
 };
 
-const Graph = ({data, style}) => {
+const Graph = ({ data, style }) => {
   return (
     <div className={`card ${styles.graphCard}`} style={style}>
       <div className={styles.info}>

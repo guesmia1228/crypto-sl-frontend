@@ -5,14 +5,18 @@ import { Helmet } from "react-helmet";
 
 const PaymentDashboard = () => {
   return (
-	<ThirdwebProvider activeChain="ethereum" supportedWallets={[metamaskWallet()]} clientId="639eea2ebcabed7eab90b56aceeed08b">
-		<Helmet>
-			<title>Nefentus | Custom Payment</title>
-		</Helmet>
-		<div className="dashboard-body">
-			<PaymentBody />
-		</div>
-	</ThirdwebProvider>
+    <ThirdwebProvider
+      activeChain="ethereum"
+      supportedWallets={[metamaskWallet()]}
+      clientId="639eea2ebcabed7eab90b56aceeed08b"
+    >
+      <Helmet>
+        <title>Nefentus | Custom Payment</title>
+      </Helmet>
+      <div className="dashboard-body">
+        <PaymentBody />
+      </div>
+    </ThirdwebProvider>
   );
 };
 

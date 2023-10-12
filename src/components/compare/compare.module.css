@@ -68,9 +68,11 @@
 }
 
 .bgImage {
-  background: url(../../assets/image/gradient.webp);
-  background-position: center;
-  background-size: cover;
+  background: linear-gradient(
+    176deg,
+    rgba(17, 17, 17, 1) 70%,
+    rgba(21, 147, 192, 1) 100%
+  );
   position: absolute;
   top: -20vh;
   left: 0;

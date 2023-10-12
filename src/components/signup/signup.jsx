@@ -1,11 +1,11 @@
 import Logo from "../../assets/logo/logo2.svg";
 import Button from "../button/button";
-import Input, { Options } from "../input/input";
-
+import Input, { SearchOptions } from "../input/input";
 import styles from "./signup.module.css";
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import ReCAPTCHA from "react-google-recaptcha";
 import backendAPI from "../../api/backendAPI";
 
 var country_list = [
@@ -197,11 +197,11 @@ var country_list = [
   "Timor L'Este",
   "Togo",
   "Tonga",
-  "Trinidad & Tobago",
+  "Trinidad &amp; Tobago",
   "Tunisia",
   "Turkey",
   "Turkmenistan",
-  "Turks & Caicos",
+  "Turks &amp; Caicos",
   "Uganda",
   "Ukraine",
   "United Arab Emirates",
@@ -217,6 +217,7 @@ var country_list = [
 ];
 
 const Signup = () => {
+  const recaptchaRef = useRef();
   const { t } = useTranslation();
   const [errorMessage, setErrorMessage] = useState(null);
   const [message, setMessage] = useState(null);
@@ -225,8 +226,9 @@ const Signup = () => {
   const [Telefon, setTelefon] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-  const [UseOption, setUseOption] = useState("Choose Options");
-  const [CountryOption, setCountryOption] = useState(t("signUp.option1Placeholder"));
+  const [CountryOption, setCountryOption] = useState(
+    t("signUp.option1Placeholder"),
+  );
   const api = new backendAPI();
 
   const resetForm = () => {
@@ -235,27 +237,26 @@ const Signup = () => {
     setTelefon("");
     setEmail("");
     setPassword("");
-    setUseOption("Choose Options");
     setCountryOption(t("signUp.option1Placeholder"));
   };
 
   async function submitForm() {
-	if (FirstName === "") {
-		setErrorMessage("Please enter your first name");
-		return;
-	} else if (LastName === "") {
-		setErrorMessage("Please enter your last name");
-		return;
-	} else if (Email === "") {
-		setErrorMessage("Please enter your email");
-		return;
-	} else if (Password === "") {
-		setErrorMessage("Please enter your password");
-		return;
-	} else if (CountryOption === t("signUp.option1Placeholder")) {
-		setErrorMessage("Please choose a country");
-		return;
-	}
+    if (FirstName === "") {
+      setErrorMessage("Please enter your first name");
+      return;
+    } else if (LastName === "") {
+      setErrorMessage("Please enter your last name");
+      return;
+    } else if (Email === "") {
+      setErrorMessage("Please enter your email");
+      return;
+    } else if (Password === "") {
+      setErrorMessage("Please enter your password");
+      return;
+    } else if (CountryOption === t("signUp.option1Placeholder")) {
+      setErrorMessage("Please choose a country");
+      return;
+    }
 
     const requestData = {
       firstName: FirstName,
@@ -277,16 +278,23 @@ const Signup = () => {
     }
   }
 
-  function handleClick(e) {
-	e.preventDefault();
-	submitForm();
+  function handleClick(event) {
+    event.preventDefault();
+
+    const captchaValue = recaptchaRef.current.getValue();
+
+    if (!captchaValue) {
+      setErrorMessage("Please verify the reCAPTCHA!");
+    } else {
+      submitForm();
+    }
   }
 
   return (
     <div className={`${styles.signup}`}>
       <div className={styles.closeWrapper}>
         <Button link={"/"} color={"white"}>
-          Close
+          {t("login.close")}
         </Button>
       </div>
       <div className={styles.left}>
@@ -309,64 +317,79 @@ const Signup = () => {
         </div>
       </div>
 
-	  <form onSubmit={handleClick}>
-		<div className={styles.right}>
-			{errorMessage && (
-			<div className={styles.errormessagecontainer}>
-				<p>{errorMessage}</p>
-			</div>
-			)}
-			{message && (
-			<div className={styles.messagecontainer}>
-				<p>{message}</p>
-			</div>
-			)}
+      <form onSubmit={handleClick}>
+        <div className={styles.right}>
+          {errorMessage && (
+            <div className={styles.errormessagecontainer}>
+              <p>{errorMessage}</p>
+            </div>
+          )}
+          {message && (
+            <div className={styles.messagecontainer}>
+              <p>{message}</p>
+            </div>
+          )}
 
-			<div className={styles.row}>
-				<Input
-					label={t("signUp.firstNameLabel") + "*"}
-					placeholder={t("signUp.firstNamePlaceholder")}
-					value={FirstName}
-					setState={setFirstName}
-				/>
+          <div className={styles.row}>
+            <Input
+              label={t("signUp.firstNameLabel") + "*"}
+              placeholder={t("signUp.firstNamePlaceholder")}
+              value={FirstName}
+              setState={setFirstName}
+            />
 
-				<Input
-					label={t("signUp.telefonLabel")}
-					placeholder="(979) 268-4143"
-					value={Telefon}
-					setState={setTelefon}
-				/>
-				<Input
-					label={t("signUp.emailLabel") + "*"}
-					placeholder={t("signUp.emailPlaceholder")}
-					value={Email}
-					setState={setEmail}
-				/>
-				<Input
-					label={t("signUp.passwordLabel") + "*"}
-					placeholder={t("signUp.passwordPlaceholder")}
-					value={Password}
-					setState={setPassword}
-					secure
-				/>
-				<Options
-					label={t("signUp.option1Label") + "*"}
-					value={CountryOption}
-					setValue={setCountryOption}
-					options={country_list}
-				/>
-			</div>
-			<div className={styles.buttonWrapper}>
-				<Button className={styles.button} onClick={handleClick}>
-					{t("signUp.formButton")}
-				</Button>
-			</div>
+            <Input
+              label={t("signUp.lastNameLabel") + "*"}
+              placeholder={t("signUp.lastNamePlaceholder")}
+              value={LastName}
+              setState={setLastName}
+            />
 
-			<p className={styles.formAgreement}>{t("signUp.formInfo")}</p>
+            <Input
+              label={t("signUp.telefonLabel")}
+              placeholder="(979) 268-4143"
+              value={Telefon}
+              setState={setTelefon}
+            />
+            <Input
+              label={t("signUp.emailLabel") + "*"}
+              placeholder={t("signUp.emailPlaceholder")}
+              value={Email}
+              setState={setEmail}
+            />
+            <Input
+              label={t("signUp.passwordLabel") + "*"}
+              placeholder={t("signUp.passwordPlaceholder")}
+              value={Password}
+              setState={setPassword}
+              secure
+            />
+            <SearchOptions
+              label={t("signUp.option1Label")}
+              value={CountryOption}
+              setValue={setCountryOption}
+              options={country_list}
+              placeholder={t("signUp.option1Placeholder")}
+            />
+          </div>
 
-			<button type="submit" hidden />
-      	</div>
-	  </form>
+          <ReCAPTCHA
+            ref={recaptchaRef}
+            sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+            theme="dark"
+          />
+
+          <div className={styles.buttonWrapper}>
+            <Button className={styles.button} onClick={handleClick}>
+              {t("signUp.formButton")}
+            </Button>
+          </div>
+
+          <p className={styles.formAgreement}>{t("signUp.formInfo")}</p>
+
+          <button type="submit" hidden />
+        </div>
+      </form>
     </div>
   );
 };

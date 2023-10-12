@@ -1,21 +1,21 @@
 .copyValueWrapper {
-	display: flex;
-	gap: 1rem;
+  display: flex;
+  gap: 1rem;
 }
 
 .copyValueWrapper img {
-	margin-top: auto;
-	margin-bottom: auto;
-	height: max-content;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: max-content;
 }
 
 .clipboardButton {
-	height: 100%;
-	padding: 1px;
-	margin-top: auto;
-	margin-bottom: auto;
+  height: 100%;
+  padding: 1px;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .clipboardButton div {
-	padding: 0.5rem 0.9rem;
+  padding: 0.5rem 0.9rem;
 }

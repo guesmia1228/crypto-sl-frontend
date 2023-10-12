@@ -194,35 +194,10 @@ export default class backendAPI {
       localStorage.setItem("business", data.business);
       localStorage.setItem("phoneNumber", data.phoneNumber);
       localStorage.setItem("username", data.username);
+      localStorage.setItem("antiPhishingCode", data.antiPhishingCode);
       return response;
     } catch (error) {
       return null; // or return some default value
-    }
-  }
-
-  async uploadFile(file) {
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-
-      const response = await fetch(`${this.baseURL}/auth/upload`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${this.token}`,
-        },
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const data = await response.json();
-      localStorage.setItem("profile_pic", data.message);
-      return data.message;
-    } catch (error) {
-      console.error("There was an error uploading the file:", error);
-      return null;
     }
   }
 
@@ -286,7 +261,58 @@ export default class backendAPI {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      console.log(data);
+      if (!data.requireOtp) {
+        setCookie("token", data.jwtToken);
+        localStorage.setItem("token", data.jwtToken);
+        localStorage.setItem("email", data.email);
+        localStorage.setItem("contactEmail", data.contactEmail);
+        localStorage.setItem("affiliateLink", data.affiliateLink);
+        localStorage.setItem("firstName", data.firstName);
+        localStorage.setItem("lastName", data.lastName);
+        localStorage.setItem("business", data.business);
+        localStorage.setItem("phoneNumber", data.phoneNumber);
+        localStorage.setItem("username", data.username);
+        localStorage.setItem("profile_pic", data.profileImage);
+        localStorage.setItem("roles", data.roles);
+        localStorage.setItem("country", data.country);
+        localStorage.setItem("isMfa", data.isMfa);
+        localStorage.setItem("requireKyc", data.requireKyc);
+        localStorage.setItem("requireOtp", data.requireOtp);
+        localStorage.setItem("userId", data.userId);
+        localStorage.setItem("antiPhishingCode", data.antiPhishingCode);
+      }
+
+      ReactGA.event({
+        category: "User",
+        action: "login",
+        label: data.email,
+      });
+
+      return data;
+    } catch (error) {
+      return null; // or return some default value
+    }
+  }
+
+  async verifyOTP(email, code, longToken) {
+    try {
+      const url = `${this.baseURL}/auth/verify/otp`;
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          code,
+          rememberMe: longToken,
+        }),
+      };
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
       setCookie("token", data.jwtToken);
       localStorage.setItem("token", data.jwtToken);
       localStorage.setItem("email", data.email);
@@ -300,8 +326,11 @@ export default class backendAPI {
       localStorage.setItem("profile_pic", data.profileImage);
       localStorage.setItem("roles", data.roles);
       localStorage.setItem("country", data.country);
+      localStorage.setItem("isMfa", data.isMfa);
       localStorage.setItem("requireKyc", data.requireKyc);
+      localStorage.setItem("requireOtp", data.requireOtp);
       localStorage.setItem("userId", data.userId);
+      localStorage.setItem("antiPhishingCode", data.antiPhishingCode);
 
       ReactGA.event({
         category: "User",
@@ -501,7 +530,7 @@ export default class backendAPI {
 
       if (!response.ok) {
         throw new Error(
-          `Network response was not ok (${response.status} ${response.statusText})`
+          `Network response was not ok (${response.status} ${response.statusText})`,
         );
       }
 
@@ -510,6 +539,32 @@ export default class backendAPI {
     } catch (error) {
       console.error("There was an error counting the affiliates:", error);
       throw error;
+    }
+  }
+
+  async uploadFile(file) {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await fetch(`${this.baseURL}/auth/upload`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      localStorage.setItem("profile_pic", data.message);
+      return data.message;
+    } catch (error) {
+      console.error("There was an error uploading the file:", error);
+      return null;
     }
   }
 
@@ -534,6 +589,29 @@ export default class backendAPI {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
+      return data;
+    } catch (error) {
+      return null; // or return some default value
+    }
+  }
+
+  async deleteProfileImage() {
+    try {
+      const url = `${this.baseURL}/auth/deleteImage`;
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${this.token}`,
+        },
+        body: null,
+      };
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      localStorage.setItem("profile_pic", "null");
       return data;
     } catch (error) {
       return null; // or return some default value
@@ -749,7 +827,7 @@ export default class backendAPI {
     quantity,
     password,
     stablecoinAddress,
-    transInfoArg
+    transInfoArg,
   ) {
     try {
       const url = `${this.baseURL}/payment`;

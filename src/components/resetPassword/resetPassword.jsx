@@ -29,9 +29,9 @@ const ResetPassword = () => {
   }, []);
 
   async function resetPassword(token, confirmPass, pass) {
-	if (confirmPass !== pass) {
+    if (confirmPass !== pass) {
       setErrorMessage("Passwords are not equal!");
-	  return;
+      return;
     }
 
     try {
@@ -47,7 +47,7 @@ const ResetPassword = () => {
   }
 
   function handleClick(e) {
-	e.preventDefault();
+    e.preventDefault();
     resetPassword(token, CPassword, Password);
   }
 
@@ -72,29 +72,29 @@ const ResetPassword = () => {
           </div>
         </div>
 
-		<form onSubmit={handleClick}>
-			<Input
-			value={Password}
-			setState={setPassword}
-			label={t("signUp.passwordLabel")}
-			placeholder={t("signUp.passwordPlaceholder")}
-			secure
-			/>
-			<Input
-			value={CPassword}
-			setState={setCPassword}
-			label={t("reset-password.button-label-confirm")}
-			placeholder={t("signUp.passwordPlaceholder")}
-			secure
-			/>
-			<Button link={null} onClick={handleClick}>
-			{t("reset-password.button")}
-			</Button>
-			<div className={styles.info}>
-			<p>{t("reset-password.info")}</p>
-			</div>
-			<button type="submit" hidden />
-		</form>
+        <form onSubmit={handleClick}>
+          <Input
+            value={Password}
+            setState={setPassword}
+            label={t("signUp.passwordLabel")}
+            placeholder={t("signUp.passwordPlaceholder")}
+            secure
+          />
+          <Input
+            value={CPassword}
+            setState={setCPassword}
+            label={t("reset-password.button-label-confirm")}
+            placeholder={t("signUp.passwordPlaceholder")}
+            secure
+          />
+          <Button link={null} onClick={handleClick}>
+            {t("reset-password.button")}
+          </Button>
+          <div className={styles.info}>
+            <p>{t("reset-password.info")}</p>
+          </div>
+          <button type="submit" hidden />
+        </form>
       </div>
     </div>
   );

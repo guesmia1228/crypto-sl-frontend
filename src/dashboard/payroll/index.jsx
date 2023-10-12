@@ -13,7 +13,7 @@ import Profile from "../../assets/image/reviews/image3.png";
 
 import { transformNumber } from "./../func/transformNumber";
 import ModalOverlay from "../modal/modalOverlay";
-import { useState } from "react";
+import React, { useState } from "react";
 import Input, { Options } from "../../components/input/input";
 
 const cardsContent = [
@@ -121,8 +121,9 @@ const PayrollBody = () => {
         </TopInfo>
 
         <div className={styles.cards}>
-          {cardsContent.map((item) => (
+          {cardsContent.map((item, index) => (
             <StatsCard
+              key={index}
               title={item.title}
               amount={item.amount}
               percentage={item.percentage}
@@ -131,8 +132,9 @@ const PayrollBody = () => {
         </div>
 
         <div className={styles.graphs}>
-          {cardContent.map((data) => (
+          {cardContent.map((data, index) => (
             <CardGraph
+              key={index}
               title={data.title}
               description={data.description}
               data={data.data}
@@ -220,8 +222,8 @@ const CardGraph = ({ title, description, data }) => {
       </div>
 
       <div className={styles.graphTable}>
-        {data.map((item) => (
-          <div className={styles.tableLine}>
+        {data.map((item, index) => (
+          <div key={index} className={styles.tableLine}>
             <div className={styles.left}>
               <div className={styles.image}>
                 <img src={item.img} alt="image" />
@@ -262,9 +264,9 @@ const Table = ({ data }) => {
         </div>
         <div className={styles.tableBody}>
           {data.map((items, lineIndex) => (
-            <ul key={lineIndex}>
+            <ul key={`parent-${lineIndex}`}>
               {items.map((item, itemIndex) => (
-                <>
+                <React.Fragment key={`child-${itemIndex}`}>
                   {itemIndex === 3 ? (
                     <li
                       className={`${styles.box} ${
@@ -278,7 +280,7 @@ const Table = ({ data }) => {
                       {itemIndex === 2 ? `$${transformNumber(item)}` : item}
                     </li>
                   )}
-                </>
+                </React.Fragment>
               ))}
 
               <li

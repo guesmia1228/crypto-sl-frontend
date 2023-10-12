@@ -5,6 +5,7 @@ import { useEffect, useState, useContext } from "react";
 import Logo from "../../assets/logo/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import backend_API from "../../api/backendAPI";
+import Cookies from "universal-cookie";
 import InputComponent, { RawInput } from "../input/input";
 import backendAPI from "../../api/backendAPI";
 import Header from "../header/header";
@@ -17,6 +18,9 @@ import MessageComponent from "../../components/message";
 import { MessageContext } from "../../context/message";
 import TopInfo from "../topInfo/topInfo";
 import Tabs from "../../components/tabs/index";
+import CropDialog, {
+  dataURLtoFile,
+} from "../../components/cropDialog/cropDialog";
 
 let nav = ["Profile", "Change password", "Change email"];
 
@@ -50,10 +54,10 @@ const SettingsBody = ({ type }) => {
   const backendapi = new backendAPI();
   const [active, setActive] = useState(0);
   const [requireKyc, setRequireKyc] = useState(
-    localStorage.getItem("requireKyc")
+    localStorage.getItem("requireKyc"),
   );
   const [profilePicUrl, setProfilePicUrl] = useState(
-    localStorage.getItem("profile_pic")
+    localStorage.getItem("profile_pic"),
   );
   const [counter, setCounter] = useState(0);
   const navigate = useNavigate();
@@ -91,6 +95,7 @@ const SettingsBody = ({ type }) => {
     }
   }, [requireKyc]);
 
+  const cookies = new Cookies();
   const [link, setLink] = useState("");
   return (
     <div
@@ -177,10 +182,23 @@ const ProfileBody = ({ afterUpdateSettings, active }) => {
   const [lastName, setLastName] = useState(localStorage.getItem("lastName"));
   const [business, setBusiness] = useState(localStorage.getItem("business"));
   const [phoneNumber, setPhoneNumber] = useState(
-    localStorage.getItem("phoneNumber")
+    localStorage.getItem("phoneNumber"),
   );
   const [email, setEmail] = useState(localStorage.getItem("email"));
   const { setErrorMessage, setInfoMessage } = useContext(MessageContext);
+  const [cropDialogOpen, setCropDialogOpen] = useState(false);
+  const [imageName, setImageName] = useState(null);
+  const [imageChanged, setImageChanged] = useState(false); // Set to true if image changed (was added or deleted))
+  const [isTotp, setIsTotp] = useState(localStorage.getItem("isMfa"));
+  const [isOtp, setIsOtp] = useState(localStorage.getItem("requireOtp"));
+  const [phishingCode, setPhishingCode] = useState(
+    localStorage.getItem("antiPhishingCode"),
+  );
+
+  useEffect(() => {
+    const profilePic = localStorage.getItem("profile_pic");
+    if (profilePic !== "null") setImageName(profilePic.split("_").pop());
+  }, []);
 
   const profileContent = [
     {
@@ -217,6 +235,8 @@ const ProfileBody = ({ afterUpdateSettings, active }) => {
 
   const handleUpload = (uploadedFile) => {
     setFile(uploadedFile);
+    setCropDialogOpen(true);
+    setImageChanged(true);
   };
 
   const checkErrors = () => {
@@ -250,14 +270,24 @@ const ProfileBody = ({ afterUpdateSettings, active }) => {
       phoneNumber: phoneNumber,
       email: email,
       business: business,
+      isMfa: isTotp,
+      requireOtp: isOtp,
+      antiPhishingCode: phishingCode,
     };
 
     let response = 1;
-    if (file) {
-      const response = await backendAPI.uploadFile(file);
-      if (response == null) {
+
+    if (imageChanged) {
+      let resp2;
+      if (file) {
+        resp2 = await backendAPI.uploadFile(file);
+      } else {
+        resp2 = await backendAPI.deleteProfileImage(file);
+      }
+      if (resp2 == null) {
         setErrorMessage("Error on uploading the profile picture");
       }
+      setImageChanged(false);
     }
 
     const response2 = await backendAPI.update(requestData);
@@ -312,7 +342,59 @@ const ProfileBody = ({ afterUpdateSettings, active }) => {
         />
       </div>
 
-      <Attachment label="Upload logo image" onUpload={handleUpload} />
+      <div>
+        <InputComponent
+          disabled
+          label="Time-based one-time password"
+          type="radio"
+          value={isTotp}
+          options={[
+            { name: "Yes", value: "true" },
+            { name: "No", value: "false" },
+          ]}
+          setState={setIsTotp}
+        />
+        <InputComponent
+          disabled
+          label="One-time passwords via email"
+          type="radio"
+          value={isOtp}
+          options={[
+            { name: "Yes", value: "true" },
+            { name: "No", value: "false" },
+          ]}
+          setState={setIsOtp}
+        />
+      </div>
+
+      <InputComponent
+        label="Anti Phishing Code"
+        placeholder="Anti Phishing Code"
+        type="text"
+        value={phishingCode}
+        setState={setPhishingCode}
+      />
+
+      <Attachment
+        label="Upload logo image"
+        onUpload={handleUpload}
+        value={imageName}
+        onDelete={() => {
+          setFile(null);
+          setImageChanged(true);
+        }}
+      />
+
+      <CropDialog
+        open={cropDialogOpen}
+        file={file}
+        aspect={1}
+        onClose={() => setCropDialogOpen(false)}
+        onSave={(croppedImageData) => {
+          setCropDialogOpen(false);
+          setFile(dataURLtoFile(croppedImageData, file.name));
+        }}
+      />
 
       <Buttons
         functions={[resetValues, handleConfirm]}
@@ -367,7 +449,7 @@ const PasswordBody = ({ active }) => {
 
     const response = await backendAPI.changePasswordDashboard(
       newPassword,
-      currentPassword
+      currentPassword,
     );
     if (response == null) {
       setErrorMessage("Old password is not the right one!");
@@ -532,7 +614,7 @@ const EmailBody = ({ active }) => {
     } else {
       const response = await backendAPI.confirmEmail(
         verificationCode.trim(),
-        newEmail
+        newEmail,
       );
       if (response == null) {
         setErrorMessage("Wrong verification code!");

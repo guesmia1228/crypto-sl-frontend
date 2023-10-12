@@ -25,7 +25,7 @@ const OptionCards = () => {
   return (
     <div className={`container scroll ${styles.section}`}>
       {content.map((item, index) => (
-        <div className="card">
+        <div key={index} className="card">
           <div className={styles.image}>
             <img src={contentImage[index].image} alt="payroll" />
           </div>

@@ -1,10 +1,10 @@
 # Name of workflow as seen in Github actions tab
 name: dev-build-and-deploy
-# Run workflow only on push to dev branch
+# Run workflow only on push to dev branch. Currently, deactivated!
 on:
   push:
     branches:
-      - dev
+      - devX
 jobs:
   # To build the project
   build-nefentus:

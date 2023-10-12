@@ -1,322 +1,321 @@
 {
-    "navigation": {
-      "home": "Inicio",
-      "solutions": "Soluciones de pago",
-      "payment": "Pago",
-      "paymentDescription": "Lorem ipsum, dolor sit amet consectetur adipisicing elit.",
-      "payroll": "Nómina",
-      "payrollDescription": "Lorem ipsum, dolor sit amet consectetur adipisicing elit.",
-      "resources": "Recurcos",
-      "affiliate": "Programa de afiliados",
-      "login": "Iniciar sesión",
-      "signUp": "Empezar",
-      "menu": "Español"
-    },
-    "home": {
-      "heroTitle": "Haga crecer su negocio con Nefentus",
-      "heroDescription": "Nuestra revolucionaria automatización de vanguardia y pagos seguros con criptomonedas le permiten centrarse en su negocio principal mientras maximiza las ganancias. Deje atrás los pagos manuales y abrace el futuro del comercio hoy mismo.",
-      "heroButton": "Comience ahora, es gratis",
-      "heroAvailable": "Disponible en:",
-      "cardSubtitle": "Su socio para la escalabilidad",
-      "cardTitle": "Empresas de todo el mundo utilizan Nefentus para gestionar y escalar su procesamiento de pagos.",
-      "cardList": [
-        {
-          "title": "Soporte de incorporación gratuito",
-          "description": "Aproveche nuestro soporte de incorporación para ayudarle a empezar."
-        },
-        {
-          "title": "Soluciones personalizadas",
-          "description": "Ofrecemos soluciones personalizadas que se adaptan a sus necesidades únicas.."
-        },
-        {
-          "title": "Benefíciese de nuestra experiencia",
-          "description": "Aproveche nuestro profundo conocimiento de la industria para impulsar el éxito dentro de su negocio."
-        }
-      ],
-      "layoutButton": "Comience gratis",
-      "simplifySubtitle": "Simplificar",
-      "simplifyTitle": "Administrar pagos e facturación con criptomonedas",
-      "simplifyDescription": "Nuestra plataforma segura es una plataforma completa y segura que simplifica, automatiza y facilita varios tipos de transacciones, incluidas las monedas tradicionales y digitales, para empresas y clientes por igual.",
-      "payrollDescription": "Utilice nuestra solución eficiente y simplificada para gestionar la compensación de los empleados, incluidos los pagos de salarios y las asignaciones de beneficios.",
-      "payrollSubtitle": "Process Payroll",
-      "payrollTitleP1": "Crecer con nuestro",
-      "payrollTitleP2": "payroll system",
-      "aboutCard1Subtitle": "Adopción rápida",
-      "aboutCard1Title": "La confianza de los usuarios se refleja en su aumento de actividad",
-      "aboutCard1Description": "La creciente actividad de los usuarios en Nefentus muestra la confianza de nuestros usuarios y el valor excepcional que obtienen de nuestro servicio. Estamos comprometidos a ofrecer continuamente excelencia y preservar su confianza.",
-      "aboutCard2Subtitle": "Gestione",
-      "aboutCard2TitleP1": "Aproveche el poder",
-      "aboutCard2TitleP2": "de nuestros cuadros de mando",
-      "aboutCard2Description": "Nuestros cuadros de mando avanzados le permiten obtener una visión más profunda y tomar decisiones basadas en datos con facilidad, mejorando su productividad y rentabilidad. Con potentes herramientas de visualización y análisis de datos a su alcance, puede descubrir tendencias ocultas, identificar indicadores clave de rendimiento y optimizar sus operaciones para lograr la máxima eficiencia.",
-      "aboutCard3Subtitle": "Integrate",
-      "aboutCard3TitleP1": "Conecte sin esfuerzo",
-      "aboutCard3TitleP2": "con sus otras herramientas",
-      "aboutCard3Description": "Integrar fácilmente su pila financiera existente con nuestra plataforma no sólo le permite acceder a más de 200 billeteras para pagos criptográficos, sino que también le permite aprovechar su infraestructura actual, reducir la necesidad de recursos adicionales, agilizar sus operaciones financieras y obtener un mejor control sobre los datos financieros de su empresa.",
-      "reviewList": [
-        {
-          "name": "Stephan Walouch",
-          "position": "Fundador y CEO",
-          "message": "Nefentus ha aumentado mis ingresos y me ha ahorrado tiempo."
-        },
-        {
-          "name": "Leon Enzminger",
-          "position": "Fundador y CEO",
-          "message": "Gracias a Nefentus, ¡puedo centrarme en hacer crecer mi negocio!"
-        },
-        {
-          "name": "Natalia Sakharova",
-          "position": "Jefe de Compilance",
-          "message": "Cambiar a Nefentus ha sido la mejor decisión que he tomado para mis pagos."
-        }
-      ],
-      "reviewTitleP1": "Escuche directamente a ",
-      "reviewTitleP2": "nuestros clientes",
-      "reviewSubtitle": "reseñas"
-    },
-    "payment": {
-      "heroHeading": "Acepte criptomonedas en menos de 5 minutos",
-      "heroDescription": "Experimente el futuro de las finanzas revolucionando sus procesos de facturación y pago con nuestras avanzadas herramientas de automatización y pagos seguros basados en cripto, simplificando la gestión financiera y maximizando el potencial de ingresos.",
-      "heroButton": "Comience ahora, es gratis",
-      "growSubtitle": "Crecer",
-      "growTitle": "Aumente sus ventas",
-      "growContent": [
-        {
-          "title": "Convierta la inteligencia en crecimiento",
-          "description": "Obtenga una visión instantánea de su negocio aprovechando nuestros cálculos automatizados de métricas clave, lo que le permitirá supervisar fácilmente su crecimiento y mantenerse al tanto de su negocio."
-        },
-        {
-          "title": "Salidas optimizadas",
-          "description": "Maximice su potencial de ventas con nuestros procesos de pago optimizados, que ofrecen tiempos de carga ultrarrápidos, tasas de conversión excepcionales y una experiencia de usuario inigualable, garantizados para deleitar a sus clientes y aumentar sus ingresos."
-        },
-        {
-          "title": "Automatice su pila financiera",
-          "description": "Desde la contabilidad y el pago de impuestos hasta el aprovisionamiento de productos, devoluciones y cancelaciones, gestión de comisiones y afiliados, emisión de billetes electrónicos, etc., Nefentus ofrece un completo conjunto de herramientas que le ayudarán a agilizar y optimizar sus operaciones comerciales."
-        }
-      ],
-      "iconTitleP1": "Adopte el pago",
-      "iconTitleP2": "que impulsan el futuro",
-      "iconSubtitle": "No se quede atrás",
-      "iconDescription": "Ofrecemos una amplia gama de opciones de pago, incluyendo criptomonedas populares como Bitcoin, Ethereum, Ripple y USDT, para ayudarle a vender sin esfuerzo sus productos y servicios a una audiencia global. La flexibilidad y escalabilidad de nuestra plataforma le permiten personalizar sus capacidades de pago y mantenerse a la vanguardia en el panorama actual de pagos en rápida evolución. Únase a nosotros hoy mismo y lleve su negocio al siguiente nivel.",
-      "whyTitle": "¿Por qué Nefentus?",
-      "whyContent": [
-        {
-          "title": "Hecho en Europa",
-          "description": "Nuestro equipo interno de expertos informáticos desarrolla y mejora continuamente Nefentus con los más altos estándares,"
-        },
-        {
-          "title": "Cumple con GDPR",
-          "description": "We prioritize data protection, adhering to the highest security and privacy standards to ensure the protection of your company and customers' data."
-        },
-        {
-          "title": "Seguro",
-          "description": "Con nuestros potentes y seguros servidores que ofrecen un 100% de disponibilidad, puedes confiar en que tu sitio web siempre será accesible, y tus datos siempre estarán seguros."
-
-        }
-      ],
-      "dataContent": [
-        {
-          "title": "3% de comisión",
-          "description": "Experimente un procesamiento de pagos sin igual, con fuertes tasas de conversión, métodos de pago populares e intuitivos, y transacciones rápidas y seguras.",
-          "list": [
-            "Altas tasas de conversión",
-            "Métodos de pago populares",
-            "Rápido y seguro",
-            "Proceso de pago intuitivo"
-          ]
-        },
-        {
-          "title": "Análisis inteligente",
-          "description": "Calculamos las métricas clave de su negocio y hacemos un seguimiento de su crecimiento sin esfuerzo.",
-          "list": [
-            "Ver el crecimiento medible",
-            "Optimice los procesos",
-            "Acceda a los análisis",
-            "Obtenga información"
-          ]
-        },
-        {
-          "title": "Automatiza",
-          "description": "Nefentus le ahorra la facturación manual y simplifica su contabilidad.",
-          "list": [
-            "Facturación automatizada",
-            "Cuadros de mando detallados",
-            "Resumen financiero",
-            "Completamente cliente"
-          ]
-        },
-        {
-          "title": "Productos digitales",
-          "description": "Cargue de forma segura productos digitales una sola vez en Nefentus y póngalos a disposición para su descarga tras la compra, sin necesidad de proveedores externos.",
-          "list": [
-            "Asegure su contenido",
-            "Acceso a productos digitales",
-            "Tenga su propia cloud"
-          ]
-        }
-      ],
-      "paymentSubtitle": "Coste",
-      "paymentTitleP1": "0€ Cuota Inicial, 0€ Cuota Mensual",
-      "paymentTitleP2": "Pague sólo por los resultados",
-      "paymentCard1Title": "Básico - Vendedor",
-      "paymentCard1Description": "3% de comisión",
-      "paymentCard2Title": "Customized - Enterpriser",
-      "paymentCard2Description": "100,000+ EUR monthly transaction ",
-      "paymentButton": "Sign Up For Free",
-      "paymentCard1": [
-        "Facturación automatizada",
-        "Acepta 7 métodos de pago diferentes",
-        "Tiempo de actividad 24/7",
-        "Cobros automatizados",
-        "Soporte Premium y rápido",
-        "Acceso instantáneo"
-      ],
-      "paymentCard2": [
-        "Todas las ventajas del paquete Básico-Vendedor",
-        "Asistencia por teléfono y vídeo a cargo de un gestor de cuentas especializado",
-        "Acceso gratuito a nuestro grupo de soporte privado para preguntas, respuestas y debate ",
-        "Acceso anticipado a versiones beta",
-        "Descuentos especiales en las comisiones por transacción"
-      ]
-    },
-    "payroll": {
-      "heroTitleP1": "The most effortless payroll ",
-      "heroTitleP2": "processing for your business",
-      "heroSubtitle": "Payroll Solutions",
-      "heroDescription": "Simplifique su proceso de nóminas con las flexibles y eficientes soluciones de nóminas en criptomoneda y FIAT de Nefentus. Añada empleados, establezca salarios y pague con facilidad, todo ello aprovechando las ventajas de la criptomoneda. Con nuestras completas herramientas de generación de informes, podrá obtener información valiosa sobre sus datos de nómina, lo que le permitirá optimizar sus operaciones para mejorar la productividad y la rentabilidad.",
-      "manageTitle": "Gestione la nómina sin esfuerzo con criptomoneda",
-      "manageDescription": "Potencie a sus empleados con las soluciones avanzadas de nómina con criptomoneda de Nefentus, que le permiten pagar salarios y bonificaciones totales o parciales en criptomoneda, así como asignar participaciones de su token para fidelizar e incentivar la productividad.",
-      "manageButton": "Comience gratis",
-      "manageSubtitle": "Gestione",
-      "organizeSubtitle": "Organice el pago",
-      "organizeTitle": "Procese sin esfuerzo los beneficios de los empleados",
-      "organizeDescription": "Gestiona eficientemente tu nómina con las funciones avanzadas de Nefentus, incluyendo soporte multidivisa y multicadena, tarifas de transacción más bajas para equipos globales, incorporación a través de cargas de archivos CSV y programación de salarios recurrentes.",
-      "trackSubtitle": "Seguimiento",
-      "trackTitleP1": "Controle todos los pagos ",
-      "trackTitleP2": "en un solo lugar",
-      "trackDescription": "Revise sin esfuerzo el estado de todas las solicitudes de pago utilizando el panel visual de Nefentus, con la posibilidad de enviar fácilmente recordatorios de pago a las solicitudes pendientes.",
-      "iconSubtitle": "Pila financiera",
-      "iconTitleP1": "Agilice sus pagos",
-      "iconTitleP2": "con integraciones sin fisuras",
-      "iconDescription": "Simplifique el procesamiento de sus pagos con la plataforma transparente de Nefentus, que ofrece acceso a más de 200 monederos para aceptar y procesar sin esfuerzo pagos en criptomoneda con funciones de seguridad avanzadas.",
-      "payrollContent": [
-        {
-          "title": "Facturació",
-          "description": "Su plataforma todo en uno para gestionar sus facturas. Diseñada para los equipos de Finanzas y Operaciones de las empresas."
-        },
-        {
-          "title": "Nómina",
-          "description": "El procesamiento de salarios y bonificaciones en criptomoneda se ha vuelto cada vez más popular debido a su simplicidad y eficiencia."
-        },
-        {
-          "title": "Gastos",
-          "description": "Simplifique la presentación de reclamaciones de gastos para su equipo. Apruebe y reembolse gastos en criptomoneda de forma rápida y sencilla."
-        }
-      ]
-    },
-    "signUp": {
-      "titleP1": "Empiece con",
-      "titleP2": "Nefentus",
-      "description": "Empiece ahora, es gratis. Nefentus le ayuda a gestionar las operaciones de su empresa de una forma conforme y sostenible.",
-      "info": "¿Ya tienes una cuenta?",
-      "infoButton": "Iniciar sesión ",
-      "firstNameLabel": "Nombre de pila",
-      "firstNamePlaceholder": "John",
-      "lastNameLabel": "Apellidos",
-      "lastNamePlaceholder": "Doe",
-      "telefonLabel": "Teléfono",
-      "emailLabel": "Correo electrónico",
-      "emailPlaceholder": "you@email.com",
-      "passwordLabel": "Contraseña",
-      "passwordPlaceholder": "Contraseña",
-      "optionLabel": "¿A qué desea inscribirse?",
-      "option1": "Vendedor",
-      "option2": "Afiliado",
-      "formButton": "Crear cuenta",
-      "formInfo": "Al registrarse, acepta nuestra Política de privacidad y las Condiciones del servicio."
-    },
-    "login": {
-      "title": "Bienvenido",
-	  "remember": "Recuérdame",
-      "button": "Iniciar sesión",
-      "info": "¿No tienes una cuenta? ",
-      "infoButton": "Registrarse",
-      "forgot": "¿Ha olvidado su contraseña?"
-    },
-    "contact": {
-      "title": "Llamada de bienvenida gratuita",
-      "description": "En Nefentus, creemos en el apoyo a nuestros clientes en cada paso del camino. Por eso ofrecemos llamadas de bienvenida gratuitas para ayudarle con el registro y la configuración. Tanto si es propietario de un bar, consultor, coach, formador, conferenciante o propietario de una agencia, nos comprometemos a encontrar la solución perfecta para sus necesidades específicas",
-      "button": "Reservar una llamada"
-    },
-    "forgot-password": {
-      "title": "Olvidé mi contraseña",
-      "button": "Enviar correo electrónico",
-      "info": "¿No sabe su correo electrónico? ¡Por favor, póngase en contacto con el soporte!"
+  "navigation": {
+    "home": "Inicio",
+    "solutions": "Soluciones de pago",
+    "payment": "Pago",
+    "paymentDescription": "Lorem ipsum, dolor sit amet consectetur adipisicing elit.",
+    "payroll": "Nómina",
+    "payrollDescription": "Lorem ipsum, dolor sit amet consectetur adipisicing elit.",
+    "resources": "Recurcos",
+    "affiliate": "Programa de afiliados",
+    "login": "Iniciar sesión",
+    "signUp": "Empezar",
+    "menu": "Español"
+  },
+  "home": {
+    "heroTitle": "Haga crecer su negocio con Nefentus",
+    "heroDescription": "Nuestra revolucionaria automatización de vanguardia y pagos seguros con criptomonedas le permiten centrarse en su negocio principal mientras maximiza las ganancias. Deje atrás los pagos manuales y abrace el futuro del comercio hoy mismo.",
+    "heroButton": "Comience ahora, es gratis",
+    "heroAvailable": "Disponible en:",
+    "cardSubtitle": "Su socio para la escalabilidad",
+    "cardTitle": "Empresas de todo el mundo utilizan Nefentus para gestionar y escalar su procesamiento de pagos.",
+    "cardList": [
+      {
+        "title": "Soporte de incorporación gratuito",
+        "description": "Aproveche nuestro soporte de incorporación para ayudarle a empezar."
       },
-      "reset-password": {
-        "title": "Restablecer contraseña",
-        "button": "restablecer",
-        "info": "¿No quieres restablecer tu contraseña? Inicia sesión en su lugar.",
-        "button-label-confirm": "Confirmar contraseña"
-        },
-    "footer": {
-      "copyright": "© 2023 Nefentus. All rights reserved.",
-      "content": [
-        {
-          "label": "Información general",
-          "links": [
-            {
-              "text": "Inicio"
-            },
-            {
-              "text": "Soluciones de pago"
-            },
-            {
-              "text": "Recursos"
-            },
-            {
-              "text": "Programa de afiliados"
-            }
-          ]
-        },
-        {
-          "label": "Únase a",
-          "links": [
-            {
-              "text": "Iniciar sesión"
-            },
-            {
-              "text": "Regístrate"
-            },
-            {
-              "text": "Play Store"
-            },
-            {
-              "text": "App store"
-            }
-          ]
-        },
-        {
-          "label": "Información",
-          "links": [
-            {
-              "text": "Política de privacidad"
-            },
-            {
-              "text": "Empresa"
-            }
-          ]
-        },
-        {
-          "label": "Company",
-          "links": [
-            {
-              "text": "office@nefentus.com"
-            },
-            {
-              "text": "Larnaca, Chipre"
-            }
-          ]
-        }
-      ]
-    }
+      {
+        "title": "Soluciones personalizadas",
+        "description": "Ofrecemos soluciones personalizadas que se adaptan a sus necesidades únicas.."
+      },
+      {
+        "title": "Benefíciese de nuestra experiencia",
+        "description": "Aproveche nuestro profundo conocimiento de la industria para impulsar el éxito dentro de su negocio."
+      }
+    ],
+    "layoutButton": "Comience gratis",
+    "simplifySubtitle": "Simplificar",
+    "simplifyTitle": "Administrar pagos e facturación con criptomonedas",
+    "simplifyDescription": "Nuestra plataforma segura es una plataforma completa y segura que simplifica, automatiza y facilita varios tipos de transacciones, incluidas las monedas tradicionales y digitales, para empresas y clientes por igual.",
+    "payrollDescription": "Utilice nuestra solución eficiente y simplificada para gestionar la compensación de los empleados, incluidos los pagos de salarios y las asignaciones de beneficios.",
+    "payrollSubtitle": "Process Payroll",
+    "payrollTitleP1": "Crecer con nuestro",
+    "payrollTitleP2": "payroll system",
+    "aboutCard1Subtitle": "Adopción rápida",
+    "aboutCard1Title": "La confianza de los usuarios se refleja en su aumento de actividad",
+    "aboutCard1Description": "La creciente actividad de los usuarios en Nefentus muestra la confianza de nuestros usuarios y el valor excepcional que obtienen de nuestro servicio. Estamos comprometidos a ofrecer continuamente excelencia y preservar su confianza.",
+    "aboutCard2Subtitle": "Gestione",
+    "aboutCard2TitleP1": "Aproveche el poder",
+    "aboutCard2TitleP2": "de nuestros cuadros de mando",
+    "aboutCard2Description": "Nuestros cuadros de mando avanzados le permiten obtener una visión más profunda y tomar decisiones basadas en datos con facilidad, mejorando su productividad y rentabilidad. Con potentes herramientas de visualización y análisis de datos a su alcance, puede descubrir tendencias ocultas, identificar indicadores clave de rendimiento y optimizar sus operaciones para lograr la máxima eficiencia.",
+    "aboutCard3Subtitle": "Integrate",
+    "aboutCard3TitleP1": "Conecte sin esfuerzo",
+    "aboutCard3TitleP2": "con sus otras herramientas",
+    "aboutCard3Description": "Integrar fácilmente su pila financiera existente con nuestra plataforma no sólo le permite acceder a más de 200 billeteras para pagos criptográficos, sino que también le permite aprovechar su infraestructura actual, reducir la necesidad de recursos adicionales, agilizar sus operaciones financieras y obtener un mejor control sobre los datos financieros de su empresa.",
+    "reviewList": [
+      {
+        "name": "Stephan Walouch",
+        "position": "Fundador y CEO",
+        "message": "Nefentus ha aumentado mis ingresos y me ha ahorrado tiempo."
+      },
+      {
+        "name": "Leon Enzminger",
+        "position": "Fundador y CEO",
+        "message": "Gracias a Nefentus, ¡puedo centrarme en hacer crecer mi negocio!"
+      },
+      {
+        "name": "Natalia Sakharova",
+        "position": "Jefe de Compilance",
+        "message": "Cambiar a Nefentus ha sido la mejor decisión que he tomado para mis pagos."
+      }
+    ],
+    "reviewTitleP1": "Escuche directamente a ",
+    "reviewTitleP2": "nuestros clientes",
+    "reviewSubtitle": "reseñas"
+  },
+  "payment": {
+    "heroHeading": "Acepte criptomonedas en menos de 5 minutos",
+    "heroDescription": "Experimente el futuro de las finanzas revolucionando sus procesos de facturación y pago con nuestras avanzadas herramientas de automatización y pagos seguros basados en cripto, simplificando la gestión financiera y maximizando el potencial de ingresos.",
+    "heroButton": "Comience ahora, es gratis",
+    "growSubtitle": "Crecer",
+    "growTitle": "Aumente sus ventas",
+    "growContent": [
+      {
+        "title": "Convierta la inteligencia en crecimiento",
+        "description": "Obtenga una visión instantánea de su negocio aprovechando nuestros cálculos automatizados de métricas clave, lo que le permitirá supervisar fácilmente su crecimiento y mantenerse al tanto de su negocio."
+      },
+      {
+        "title": "Salidas optimizadas",
+        "description": "Maximice su potencial de ventas con nuestros procesos de pago optimizados, que ofrecen tiempos de carga ultrarrápidos, tasas de conversión excepcionales y una experiencia de usuario inigualable, garantizados para deleitar a sus clientes y aumentar sus ingresos."
+      },
+      {
+        "title": "Automatice su pila financiera",
+        "description": "Desde la contabilidad y el pago de impuestos hasta el aprovisionamiento de productos, devoluciones y cancelaciones, gestión de comisiones y afiliados, emisión de billetes electrónicos, etc., Nefentus ofrece un completo conjunto de herramientas que le ayudarán a agilizar y optimizar sus operaciones comerciales."
+      }
+    ],
+    "iconTitleP1": "Adopte el pago",
+    "iconTitleP2": "que impulsan el futuro",
+    "iconSubtitle": "No se quede atrás",
+    "iconDescription": "Ofrecemos una amplia gama de opciones de pago, incluyendo criptomonedas populares como Bitcoin, Ethereum, Ripple y USDT, para ayudarle a vender sin esfuerzo sus productos y servicios a una audiencia global. La flexibilidad y escalabilidad de nuestra plataforma le permiten personalizar sus capacidades de pago y mantenerse a la vanguardia en el panorama actual de pagos en rápida evolución. Únase a nosotros hoy mismo y lleve su negocio al siguiente nivel.",
+    "whyTitle": "¿Por qué Nefentus?",
+    "whyContent": [
+      {
+        "title": "Hecho en Europa",
+        "description": "Nuestro equipo interno de expertos informáticos desarrolla y mejora continuamente Nefentus con los más altos estándares,"
+      },
+      {
+        "title": "Cumple con GDPR",
+        "description": "We prioritize data protection, adhering to the highest security and privacy standards to ensure the protection of your company and customers' data."
+      },
+      {
+        "title": "Seguro",
+        "description": "Con nuestros potentes y seguros servidores que ofrecen un 100% de disponibilidad, puedes confiar en que tu sitio web siempre será accesible, y tus datos siempre estarán seguros."
+      }
+    ],
+    "dataContent": [
+      {
+        "title": "3% de comisión",
+        "description": "Experimente un procesamiento de pagos sin igual, con fuertes tasas de conversión, métodos de pago populares e intuitivos, y transacciones rápidas y seguras.",
+        "list": [
+          "Altas tasas de conversión",
+          "Métodos de pago populares",
+          "Rápido y seguro",
+          "Proceso de pago intuitivo"
+        ]
+      },
+      {
+        "title": "Análisis inteligente",
+        "description": "Calculamos las métricas clave de su negocio y hacemos un seguimiento de su crecimiento sin esfuerzo.",
+        "list": [
+          "Ver el crecimiento medible",
+          "Optimice los procesos",
+          "Acceda a los análisis",
+          "Obtenga información"
+        ]
+      },
+      {
+        "title": "Automatiza",
+        "description": "Nefentus le ahorra la facturación manual y simplifica su contabilidad.",
+        "list": [
+          "Facturación automatizada",
+          "Cuadros de mando detallados",
+          "Resumen financiero",
+          "Completamente cliente"
+        ]
+      },
+      {
+        "title": "Productos digitales",
+        "description": "Cargue de forma segura productos digitales una sola vez en Nefentus y póngalos a disposición para su descarga tras la compra, sin necesidad de proveedores externos.",
+        "list": [
+          "Asegure su contenido",
+          "Acceso a productos digitales",
+          "Tenga su propia cloud"
+        ]
+      }
+    ],
+    "paymentSubtitle": "Coste",
+    "paymentTitleP1": "0€ Cuota Inicial, 0€ Cuota Mensual",
+    "paymentTitleP2": "Pague sólo por los resultados",
+    "paymentCard1Title": "Básico - Vendedor",
+    "paymentCard1Description": "3% de comisión",
+    "paymentCard2Title": "Customized - Enterpriser",
+    "paymentCard2Description": "100,000+ EUR monthly transaction ",
+    "paymentButton": "Sign Up For Free",
+    "paymentCard1": [
+      "Facturación automatizada",
+      "Acepta 7 métodos de pago diferentes",
+      "Tiempo de actividad 24/7",
+      "Cobros automatizados",
+      "Soporte Premium y rápido",
+      "Acceso instantáneo"
+    ],
+    "paymentCard2": [
+      "Todas las ventajas del paquete Básico-Vendedor",
+      "Asistencia por teléfono y vídeo a cargo de un gestor de cuentas especializado",
+      "Acceso gratuito a nuestro grupo de soporte privado para preguntas, respuestas y debate ",
+      "Acceso anticipado a versiones beta",
+      "Descuentos especiales en las comisiones por transacción"
+    ]
+  },
+  "payroll": {
+    "heroTitleP1": "The most effortless payroll ",
+    "heroTitleP2": "processing for your business",
+    "heroSubtitle": "Payroll Solutions",
+    "heroDescription": "Simplifique su proceso de nóminas con las flexibles y eficientes soluciones de nóminas en criptomoneda y FIAT de Nefentus. Añada empleados, establezca salarios y pague con facilidad, todo ello aprovechando las ventajas de la criptomoneda. Con nuestras completas herramientas de generación de informes, podrá obtener información valiosa sobre sus datos de nómina, lo que le permitirá optimizar sus operaciones para mejorar la productividad y la rentabilidad.",
+    "manageTitle": "Gestione la nómina sin esfuerzo con criptomoneda",
+    "manageDescription": "Potencie a sus empleados con las soluciones avanzadas de nómina con criptomoneda de Nefentus, que le permiten pagar salarios y bonificaciones totales o parciales en criptomoneda, así como asignar participaciones de su token para fidelizar e incentivar la productividad.",
+    "manageButton": "Comience gratis",
+    "manageSubtitle": "Gestione",
+    "organizeSubtitle": "Organice el pago",
+    "organizeTitle": "Procese sin esfuerzo los beneficios de los empleados",
+    "organizeDescription": "Gestiona eficientemente tu nómina con las funciones avanzadas de Nefentus, incluyendo soporte multidivisa y multicadena, tarifas de transacción más bajas para equipos globales, incorporación a través de cargas de archivos CSV y programación de salarios recurrentes.",
+    "trackSubtitle": "Seguimiento",
+    "trackTitleP1": "Controle todos los pagos ",
+    "trackTitleP2": "en un solo lugar",
+    "trackDescription": "Revise sin esfuerzo el estado de todas las solicitudes de pago utilizando el panel visual de Nefentus, con la posibilidad de enviar fácilmente recordatorios de pago a las solicitudes pendientes.",
+    "iconSubtitle": "Pila financiera",
+    "iconTitleP1": "Agilice sus pagos",
+    "iconTitleP2": "con integraciones sin fisuras",
+    "iconDescription": "Simplifique el procesamiento de sus pagos con la plataforma transparente de Nefentus, que ofrece acceso a más de 200 monederos para aceptar y procesar sin esfuerzo pagos en criptomoneda con funciones de seguridad avanzadas.",
+    "payrollContent": [
+      {
+        "title": "Facturació",
+        "description": "Su plataforma todo en uno para gestionar sus facturas. Diseñada para los equipos de Finanzas y Operaciones de las empresas."
+      },
+      {
+        "title": "Nómina",
+        "description": "El procesamiento de salarios y bonificaciones en criptomoneda se ha vuelto cada vez más popular debido a su simplicidad y eficiencia."
+      },
+      {
+        "title": "Gastos",
+        "description": "Simplifique la presentación de reclamaciones de gastos para su equipo. Apruebe y reembolse gastos en criptomoneda de forma rápida y sencilla."
+      }
+    ]
+  },
+  "signUp": {
+    "titleP1": "Empiece con",
+    "titleP2": "Nefentus",
+    "description": "Empiece ahora, es gratis. Nefentus le ayuda a gestionar las operaciones de su empresa de una forma conforme y sostenible.",
+    "info": "¿Ya tienes una cuenta?",
+    "infoButton": "Iniciar sesión ",
+    "firstNameLabel": "Nombre de pila",
+    "firstNamePlaceholder": "John",
+    "lastNameLabel": "Apellidos",
+    "lastNamePlaceholder": "Doe",
+    "telefonLabel": "Teléfono",
+    "emailLabel": "Correo electrónico",
+    "emailPlaceholder": "you@email.com",
+    "passwordLabel": "Contraseña",
+    "passwordPlaceholder": "Contraseña",
+    "optionLabel": "¿A qué desea inscribirse?",
+    "option1": "Vendedor",
+    "option2": "Afiliado",
+    "formButton": "Crear cuenta",
+    "formInfo": "Al registrarse, acepta nuestra Política de privacidad y las Condiciones del servicio."
+  },
+  "login": {
+    "title": "Bienvenido",
+    "remember": "Recuérdame",
+    "button": "Iniciar sesión",
+    "info": "¿No tienes una cuenta? ",
+    "infoButton": "Registrarse",
+    "forgot": "¿Ha olvidado su contraseña?"
+  },
+  "contact": {
+    "title": "Llamada de bienvenida gratuita",
+    "description": "En Nefentus, creemos en el apoyo a nuestros clientes en cada paso del camino. Por eso ofrecemos llamadas de bienvenida gratuitas para ayudarle con el registro y la configuración. Tanto si es propietario de un bar, consultor, coach, formador, conferenciante o propietario de una agencia, nos comprometemos a encontrar la solución perfecta para sus necesidades específicas",
+    "button": "Reservar una llamada"
+  },
+  "forgot-password": {
+    "title": "Olvidé mi contraseña",
+    "button": "Enviar correo electrónico",
+    "info": "¿No sabe su correo electrónico? ¡Por favor, póngase en contacto con el soporte!"
+  },
+  "reset-password": {
+    "title": "Restablecer contraseña",
+    "button": "restablecer",
+    "info": "¿No quieres restablecer tu contraseña? Inicia sesión en su lugar.",
+    "button-label-confirm": "Confirmar contraseña"
+  },
+  "footer": {
+    "copyright": "© 2023 Nefentus. All rights reserved.",
+    "content": [
+      {
+        "label": "Información general",
+        "links": [
+          {
+            "text": "Inicio"
+          },
+          {
+            "text": "Soluciones de pago"
+          },
+          {
+            "text": "Recursos"
+          },
+          {
+            "text": "Programa de afiliados"
+          }
+        ]
+      },
+      {
+        "label": "Únase a",
+        "links": [
+          {
+            "text": "Iniciar sesión"
+          },
+          {
+            "text": "Regístrate"
+          },
+          {
+            "text": "Play Store"
+          },
+          {
+            "text": "App store"
+          }
+        ]
+      },
+      {
+        "label": "Información",
+        "links": [
+          {
+            "text": "Política de privacidad"
+          },
+          {
+            "text": "Empresa"
+          }
+        ]
+      },
+      {
+        "label": "Company",
+        "links": [
+          {
+            "text": "office@nefentus.com"
+          },
+          {
+            "text": "Larnaca, Chipre"
+          }
+        ]
+      }
+    ]
   }
+}

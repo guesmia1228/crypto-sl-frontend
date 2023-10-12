@@ -10,8 +10,8 @@
 }
 
 .balance {
-	margin-top: 20px;
-	background-color: #1C1C1C;
+  margin-top: 20px;
+  background-color: #1c1c1c;
   padding: 3rem;
   border-radius: 1rem;
 }
@@ -79,8 +79,8 @@
 }
 
 .line img {
-	width: 4rem;
-	height: auto;
+  width: 4rem;
+  height: auto;
 }
 
 .lineLeft {
@@ -101,13 +101,14 @@
   color: var(--gray-color);
 }
 
-.crypto, .dollar {
+.crypto,
+.dollar {
   text-align: right;
 }
 
 .withdrawal {
-	margin-top: 20px;
-	background-color: #1C1C1C;
+  margin-top: 20px;
+  background-color: #1c1c1c;
   padding: 3rem;
   border-radius: 1rem;
 }
@@ -142,92 +143,92 @@
 }
 
 .center {
-	display: flex;
-  	justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .tabNavLogo {
-	height: 1.5rem;
-	margin-right: 0.3rem;
-	vertical-align: baseline;
+  height: 1.5rem;
+  margin-right: 0.3rem;
+  vertical-align: baseline;
 }
 
 .metamaskConnectButton {
-	margin-top: 20px;
+  margin-top: 20px;
 }
 
 .metamaskAccount {
-	margin-top: 20px;
-	background-color: #1C1C1C;
-	padding: 3rem;
-	border-radius: 1rem;
+  margin-top: 20px;
+  background-color: #1c1c1c;
+  padding: 3rem;
+  border-radius: 1rem;
 
-	display: flex;
-	gap: 3rem;
-	justify-content: space-between;
+  display: flex;
+  gap: 3rem;
+  justify-content: space-between;
 }
 
-.metamaskAccount > span{
-	margin-top: auto;
-    margin-bottom: auto;
+.metamaskAccount > span {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .metamaskDisconnectButton {
-	padding: 1rem 0rem;
-	border: 1px solid var(--white-color);
-	border-radius: 0.5rem;
-	height: max-content;
-  
-	text-align: center;
-	width: 14rem;
-  
-	cursor: pointer;
-  
-	font-size: 1.6rem;
+  padding: 1rem 0rem;
+  border: 1px solid var(--white-color);
+  border-radius: 0.5rem;
+  height: max-content;
 
-	border-color: rgba(255, 255, 255, 0.2) !important;
-	color: var(--gray-color) !important;
-	background-color: rgba(0,0,0,0) !important;
+  text-align: center;
+  width: 14rem;
+
+  cursor: pointer;
+
+  font-size: 1.6rem;
+
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: var(--gray-color) !important;
+  background-color: rgba(0, 0, 0, 0) !important;
 }
 
 .modal h4 {
-	font-size: 2.5rem;
-	font-weight: 500;
-	margin-bottom: 3rem;
+  font-size: 2.5rem;
+  font-weight: 500;
+  margin-bottom: 3rem;
 }
 
 .modalInputs {
-	display: flex;
-	flex-direction: column;
-	gap: 2rem;
-	margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 3rem;
 }
 
 .modalButtons {
-	display: grid;
-	grid-template-columns: 1fr;
-	gap: 2rem;
-	cursor: pointer;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  cursor: pointer;
 }
 
 .modalButtons > div {
-	width: 100%;
+  width: 100%;
 }
 
 .walletAddressWrapper {
-	display: flex;
-	gap: 1rem;
+  display: flex;
+  gap: 1rem;
 }
 
 .walletAddressWrapper img {
-	margin-top: auto;
-	margin-bottom: auto;
-	height: max-content;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: max-content;
 }
 
 .clipboardButton {
-	height: 100%;
-	padding: 2px;
+  height: 100%;
+  padding: 2px;
 }
 
 @media (max-width: 900px) {
@@ -260,5 +261,5 @@
 }
 
 .withdrawalTable {
-	margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }

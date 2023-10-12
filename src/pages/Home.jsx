@@ -1,13 +1,9 @@
 import Layout from "../components/layout/layout";
-import Navigation from "../components/navigation/navigation";
 
 import Logos from "../components/logos/logos";
 import Cards from "../components/cards/cards";
 import About from "../components/about/about";
-import Reviews from "../components/reviews/reviews";
 import backendAPI from "../api/backendAPI";
-import Cookies from "universal-cookie";
-import HomeHeroVideo from "../assets/video/homeHero.mp4";
 
 import { Helmet } from "react-helmet";
 
@@ -16,13 +12,12 @@ import Main from "../assets/image/main.svg";
 
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
-import Help from "../components/help/help";
 import PaymentCards from "../components/paymentCards/paymentCards";
+import Prices from "../components/prices/prices";
 
 const Home = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const api = new backendAPI();
-  const cookies = new Cookies();
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has("affiliate")) {
@@ -55,6 +50,7 @@ const Home = () => {
         full
         // video={HomeHeroVideo}
         store
+        children={<Prices />}
       />
 
       <Logos />
