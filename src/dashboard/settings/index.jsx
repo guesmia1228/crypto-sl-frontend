@@ -232,6 +232,7 @@ const ProfileBody = ({ afterUpdateSettings, active }) => {
   ];
 
   const backendAPI = new backend_API();
+  const navigate = useNavigate();
 
   const handleUpload = (uploadedFile) => {
     setFile(uploadedFile);
@@ -269,7 +270,7 @@ const ProfileBody = ({ afterUpdateSettings, active }) => {
       lastName: lastName,
       phoneNumber: phoneNumber,
       email: email,
-      business: business,
+      business: business || "",
       isMfa: isTotp,
       requireOtp: isOtp,
       antiPhishingCode: phishingCode,
@@ -293,6 +294,10 @@ const ProfileBody = ({ afterUpdateSettings, active }) => {
     const response2 = await backendAPI.update(requestData);
     if (response2 == null) {
       setErrorMessage("Error on updating data");
+      await backendAPI.signout();
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
     }
 
     resetValues();
