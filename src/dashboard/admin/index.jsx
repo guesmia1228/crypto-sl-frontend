@@ -81,17 +81,7 @@ const AdminBody = ({ type }) => {
       const [dataClick, reportResp, totalPricePerDate] =
         await Promise.allSettled(getPromisesGraph);
 
-      const [dataUsers] = await Promise.allSettled([adminApi.getUsers()]);
-
-      console.log(
-        dataReg,
-        dataClick,
-        dataOrders,
-        dataInc,
-        dataUsers,
-        reportResp,
-        totalPricePerDate,
-      );
+      const dataUsers = await adminApi.getUsers();
 
       const cardsContent = [
         {
@@ -130,8 +120,8 @@ const AdminBody = ({ type }) => {
       console.log(cardsContent);
       setCardInfo(cardsContent);
 
-      dataUsers.value.reverse();
-      updateUsers(dataUsers.value);
+      dataUsers.reverse();
+      updateUsers(dataUsers);
 
       console.log(reportResp);
       setBarContent(reportResp.value);
