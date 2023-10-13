@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import styles from "./countdown.module.css";
 
-function Countdown({children}) {
-  const expirationDate = new Date("October 14, 2023 23:59:59");
+function Countdown({ children }) {
+  const expirationDate = new Date("November 1, 2023 0:0:0");
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -38,24 +38,22 @@ function Countdown({children}) {
   }, []);
 
   return (
-	<>
-		<div className={styles.countdown}>
-		<h2>Coming Soon:</h2>
-		<div className={styles.countdownTimer}>
-			<span>{timeLeft.days}</span>
-			<span>d</span>
-			<span>{timeLeft.hours}</span>
-			<span>h</span>
-			<span>{timeLeft.minutes}</span>
-			<span>m</span>
-			<span>{timeLeft.seconds}</span>
-			<span>s</span>
-		</div>
-		<div className={styles.content}>
-			{children}
-		</div>
-		</div>
-	</>
+    <>
+      <div className={styles.countdown}>
+        <h2>Coming Soon:</h2>
+        <div className={styles.countdownTimer}>
+          <span>{timeLeft.days}</span>
+          <span>d</span>
+          <span>{timeLeft.hours}</span>
+          <span>h</span>
+          <span>{timeLeft.minutes}</span>
+          <span>m</span>
+          <span>{timeLeft.seconds}</span>
+          <span>s</span>
+        </div>
+        <div className={styles.content}>{children}</div>
+      </div>
+    </>
   );
 }
 

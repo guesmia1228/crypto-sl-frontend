@@ -1,9 +1,18 @@
 import styles from "./input.module.css";
+import Delete from "../../assets/icon/delete.svg";
 
 import AttachmentImage from "../../assets/icon/attachment.svg";
-import { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
-const Input = ({ label, placeholder, type = "text", setState, value, disabled }) => {
+const Input = ({
+  label,
+  placeholder,
+  type = "text",
+  setState,
+  value,
+  disabled,
+  options,
+}) => {
   const handleChange = (e) => {
     setState(e.target.value);
   };
@@ -12,6 +21,59 @@ const Input = ({ label, placeholder, type = "text", setState, value, disabled })
     <div className={styles.input}>
       <p>{label}</p>
 
+      {type === "radio" ? (
+        <div className={styles["radio-group"]}>
+          {options.map((option) => (
+            <div key={option.value} className={styles["radio"]}>
+              {console.log(
+                "checked",
+                value,
+                option.value,
+                value === option.value,
+              )}
+              <input
+                type="radio"
+                id={`${label} - ${option.name}`}
+                name={label}
+                value={option.value}
+                onChange={handleChange}
+                checked={value === option.value}
+              />
+              <label htmlFor={`${label} - ${option.name}`}>{option.name}</label>
+              <br />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <input
+          type={type}
+          name=""
+          id=""
+          value={value}
+          placeholder={placeholder}
+          onChange={handleChange}
+          disabled={disabled === true}
+        />
+      )}
+    </div>
+  );
+};
+
+export default Input;
+
+export const RawInput = ({
+  placeholder,
+  type = "text",
+  setState,
+  value,
+  disabled,
+}) => {
+  const handleChange = (e) => {
+    setState(e.target.value);
+  };
+
+  return (
+    <div className={`${styles.input} ${styles.inputRaw}`}>
       <input
         type={type}
         name=""
@@ -19,30 +81,20 @@ const Input = ({ label, placeholder, type = "text", setState, value, disabled })
         value={value}
         placeholder={placeholder}
         onChange={handleChange}
-		disabled={disabled === true}
+        disabled={disabled === true}
       />
     </div>
   );
 };
 
-export default Input;
-
-export const RawInput = ({ placeholder, type = "text", setState, value, disabled }) => {
-	const handleChange = (e) => {
-		setState(e.target.value);
-	};
-  
-	return (
-		<div className={`${styles.input} ${styles.inputRaw}`}>
-			<input type={type} name="" id="" value={value} placeholder={placeholder} onChange={handleChange} disabled={disabled === true}/>
-		</div>
-	);
-};
-
-export const Attachment = ({ label, onUpload }) => {
+export const Attachment = ({ label, onUpload, onDelete, value }) => {
   const inputRef = useRef(null);
 
   const [text, setText] = useState(false);
+
+  useEffect(() => {
+    if (value) setText(value);
+  }, [value]);
 
   const handleClick = () => {
     inputRef.current.click();
@@ -71,12 +123,22 @@ export const Attachment = ({ label, onUpload }) => {
     <>
       <div className={styles.input}>
         <p>{label}</p>
-
-        <div className={styles.attachment} onClick={handleClick}>
-          <img src={AttachmentImage} alt="" />
-          <p style={{ color: text ? "#fff" : "#c4c4c4" }}>
-            {text ? text : "Add attachment"}
-          </p>
+        <div className={styles.attachment}>
+          <div className={styles.left} onClick={handleClick}>
+            <img src={AttachmentImage} alt="" />
+            <p style={{ color: text ? "#fff" : "#c4c4c4" }}>
+              {text ? text : "Add attachment"}
+            </p>
+          </div>
+          <img
+            src={Delete}
+            alt="Delete attachment"
+            onClick={() => {
+              onDelete();
+              setText(null);
+            }}
+            className={styles.deleteLogo}
+          />
         </div>
       </div>
       <input

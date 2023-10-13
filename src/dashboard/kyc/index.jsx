@@ -32,8 +32,8 @@ const KycBody = () => {
         const level = await backendapi.getKYCLevel(userId);
         const userKYCData = await Promise.all(
           Object.values(KYC_TYPE).map((type) =>
-            backendapi.getByKYC(type, userId)
-          )
+            backendapi.getByKYC(type, userId),
+          ),
         );
 
         const transformedResults = userKYCData.map((item) => {
@@ -51,7 +51,7 @@ const KycBody = () => {
             (item) =>
               item.file === null ||
               item.file === undefined ||
-              item.verify === true
+              item.verify === true,
           )
         )
           return;
@@ -69,7 +69,7 @@ const KycBody = () => {
           level.data.kycLevel,
           new Date(user.createdAt).toISOString().substring(0, 10),
         ];
-      })
+      }),
     );
     setData(arrayWithResults.filter((item) => item !== undefined));
   };
@@ -140,10 +140,10 @@ const Table = ({ data, setData }) => {
             </ul>
           </div>
           <div className={styles.tableBody}>
-            {data.map((items) => (
-              <ul>
+            {data.map((items, index) => (
+              <ul key={index}>
                 {items.map((item, index) => (
-                  <>
+                  <React.Fragment key={index}>
                     {index === 0 ? (
                       <li className={styles.profile}>
                         <div className={styles.profileImage}>
@@ -167,7 +167,7 @@ const Table = ({ data, setData }) => {
                     ) : (
                       <li>{item}</li>
                     )}
-                  </>
+                  </React.Fragment>
                 ))}
 
                 <li>

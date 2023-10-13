@@ -22,8 +22,9 @@ const Compare = () => {
           />
         </div>
         <div className={`${styles.section} `}>
-          {content.map((item) => (
+          {content.map((item, index) => (
             <Card
+              key={index}
               type={item.type}
               title={item.title}
               description={item.description}

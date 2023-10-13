@@ -2,7 +2,7 @@ import styles from "./sidebar.module.css";
 
 import Logo from "../../assets/logo/logo_wide.svg";
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import Hamburger from "../../assets/icon/hamburger.svg";
 import Button from "../../components/button/button";
@@ -43,9 +43,15 @@ const items = [
   {
     text: "Custom payment",
     icon: (
-		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
-			<path d="M20 22H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1ZM8 9v2h8V9H8Zm0 4v2h8v-2H8Z"/>
-		</svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+      >
+        <path d="M20 22H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1ZM8 9v2h8V9H8Zm0 4v2h8v-2H8Z" />
+      </svg>
     ),
     link: "/dashboard/payment",
   },
@@ -67,12 +73,18 @@ const items = [
   {
     text: "Wallet",
     icon: (
-		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
-			<path d="M20 7V5c0-1.103-.897-2-2-2H5C3.346 3 2 4.346 2 6v12c0 2.201 1.794 3 3 3h15c1.103 0 2-.897 2-2V9c0-1.103-.897-2-2-2zm-2 9h-2v-4h2v4zM5 7a1.001 1.001 0 0 1 0-2h13v2H5z"/>
-		</svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+      >
+        <path d="M20 7V5c0-1.103-.897-2-2-2H5C3.346 3 2 4.346 2 6v12c0 2.201 1.794 3 3 3h15c1.103 0 2-.897 2-2V9c0-1.103-.897-2-2-2zm-2 9h-2v-4h2v4zM5 7a1.001 1.001 0 0 1 0-2h13v2H5z" />
+      </svg>
     ),
     link: "/dashboard/wallet",
-  },/*
+  } /*
   {
     text: "Notification",
     icon: (
@@ -103,7 +115,7 @@ const items = [
       </svg>
     ),
     link: "/dashboard/support",
-  },*/
+  },*/,
   {
     text: "Settings",
     icon: (
@@ -126,18 +138,10 @@ const items = [
 ];
 
 const Sidebar = () => {
-  const [active, setActive] = useState();
   const [open, setOpen] = useState(window.innerWidth < 900 ? false : true);
 
-  const query = useLocation();
   const role = getRole(localStorage);
   const roleName = ROLE_TO_NAME[role];
-
-  useEffect(() => {
-    if (query.pathname === "/dashboard/settings") {
-      setActive(6);
-    } else setActive(0);
-  }, []);
 
   useEffect(() => {
     const resize = () => {
@@ -156,8 +160,6 @@ const Sidebar = () => {
   }, []);
 
   const handleClick = (index) => {
-    setActive(index);
-
     if (window.innerWidth < 900) {
       setOpen(false);
     }
@@ -178,9 +180,9 @@ const Sidebar = () => {
         <div className={`${styles.sidebar}`}>
           <div>
             <div className={styles.logo}>
-				<center>
-					<img src={Logo} alt="nefentus logo" />
-				</center>
+              <center>
+                <img src={Logo} alt="nefentus logo" />
+              </center>
 
               <p className={styles.close} onClick={() => setOpen(false)}>
                 X
@@ -188,34 +190,42 @@ const Sidebar = () => {
             </div>
             <div className={styles.items}>
               {items.map((item, index) => (
-                <Link
-				  key={index}
+                <NavLink
+                  end
+                  key={index}
                   to={item.link}
-                  className={`${styles.item} ${
-                    active === index ? styles.active : ""
-                  }`}
+                  className={`${styles.item} ${({ isActive }) =>
+                    isActive ? styles.active : ""}`}
                   onClick={() => handleClick(index)}
-                  style={{
-                    background:
-                      active === index
+                  style={({ isActive }) => {
+                    return {
+                      background: isActive
                         ? "linear-gradient(90deg, #1595C2 0%, #66BFDE 100%)"
                         : "transparent",
+                    };
                   }}
                 >
                   {item.icon}
                   <p>{item.text}</p>
-                </Link>
+                </NavLink>
               ))}
             </div>
           </div>
 
-		  {(role === "admin" || role === "leader" || role === "seniorbroker" || role === "broker") && (
-			<div>
-				<Button link={dashboardLink(localStorage)} color={"white"} style={{padding: "0.3rem 0.5rem"}}>
-					To {roleName} Dashboard
-				</Button>
-			</div>
-		  )}
+          {(role === "admin" ||
+            role === "leader" ||
+            role === "seniorbroker" ||
+            role === "broker") && (
+            <div>
+              <Button
+                link={dashboardLink(localStorage)}
+                color={"white"}
+                style={{ padding: "0.3rem 0.5rem" }}
+              >
+                To {roleName} Dashboard
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </>

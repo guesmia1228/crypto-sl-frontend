@@ -1,7 +1,7 @@
 import styles from "./supportBody.module.css";
 
 import Image1 from "../../assets/image/support/image1.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import IntroductionVideo from "../../assets/video/introduction.mp4";
@@ -39,6 +39,7 @@ const SupportBody = () => {
             <div className={styles.list}>
               {content.map((item, index) => (
                 <div
+                  key={index}
                   onClick={() => handleChange(index)}
                   className={`card ${styles.card} ${
                     active === index ? styles.active : ""

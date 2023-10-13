@@ -2,17 +2,19 @@ import styles from "./graph.module.css";
 import { formatUSDBalance } from "../../utils";
 
 import {
-  Chart as ChartJS,
   CategoryScale,
+  Chart as ChartJS,
+  Legend,
   LinearScale,
-  PointElement,
   LineElement,
+  PointElement,
   Title,
   Tooltip,
-  Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-
+import { Options } from "../../components/input/input";
+import { useState } from "react";
+import { months } from "../../constants";
 
 const today = new Date();
 
@@ -22,7 +24,7 @@ const days = Math.round((today - new Date("Apr 01 2023")) / oneDay);
 
 // Erstelle die Labels für den Chart
 const labels1 = [];
-let labels = []
+let labels = [];
 for (let i = 0; i < days; i += 2) {
   const date = new Date("Apr 01 2023");
   date.setDate(date.getDate() + i);
@@ -37,9 +39,10 @@ if (labels1[labels1.length - 1] !== today.toLocaleDateString()) {
 }
 
 const randomData = Array.from({ length: days }, () => 0);
+
 function populateGraph(totalPrices) {
-  labels = totalPrices ? Object.keys(totalPrices) : []
-  const values = totalPrices ? Object.values(totalPrices) : []
+  labels = totalPrices ? Object.keys(totalPrices) : [];
+  const values = totalPrices ? Object.values(totalPrices) : [];
   return {
     labels,
     datasets: [
@@ -51,34 +54,35 @@ function populateGraph(totalPrices) {
         tension: 0.1,
       },
     ],
-  }
+  };
 }
+
 function getStartDate(data) {
   if (data == null) {
-    return "2023-04-01"
+    return "2023-04-01";
   } else {
-    return Object.keys(data)[0]
+    return Object.keys(data)[0];
   }
 }
 
-function  getTotalIncome(totalPrices){
-  if(totalPrices){
-    const values = Object.values(totalPrices)
+function getTotalIncome(totalPrices) {
+  if (totalPrices) {
+    const values = Object.values(totalPrices);
     const sum = values.reduce(function (prev, currentValue) {
       return prev + currentValue;
-    },0)
-    return '$' + formatUSDBalance(sum)
+    }, 0);
+    return "$" + formatUSDBalance(sum);
   } else {
-    return "$0"
+    return "$0";
   }
 }
 
 function getEndDate(data) {
   if (data == null) {
-    return "2023-04-30"
+    return "2023-04-30";
   } else {
-    const keys = Object.keys(data)
-    return keys[keys.length - 1]
+    const keys = Object.keys(data);
+    return keys[keys.length - 1];
   }
 }
 
@@ -90,7 +94,7 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
 export const options = {
@@ -127,7 +131,7 @@ export const options = {
         color: "#c4c4c4",
         font: {
           size: window.innerWidth < 550 ? 8 : 14,
-          family: "Euclid",
+          family: "Euclid, sans-serif",
           weight: 400,
         },
       },
@@ -141,7 +145,7 @@ export const options = {
         color: "#c4c4c4",
 
         font: {
-          family: "Euclid",
+          family: "Euclid, sans-serif",
           weight: 400,
           size: window.innerWidth < 550 ? 8 : 14,
         },
@@ -150,24 +154,74 @@ export const options = {
   },
 };
 
-const Graph = ({data, style}) => {
+const Graph = ({ data, style }) => {
+  const [period, setPeriod] = useState("Choose period");
+
+  const extractUniqueMonthsAndYears = (data) => {
+    return Object.keys(data).reduce((uniqueDates, date) => {
+      const dateParts = date.split("-");
+      const month = months[parseInt(dateParts[1], 10) - 1];
+      const year = dateParts[0];
+      const key = `${month} ${year}`;
+
+      if (!uniqueDates.includes(key)) {
+        uniqueDates.push(key);
+      }
+
+      return uniqueDates;
+    }, []);
+  };
+
+  const options = ["All Time", ...extractUniqueMonthsAndYears(data)];
+
+  const filterDataByPeriod = (data, selectedPeriod) => {
+    if (selectedPeriod === "All Time" || selectedPeriod === "Choose period") {
+      return data;
+    } else {
+      const filteredData = {};
+      for (const date in data) {
+        const dateParts = date.split("-");
+        const month = months[parseInt(dateParts[1], 10) - 1];
+        const year = `${dateParts[0]}`;
+        const key = `${month} ${year}`;
+
+        if (key === selectedPeriod) {
+          filteredData[date] = data[date];
+        }
+      }
+      return filteredData;
+    }
+  };
+
+  const graphData = filterDataByPeriod({ ...data }, period);
+
   return (
     <div className={`card ${styles.graphCard}`} style={style}>
       <div className={styles.info}>
         <div className={styles.left}>
           <div className={styles.label}>Income</div>
-          <div className={styles.graphAmount}>{getTotalIncome(data)}</div>
+          <div className={styles.graphAmount}>{getTotalIncome(graphData)}</div>
         </div>
 
-        <div className={styles.datePicker}>
-          <p>{getStartDate(data)}</p>
-          <p> - </p>
-          <p>{getEndDate(data)}</p>
+        <div className={styles.dropdownWrap}>
+          <div className={styles.dropdownBorder}>
+            <Options
+              label={""}
+              value={period}
+              options={options}
+              setValue={setPeriod}
+            />
+          </div>
+          <div className={styles.datePicker}>
+            <p>{getStartDate(graphData)}</p>
+            <p> - </p>
+            <p>{getEndDate(graphData)}</p>
+          </div>
         </div>
       </div>
 
       <div className={styles.chartContainer}>
-        <Line options={options} data={populateGraph(data)} />
+        <Line options={options} data={populateGraph(graphData)} />
       </div>
     </div>
   );

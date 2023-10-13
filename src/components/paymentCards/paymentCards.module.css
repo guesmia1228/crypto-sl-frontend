@@ -1,7 +1,9 @@
 .sectionWrapper {
-  background: url(../../assets/image/gradient.webp);
-  background-position: center;
-  background-size: cover;
+  background-image: linear-gradient(
+    176deg,
+    rgba(17, 17, 17, 1) 50%,
+    rgba(21, 147, 192, 1) 100%
+  );
   padding-bottom: 10rem;
 }
 

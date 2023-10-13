@@ -1,13 +1,12 @@
 import Cookies from "js-cookie";
 import setCookie from "../components/setCookie/setCookie";
+import ReactGA from "react-ga4";
+
 export default class backendAPI {
   constructor() {
-    //LAUNCH
-    //this.baseURL = "https://nefentus.com:8443/api";
-    //DEV
-    this.baseURL = process.env.REACT_APP_BASE_ENDPOINT_API;
-
+    this.baseURL = process.env.VITE_REACT_APP_BASE_ENDPOINT_API;
     this.token = Cookies.get("token");
+    ReactGA.initialize(process.env.VITE_REACT_APP_GA_ID);
   }
 
   async checkJwt() {
@@ -43,6 +42,12 @@ export default class backendAPI {
       const response = await fetch(url, options);
       if (!response.ok) {
         throw new Error("Network response was not ok");
+      } else {
+        ReactGA.event({
+          category: "Registration",
+          action: "registration_active",
+          label: formData.email,
+        });
       }
       return response;
     } catch (error) {
@@ -59,6 +64,52 @@ export default class backendAPI {
           "Content-Type": "application/json",
         },
         body: email,
+      };
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response;
+    } catch (error) {
+      return null; // or return some default value
+    }
+  }
+
+  async changeEmailDashboard(newEmail) {
+    try {
+      const url = `${this.baseURL}/auth/change-email`;
+      const options = {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${this.token}`,
+        },
+        body: newEmail,
+      };
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response;
+    } catch (error) {
+      return null; // or return some default value
+    }
+  }
+
+  async confirmEmail(code, newEmail) {
+    try {
+      const payload = {
+        token: code,
+        newEmail: newEmail,
+      };
+      const url = `${this.baseURL}/auth/confirm-email`;
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${this.token}`,
+        },
+        body: JSON.stringify(payload),
       };
       const response = await fetch(url, options);
       if (!response.ok) {
@@ -143,6 +194,7 @@ export default class backendAPI {
       localStorage.setItem("business", data.business);
       localStorage.setItem("phoneNumber", data.phoneNumber);
       localStorage.setItem("username", data.username);
+      localStorage.setItem("antiPhishingCode", data.antiPhishingCode);
       return response;
     } catch (error) {
       return null; // or return some default value
@@ -235,7 +287,58 @@ export default class backendAPI {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      console.log(data);
+      if (!data.requireOtp) {
+        setCookie("token", data.jwtToken);
+        localStorage.setItem("token", data.jwtToken);
+        localStorage.setItem("email", data.email);
+        localStorage.setItem("contactEmail", data.contactEmail);
+        localStorage.setItem("affiliateLink", data.affiliateLink);
+        localStorage.setItem("firstName", data.firstName);
+        localStorage.setItem("lastName", data.lastName);
+        localStorage.setItem("business", data.business);
+        localStorage.setItem("phoneNumber", data.phoneNumber);
+        localStorage.setItem("username", data.username);
+        localStorage.setItem("profile_pic", data.profileImage);
+        localStorage.setItem("roles", data.roles);
+        localStorage.setItem("country", data.country);
+        localStorage.setItem("isMfa", data.isMfa);
+        localStorage.setItem("requireKyc", data.requireKyc);
+        localStorage.setItem("requireOtp", data.requireOtp);
+        localStorage.setItem("userId", data.userId);
+        localStorage.setItem("antiPhishingCode", data.antiPhishingCode);
+      }
+
+      ReactGA.event({
+        category: "User",
+        action: "login",
+        label: data.email,
+      });
+
+      return data;
+    } catch (error) {
+      return null; // or return some default value
+    }
+  }
+
+  async verifyOTP(email, code, longToken) {
+    try {
+      const url = `${this.baseURL}/auth/verify/otp`;
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          code,
+          rememberMe: longToken,
+        }),
+      };
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
       setCookie("token", data.jwtToken);
       localStorage.setItem("token", data.jwtToken);
       localStorage.setItem("email", data.email);
@@ -249,8 +352,18 @@ export default class backendAPI {
       localStorage.setItem("profile_pic", data.profileImage);
       localStorage.setItem("roles", data.roles);
       localStorage.setItem("country", data.country);
+      localStorage.setItem("isMfa", data.isMfa);
       localStorage.setItem("requireKyc", data.requireKyc);
+      localStorage.setItem("requireOtp", data.requireOtp);
       localStorage.setItem("userId", data.userId);
+      localStorage.setItem("antiPhishingCode", data.antiPhishingCode);
+
+      ReactGA.event({
+        category: "User",
+        action: "login",
+        label: data.email,
+      });
+
       return response;
     } catch (error) {
       return null; // or return some default value
@@ -443,7 +556,7 @@ export default class backendAPI {
 
       if (!response.ok) {
         throw new Error(
-          `Network response was not ok (${response.status} ${response.statusText})`
+          `Network response was not ok (${response.status} ${response.statusText})`,
         );
       }
 
@@ -518,6 +631,49 @@ export default class backendAPI {
       }
       const data = await response.json();
       return data;
+    } catch (error) {
+      return null; // or return some default value
+    }
+  }
+  async deleteProfileImage() {
+    try {
+      const url = `${this.baseURL}/auth/deleteImage`;
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${this.token}`,
+        },
+        body: null,
+      };
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      localStorage.setItem("profile_pic", "null");
+      return data;
+    } catch (error) {
+      return null; // or return some default value
+    }
+  }
+
+  async getByKYC(type) {
+    try {
+      const userId = localStorage.getItem("userId");
+      const url = `${this.baseURL}/auth/${userId}/kyc-image-url?type=${type}`;
+      const options = {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      };
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      return { [type]: data };
     } catch (error) {
       return null; // or return some default value
     }
@@ -711,7 +867,7 @@ export default class backendAPI {
     quantity,
     password,
     stablecoinAddress,
-    transInfoArg
+    transInfoArg,
   ) {
     try {
       const url = `${this.baseURL}/payment`;

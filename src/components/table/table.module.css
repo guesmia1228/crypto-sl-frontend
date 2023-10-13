@@ -1,5 +1,5 @@
 .card {
-	border-radius: 1rem;
+  border-radius: 1rem;
 }
 
 /*
@@ -57,26 +57,26 @@
   background: rgba(255, 255, 255, 0.05);
 }
 
-@media (max-width: 900px) {  
-	.card {
-	  overflow-x: scroll;
-	}
-  
-	.card::-webkit-scrollbar {
-	  display: none;
-	}
+@media (max-width: 900px) {
+  .card {
+    overflow-x: scroll;
+  }
+
+  .card::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* Highlights */
 .colored {
-	color: #1595c2;
+  color: #1595c2;
 }
 
 .highlighted {
-	background-color: rgba(21, 149, 194, 0.1);
-	color: #1595c2;
-  
-	padding: 0.3rem 1rem;
-	border-radius: 0.2rem;
-	width: max-content;
+  background-color: rgba(21, 149, 194, 0.1);
+  color: #1595c2;
+
+  padding: 0.3rem 1rem;
+  border-radius: 0.2rem;
+  width: max-content;
 }

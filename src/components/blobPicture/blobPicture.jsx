@@ -1,19 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const BlobPicture = () => {
-  const [base64Data, setBase64Data] = useState('');
+  const [base64Data, setBase64Data] = useState("");
 
-    useEffect(() => {
-      setBase64Data(localStorage.getItem("profile_pic"));
+  useEffect(() => {
+    setBase64Data(localStorage.getItem("profile_pic"));
   }, [localStorage.getItem("profile_pic")]);
 
-    return (
-    <div>
-      {base64Data !== 'null' &&(
-        <img
-          src={`${base64Data}`}
-          style={{ maxWidth: '100%', height: 'auto' }}
-        />
+  return (
+    <div style={{ width: "100%", height: "100%" }}>
+      {base64Data !== "null" && (
+        <img src={`${base64Data}`} style={{ height: "100%", width: "100%" }} />
       )}
     </div>
   );

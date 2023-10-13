@@ -12,6 +12,11 @@
   transform: scale(0);
   transition: 0.5s ease-out;
   opacity: 0;
+  background: radial-gradient(
+    circle,
+    rgba(17, 16, 17, 1) 40%,
+    rgba(22, 22, 22, 1) 100%
+  );
 }
 
 .card video {

@@ -15,6 +15,7 @@ import Logo5 from "../assets/icon/methods/logo5.svg";
 import Logo6 from "../assets/icon/methods/logo6.svg";
 import Logo7 from "../assets/icon/methods/logo7.svg";
 import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 import HeroImage from "../assets/image/paymentHero.png";
 import WhyImage from "../assets/image/whyNew.png";

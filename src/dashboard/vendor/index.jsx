@@ -1,110 +1,101 @@
-import Button from "./../../components/button/button";
-import { Link, useNavigate } from "react-router-dom";
-
-import Negative from "../../assets/icon/negative.svg";
-import Positive from "../../assets/icon/positive.svg";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./vendor.module.css";
-
-import UrlLink from "../../assets/icon/link.svg";
 
 import backend_API from "../../api/backendAPI";
 
 import { useEffect, useState } from "react";
-import { unstable_renderSubtreeIntoContainer } from "react-dom";
-import ProfileBox from "../profileBox/profileBox";
 import Header from "../header/header";
 import Graph from "../graph/graph";
 import StatsCard from "../statsCard/statsCard";
-import { transformNumber } from "../func/transformNumber";
-import { formatUSDBalance } from "../../utils";
 import vendorDashboardApi from "../../api/vendorDashboardApi";
 
 const VendorBody = () => {
-	const backendAPI = new backend_API();
-	const dashboardApi = new vendorDashboardApi();
+  const backendAPI = new backend_API();
+  const dashboardApi = new vendorDashboardApi();
 
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
-	const [cardInfo, setCardInfo] = useState([]);
-	const [graphData, setGraphData] = useState([]);
+  const [cardInfo, setCardInfo] = useState([]);
+  const [graphData, setGraphData] = useState([]);
 
-	useEffect(() => {
-		fetchData();
-	}, []);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-	const fetchData = async () => {
-		const result = await dashboardApi.checkPermission();
+  const fetchData = async () => {
+    const result = await dashboardApi.checkPermission();
 
-		console.log("Vendor permission: ", result)
+    console.log("Vendor permission: ", result);
 
-		if (result !== true) {
-			navigate("/login");
-		} else {
-			const getPromises = [
-				dashboardApi.getTotalIncome(),
-				dashboardApi.getNumOrders(),
-				dashboardApi.getTotalIncomesPerDay()
-			];
-			const [sales, numOrders, totalPricePerDate] = await Promise.all(getPromises);
+    if (result !== true) {
+      navigate("/login");
+    } else {
+      const getPromises = [
+        dashboardApi.getTotalIncome(),
+        dashboardApi.getNumOrders(),
+        dashboardApi.getTotalIncomesPerDay(),
+      ];
+      const [sales, numOrders, totalPricePerDate] =
+        await Promise.allSettled(getPromises);
 
-			console.log(sales);
-			console.log(numOrders);
+      console.log(sales);
+      console.log(numOrders);
 
-			const cardsContent = [
-				{
-					title: "Sales: Total",
-					amount: sales.total?.number,
-					percentage: sales.total?.percentage,
-					isIncome: true,
-				},
-				{
-					title: "Payments",
-					amount: numOrders?.number,
-					percentage: numOrders?.percentage,
-					isIncome: false,
-				},
-				{
-					title: "Sales: Last 24 hours",
-					amount: sales.last24Hours?.number,
-					percentage: sales.last24Hours?.percentage,
-					isIncome: true,
-				},
-				{
-					title: "Sales: Last 30 days",
-					amount: sales.last30Days?.number,
-					percentage: sales.last30Days?.percentage,
-					isIncome: true,
-				},
-			];
+      const cardsContent = [
+        {
+          title: "Sales: Total",
+          amount: sales?.value?.total?.number,
+          percentage: sales?.value?.total?.percentage,
+          isIncome: true,
+        },
+        {
+          title: "Payments",
+          amount: numOrders?.value?.number,
+          percentage: numOrders?.value?.percentage,
+          isIncome: false,
+        },
+        {
+          title: "Sales: Last 24 hours",
+          amount: sales.last24Hours?.number,
+          percentage: sales.last24Hours?.percentage,
+          isIncome: true,
+        },
+        {
+          title: "Sales: Last 30 days",
+          amount: sales.last30Days?.number,
+          percentage: sales.last30Days?.percentage,
+          isIncome: true,
+        },
+      ];
 
-			console.log(cardsContent)
-			setCardInfo(cardsContent);
+      console.log(cardsContent);
+      setCardInfo(cardsContent);
 
-			console.log(totalPricePerDate)
-			setGraphData(totalPricePerDate);
-		}
-	}
+      console.log(totalPricePerDate);
+      setGraphData(totalPricePerDate.value);
+    }
+  };
 
-  	return (
-		<div className={`${styles.body}`}>
-			<Header title="Dashboard" />
+  return (
+    <div className={`${styles.body}`}>
+      <Header title="Dashboard" />
 
-			<div className={styles.row}>
-				{cardInfo.map((item) => (
-					<StatsCard
-						key={item.title}
-						title={item.title}
-						amount={item.amount}
-						percentage={item.percentage}
-						isMonetary={item.isIncome}
-					/>
-				))}
-			</div>
+      <div className={styles.row}>
+        {cardInfo.map((item) => (
+          <StatsCard
+            key={item.title}
+            title={item.title}
+            amount={item.amount}
+            percentage={item.percentage}
+            isMonetary={item.isIncome}
+          />
+        ))}
+      </div>
 
-			<Graph data={graphData} />
-		</div>
-  	);
+      <Graph data={graphData} />
+    </div>
+  );
 };
 
 export default VendorBody;

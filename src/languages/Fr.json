@@ -16,13 +16,13 @@
     "title": "Mot de passe oublié",
     "button": "Envoyer un e-mail",
     "info": "Vous ne connaissez pas votre adresse e-mail ? Veuillez contacter le support !"
-    },
-    "reset-password": {
-      "title": "Réinitialiser le mot de passe",
-      "button": "réinitialiser",
-      "info": "Vous ne voulez pas réinitialiser votre mot de passe ? Connectez-vous plutôt.",
-      "button-label-confirm": "Confirmer le mot de passe"
-      },
+  },
+  "reset-password": {
+    "title": "Réinitialiser le mot de passe",
+    "button": "réinitialiser",
+    "info": "Vous ne voulez pas réinitialiser votre mot de passe ? Connectez-vous plutôt.",
+    "button-label-confirm": "Confirmer le mot de passe"
+  },
   "home": {
     "heroTitle": "Augmentez le niveau de votre entreprise avec Nefentus ",
     "heroDescription": "Notre automatisation révolutionnaire de pointe et nos caisses crypto sécurisées vous permettent de vous concentrer sur votre activité principale tout en maximisant vos gains. Laissez les paiements manuels derrière vous et adoptez dès aujourd'hui l'avenir du commerce. ",
@@ -245,7 +245,7 @@
   },
   "login": {
     "title": "Bienvenue ",
-	"remember": "Se souvenir de moi",
+    "remember": "Se souvenir de moi",
     "button": "S'inscrire",
     "info": "Vous n'avez pas de compte ? ",
     "infoButton": "S'inscrire",

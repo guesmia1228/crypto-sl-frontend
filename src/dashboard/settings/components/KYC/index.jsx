@@ -63,10 +63,10 @@ export const KYC = () => {
     const level = await backendapi.getKYCLevel(userId);
 
     const arrayWithResults = await Promise.all(
-      Object.values(KYC_TYPE).map((type) => backendapi.getByKYC(type, userId))
+      Object.values(KYC_TYPE).map((type) => backendapi.getByKYC(type, userId)),
     );
 
-    const transformedResults = arrayWithResults
+    const transformedResults = arrayWithResults?.value
       .map((item) => {
         const key = Object.keys(item)[0];
         return { [key]: item[key].data };
@@ -99,12 +99,12 @@ export const KYC = () => {
   };
 
   const handleUpload = async () => {
-    const arrayWithResults = await Promise.all(
+    const arrayWithResults = await Promise.allSettled(
       Object.keys(uploadingFiles).map((type) =>
-        backendapi.uploadKYCByType(type, uploadingFiles[type])
-      )
+        backendapi.uploadKYCByType(type, uploadingFiles[type]),
+      ),
     );
-    if (arrayWithResults) {
+    if (arrayWithResults?.value) {
       fetchFYC();
       setUploadingFiles(INITIAL_FILES);
     }
@@ -150,10 +150,10 @@ export const KYC = () => {
       <div className={styles.kycList}>
         {KYCContent.map((item, index) => (
           <div
+            key={index}
             className={`${styles.kycItem} ${
               selectingType === item.id ? styles.itemActive : ""
             }`}
-            key={index}
             onClick={() => {
               handleSelectType(item.id);
               setStatusIndex(index);

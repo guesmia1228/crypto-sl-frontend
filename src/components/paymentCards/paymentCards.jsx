@@ -32,8 +32,8 @@ const PaymentCards = () => {
                 <p>{t("payment.paymentCard1Description")}</p>
               </div>
               <div className={styles.list}>
-                {card1List.map((item) => (
-                  <div>
+                {card1List.map((item, index) => (
+                  <div key={index}>
                     <img src={Checkmark} alt="checkmark" />
                     <p>{item}</p>
                   </div>
@@ -53,8 +53,8 @@ const PaymentCards = () => {
                 <p>{t("payment.paymentCard2Description")}</p>
               </div>
               <div className={styles.list}>
-                {card2List.map((item) => (
-                  <div>
+                {card2List.map((item, index) => (
+                  <div key={index}>
                     <img src={Checkmark} alt="checkmark" />
                     <p>{item}</p>
                   </div>
