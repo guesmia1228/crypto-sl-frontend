@@ -4,9 +4,9 @@ import ReactGA from "react-ga4";
 
 export default class backendAPI {
   constructor() {
-    this.baseURL = process.env.REACT_APP_BASE_ENDPOINT_API;
+    this.baseURL = process.env.VITE_REACT_APP_BASE_ENDPOINT_API;
     this.token = Cookies.get("token");
-    ReactGA.initialize(process.env.REACT_APP_GA_ID);
+    ReactGA.initialize(process.env.VITE_REACT_APP_GA_ID);
   }
 
   async checkJwt() {

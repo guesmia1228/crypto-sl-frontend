@@ -246,7 +246,7 @@ const LoginBox = () => {
 
               <ReCAPTCHA
                 ref={recaptchaRef}
-                sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+                sitekey={process.env.VITE_REACT_APP_RECAPTCHA_SITE_KEY}
                 theme="dark"
               />
 
