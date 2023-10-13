@@ -58,11 +58,11 @@ export const KYC = () => {
   });
 
   const fetchFYC = async () => {
-    const arrayWithResults = await Promise.all(
+    const arrayWithResults = await Promise.allSettled(
       Object.values(KYC_TYPE).map((type) => backendapi.getByKYC(type)),
     );
 
-    const transformedResults = arrayWithResults
+    const transformedResults = arrayWithResults?.value
       .map((item) => {
         const key = Object.keys(item)[0];
         return { [key]: item[key].data };
@@ -94,12 +94,12 @@ export const KYC = () => {
   };
 
   const handleUpload = async () => {
-    const arrayWithResults = await Promise.all(
+    const arrayWithResults = await Promise.allSettled(
       Object.keys(uploadingFiles).map((type) =>
         backendapi.uploadKYCByType(type, uploadingFiles[type]),
       ),
     );
-    if (arrayWithResults) {
+    if (arrayWithResults?.value) {
       fetchFYC();
       setUploadingFiles(INITIAL_FILES);
     }

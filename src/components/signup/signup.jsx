@@ -1,12 +1,17 @@
 import Logo from "../../assets/logo/logo2.svg";
 import Button from "../button/button";
-import Input, { SearchOptions } from "../input/input";
+import Input, { Options } from "../input/input";
 import styles from "./signup.module.css";
 import { Link } from "react-router-dom";
 import { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import ReCAPTCHA from "react-google-recaptcha";
 import backendAPI from "../../api/backendAPI";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import isMobilePhone from "../../func/isMobilePhone";
+import Error from "../error/error";
 
 var country_list = [
   "Afghanistan",
@@ -221,73 +226,89 @@ const Signup = () => {
   const { t } = useTranslation();
   const [errorMessage, setErrorMessage] = useState(null);
   const [message, setMessage] = useState(null);
-  const [FirstName, setFirstName] = useState("");
-  const [LastName, setLastName] = useState("");
-  const [Telefon, setTelefon] = useState("");
-  const [Email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
   const [CountryOption, setCountryOption] = useState(
     t("signUp.option1Placeholder"),
   );
   const api = new backendAPI();
 
+  const schema = z
+    .object({
+      firstName: z.string().min(1, { message: "Please enter your first name" }),
+      lastName: z.string().min(1, { message: "Please enter your last name" }),
+      telNr: z
+        .string()
+        .min(1, { message: "Please enter your phone number" })
+        .refine(isMobilePhone, {
+          message: "Please enter a valid phone number",
+        }),
+      email: z
+        .string()
+        .min(1, { message: "Please enter your email" })
+        .email({ message: "Please enter a valid email" }),
+      password: z
+        .string()
+        .min(1, { message: "Please enter your password" })
+        .min(8, { message: "Password must be at least 8 characters" })
+        .refine(
+          (value) =>
+            /^(?:(?=.*[a-z])(?=.*[A-Z])(?=.*\d)|(?=.*[a-z])(?=.*[A-Z])(?=.*[.\$\/@!%&*_,#*-+;`])|(?=.*[a-z])(?=.*\d)(?=.*[.\$\/@!%&*_,#*-+;`])|(?=.*[A-Z])(?=.*\d)(?=.*[.\$\/@!%&*_,#*-+;`])|(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[.\$\/@!%&*_,#*-+;`])).*$/.test(
+              value,
+            ),
+          {
+            message:
+              "Password must include characters from 3 of the following 4 groups: uppercase letters, lowercase letters, numbers, and special characters",
+          },
+        ),
+      confirmPassword: z
+        .string()
+        .nonempty({ message: "Confirm your password" }),
+    })
+    .refine(
+      (schemaData) => schemaData.password === schemaData.confirmPassword,
+      {
+        message: "Passwords must match",
+        path: ["confirmPassword"],
+      },
+    );
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({ resolver: zodResolver(schema), mode: "onSubmit" });
+
   const resetForm = () => {
-    setFirstName("");
-    setLastName("");
-    setTelefon("");
-    setEmail("");
-    setPassword("");
+    reset();
     setCountryOption(t("signUp.option1Placeholder"));
   };
 
-  async function submitForm() {
-    if (FirstName === "") {
-      setErrorMessage("Please enter your first name");
-      return;
-    } else if (LastName === "") {
-      setErrorMessage("Please enter your last name");
-      return;
-    } else if (Email === "") {
-      setErrorMessage("Please enter your email");
-      return;
-    } else if (Password === "") {
-      setErrorMessage("Please enter your password");
-      return;
-    } else if (CountryOption === t("signUp.option1Placeholder")) {
+  async function submitForm(data) {
+    if (CountryOption === t("signUp.option1Placeholder")) {
       setErrorMessage("Please choose a country");
       return;
     }
-
-    const requestData = {
-      firstName: FirstName,
-      lastName: LastName,
-      telNr: Telefon,
-      email: Email,
-      password: Password,
-      roles: ["Affiliate"],
-      country: CountryOption,
-      affiliateLink: localStorage.getItem("affiliateJoined"),
-    };
-
-    const response = await api.register(requestData);
-    if (response == null) {
-      setErrorMessage("Error when registering");
-      return;
-    } else {
-      setMessage("Please confirm your email address to proceed.");
-    }
-    resetForm();
-  }
-
-  function handleClick(event) {
-    event.preventDefault();
 
     const captchaValue = recaptchaRef.current.getValue();
 
     if (!captchaValue) {
       setErrorMessage("Please verify the reCAPTCHA!");
     } else {
-      submitForm();
+      const requestData = {
+        ...data,
+        roles: ["Affiliate"],
+        country: CountryOption,
+        affiliateLink: localStorage.getItem("affiliateJoined"),
+      };
+
+      const response = await api.register(requestData);
+      if (response == null) {
+        setErrorMessage("Error when registering");
+      } else {
+        setMessage("Please confirm your email address to proceed.");
+      }
+      resetForm();
+      setErrorMessage(null);
     }
   }
 
@@ -318,78 +339,86 @@ const Signup = () => {
         </div>
       </div>
 
-      <form onSubmit={handleClick}>
-        <div className={styles.right}>
-          {errorMessage && (
-            <div className={styles.errormessagecontainer}>
-              <p>{errorMessage}</p>
-            </div>
-          )}
-          {message && (
-            <div className={styles.messagecontainer}>
-              <p>{message}</p>
-            </div>
-          )}
-
-          <div className={styles.row}>
-            <Input
-              label={t("signUp.firstNameLabel") + "*"}
-              placeholder={t("signUp.firstNamePlaceholder")}
-              value={FirstName}
-              setState={setFirstName}
-            />
-
-            <Input
-              label={t("signUp.lastNameLabel") + "*"}
-              placeholder={t("signUp.lastNamePlaceholder")}
-              value={LastName}
-              setState={setLastName}
-            />
-
-            <Input
-              label={t("signUp.telefonLabel")}
-              placeholder="(979) 268-4143"
-              value={Telefon}
-              setState={setTelefon}
-            />
-            <Input
-              label={t("signUp.emailLabel") + "*"}
-              placeholder={t("signUp.emailPlaceholder")}
-              value={Email}
-              setState={setEmail}
-            />
-            <Input
-              label={t("signUp.passwordLabel") + "*"}
-              placeholder={t("signUp.passwordPlaceholder")}
-              value={Password}
-              setState={setPassword}
-              secure
-            />
-            <SearchOptions
-              label={t("signUp.option1Label")}
-              value={CountryOption}
-              setValue={setCountryOption}
-              options={country_list}
-              placeholder={t("signUp.option1Placeholder")}
-            />
+      <form onSubmit={handleSubmit(submitForm)} className={styles.right}>
+        <Error
+          error={
+            errorMessage ||
+            errors.firstName?.message ||
+            errors.lastName?.message ||
+            errors.telNr?.message ||
+            errors.email?.message ||
+            errors.password?.message ||
+            errors.confirmPassword?.message
+          }
+        />
+        {message && (
+          <div className={styles.messagecontainer}>
+            <p>{message}</p>
           </div>
+        )}
 
-          <ReCAPTCHA
-            ref={recaptchaRef}
-            sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
-            theme="dark"
+        <div className={styles.row}>
+          <Input
+            label={t("signUp.firstNameLabel") + "*"}
+            placeholder={t("signUp.firstNamePlaceholder")}
+            register={register}
+            name={"firstName"}
           />
 
-          <div className={styles.buttonWrapper}>
-            <Button className={styles.button} onClick={handleClick}>
-              {t("signUp.formButton")}
-            </Button>
-          </div>
+          <Input
+            label={t("signUp.lastNameLabel") + "*"}
+            placeholder={t("signUp.lastNamePlaceholder")}
+            register={register}
+            name={"lastName"}
+          />
 
-          <p className={styles.formAgreement}>{t("signUp.formInfo")}</p>
-
-          <button type="submit" hidden />
+          <Input
+            label={t("signUp.telefonLabel")}
+            placeholder="(979) 268-4143"
+            register={register}
+            name={"telNr"}
+          />
+          <Input
+            label={t("signUp.emailLabel") + "*"}
+            placeholder={t("signUp.emailPlaceholder")}
+            register={register}
+            name={"email"}
+          />
+          <Input
+            label={t("signUp.passwordLabel") + "*"}
+            placeholder={t("signUp.passwordPlaceholder")}
+            register={register}
+            name={"password"}
+            secure
+          />
+          <Input
+            label={t("signUp.confirmPasswordLabel") + "*"}
+            placeholder={t("signUp.confirmPasswordPlaceholder")}
+            register={register}
+            name={"confirmPassword"}
+            secure
+          />
+          <Options
+            label={t("signUp.option1Label") + "*"}
+            value={CountryOption}
+            setValue={setCountryOption}
+            options={country_list}
+          />
         </div>
+
+        <ReCAPTCHA
+          ref={recaptchaRef}
+          sitekey={process.env.VITE_REACT_APP_RECAPTCHA_SITE_KEY}
+          theme="dark"
+        />
+
+        <div className={styles.buttonWrapper}>
+          <Button className={styles.button} type="submit">
+            {t("signUp.formButton")}
+          </Button>
+        </div>
+
+        <p className={styles.formAgreement}>{t("signUp.formInfo")}</p>
       </form>
     </div>
   );

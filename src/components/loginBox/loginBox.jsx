@@ -12,6 +12,10 @@ import backend_API from "../../api/backendAPI";
 
 import CheckBox from "../../assets/icon/whiteCheckmark.svg";
 import Cookies from "js-cookie";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import Error from "../error/error";
 import setCookie from "../setCookie/setCookie";
 import ReCAPTCHA from "react-google-recaptcha";
 
@@ -45,12 +49,6 @@ const LoginBox = () => {
   const recaptchaRef = useRef();
   const [errorMessage, setErrorMessage] = useState(null);
   const [message, setMessage] = useState(null);
-  const [Username, setUsername] = useState(Cookies.get("nefentus-username"));
-  const [Password, setPassword] = useState(
-    Cookies.get("nefentus-password")
-      ? decryptData(Cookies.get("nefentus-password"))
-      : "",
-  );
   const navigate = useNavigate();
   const backendAPI = new backend_API();
   const { t } = useTranslation();
@@ -60,17 +58,40 @@ const LoginBox = () => {
       : false,
   );
 
+  const schema = z.object({
+    email: z.string().min(1, { message: "Please enter your email" }),
+    password: z.string().min(1, { message: "Please enter your password" }),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(schema),
+    mode: "onSubmit",
+    defaultValues: {
+      email: Cookies.get("nefentus-username")
+        ? Cookies.get("nefentus-username")
+        : "",
+      password: Cookies.get("nefentus-password")
+        ? decryptData(Cookies.get("nefentus-password"))
+        : "",
+    },
+  });
+
   useEffect(() => {
     if (checkBox) {
-      setCookie("nefentus-username", Username, 365);
-      setCookie("nefentus-password", encryptData(Password), 365);
+      setCookie("nefentus-username", getValues("email"), 365);
+      setCookie("nefentus-password", encryptData(getValues("password")), 365);
       setCookie("nefentus-remember-me", checkBox, 365);
     } else {
       setCookie("nefentus-username", "", 365);
       setCookie("nefentus-password", "", 365);
       setCookie("nefentus-remember-me", false, 365);
     }
-  }, [checkBox, loginUser]);
+  }, [checkBox, getValues]);
   const [showConfirmMeEmail, setShowConfirmMeEmail] = useState(false);
   const [email, setEmail] = useState(null);
   const [code, setCode] = useState("");
@@ -98,23 +119,33 @@ const LoginBox = () => {
     checkJwtAndNavigate();
   }, []);
 
-  async function loginUser(username1, password1, checkbox) {
-    if (Cookies.get("acceptCookie") !== true) {
-      checkbox = false;
-    }
-    try {
-      const response = await backendAPI.login(username1, password1, checkbox);
-      if (response == null) {
-        setErrorMessage("Invalid login data");
-        return;
-      } else if (response.requireOtp) {
-        setShowConfirmMeEmail(true);
-        setEmail(response.email);
-      } else {
-        navigateDashboard();
+  async function loginUser(data, checkbox) {
+    const captchaValue = recaptchaRef.current.getValue();
+
+    if (!captchaValue) {
+      setErrorMessage("Please verify the reCAPTCHA!");
+    } else {
+      if (Cookies.get("acceptCookie") !== true) {
+        checkbox = false;
       }
-    } catch (error) {
-      setErrorMessage("There was an error logging in");
+      try {
+        const response = await backendAPI.login(
+          data.email,
+          data.password,
+          checkbox,
+        );
+        if (response == null) {
+          setErrorMessage("Invalid login data");
+          return;
+        } else if (response.requireOtp) {
+          setShowConfirmMeEmail(true);
+          setEmail(response.email);
+        } else {
+          navigateDashboard();
+        }
+      } catch (error) {
+        setErrorMessage("There was an error logging in");
+      }
     }
   }
 
@@ -147,18 +178,6 @@ const LoginBox = () => {
     }
   };
 
-  function handleClick(event) {
-    event.preventDefault();
-
-    const captchaValue = recaptchaRef.current.getValue();
-
-    if (!captchaValue) {
-      setErrorMessage("Please verify the reCAPTCHA!");
-    } else {
-      loginUser(Username, Password, checkBox);
-    }
-  }
-
   const handleConfrimCode = (e) => {
     e.preventDefault();
     verifyOtpCode(email, code, checkBox);
@@ -176,32 +195,31 @@ const LoginBox = () => {
 
         <div>
           <h2>
-            <span className="gradient">{t("login.titleP1")}</span>
+            <span className="gradient">{t("login.titleP1") + "*"}</span>
           </h2>
           <p>{t("login.description")}</p>
 
           <p>
             {t("login.info")}
             <u>
-              <Link to="/signUp">{t("login.infoButton")}</Link>
+              <Link to="/signUp">{t("login.infoButton") + "*"}</Link>
             </u>
           </p>
         </div>
       </div>
 
       <div className={styles.right}>
-        <>
-          {errorMessage && (
-            <div className={styles.errormessagecontainer}>
-              <p>{errorMessage}</p>
-            </div>
-          )}
-          {message && (
-            <div className={styles.messagecontainer}>
-              <p>{message}</p>
-            </div>
-          )}
-        </>
+        <Error
+          error={
+            errorMessage || errors.email?.message || errors.password?.message
+          }
+        />
+        {message && (
+          <div className={styles.messagecontainer}>
+            <p>{message}</p>
+          </div>
+        )}
+
         {showConfirmMeEmail ? (
           <ConfirmMeEmail
             email={email}
@@ -210,17 +228,17 @@ const LoginBox = () => {
             handleClick={handleConfrimCode}
           />
         ) : (
-          <form onSubmit={handleClick}>
+          <form onSubmit={handleSubmit(loginUser)}>
             <div className={styles.inputWrapper}>
               <Input
-                value={Username}
-                setState={setUsername}
-                label={t("signUp.emailLabel") + "*"}
+                register={register}
+                name={"email"}
+                label={t("signUp.emailLabel")}
                 placeholder={t("signUp.emailPlaceholder")}
               />
               <Input
-                value={Password}
-                setState={setPassword}
+                register={register}
+                name={"password"}
                 label={t("signUp.passwordLabel")}
                 placeholder={t("signUp.passwordPlaceholder")}
                 secure
@@ -228,7 +246,7 @@ const LoginBox = () => {
 
               <ReCAPTCHA
                 ref={recaptchaRef}
-                sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+                sitekey={process.env.VITE_REACT_APP_RECAPTCHA_SITE_KEY}
                 theme="dark"
               />
 
@@ -246,12 +264,10 @@ const LoginBox = () => {
               </div>
             </div>
             <div className={styles.buttonWrapper}>
-              <Button className={styles.button} onClick={handleClick}>
+              <Button className={styles.button} type="submit">
                 {t("login.button")}
               </Button>
             </div>
-
-            <button type="submit" hidden />
           </form>
         )}
       </div>

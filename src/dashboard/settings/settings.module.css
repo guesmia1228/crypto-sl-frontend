@@ -249,12 +249,15 @@
 }
 
 .popup {
-  text-align: center;
   border-radius: 1rem;
   padding: 3rem;
   width: 100%;
   margin: 2.5rem;
   max-width: 50rem;
+}
+
+.popup > p {
+  text-align: center;
 }
 
 .modalHeadline {

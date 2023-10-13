@@ -4,20 +4,54 @@ import styles from "./resetPassword.module.css";
 import Logo from "../../assets/logo/logo.svg";
 import Button from "../button/button";
 import { useState, useEffect } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
 import backend_API from "../../api/backendAPI";
+import Error from "../error/error";
 
 const ResetPassword = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [message, setMessage] = useState(null);
-  const [Password, setPassword] = useState("");
-  const [CPassword, setCPassword] = useState("");
   const [token, setToken] = useState(null);
-  const navigate = useNavigate();
   const backendAPI = new backend_API();
   const { t } = useTranslation();
+
+  const schema = z
+    .object({
+      password: z
+        .string()
+        .min(1, { message: "Please enter your password" })
+        .min(8, { message: "Password must be at least 8 characters" })
+        .refine(
+          (value) =>
+            /^(?=(.*[a-z]){1,})(?=(.*[A-Z]){1,})(?=(.*\d){1,})(?=(.*[@#$%^&+=!_]){1,}).{8,}$/.test(
+              value,
+            ),
+          {
+            message:
+              "Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",
+          },
+        ),
+      confirmPassword: z
+        .string()
+        .nonempty({ message: "Confirm your password" }),
+    })
+    .refine(
+      (schemaData) => schemaData.password === schemaData.confirmPassword,
+      {
+        message: "Passwords must match",
+        path: ["confirmPassword"],
+      },
+    );
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: zodResolver(schema), mode: "onSubmit" });
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -28,14 +62,9 @@ const ResetPassword = () => {
     }
   }, []);
 
-  async function resetPassword(token, confirmPass, pass) {
-    if (confirmPass !== pass) {
-      setErrorMessage("Passwords are not equal!");
-      return;
-    }
-
+  async function resetPassword(data) {
     try {
-      const response = await backendAPI.resetPassword(pass, token);
+      const response = await backendAPI.resetPassword(data.password, token);
       if (response == null) {
         setErrorMessage("Invalid Token!");
         return;
@@ -46,11 +75,6 @@ const ResetPassword = () => {
     }
   }
 
-  function handleClick(e) {
-    e.preventDefault();
-    resetPassword(token, CPassword, Password);
-  }
-
   return (
     <div className={styles.login}>
       <div className={styles.card}>
@@ -59,11 +83,13 @@ const ResetPassword = () => {
 
           <h3>{t("reset-password.title")}</h3>
           <div>
-            {errorMessage && (
-              <div className={styles.errormessagecontainer}>
-                <p style={{ color: "red" }}> {errorMessage}</p>
-              </div>
-            )}
+            <Error
+              error={
+                errorMessage ||
+                errors.password?.message ||
+                errors.confirmPassword?.message
+              }
+            />
             {message && (
               <div className={styles.messagecontainer}>
                 <p style={{ color: "green" }}>{message}</p>
@@ -72,28 +98,27 @@ const ResetPassword = () => {
           </div>
         </div>
 
-        <form onSubmit={handleClick}>
+        <form onSubmit={handleSubmit(resetPassword)}>
           <Input
-            value={Password}
-            setState={setPassword}
+            register={register}
+            name="password"
             label={t("signUp.passwordLabel")}
             placeholder={t("signUp.passwordPlaceholder")}
             secure
           />
           <Input
-            value={CPassword}
-            setState={setCPassword}
+            register={register}
+            name="confirmPassword"
             label={t("reset-password.button-label-confirm")}
             placeholder={t("signUp.passwordPlaceholder")}
             secure
           />
-          <Button link={null} onClick={handleClick}>
+          <Button link={null} type="submit">
             {t("reset-password.button")}
           </Button>
           <div className={styles.info}>
             <p>{t("reset-password.info")}</p>
           </div>
-          <button type="submit" hidden />
         </form>
       </div>
     </div>

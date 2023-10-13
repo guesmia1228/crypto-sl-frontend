@@ -81,25 +81,35 @@ const AdminBody = ({ type }) => {
         dataUsers,
         reportResp,
         totalPricePerDate,
-      ] = await Promise.all(getPromises);
+      ] = await Promise.allSettled(getPromises);
+
+      console.log(
+        dataReg,
+        dataClick,
+        dataOrders,
+        dataInc,
+        dataUsers,
+        reportResp,
+        totalPricePerDate,
+      );
 
       const cardsContent = [
         {
           title: "Total Income",
-          amount: dataInc.number,
-          percentage: dataInc.percentage,
+          amount: dataInc?.value?.number,
+          percentage: dataInc?.value?.percentage,
           isMonetary: true,
         },
         {
           title: "Clicks",
-          amount: dataClick.number,
-          percentage: dataClick.percentage,
+          amount: dataClick?.value?.number,
+          percentage: dataClick?.value?.percentage,
           isMonetary: false,
         },
         {
           title: "Registrations",
-          amount: dataReg.number,
-          percentage: dataReg.percentage,
+          amount: dataReg?.value?.number,
+          percentage: dataReg?.value?.percentage,
           isMonetary: false,
         },
       ];
@@ -111,8 +121,8 @@ const AdminBody = ({ type }) => {
       ) {
         cardsContent[1] = {
           title: "Orders",
-          amount: dataOrders.number,
-          percentage: dataOrders.percentage,
+          amount: dataOrders?.value?.number,
+          percentage: dataOrders?.value?.percentage,
           isMonetary: false,
         };
       }
@@ -120,13 +130,13 @@ const AdminBody = ({ type }) => {
       console.log(cardsContent);
       setCardInfo(cardsContent);
 
-      dataUsers.reverse();
-      updateUsers(dataUsers);
+      dataUsers.value.reverse();
+      updateUsers(dataUsers.value);
 
       console.log(reportResp);
-      setBarContent(reportResp);
+      setBarContent(reportResp.value);
 
-      setGraphData(totalPricePerDate);
+      setGraphData(totalPricePerDate.value);
       console.log(totalPricePerDate);
     }
   };

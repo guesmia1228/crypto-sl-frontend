@@ -5,7 +5,7 @@ export default class vendorDashboardApi {
     //this.baseURL = "https://nefentus.com:8443/api/dashboard/admin";
     //DEV
     this.baseURL =
-      process.env.REACT_APP_BASE_ENDPOINT_API + "/dashboard/vendor";
+      process.env.VITE_REACT_APP_BASE_ENDPOINT_API + "/dashboard/vendor";
     this.token = Cookies.get("token");
   }
 

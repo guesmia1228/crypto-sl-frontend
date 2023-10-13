@@ -1,0 +1,30 @@
+.layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.body {
+  display: flex;
+  flex: 1 1 0%;
+  overflow: hidden;
+}
+
+.children {
+  padding: 2rem;
+  overflow: auto;
+  width: 100%;
+}
+
+.children > div {
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+}
+
+@media (max-width: 900px) {
+  .side {
+    display: none;
+  }
+}

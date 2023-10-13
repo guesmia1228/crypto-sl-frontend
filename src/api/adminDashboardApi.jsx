@@ -5,9 +5,9 @@ export default class adminDashboardApi {
   constructor(type) {
     if (type !== "admin") type = "partner";
     this.baseURL =
-      process.env.REACT_APP_BASE_ENDPOINT_API + `/dashboard/${type}`;
+      process.env.VITE_REACT_APP_BASE_ENDPOINT_API + `/dashboard/${type}`;
     this.token = Cookies.get("token");
-    ReactGA.initialize(process.env.REACT_APP_GA_ID);
+    ReactGA.initialize(process.env.VITE_REACT_APP_GA_ID);
   }
 
   async checkPermission() {

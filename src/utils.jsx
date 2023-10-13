@@ -70,7 +70,7 @@ export const encryptData = (password) => {
   try {
     return CryptoJS.AES.encrypt(
       JSON.stringify(password),
-      process.env.REACT_APP_SECRET_WORD,
+      process.env.VITE_REACT_APP_SECRET_WORD,
     ).toString();
   } catch (error) {
     console.error("Encryption failed. Please check your input.");
@@ -81,7 +81,7 @@ export const decryptData = (password) => {
   try {
     const bytes = CryptoJS.AES.decrypt(
       password,
-      process.env.REACT_APP_SECRET_WORD,
+      process.env.VITE_REACT_APP_SECRET_WORD,
     );
     return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
   } catch (error) {

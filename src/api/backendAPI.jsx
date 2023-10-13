@@ -4,9 +4,9 @@ import ReactGA from "react-ga4";
 
 export default class backendAPI {
   constructor() {
-    this.baseURL = process.env.REACT_APP_BASE_ENDPOINT_API;
+    this.baseURL = process.env.VITE_REACT_APP_BASE_ENDPOINT_API;
     this.token = Cookies.get("token");
-    ReactGA.initialize(process.env.REACT_APP_GA_ID);
+    ReactGA.initialize(process.env.VITE_REACT_APP_GA_ID);
   }
 
   async checkJwt() {
@@ -64,6 +64,52 @@ export default class backendAPI {
           "Content-Type": "application/json",
         },
         body: email,
+      };
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response;
+    } catch (error) {
+      return null; // or return some default value
+    }
+  }
+
+  async changeEmailDashboard(newEmail) {
+    try {
+      const url = `${this.baseURL}/auth/change-email`;
+      const options = {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${this.token}`,
+        },
+        body: newEmail,
+      };
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response;
+    } catch (error) {
+      return null; // or return some default value
+    }
+  }
+
+  async confirmEmail(code, newEmail) {
+    try {
+      const payload = {
+        token: code,
+        newEmail: newEmail,
+      };
+      const url = `${this.baseURL}/auth/confirm-email`;
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${this.token}`,
+        },
+        body: JSON.stringify(payload),
       };
       const response = await fetch(url, options);
       if (!response.ok) {
@@ -148,6 +194,7 @@ export default class backendAPI {
       localStorage.setItem("business", data.business);
       localStorage.setItem("phoneNumber", data.phoneNumber);
       localStorage.setItem("username", data.username);
+      localStorage.setItem("antiPhishingCode", data.antiPhishingCode);
       return response;
     } catch (error) {
       return null; // or return some default value
@@ -232,6 +279,7 @@ export default class backendAPI {
         localStorage.setItem("requireKyc", data.requireKyc);
         localStorage.setItem("requireOtp", data.requireOtp);
         localStorage.setItem("userId", data.userId);
+        localStorage.setItem("antiPhishingCode", data.antiPhishingCode);
       }
 
       ReactGA.event({
@@ -282,6 +330,7 @@ export default class backendAPI {
       localStorage.setItem("requireKyc", data.requireKyc);
       localStorage.setItem("requireOtp", data.requireOtp);
       localStorage.setItem("userId", data.userId);
+      localStorage.setItem("antiPhishingCode", data.antiPhishingCode);
 
       ReactGA.event({
         category: "User",
