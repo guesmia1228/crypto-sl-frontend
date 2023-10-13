@@ -413,7 +413,7 @@ const Signup = () => {
         />
 
         <div className={styles.buttonWrapper}>
-          <Button className={styles.button} onClick={handleClick}>
+          <Button className={styles.button} type="submit">
             {t("signUp.formButton")}
           </Button>
         </div>
