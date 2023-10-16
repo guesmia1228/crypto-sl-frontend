@@ -16,23 +16,23 @@ const KYC_TYPE = {
 const KYCContent = [
   {
     id: KYC_TYPE.PASSPORT,
-    label: "Upload Passport",
+    label: "Passport or ID card",
   },
   {
     id: KYC_TYPE.PERSONAL_PICTURE,
-    label: "Picture of You",
+    label: "Picture with passport/ID",
   },
   {
     id: KYC_TYPE.COMPANY_REGISTRATION,
-    label: "Company Registration",
-  },
-  {
-    id: KYC_TYPE.UTILITY_BILL,
-    label: "Utility Bill",
+    label: "Company registration",
   },
   {
     id: KYC_TYPE.ADRESS,
-    label: "Address verification",
+    label: "Proof of address",
+  },
+  {
+    id: KYC_TYPE.UTILITY_BILL,
+    label: "Due deligence",
   },
 ];
 
@@ -47,6 +47,7 @@ const INITIAL_FILES = {
 export const KYC = () => {
   const backendapi = new backendAPI();
   const [statusIndex, setStatusIndex] = useState(0);
+  const [level, setLevel] = useState(0);
   const [uploadingFiles, setUploadingFiles] = useState(INITIAL_FILES);
 
   const [files, setFiles] = useState({
@@ -58,8 +59,11 @@ export const KYC = () => {
   });
 
   const fetchFYC = async () => {
-    const arrayWithResults = await Promise.allSettled(
-      Object.values(KYC_TYPE).map((type) => backendapi.getByKYC(type)),
+    const userId = localStorage.getItem("userId");
+    const level = await backendapi.getKYCLevel(userId);
+
+    const arrayWithResults = await Promise.all(
+      Object.values(KYC_TYPE).map((type) => backendapi.getByKYC(type, userId)),
     );
 
     const transformedResults = arrayWithResults?.value
@@ -69,6 +73,7 @@ export const KYC = () => {
       })
       .reduce((acc, curr) => ({ ...acc, ...curr }), {});
     setFiles(transformedResults);
+    setLevel(level.data.kycLevel);
   };
 
   useEffect(() => {
@@ -115,17 +120,14 @@ export const KYC = () => {
 
   return (
     <div className={styles.kyc}>
+      <h4 className={styles.name}>Current KYC level: {level}</h4>
       {files[selectingType] && files[selectingType]["url"] ? (
         <div className={styles.kycImageContainer}>
-          <img
-            className={styles.kycImage}
-            src={files[selectingType]["url"]}
-            alt="url"
-          />
+          <img className={styles.kycImage} src={files[selectingType]["url"]} />
         </div>
       ) : (
         <div className={styles.kycDrop}>
-          <img src={File} alt="file" />
+          <img src={File} alt="" />
 
           <input
             onChange={onChange}
@@ -152,15 +154,23 @@ export const KYC = () => {
             className={`${styles.kycItem} ${
               selectingType === item.id ? styles.itemActive : ""
             }`}
-            onClick={() => handleSelectType(item.id)}
+            onClick={() => {
+              handleSelectType(item.id);
+              setStatusIndex(index);
+            }}
           >
             <div className={styles.kycLabelSection}>
-              <div className={styles.kycLabel}>{item.label}</div>
+              <div className={styles.kycLabel}>
+                {item.label}{" "}
+                {files[item.id]?.required && !files[item.id]?.verify && (
+                  <span className={styles.kycRequired}>*</span>
+                )}
+              </div>
 
               <div className={styles.kycStatus}>
                 {files[item.id]?.url &&
                   (files[item.id].verify ? (
-                    <img src={Correct} alt="correct" />
+                    <img src={Correct} alt="" />
                   ) : (
                     "(waiting verification)"
                   ))}
@@ -175,7 +185,7 @@ export const KYC = () => {
                 <p>
                   {uploadingFiles[item.id] ? uploadingFiles[item.id].name : ""}
                 </p>
-                <img src={Fail} alt="fail" />
+                <img src={Fail} alt="" />
               </div>
             )}
           </div>
