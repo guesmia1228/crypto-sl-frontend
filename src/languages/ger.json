@@ -219,7 +219,11 @@
     "close": "Schließen",
     "info": "Noch keinen Account? ",
     "infoButton": "Registrieren Sie sich",
-    "forgot": "Passwort vergessen?"
+    "forgot": "Passwort vergessen?",
+    "OTPTitle": "Prüfen Sie Ihre E-Mail auf einen Code",
+    "OTPSubtitleP1": "Wir haben einen 6-stelligen Code gesendet an ",
+    "OTPSubtitleP2": ". Der Code läuft in Kürze ab, also geben Sie ihn bitte bald ein.",
+    "confirm": "Bestätigen"
   },
   "affiliate": {
     "heroTitleP1": "Wahrscheinlich\n",
@@ -341,5 +345,19 @@
     ],
     "privacy": "Datenschutzerklärung",
     "imprint": "Impressum"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "overview": "Übersicht",
+    "overviewSubtitle": "Prüfen Sie Informationen über Einkommen, Klicks und Registrierungen.",
+    "addUser": "Benutzer hinzufügen",
+    "vendorButton": "Dashboard für Anbieter",
+    "income": "Einkommen",
+    "totalIncome": "Gesamtes Einkommen",
+    "clicks": "Klicks",
+    "registrations": "Anmeldungen",
+    "orders": "Bestellungen",
+    "userManagement": "Benutzerverwaltung",
+    "registrationsRoles": "Registrierungen Rollen"
   }
 }

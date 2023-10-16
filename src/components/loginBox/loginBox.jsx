@@ -20,12 +20,15 @@ import setCookie from "../setCookie/setCookie";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const ConfirmMeEmail = ({ email, code, setCode, handleClick }) => {
+  const { t } = useTranslation();
+
   return (
     <div className={styles["confirm-email"]}>
-      <h3>Check your email for a code</h3>
+      <h3>{t("login.OTPTitle")}</h3>
       <p>
-        We have sent a 6-digits code to {email}. The code expires shortly, so
-        please enter it soon.
+        {t("login.OTPSubtitleP1")}
+        {email}
+        {t("login.OTPSubtitleP2")}
       </p>
       <form onSubmit={handleClick}>
         <Input
@@ -36,7 +39,7 @@ const ConfirmMeEmail = ({ email, code, setCode, handleClick }) => {
         <div className={styles["button-group"]}>
           <div className={`${styles.buttonWrapper} ${styles.buttonWrapperOTP}`}>
             <Button className={styles.button} onClick={handleClick}>
-              Confirm
+              {t("login.confirm")}
             </Button>
           </div>
         </div>

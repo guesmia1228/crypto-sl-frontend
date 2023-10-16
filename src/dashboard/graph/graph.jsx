@@ -15,6 +15,7 @@ import { Line } from "react-chartjs-2";
 import { Options } from "../../components/input/input";
 import { useState } from "react";
 import { months } from "../../constants";
+import { useTranslation } from "react-i18next";
 
 const today = new Date();
 
@@ -156,6 +157,7 @@ export const options = {
 
 const Graph = ({ data, style }) => {
   const [period, setPeriod] = useState("Choose period");
+  const { t } = useTranslation();
 
   const extractUniqueMonthsAndYears = (data) => {
     return Object.keys(data).reduce((uniqueDates, date) => {
@@ -199,7 +201,7 @@ const Graph = ({ data, style }) => {
     <div className={`card ${styles.graphCard}`} style={style}>
       <div className={styles.info}>
         <div className={styles.left}>
-          <div className={styles.label}>Income</div>
+          <div className={styles.label}>{t("dashboard.income")}</div>
           <div className={styles.graphAmount}>{getTotalIncome(graphData)}</div>
         </div>
 

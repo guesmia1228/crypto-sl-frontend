@@ -281,7 +281,11 @@
     "close": "Close",
     "info": "Don't have an account? ",
     "infoButton": "Sign up",
-    "forgot": "Forgot password?"
+    "forgot": "Forgot password?",
+    "OTPTitle": "Check your email for a code",
+    "OTPSubtitleP1": "We have sent a 6-digits code to ",
+    "OTPSubtitleP2": ". The code expires shortly, so please enter it soon.",
+    "confirm": "Confirm"
   },
   "affiliate": {
     "heroTitleP1": "Probably",
@@ -403,5 +407,19 @@
     ],
     "privacy": "Privacy Policy",
     "imprint": "Imprint"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "overview": "Overview",
+    "overviewSubtitle": "Check information on income, clicks, and registrations.",
+    "addUser": "Add User",
+    "vendorButton": "Vendor Dashboard",
+    "income": "Income",
+    "totalIncome": "Total Income",
+    "clicks": "Clicks",
+    "registrations": "Registrations",
+    "orders": "Orders",
+    "userManagement": "User Management",
+    "registrationsRoles": "Registrations Roles"
   }
 }

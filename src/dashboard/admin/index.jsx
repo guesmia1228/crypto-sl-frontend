@@ -16,6 +16,7 @@ import CopyValue from "../copyValue";
 import { MessageContext } from "../../context/message";
 import MessageComponent from "../../components/message";
 import imputStyles from "../../components/input/input.module.css";
+import { useTranslation } from "react-i18next";
 
 const header = [
   "First Name",
@@ -52,6 +53,8 @@ const AdminBody = ({ type }) => {
   const navigate = useNavigate();
   const adminApi = new adminDashboardApi(type);
   const affiliate = type === "affiliate";
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchAdminData();
@@ -95,19 +98,19 @@ const AdminBody = ({ type }) => {
 
       const cardsContent = [
         {
-          title: "Total Income",
+          title: t("dashboard.totalIncome"),
           amount: dataInc?.value?.number,
           percentage: dataInc?.value?.percentage,
           isMonetary: true,
         },
         {
-          title: "Clicks",
+          title: t("dashboard.clicks"),
           amount: dataClick?.value?.number,
           percentage: dataClick?.value?.percentage,
           isMonetary: false,
         },
         {
-          title: "Registrations",
+          title: t("dashboard.registrations"),
           amount: dataReg?.value?.number,
           percentage: dataReg?.value?.percentage,
           isMonetary: false,
@@ -120,7 +123,7 @@ const AdminBody = ({ type }) => {
         type === "broker"
       ) {
         cardsContent[1] = {
-          title: "Orders",
+          title: t("dashboard.orders"),
           amount: dataOrders?.value?.number,
           percentage: dataOrders?.value?.percentage,
           isMonetary: false,
@@ -348,19 +351,21 @@ const AdminBody = ({ type }) => {
   return (
     <>
       <div className={styles.body}>
-        <Header title={ROLE_TO_NAME[type] + " Dashboard"} />
+        <Header title={ROLE_TO_NAME[type] + " " + t("dashboard.title")} />
 
         <TopInfo
-          title="Overview"
-          description="Check information on income, clicks, and registrations."
+          title={t("dashboard.overview")}
+          description={t("dashboard.overviewSubtitle")}
         >
           <div
             className={styles.topButtonWrapper}
             style={{ gridTemplateColumns: !affiliate ? "1fr 1fr" : "1fr" }}
           >
-            {!affiliate && <Button onClick={modalAddUser}>Add User</Button>}
+            {!affiliate && (
+              <Button onClick={modalAddUser}> {t("dashboard.addUser")}</Button>
+            )}
             <Button color="white" onClick={() => navigate("/dashboard/vendor")}>
-              Vendor Dashboard
+              {t("dashboard.vendorButton")}
             </Button>
           </div>
         </TopInfo>
@@ -400,7 +405,7 @@ const AdminBody = ({ type }) => {
 
           {!affiliate && (
             <div className={`${styles.registration} card`}>
-              <h3>Registrations Roles</h3>
+              <h3>{t("dashboard.registrationsRoles")}</h3>
 
               <div
                 style={{
@@ -482,7 +487,7 @@ const AdminBody = ({ type }) => {
 
         <div className={styles.tableWrapper}>
           <div className={styles.top}>
-            <h4>User Management</h4>
+            <h4>{t("dashboard.userManagement")}</h4>
 
             <div className={styles.inputs}>
               <Input
