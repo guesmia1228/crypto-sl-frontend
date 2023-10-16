@@ -422,7 +422,7 @@
   border-radius: 0.5rem;
   display: flex;
   justify-content: center;
-  .kycImage {
-    height: 25rem;
-  }
+}
+.kycImage {
+  height: 25rem;
 }
