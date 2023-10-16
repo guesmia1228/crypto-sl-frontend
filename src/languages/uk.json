@@ -340,7 +340,9 @@
       }
     ],
     "privacy": "Політика конфіденційності",
-    "imprint": "Про авторські права"
+    "imprint": "Про авторські права",
+    "terms": "Загальні положення та умови",
+    "contact": "Зв'яжіться з нами"
   },
   "dashboard": {
     "title": "Панель",
@@ -354,6 +356,71 @@
     "registrations": "Реєстрації",
     "orders": "Замовлення",
     "userManagement": "Керування користувачами",
-    "registrationsRoles": "Реєстраційні ролі"
+    "registrationsRoles": "Реєстраційні ролі",
+    "cardsDays": "за останні 30 днів",
+    "total": "Загалом",
+    "KYCRequests": "Запити KYC",
+    "roles": {
+      "Vendor": "Постачальник",
+      "Admin": "Адміністратор",
+      "Leader": "Лідер",
+      "SeniorBroker": "Старший брокер",
+      "Broker": "Брокер",
+      "Affiliate": "Партнер"
+    },
+    "tableHeaders": {
+      "firstName": "Ім'я",
+      "lastName": "Прізвище",
+      "email": "Електронна пошта",
+      "roles": "Ролі",
+      "status": "Статус",
+      "income": "Дохід ($)",
+      "joinedOn": "Приєднався",
+      "actions": "Дії"
+    },
+    "modal": {
+      "titleCreate": "Створити Користувача",
+      "titleEdit": "Редагувати Користувача",
+      "firstName": "Ім'я*",
+      "firstNamePlaceholder": "Введіть ім'я",
+      "lastName": "Прізвище*",
+      "lastNamePlaceholder": "Введіть прізвище",
+      "email": "Електронна пошта*",
+      "emailPlaceholder": "Введіть електронну пошту",
+      "password": "Пароль*",
+      "passwordPlaceholder": "Введіть пароль",
+      "role": "Роль*"
+    }
+  },
+  "graph": {
+    "months": {
+      "January": "Січень",
+      "February": "Лютий",
+      "March": "Березень",
+      "April": "Квітень",
+      "May": "Травень",
+      "June": "Червень",
+      "July": "Липень",
+      "August": "Серпень",
+      "September": "Вересень",
+      "October": "Жовтень",
+      "November": "Листопад",
+      "December": "Грудень"
+    },
+    "choosePeriod": "Виберіть період",
+    "allTime": "Весь час"
+  },
+  "general": {
+    "search": "Пошук",
+    "active": "активний",
+    "notActive": "неактивний",
+    "deactivate": "Деактивувати",
+    "activate": "Активувати",
+    "edit": "Редагувати",
+    "delete": "Видалити",
+    "cancel": "Відмінити",
+    "create": "Створити",
+    "settings": "Налаштування",
+    "logOut": "Вихід"
   }
 }

@@ -344,7 +344,9 @@
       }
     ],
     "privacy": "Datenschutzerklärung",
-    "imprint": "Impressum"
+    "imprint": "Impressum",
+    "terms": "Bedingungen und Konditionen",
+    "contact": "Kontaktieren Sie uns"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -358,6 +360,70 @@
     "registrations": "Anmeldungen",
     "orders": "Bestellungen",
     "userManagement": "Benutzerverwaltung",
-    "registrationsRoles": "Registrierungen Rollen"
+    "registrationsRoles": "Registrierungen Rollen",
+    "cardsDays": "in den letzten 30 Tagen",
+    "total": "Total",
+    "KYCRequests": "KYC-Anfragen",
+    "roles": {
+      "Vendor": "Anbieter",
+      "Admin": "Administrator",
+      "Leader": "Leiter",
+      "SeniorBroker": "Senior Broker",
+      "Broker": "Makler",
+      "Affiliate": "Partner"
+    },
+    "tableHeaders": {
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "email": "E-Mail",
+      "roles": "Rollen",
+      "status": "Status",
+      "income ": "Einkommen ($)",
+      "joinedOn": "Beigetreten am",
+      "actions": "Aktionen"
+    },
+    "modal": {
+      "titleCreate": "Benutzer erstellen",
+      "titleEdit": "Benutzer bearbeiten",
+      "firstName": "Vorname*",
+      "firstNamePlaceholder": "Geben Sie den Vornamen ein",
+      "lastName": "Nachname*",
+      "lastNamePlaceholder": "Geben Sie den Nachnamen ein",
+      "email": "E-Mail*",
+      "emailPlaceholder": "Geben Sie die E-Mail-Adresse ein",
+      "password": "Passwort*",
+      "passwordPlaceholder": "Geben Sie das Passwort ein",
+      "role": "Rolle*"
+    }
+  },
+  "graph": {
+    "months": {
+      "January": "January",
+      "February": "February",
+      "March": "March",
+      "April": "April",
+      "May": "May",
+      "June": "June",
+      "July": "July",
+      "August": "August",
+      "September": "September",
+      "October": "October",
+      "November": "November",
+      "December": "December"
+    },
+    "choosePeriod": "Zeitraum wählen",
+    "allTime": "Alle Zeiten"
+  },
+  "general": {
+    "search": "Suche",
+    "active": "aktiv",
+    "notActive": "nicht aktiv",
+    "deactivate": "Deaktivieren",
+    "activate": "Aktivieren",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "cancel": "Abbrechen",
+    "create": "Erstellen",
+    "settings": "Einstellungen"
   }
 }

@@ -324,26 +324,26 @@ const Graph = () => {
   );
 };
 
-const list = [
-  {
-    text: "Imprint",
-    link: "/imprint",
-  },
-  {
-    text: "Privacy Policy",
-    link: "/privacy",
-  },
-  {
-    text: "Terms and Condition",
-    link: "/terms",
-  },
-  {
-    text: "Contact us",
-    link: "/contact",
-  },
-];
-
 const Footer = () => {
+  const list = [
+    {
+      text: "Imprint",
+      link: "/imprint",
+    },
+    {
+      text: "Privacy Policy",
+      link: "/privacy",
+    },
+    {
+      text: "Terms and Condition",
+      link: "/terms",
+    },
+    {
+      text: "Contact us",
+      link: "/contact",
+    },
+  ];
+
   return (
     <div className={styles.footer}>
       <ul>

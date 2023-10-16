@@ -44,8 +44,10 @@ const Navigation = () => {
 
   function dashboardString(profile) {
     if (profile.firstName || profile.lastName)
-      return `Dashboard: ${profile.firstName} ${profile.lastName}`;
-    else return "Dashboard";
+      return `${t("dashboard.title")}: ${profile.firstName} ${
+        profile.lastName
+      }`;
+    else return t("dashboard.title");
   }
 
   function loginAndSignupWeb() {

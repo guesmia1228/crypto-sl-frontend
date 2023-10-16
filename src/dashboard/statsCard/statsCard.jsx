@@ -3,13 +3,16 @@ import { transformNumber } from "../func/transformNumber";
 import Negative from "../../assets/icon/negative.svg";
 import Positive from "../../assets/icon/positive.svg";
 import { formatUSDBalance } from "../../utils";
+import { useTranslation } from "react-i18next";
 
 import styles from "./statsCard.module.css";
 
 const StatsCard = ({ title, amount, percentage, isMonetary }) => {
+  const { t } = useTranslation();
+
   let positive = null;
   let color = null;
-  let percChange = "last 30 days";
+  let percChange = t("dashboard.cardsDays");
   if (percentage !== undefined && percentage !== null && percentage !== 0) {
     positive = percentage > 0 ? true : false;
     color = positive ? "#23C215" : "#C21515";
@@ -18,7 +21,7 @@ const StatsCard = ({ title, amount, percentage, isMonetary }) => {
         <span style={{ color: color }}>
           {(positive ? `+` : ``) + parseFloat(percentage).toFixed(0) + "%"}
         </span>{" "}
-        vs last 30 days
+        vs {t("dashboard.cardsDays")}
       </>
     );
   }

@@ -4,6 +4,7 @@ import Positive from "../../../assets/icon/positive.svg";
 import Negative from "../../../assets/icon/negative.svg";
 
 import styles from "./earningCards.module.css";
+import { useTranslation } from "react-i18next";
 
 const data = [
   {
@@ -24,6 +25,8 @@ const data = [
 ];
 
 const EarningCards = () => {
+  const { t } = useTranslation();
+
   return (
     <div className={styles.cards}>
       {data.map((item, index) => (
@@ -36,6 +39,8 @@ const EarningCards = () => {
 export default EarningCards;
 
 const SingleCard = ({ data }) => {
+  const { t } = useTranslation();
+
   return (
     <Card>
       <div className={styles.label}>{data.label}</div>
@@ -48,7 +53,7 @@ const SingleCard = ({ data }) => {
           >
             {data.percentage}%
           </div>
-          <div className={styles.rest}>vs last 30 days</div>
+          <div className={styles.rest}>{t("dashboard.cardsDays")}</div>
         </div>
       </div>
     </Card>

@@ -406,7 +406,9 @@
       }
     ],
     "privacy": "Privacy Policy",
-    "imprint": "Imprint"
+    "imprint": "Imprint",
+    "terms": "Terms and Condition",
+    "contact": "Contact us"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -420,6 +422,71 @@
     "registrations": "Registrations",
     "orders": "Orders",
     "userManagement": "User Management",
-    "registrationsRoles": "Registrations Roles"
+    "registrationsRoles": "Registrations Roles",
+    "cardsDays": "last 30 days",
+    "total": "Total",
+    "KYCRequests": "KYC Requests",
+    "roles": {
+      "Vendor": "Vendor",
+      "Admin": "Admin",
+      "Leader": "Leader",
+      "SeniorBroker": "Senior Broker",
+      "Broker": "Broker",
+      "Affiliate": "Affiliate"
+    },
+    "tableHeaders": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "roles": "Roles",
+      "status": "Status",
+      "income": "Income ($)",
+      "joinedOn": "Joined on",
+      "actions": "Actions"
+    },
+    "modal": {
+      "titleCreate": "Create User",
+      "titleEdit": "Edit User",
+      "firstName": "First name*",
+      "firstNamePlaceholder": "Enter first name",
+      "lastName": "Last name*",
+      "lastNamePlaceholder": "Enter last name",
+      "email": "Email*",
+      "emailPlaceholder": "Enter email",
+      "password": "Password*",
+      "passwordPlaceholder": "Enter password",
+      "role": "Role*"
+    }
+  },
+  "graph": {
+    "months": {
+      "January": "Januar",
+      "February": "Februar",
+      "March": "März",
+      "April": "April",
+      "May": "Mai",
+      "June": "Juni",
+      "July": "Juli",
+      "August": "August",
+      "September": "September",
+      "October": "Oktober",
+      "November": "November",
+      "December": "Dezember"
+    },
+    "choosePeriod": "Choose period",
+    "allTime": "All Time"
+  },
+  "general": {
+    "search": "Search",
+    "active": "active",
+    "notActive": "not active",
+    "deactivate": "Deactivate",
+    "activate": "Activate",
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "create": "Create",
+    "settings": "Settings",
+    "logOut": "Log Out"
   }
 }

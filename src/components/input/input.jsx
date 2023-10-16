@@ -89,11 +89,17 @@ export const Options = ({
         {open && (
           <div className={`card ${styles.body}`}>
             {options.length > 0 ? (
-              options.map((item) => (
-                <p key={item} onClick={() => setValue(item)}>
-                  {item}
-                </p>
-              ))
+              options.map((item) =>
+                item.value ? (
+                  <p key={item.value} onClick={() => setValue(item.value)}>
+                    {item.display}
+                  </p>
+                ) : (
+                  <p key={item} onClick={() => setValue(item)}>
+                    {item}
+                  </p>
+                ),
+              )
             ) : (
               <>
                 <p key={"vendor"} onClick={() => setValue("Vendor")}>
