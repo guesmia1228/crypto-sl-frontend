@@ -13,6 +13,7 @@ import ModalOverlay from "../modal/modalOverlay";
 import { MessageContext } from "../../context/message";
 import { formatUSDBalance } from "../../utils";
 import MessageComponent from "../../components/message";
+import { useTranslation } from "react-i18next";
 
 const headers = ["Created at", "Price ($)", "Status", "QR code", "Actions"];
 const colSizes = [1.5, 1, 1.5, 1.5, 1.5];
@@ -30,33 +31,34 @@ const PaymentBody = () => {
   const [successfulModal, setSuccessfulModal] = useState(false);
   const [qrModalOpen, setQRModalOpen] = useState(false);
   const [qrValue, setQRValue] = useState("");
+  const { t } = useTranslation();
 
   const vendorAPI = new vendorDashboardApi();
 
   async function createInvoice() {
     // Check data
     if (!amount) {
-      setErrorMessage("Please enter a valid amount");
+      setErrorMessage(t("messages.error.amountValid"));
       return;
     }
     if (!email) {
-      setErrorMessage("Please enter a valid email");
+      setErrorMessage(t("messages.validation.validEmail"));
       return;
     }
     if (!name) {
-      setErrorMessage("Please enter a valid name");
+      setErrorMessage(t("messages.error.nameValid"));
       return;
     }
     if (!company) {
-      setErrorMessage("Please enter a valid company");
+      setErrorMessage(t("messages.error.companyValid"));
       return;
     }
     if (!address) {
-      setErrorMessage("Please enter a valid address");
+      setErrorMessage(t("messages.error.addressValid"));
       return;
     }
     if (!taxNumber) {
-      setErrorMessage("Please enter a valid tax number");
+      setErrorMessage(t("messages.error.taxNumberValid"));
       return;
     }
 
@@ -77,7 +79,7 @@ const PaymentBody = () => {
       setQRValue(invoiceLink);
       setQRModalOpen(true);
     } else {
-      setErrorMessage("Could not create an invoice!");
+      setErrorMessage(t("messages.error.createInvoice"));
     }
   }
 
@@ -144,10 +146,10 @@ const PaymentBody = () => {
     const result = await vendorAPI.deleteInvoice(link);
     if (result) {
       fetchInvoices();
-      setInfoMessage("Invoice deleted!");
+      setInfoMessage(t("messages.success.deleteInvoice"));
     } else {
       fetchInvoices();
-      setErrorMessage("Could not delete invoice!");
+      setErrorMessage(t("messages.error.deleteInvoice"));
     }
   }
 
@@ -302,6 +304,7 @@ const Modal = ({
   onClose,
 }) => {
   const { setInfoMessage } = useContext(MessageContext);
+  const { t } = useTranslation();
 
   return (
     <ModalOverlay>
@@ -324,9 +327,7 @@ const Modal = ({
               "Link:",
               <CopyValue
                 value={qrValue}
-                onCopy={() =>
-                  setInfoMessage("Payment link copied to clipboard!")
-                }
+                onCopy={() => setInfoMessage(t("messages.info.paymentLink"))}
               />,
             ],
           ]}

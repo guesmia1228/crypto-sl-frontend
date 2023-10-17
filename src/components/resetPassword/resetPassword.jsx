@@ -65,12 +65,12 @@ const ResetPassword = () => {
     try {
       const response = await backendAPI.resetPassword(data.password, token);
       if (response == null) {
-        setErrorMessage("Invalid Token!");
+        setErrorMessage(t("messages.error.token"));
         return;
       }
-      setMessage("Password reset successfull!");
+      setMessage(t("messages.success.passwordReset"));
     } catch (error) {
-      setErrorMessage("There was an error updating the password!");
+      setErrorMessage(t("messages.error.updatePassword"));
     }
   }
 

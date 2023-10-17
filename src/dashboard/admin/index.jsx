@@ -289,23 +289,23 @@ const AdminBody = ({ type }) => {
 
   const addUser = async () => {
     if (firstName === "") {
-      setErrorMessage("First name is required");
+      setErrorMessage(t("messages.error.firstNameRequired"));
       return;
     }
     if (lastName === "") {
-      setErrorMessage("Last name is required");
+      setErrorMessage(t("messages.error.lastNameRequired"));
       return;
     }
     if (email === "" && editEmailAddress === null) {
-      setErrorMessage("Email is required");
+      setErrorMessage(t("messages.error.emailRequired"));
       return;
     }
     if (password === "" && editEmailAddress === null) {
-      setErrorMessage("Password is required");
+      setErrorMessage(t("messages.error.passwordRequired"));
       return;
     }
     if (role === "") {
-      setErrorMessage("Role is required");
+      setErrorMessage(t("messages.error.roleRequired"));
       return;
     }
 
@@ -318,9 +318,9 @@ const AdminBody = ({ type }) => {
         role,
       );
       if (resp) {
-        setInfoMessage("User updated successfully!");
+        setInfoMessage(t("messages.success.updateUser"));
       } else {
-        setErrorMessage("Could not update user!");
+        setErrorMessage(t("messages.error.updateUser"));
       }
 
       updateUsersTable();
@@ -339,20 +339,20 @@ const AdminBody = ({ type }) => {
           setOpenModal(false);
           fetchAdminData();
           clearAddUserFields();
-          setInfoMessage("User added successfully!");
+          setInfoMessage(t("messages.success.addUser"));
           return;
         } else if (resp.status === 409) {
-          setErrorMessage("User already exists!");
+          setErrorMessage(t("messages.error.userExist"));
           return;
         }
       }
 
-      setErrorMessage("Could not add user!");
+      setErrorMessage(t("messages.error.addUser"));
     }
   };
 
   const affiliateLinkCopied = async () => {
-    setInfoMessage("Affiliate link copied to clipboard");
+    setInfoMessage(t("messages.info.affiliateLink"));
   };
 
   return (

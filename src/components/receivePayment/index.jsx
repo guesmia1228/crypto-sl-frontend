@@ -26,9 +26,11 @@ import usePrices from "../../hooks/prices";
 import { currencies } from "../../constants";
 import { formatTokenBalance, formatUSDBalance } from "../../utils";
 import { nullToZeroAddress } from "../../utils";
+import { useTranslation } from "react-i18next";
 
 const ReceivePayment = ({ priceUSD, userId, info, transInfoArg, disabled }) => {
   let internalWalletAddress = useInternalWallet();
+  const { t } = useTranslation();
 
   const [password, setPassword] = useState("");
   const [internalPayIdx, setInternalPayIdx] = useState(-1); // Index of the currency to pay with (or -1 if not selected)
@@ -71,11 +73,11 @@ const ReceivePayment = ({ priceUSD, userId, info, transInfoArg, disabled }) => {
   async function handleBuy(providerSource, currencyIdx) {
     // Checks
     if (!(priceUSD > 0.0)) {
-      setErrorMessage("Invalid price!");
+      setErrorMessage(t("messages.error.invalidPrice"));
       return;
     }
     if (!userId) {
-      setErrorMessage("Invalid user id!");
+      setErrorMessage(t("messages.error.invalidUserId"));
       return;
     }
 
@@ -111,14 +113,14 @@ const ReceivePayment = ({ priceUSD, userId, info, transInfoArg, disabled }) => {
           transInfoArg,
         );
         if (ret) {
-          setInfoMessage("Transaction successful!");
+          setInfoMessage(t("messages.success.transaction"));
         } else {
           setInfoMessage(
-            "Transaction successfull but could not send transaction info!",
+            "Transaction successfully but could not send transaction info!",
           );
         }
       } else {
-        setErrorMessage("Transaction failed!");
+        setErrorMessage(t("messages.error.transactionFailed"));
       }
     } else if (providerSource === "internal") {
       const ret = await backend_API.makePayment(
@@ -131,11 +133,11 @@ const ReceivePayment = ({ priceUSD, userId, info, transInfoArg, disabled }) => {
       );
 
       if (ret === "insufficientFunds") {
-        setErrorMessage("Transaction failed! Insufficient funds.");
+        setErrorMessage(t("messages.error.transactionFailed2"));
       } else if (ret) {
-        setInfoMessage("Transaction successful!");
+        setInfoMessage(t("messages.success.transaction"));
       } else {
-        setErrorMessage("Transaction failed!");
+        setErrorMessage(t("messages.error.transactionFailed"));
       }
     }
   }
