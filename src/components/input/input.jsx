@@ -238,7 +238,7 @@ export const SearchOptions = ({
   const { t } = useTranslation();
 
   const filteredOptions = options.filter((item) =>
-    item.toLowerCase().includes(value.toLowerCase()),
+    item.display.toLowerCase().includes(value.toLowerCase()),
   );
 
   return (
@@ -275,8 +275,8 @@ export const SearchOptions = ({
         {open && (
           <div className={`card ${styles.body}`}>
             {filteredOptions.map((item) => (
-              <p onClick={() => setValue(item)} key={item}>
-                {item}
+              <p onClick={() => setValue(item.value)} key={item.value}>
+                {item.display}
               </p>
             ))}
           </div>
