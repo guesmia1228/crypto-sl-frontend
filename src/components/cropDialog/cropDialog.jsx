@@ -64,23 +64,14 @@ const CropDialog = ({ open, file, aspect, onSave, onClose }) => {
         setImage(imageReader.result);
         const img = new Image();
         img.src = imageReader.result;
-
         if (aspect) {
-          setCrop(
-            centerCrop(
-              makeAspectCrop(
-                {
-                  unit: "%",
-                  width: 100,
-                },
-                aspect,
-                img.width,
-                img.height,
-              ),
-              img.width,
-              img.height,
-            ),
-          );
+          setCrop({
+            unit: "%",
+            x: 25,
+            y: 25,
+            width: 50,
+            height: 50,
+          });
         }
       };
     }
