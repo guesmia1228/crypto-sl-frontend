@@ -55,6 +55,7 @@ const AdminBody = ({ type }) => {
 
   useEffect(() => {
     fetchAdminData();
+    fetchAdminUsersData();
     clearMessages();
   }, []);
 
@@ -80,8 +81,6 @@ const AdminBody = ({ type }) => {
 
       const [dataClick, reportResp, totalPricePerDate] =
         await Promise.allSettled(getPromisesGraph);
-
-      const dataUsers = await adminApi.getUsers();
 
       const cardsContent = [
         {
@@ -120,14 +119,23 @@ const AdminBody = ({ type }) => {
       console.log(cardsContent);
       setCardInfo(cardsContent);
 
-      dataUsers.reverse();
-      updateUsers(dataUsers);
-
       console.log(reportResp);
       setBarContent(reportResp.value);
 
       setGraphData(totalPricePerDate.value);
       console.log(totalPricePerDate);
+    }
+  };
+
+  const fetchAdminUsersData = async () => {
+    const result = await adminApi.checkPermission();
+    if (result !== true) {
+      navigate("/login");
+    } else {
+      const dataUsers = await adminApi.getUsers();
+
+      dataUsers.reverse();
+      updateUsers(dataUsers);
     }
   };
 

@@ -289,7 +289,7 @@
   }
 
   .navigation > div a {
-    padding: 0px !important;
+    padding: 0 !important;
   }
 
   .button {
@@ -422,7 +422,7 @@
   border-radius: 0.5rem;
   display: flex;
   justify-content: center;
-  .kycImage {
-    height: 25rem;
-  }
+}
+.kycImage {
+  height: 25rem;
 }
