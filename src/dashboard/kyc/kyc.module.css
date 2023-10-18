@@ -22,6 +22,12 @@
   color: #23c215;
 }
 
+.row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .input {
   position: relative;
   width: 26.3rem;
@@ -52,7 +58,7 @@
 }
 
 .table ul {
-  grid-template-columns: 1.5fr 2fr 0.8fr 1fr 1fr 1fr 1.2fr;
+  grid-template-columns: 1.5fr 2fr 0.8fr 1fr 1fr 0.5fr 1fr 1.2fr;
 }
 
 .tableBody li:last-child {
@@ -128,8 +134,14 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   font-size: 1.4rem;
+}
+
+.modal .level {
+  font-size: 1.6rem;
+  margin-bottom: 1.2rem;
 }
 
 .modal img {

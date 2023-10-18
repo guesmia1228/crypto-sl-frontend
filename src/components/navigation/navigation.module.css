@@ -23,9 +23,7 @@
   position: relative;
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
-  max-width: 1500px !important;
-  padding-left: 30px !important;
-  padding-right: 30px !important;
+  max-width: 111rem !important;
 }
 
 .content > div {

@@ -534,3 +534,28 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   -ms-user-select: none;
   user-select: none;
 }
+
+/* Loading animation */
+
+.loadingAnimation {
+  max-width: 400px;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: auto;
+  margin: auto;
+}
+
+@media (max-width: 900px) {
+  .loadingAnimation {
+    max-width: 100%;
+  }
+}
+
+.loadingAnimationWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
