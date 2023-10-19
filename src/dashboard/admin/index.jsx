@@ -74,12 +74,12 @@ const AdminBody = ({ type }) => {
       ];
 
       const [
-        dataInc,
-        dataOrders,
-        dataReg,
         dataClick,
         reportResp,
         totalPricePerDate,
+        dataInc,
+        dataOrders,
+        dataReg,
       ] = await Promise.allSettled(getPromises);
 
       const cardsContent = [
