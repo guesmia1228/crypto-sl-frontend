@@ -41,10 +41,6 @@ const Wallet = React.lazy(() => import("./dashboard/Wallet"));
 const Admin = React.lazy(() => import("./dashboard/Admin"));
 const Kyc = React.lazy(() => import("./dashboard/Kyc"));
 
-import MainDashboard from "./dashboardNew/screens/mainDashboard";
-import ScreenLayout from "./dashboardNew/containers/screenLayout/screenLayout";
-import ProfileDashboard from "./dashboardNew/screens/profileDashboard";
-import SecuritySettings from "./dashboardNew/containers/securitySettings/securitySettings";
 import { Player } from "@lottiefiles/react-lottie-player";
 import LoadingAnimation from "./assets/logo/loadingAnimation.json";
 
