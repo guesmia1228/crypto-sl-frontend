@@ -284,7 +284,7 @@
     "forgot": "Forgot password?",
     "OTPTitle": "Check your email for a code",
     "OTPSubtitleP1": "We have sent a 6-digits code to ",
-    "OTPSubtitleP2": ". The code expires shortly, so please enter it soon.",
+    "OTPSubtitleP2": ". The code expires shortly.",
     "confirm": "Confirm"
   },
   "affiliate": {
@@ -422,7 +422,7 @@
     "registrations": "Registrations",
     "orders": "Orders",
     "userManagement": "User Management",
-    "registrationsRoles": "Registrations Roles",
+    "registrationsRoles": "Roles",
     "cardsDays": "last 30 days",
     "total": "Total",
     "KYCRequests": "KYC Requests",
@@ -445,7 +445,7 @@
       "actions": "Actions"
     },
     "modal": {
-      "titleCreate": "Create User",
+      "titleCreate": "Add User",
       "titleEdit": "Edit User",
       "firstName": "First name*",
       "firstNamePlaceholder": "Enter first name",
@@ -460,18 +460,18 @@
   },
   "graph": {
     "months": {
-      "January": "Januar",
-      "February": "Februar",
-      "March": "März",
+      "January": "January",
+      "February": "February",
+      "March": "March",
       "April": "April",
-      "May": "Mai",
-      "June": "Juni",
-      "July": "Juli",
+      "May": "May",
+      "June": "June",
+      "July": "July",
       "August": "August",
       "September": "September",
-      "October": "Oktober",
+      "October": "October",
       "November": "November",
-      "December": "Dezember"
+      "December": "December"
     },
     "choosePeriod": "Choose period",
     "allTime": "All Time"
@@ -479,7 +479,7 @@
   "general": {
     "search": "Search",
     "active": "active",
-    "notActive": "not active",
+    "notActive": "inactive",
     "deactivate": "Deactivate",
     "activate": "Activate",
     "edit": "Edit",

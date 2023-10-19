@@ -220,9 +220,9 @@
     "info": "Noch keinen Account? ",
     "infoButton": "Registrieren Sie sich",
     "forgot": "Passwort vergessen?",
-    "OTPTitle": "Prüfen Sie Ihre E-Mail auf einen Code",
+    "OTPTitle": "Ein Code wurde per Email verschickt",
     "OTPSubtitleP1": "Wir haben einen 6-stelligen Code gesendet an ",
-    "OTPSubtitleP2": ". Der Code läuft in Kürze ab, also geben Sie ihn bitte bald ein.",
+    "OTPSubtitleP2": ". Der Code läuft in Kürze ab.",
     "confirm": "Bestätigen"
   },
   "affiliate": {
@@ -353,24 +353,24 @@
     "overview": "Übersicht",
     "overviewSubtitle": "Prüfen Sie Informationen über Einkommen, Klicks und Registrierungen.",
     "addUser": "Benutzer hinzufügen",
-    "vendorButton": "Dashboard für Anbieter",
+    "vendorButton": "Verkäufer-Dashboard",
     "income": "Einkommen",
     "totalIncome": "Gesamtes Einkommen",
     "clicks": "Klicks",
     "registrations": "Anmeldungen",
     "orders": "Bestellungen",
     "userManagement": "Benutzerverwaltung",
-    "registrationsRoles": "Registrierungen Rollen",
+    "registrationsRoles": "Rollen",
     "cardsDays": "in den letzten 30 Tagen",
-    "total": "Total",
+    "total": "Gesamt",
     "KYCRequests": "KYC-Anfragen",
     "roles": {
-      "Vendor": "Anbieter",
+      "Vendor": "Verkäufer",
       "Admin": "Administrator",
-      "Leader": "Leiter",
+      "Leader": "Leader",
       "SeniorBroker": "Senior Broker",
-      "Broker": "Makler",
-      "Affiliate": "Partner"
+      "Broker": "Broker",
+      "Affiliate": "Affiliate"
     },
     "tableHeaders": {
       "firstName": "Vorname",
@@ -383,7 +383,7 @@
       "actions": "Aktionen"
     },
     "modal": {
-      "titleCreate": "Benutzer erstellen",
+      "titleCreate": "Benutzer hinzufügen",
       "titleEdit": "Benutzer bearbeiten",
       "firstName": "Vorname*",
       "firstNamePlaceholder": "Geben Sie den Vornamen ein",
@@ -398,33 +398,34 @@
   },
   "graph": {
     "months": {
-      "January": "January",
-      "February": "February",
-      "March": "March",
+      "January": "Januar",
+      "February": "Februar",
+      "March": "März",
       "April": "April",
-      "May": "May",
-      "June": "June",
-      "July": "July",
+      "May": "Mai",
+      "June": "Juni",
+      "July": "Juli",
       "August": "August",
       "September": "September",
-      "October": "October",
+      "October": "Oktober",
       "November": "November",
-      "December": "December"
+      "December": "Dezember"
     },
     "choosePeriod": "Zeitraum wählen",
-    "allTime": "Alle Zeiten"
+    "allTime": "Komplett"
   },
   "general": {
     "search": "Suche",
     "active": "aktiv",
-    "notActive": "nicht aktiv",
+    "notActive": "inaktiv",
     "deactivate": "Deaktivieren",
     "activate": "Aktivieren",
     "edit": "Bearbeiten",
     "delete": "Löschen",
     "cancel": "Abbrechen",
     "create": "Erstellen",
-    "settings": "Einstellungen"
+    "settings": "Einstellungen",
+    "logOut": "Ausloggen"
   },
   "countries": {
     "Afghanistan": "Afghanistan",
@@ -675,7 +676,7 @@
       "sendingEmail": "Es gab einen Fehler beim Senden der E-Mail!",
       "token": "Ungültiges Token!",
       "updatePassword": "Es gab einen Fehler beim Aktualisieren des Passworts!",
-      "withdraw": "Rückzug gescheitert!",
+      "withdraw": "Abhebung gescheitert!",
       "firstNameRequired": "Vorname ist erforderlich.",
       "lastNameRequired": "Nachname ist erforderlich.",
       "emailRequired": "E-Mail ist erforderlich.",
@@ -703,8 +704,8 @@
       "invalidPrice": "Ungültiger Preis!",
       "invalidUserId": "Ungültige Benutzerkennung!",
       "deleteInvoice": "Konnte die Rechnung nicht löschen!",
-      "transactionFailed": "Transaction failed!",
-      "transactionFailed2": "Transaction failed! Unzureichende Geldmittel.",
+      "transactionFailed": "Transaktion fehlgeschlagen!",
+      "transactionFailed2": "Transaktion fehlgeschlagen! Unzureichende Deckung.",
       "nameRequired": "Name ist erforderlich!",
       "descriptionRequired": "Beschreibung ist erforderlich!",
       "priceRequired": "Preis ist erforderlich!",
@@ -718,10 +719,10 @@
     },
     "info": {
       "email": "E-Mail zum Zurücksetzen des Passworts gesendet!",
-      "withdrawing": "Zurückziehend...",
+      "withdrawing": "Abheben...",
       "walletCopy": "Wallet-Adresse kopiert!",
       "paymentLink": "Zahlungslink in die Zwischenablage kopiert!",
-      "affiliateLink": "Partnerlink in die Zwischenablage kopiert"
+      "affiliateLink": "Affiliatelink in die Zwischenablage kopiert"
     }
   }
 }
