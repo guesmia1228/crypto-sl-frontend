@@ -64,23 +64,23 @@ const AdminBody = ({ type }) => {
     if (result !== true) {
       navigate("/login");
     } else {
-      const getPromisesGraph = [
+      const getPromises = [
         adminApi.getTotalClicks(),
         adminApi.getRoleReport(),
         adminApi.getTotalIncomesPerDay(),
-      ];
-
-      const getPromisesCards = [
         adminApi.getTotalIncome(),
         adminApi.getNumOrders(),
         adminApi.getTotalRegistrations(),
       ];
 
-      const [dataInc, dataOrders, dataReg] =
-        await Promise.allSettled(getPromisesCards);
-
-      const [dataClick, reportResp, totalPricePerDate] =
-        await Promise.allSettled(getPromisesGraph);
+      const [
+        dataInc,
+        dataOrders,
+        dataReg,
+        dataClick,
+        reportResp,
+        totalPricePerDate,
+      ] = await Promise.allSettled(getPromises);
 
       const cardsContent = [
         {
