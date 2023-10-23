@@ -1,26 +1,28 @@
 import { Link } from "react-router-dom";
 import styles from "./footer.module.css";
-
-const list = [
-  {
-    text: "Imprint",
-    link: "/imprint",
-  },
-  {
-    text: "Privacy Policy",
-    link: "/privacy",
-  },
-  {
-    text: "Terms and Condition",
-    link: "/terms",
-  },
-  {
-    text: "Contact us",
-    link: "/contact",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
+
+  const list = [
+    {
+      text: t("footer.imprint"),
+      link: "/imprint",
+    },
+    {
+      text: t("footer.privacy"),
+      link: "/privacy",
+    },
+    {
+      text: t("footer.terms"),
+      link: "/terms",
+    },
+    {
+      text: t("footer.contact"),
+      link: "/contact",
+    },
+  ];
   return (
     <div className={styles.footer}>
       <ul>
@@ -31,7 +33,7 @@ const Footer = () => {
         ))}
       </ul>
 
-      <p>© 2023 Nefentus. All rights reserved.</p>
+      <p>{t("footer.copyright")}</p>
     </div>
   );
 };

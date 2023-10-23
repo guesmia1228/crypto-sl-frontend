@@ -14,7 +14,7 @@ import {
 import { Line } from "react-chartjs-2";
 import { Options } from "../../components/input/input";
 import { useState } from "react";
-import { months } from "../../constants";
+import { useTranslation } from "react-i18next";
 
 const today = new Date();
 
@@ -155,7 +155,23 @@ export const options = {
 };
 
 const Graph = ({ data, style }) => {
-  const [period, setPeriod] = useState("Choose period");
+  const { t } = useTranslation();
+  const [period, setPeriod] = useState(t("graph.choosePeriod"));
+
+  const months = [
+    t("graph.months.January"),
+    t("graph.months.February"),
+    t("graph.months.March"),
+    t("graph.months.April"),
+    t("graph.months.May"),
+    t("graph.months.June"),
+    t("graph.months.July"),
+    t("graph.months.August"),
+    t("graph.months.September"),
+    t("graph.months.October"),
+    t("graph.months.November"),
+    t("graph.months.December"),
+  ];
 
   const extractUniqueMonthsAndYears = (data) => {
     return Object.keys(data).reduce((uniqueDates, date) => {
@@ -172,10 +188,13 @@ const Graph = ({ data, style }) => {
     }, []);
   };
 
-  const options = ["All Time", ...extractUniqueMonthsAndYears(data)];
+  const options = [t("graph.allTime"), ...extractUniqueMonthsAndYears(data)];
 
   const filterDataByPeriod = (data, selectedPeriod) => {
-    if (selectedPeriod === "All Time" || selectedPeriod === "Choose period") {
+    if (
+      selectedPeriod === t("graph.allTime") ||
+      selectedPeriod === t("graph.choosePeriod")
+    ) {
       return data;
     } else {
       const filteredData = {};
@@ -199,7 +218,7 @@ const Graph = ({ data, style }) => {
     <div className={`card ${styles.graphCard}`} style={style}>
       <div className={styles.info}>
         <div className={styles.left}>
-          <div className={styles.label}>Income</div>
+          <div className={styles.label}>{t("dashboard.income")}</div>
           <div className={styles.graphAmount}>{getTotalIncome(graphData)}</div>
         </div>
 

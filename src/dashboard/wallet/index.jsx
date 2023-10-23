@@ -32,6 +32,7 @@ import {
   useConnectionStatus,
   useAddress,
 } from "@thirdweb-dev/react";
+import { useTranslation } from "react-i18next";
 
 const WalletBody = () => {
   let internalWalletAddress = useInternalWallet();
@@ -157,6 +158,7 @@ const Balances = ({
   const [isWithdrawing, setIsWithdrawing] = useState(false);
   const { setInfoMessage, setErrorMessage, clearMessages } =
     useContext(MessageContext);
+  const { t } = useTranslation();
 
   const isMetaMask = metamask !== null;
 
@@ -180,22 +182,22 @@ const Balances = ({
     // Check values
     if (isWithdrawing) return;
     if (withdrawAmount === "") {
-      setErrorMessage("Please enter an amount to withdraw.");
+      setErrorMessage(t("messages.error.amountWithdraw"));
       return;
     }
     if (withdrawAddress === "") {
-      setErrorMessage("Please enter an address to withdraw to.");
+      setErrorMessage(t("messages.error.addressWithdraw"));
       return;
     }
     if (password === "") {
-      setErrorMessage("Please enter your password.");
+      setErrorMessage(t("messages.validation.password"));
       return;
     }
     const sendCurrency = currencies.find(
       (currency) => currency.abbr === withdrawCurrency,
     );
     if (!sendCurrency) {
-      setErrorMessage("Please select a correct currency to withdraw.");
+      setErrorMessage(t("messages.error.currencyCorrect"));
       return;
     }
 
@@ -204,14 +206,14 @@ const Balances = ({
     const passwordCorrect = await backend_Api.checkPassword(password);
     console.log("passwordCorrect: " + passwordCorrect);
     if (!passwordCorrect) {
-      setErrorMessage("You did not provide the correct password!");
+      setErrorMessage(t("messages.error.passwordCorrect"));
       return;
     }
 
     //Before withdraw
     setPassword("");
     setIsWithdrawing(true);
-    setInfoMessage("Withdrawing...");
+    setInfoMessage(t("messages.info.withdrawing"));
 
     // Withdraw
     const tokenAddress = sendCurrency.address;
@@ -225,14 +227,14 @@ const Balances = ({
           withdrawAddress,
         );
         if (txReceipt.status === 1) {
-          setInfoMessage("Withdrawal successful!");
+          setInfoMessage(t("messages.success.withdrawal"));
           fetchBalances();
         } else {
-          setErrorMessage("Withdrawal failed!");
+          setErrorMessage(t("messages.error.withdraw"));
         }
       } catch (error) {
         console.log(error);
-        setErrorMessage("Withdrawal failed!");
+        setErrorMessage(t("messages.error.withdraw"));
       }
     } else {
       const backend_Api = new backendAPI();
@@ -243,10 +245,10 @@ const Balances = ({
         password,
       );
       if (ret) {
-        setInfoMessage("Withdrawal successful!");
+        setInfoMessage(t("messages.success.withdrawal"));
         fetchBalances();
       } else {
-        setErrorMessage("Withdrawal failed!");
+        setErrorMessage(t("messages.error.withdraw"));
       }
     }
   }
@@ -389,7 +391,9 @@ const Balances = ({
 
                       <CopyValue
                         value={walletAddress}
-                        onCopy={() => setInfoMessage("Wallet address copied!")}
+                        onCopy={() =>
+                          setInfoMessage(t("messages.info.walletCopy"))
+                        }
                       />
                     </div>
                   </div>

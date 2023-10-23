@@ -19,7 +19,7 @@ const PasswordForgot = () => {
   const { t } = useTranslation();
 
   const schema = z.object({
-    email: z.string().min(1, { message: "Please enter your email" }),
+    email: z.string().min(1, { message: t("messages.validation.email") }),
   });
 
   const {
@@ -32,12 +32,12 @@ const PasswordForgot = () => {
     try {
       const response = await backendAPI.forgotPassword(data.email);
       if (response == null) {
-        setErrorMessage("Invalid email address!");
+        setErrorMessage(t("messages.error.email"));
         return;
       }
-      setMessage("Email sent to reset password!");
+      setMessage(t("messages.info.email"));
     } catch (error) {
-      setErrorMessage("There was an error sending the email!");
+      setErrorMessage(t("messages.error.sendingEmail"));
     }
   }
 

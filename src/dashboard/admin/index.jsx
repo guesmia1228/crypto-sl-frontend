@@ -16,21 +16,24 @@ import CopyValue from "../copyValue";
 import { MessageContext } from "../../context/message";
 import MessageComponent from "../../components/message";
 import imputStyles from "../../components/input/input.module.css";
+import { useTranslation } from "react-i18next";
 
-const header = [
-  "First Name",
-  "Last Name",
-  "Email",
-  "Roles",
-  "Status",
-  "Income ($)",
-  "Joined on",
-  "Actions",
-];
-
-const colSizes = [1, 1, 2, 1, 1, 1, 1, 2];
+const colSizes = [1, 1, 2, 1, 1, 1, 1, 3];
 
 const AdminBody = ({ type }) => {
+  const { t } = useTranslation();
+
+  const header = [
+    t("dashboard.tableHeaders.firstName"),
+    t("dashboard.tableHeaders.lastName"),
+    t("dashboard.tableHeaders.email"),
+    t("dashboard.tableHeaders.roles"),
+    t("dashboard.tableHeaders.status"),
+    t("dashboard.tableHeaders.income"),
+    t("dashboard.tableHeaders.joinedOn"),
+    t("dashboard.tableHeaders.actions"),
+  ];
+
   const [cardInfo, setCardInfo] = useState([]);
   const [tableData, setTableData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -84,19 +87,19 @@ const AdminBody = ({ type }) => {
 
       const cardsContent = [
         {
-          title: "Total Income",
+          title: t("dashboard.totalIncome"),
           amount: dataInc?.value?.number,
           percentage: dataInc?.value?.percentage,
           isMonetary: true,
         },
         {
-          title: "Clicks",
+          title: t("dashboard.clicks"),
           amount: dataClick?.value?.number,
           percentage: dataClick?.value?.percentage,
           isMonetary: false,
         },
         {
-          title: "Registrations",
+          title: t("dashboard.registrations"),
           amount: dataReg?.value?.number,
           percentage: dataReg?.value?.percentage,
           isMonetary: false,
@@ -109,7 +112,7 @@ const AdminBody = ({ type }) => {
         type === "broker"
       ) {
         cardsContent[1] = {
-          title: "Orders",
+          title: t("dashboard.orders"),
           amount: dataOrders?.value?.number,
           percentage: dataOrders?.value?.percentage,
           isMonetary: false,
@@ -162,14 +165,21 @@ const AdminBody = ({ type }) => {
         user.lastName,
         user.email,
         user.roles
-          .map((role) => ROLE_TO_NAME[role.replace(" ", "")])
+          .map((role) =>
+            t(
+              `dashboard.roles.${ROLE_TO_NAME[role.replace(" ", "")].replaceAll(
+                " ",
+                "",
+              )}`,
+            ),
+          )
           .join(", "),
         <span
           className={`${styles.box} ${
             user.activated ? styles.approved : styles.pending
           }`}
         >
-          {user.activated ? "active" : "not active"}
+          {user.activated ? t("general.active") : t("general.notActive")}
         </span>,
         formatUSDBalance(user.income),
         new Date(user.createdAt).toLocaleString(),
@@ -189,24 +199,24 @@ const AdminBody = ({ type }) => {
             className={styles.actionsLink}
             onClick={() => activateUser(user.email)}
           >
-            Activate
+            {t("general.activate")}
           </span>
         ) : (
           <span
             className={styles.actionsLink}
             onClick={() => deactivateUser(user.email)}
           >
-            Deactivate
+            {t("general.deactivate")}
           </span>
         )}
         <span className={styles.actionsLink} onClick={() => editUser(user)}>
-          Edit
+          {t("general.edit")}
         </span>
         <span
           className={styles.deleteLink}
           onClick={() => deleteUser(user.email)}
         >
-          Delete
+          {t("general.delete")}
         </span>
       </div>
     );
@@ -277,23 +287,23 @@ const AdminBody = ({ type }) => {
 
   const addUser = async () => {
     if (firstName === "") {
-      setErrorMessage("First name is required");
+      setErrorMessage(t("messages.error.firstNameRequired"));
       return;
     }
     if (lastName === "") {
-      setErrorMessage("Last name is required");
+      setErrorMessage(t("messages.error.lastNameRequired"));
       return;
     }
     if (email === "" && editEmailAddress === null) {
-      setErrorMessage("Email is required");
+      setErrorMessage(t("messages.error.emailRequired"));
       return;
     }
     if (password === "" && editEmailAddress === null) {
-      setErrorMessage("Password is required");
+      setErrorMessage(t("messages.error.passwordRequired"));
       return;
     }
     if (role === "") {
-      setErrorMessage("Role is required");
+      setErrorMessage(t("messages.error.roleRequired"));
       return;
     }
 
@@ -306,9 +316,9 @@ const AdminBody = ({ type }) => {
         role,
       );
       if (resp) {
-        setInfoMessage("User updated successfully!");
+        setInfoMessage(t("messages.success.updateUser"));
       } else {
-        setErrorMessage("Could not update user!");
+        setErrorMessage(t("messages.error.updateUser"));
       }
 
       updateUsersTable();
@@ -327,38 +337,40 @@ const AdminBody = ({ type }) => {
           setOpenModal(false);
           fetchAdminData();
           clearAddUserFields();
-          setInfoMessage("User added successfully!");
+          setInfoMessage(t("messages.success.addUser"));
           return;
         } else if (resp.status === 409) {
-          setErrorMessage("User already exists!");
+          setErrorMessage(t("messages.error.userExist"));
           return;
         }
       }
 
-      setErrorMessage("Could not add user!");
+      setErrorMessage(t("messages.error.addUser"));
     }
   };
 
   const affiliateLinkCopied = async () => {
-    setInfoMessage("Affiliate link copied to clipboard");
+    setInfoMessage(t("messages.info.affiliateLink"));
   };
 
   return (
     <>
       <div className={styles.body}>
-        <Header title={ROLE_TO_NAME[type] + " Dashboard"} />
+        <Header title={ROLE_TO_NAME[type] + " " + t("dashboard.title")} />
 
         <TopInfo
-          title="Overview"
-          description="Check information on income, clicks, and registrations."
+          title={t("dashboard.overview")}
+          description={t("dashboard.overviewSubtitle")}
         >
           <div
             className={styles.topButtonWrapper}
             style={{ gridTemplateColumns: !affiliate ? "1fr 1fr" : "1fr" }}
           >
-            {!affiliate && <Button onClick={modalAddUser}>Add User</Button>}
+            {!affiliate && (
+              <Button onClick={modalAddUser}> {t("dashboard.addUser")}</Button>
+            )}
             <Button color="white" onClick={() => navigate("/dashboard/vendor")}>
-              Vendor Dashboard
+              {t("dashboard.vendorButton")}
             </Button>
           </div>
         </TopInfo>
@@ -398,7 +410,7 @@ const AdminBody = ({ type }) => {
 
           {!affiliate && (
             <div className={`${styles.registration} card`}>
-              <h3>Registrations Roles</h3>
+              <h3>{t("dashboard.registrationsRoles")}</h3>
 
               <div
                 style={{
@@ -425,7 +437,7 @@ const AdminBody = ({ type }) => {
 
               <div className={styles.totalBox}>
                 <div className={styles.totalBoxTop}>
-                  <p>Total</p>
+                  <p>{t("dashboard.total")}</p>
                   <p className={styles.label}>
                     {barContent.reduce((total, item) => {
                       const amount = Number(item.count);
@@ -447,7 +459,11 @@ const AdminBody = ({ type }) => {
                           }
                         ></div>
                         <div className={styles.name}>
-                          {ROLE_TO_NAME[item.role]}
+                          {t(
+                            `dashboard.roles.${ROLE_TO_NAME[
+                              item.role
+                            ].replaceAll(" ", "")}`,
+                          )}
                         </div>
                       </div>
                     ))}
@@ -469,7 +485,7 @@ const AdminBody = ({ type }) => {
                 {type === "admin" && (
                   <div className={styles.button}>
                     <Button color="white" link={"/dashboard/kyc"}>
-                      KYC Requests
+                      {t("dashboard.KYCRequests")}
                     </Button>
                   </div>
                 )}
@@ -480,11 +496,11 @@ const AdminBody = ({ type }) => {
 
         <div className={styles.tableWrapper}>
           <div className={styles.top}>
-            <h4>User Management</h4>
+            <h4>{t("dashboard.userManagement")}</h4>
 
             <div className={styles.inputs}>
               <Input
-                placeholder="Search"
+                placeholder={t("general.search")}
                 dashboard
                 value={searchText}
                 setState={changeSearchText}
@@ -507,27 +523,31 @@ const AdminBody = ({ type }) => {
             <div className={styles.modal}>
               <MessageComponent />
 
-              <h4>{editEmailAddress ? "Edit" : "Create"} User</h4>
+              <h4>
+                {editEmailAddress
+                  ? t("dashboard.modal.titleEdit")
+                  : t("dashboard.modal.titleCreate")}
+              </h4>
 
               <div className={styles.modalInputs}>
                 <Input
                   dashboard
-                  label="First name*"
-                  placeholder={"Enter first name"}
+                  label={t("dashboard.modal.firstName")}
+                  placeholder={t("dashboard.modal.firstNamePlaceholder")}
                   value={firstName}
                   setState={setFirstName}
                 />
                 <Input
                   dashboard
-                  label="Last name*"
-                  placeholder={"Enter last name"}
+                  label={t("dashboard.modal.lastName")}
+                  placeholder={t("dashboard.modal.lastNamePlaceholder")}
                   value={lastName}
                   setState={setLastName}
                 />
                 <Input
                   dashboard
-                  label="Email*"
-                  placeholder={"Enter email"}
+                  label={t("dashboard.modal.email")}
+                  placeholder={t("dashboard.modal.emailPlaceholder")}
                   value={email}
                   setState={setEmail}
                   disabled={editEmailAddress !== null}
@@ -537,14 +557,14 @@ const AdminBody = ({ type }) => {
                     <p
                       className={`${imputStyles.label} ${imputStyles.dashboardLabel}`}
                     >
-                      Password*
+                      {t("dashboard.modal.password")}
                     </p>
 
                     <div className={styles.passwordWrapper}>
                       <input
                         className={`${imputStyles.input} ${imputStyles.dashboardInput}`}
                         type={showPassword ? "text" : "password"}
-                        placeholder={"Enter password"}
+                        placeholder={t("dashboard.modal.passwordPlaceholder")}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
@@ -571,14 +591,24 @@ const AdminBody = ({ type }) => {
 
                 {type === "admin" && (
                   <Options
-                    label="Role*"
-                    value={role}
+                    label={t("dashboard.modal.role")}
+                    value={
+                      role
+                        ? t(`dashboard.roles.${role.replaceAll(" ", "")}`)
+                        : ""
+                    }
                     options={[
-                      "Vendor",
-                      "Affiliate",
-                      "Broker",
-                      "Senior Broker",
-                      "Leader",
+                      { value: "Vendor", display: t("dashboard.roles.Vendor") },
+                      {
+                        value: "Affiliate",
+                        display: t("dashboard.roles.Affiliate"),
+                      },
+                      { value: "Broker", display: t("dashboard.roles.Broker") },
+                      {
+                        value: "Senior Broker",
+                        display: t("dashboard.roles.SeniorBroker"),
+                      },
+                      { value: "Leader", display: t("dashboard.roles.Leader") },
                     ]}
                     dashboard
                     setValue={setRole}
@@ -586,27 +616,63 @@ const AdminBody = ({ type }) => {
                 )}
                 {type === "leader" && (
                   <Options
-                    label="Role*"
-                    value={role}
-                    options={["Vendor", "Affiliate", "Broker", "Senior Broker"]}
+                    label={t("dashboard.modal.role")}
+                    value={
+                      role
+                        ? t(`dashboard.roles.${role.replaceAll(" ", "")}`)
+                        : ""
+                    }
+                    options={[
+                      { value: "Vendor", display: t("dashboard.roles.Vendor") },
+                      {
+                        value: "Affiliate",
+                        display: t("dashboard.roles.Affiliate"),
+                      },
+                      { value: "Broker", display: t("dashboard.roles.Broker") },
+                      {
+                        value: "Senior Broker",
+                        display: t("dashboard.roles.SeniorBroker"),
+                      },
+                    ]}
                     dashboard
                     setValue={setRole}
                   />
                 )}
                 {type === "seniorbroker" && (
                   <Options
-                    label="Role*"
-                    value={role}
-                    options={["Vendor", "Affiliate", "Broker"]}
+                    label={t("dashboard.modal.role")}
+                    value={
+                      role
+                        ? t(`dashboard.roles.${role.replaceAll(" ", "")}`)
+                        : ""
+                    }
+                    options={[
+                      { value: "Vendor", display: t("dashboard.roles.Vendor") },
+                      {
+                        value: "Affiliate",
+                        display: t("dashboard.roles.Affiliate"),
+                      },
+                      { value: "Broker", display: t("dashboard.roles.Broker") },
+                    ]}
                     dashboard
                     setValue={setRole}
                   />
                 )}
                 {type === "broker" && (
                   <Options
-                    label="Role*"
-                    value={role}
-                    options={["Vendor", "Affiliate"]}
+                    label={t("dashboard.modal.role")}
+                    value={
+                      role
+                        ? t(`dashboard.roles.${role.replaceAll(" ", "")}`)
+                        : ""
+                    }
+                    options={[
+                      { value: "Vendor", display: t("dashboard.roles.Vendor") },
+                      {
+                        value: "Affiliate",
+                        display: t("dashboard.roles.Affiliate"),
+                      },
+                    ]}
                     dashboard
                     setValue={setRole}
                   />
@@ -621,10 +687,12 @@ const AdminBody = ({ type }) => {
                     setOpenModal(false);
                   }}
                 >
-                  Cancel
+                  {t("general.cancel")}
                 </div>
                 <Button onClick={addUser} color="white">
-                  {editEmailAddress ? "Edit" : "Create"} User
+                  {editEmailAddress
+                    ? t("dashboard.modal.titleEdit")
+                    : t("dashboard.modal.titleCreate")}
                 </Button>
               </div>
             </div>

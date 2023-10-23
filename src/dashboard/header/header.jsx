@@ -8,8 +8,11 @@ import Logo from "../../assets/logo/logo.svg";
 import Logout from "../../assets/icon/logout.svg";
 import Settings from "../../assets/icon/settings.svg";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Header = ({ title, logo }) => {
+  const { t } = useTranslation();
+
   const backendAPI = new backend_API();
   const navigate = useNavigate();
 
@@ -32,11 +35,11 @@ const Header = ({ title, logo }) => {
         <div className={`${styles.settingsBody} card`}>
           <Link to="/dashboard/settings" className={styles.logout}>
             <img src={Settings} alt="settings" />
-            <p>Settings</p>
+            <p>{t("general.settings")}</p>
           </Link>
           <Link onClick={logOut} to="#" className={styles.logout}>
             <img src={Logout} alt="logout" />
-            <p>Log out</p>
+            <p>{t("general.logOut")}</p>
           </Link>
         </div>
 

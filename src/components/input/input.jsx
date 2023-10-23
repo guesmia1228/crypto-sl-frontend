@@ -89,11 +89,17 @@ export const Options = ({
         {open && (
           <div className={`card ${styles.body}`}>
             {options.length > 0 ? (
-              options.map((item) => (
-                <p key={item} onClick={() => setValue(item)}>
-                  {item}
-                </p>
-              ))
+              options.map((item) =>
+                item.value ? (
+                  <p key={item.value} onClick={() => setValue(item.value)}>
+                    {item.display}
+                  </p>
+                ) : (
+                  <p key={item} onClick={() => setValue(item)}>
+                    {item}
+                  </p>
+                ),
+              )
             ) : (
               <>
                 <p key={"vendor"} onClick={() => setValue("Vendor")}>
@@ -232,7 +238,7 @@ export const SearchOptions = ({
   const { t } = useTranslation();
 
   const filteredOptions = options.filter((item) =>
-    item.toLowerCase().includes(value.toLowerCase()),
+    item.display.toLowerCase().includes(value.toLowerCase()),
   );
 
   return (
@@ -269,8 +275,8 @@ export const SearchOptions = ({
         {open && (
           <div className={`card ${styles.body}`}>
             {filteredOptions.map((item) => (
-              <p onClick={() => setValue(item)} key={item}>
-                {item}
+              <p onClick={() => setValue(item.value)} key={item.value}>
+                {item.display}
               </p>
             ))}
           </div>

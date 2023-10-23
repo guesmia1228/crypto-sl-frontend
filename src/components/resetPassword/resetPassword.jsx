@@ -23,26 +23,25 @@ const ResetPassword = () => {
     .object({
       password: z
         .string()
-        .min(1, { message: "Please enter your password" })
-        .min(8, { message: "Password must be at least 8 characters" })
+        .min(1, { message: t("messages.validation.password") })
+        .min(8, { message: t("messages.validation.validPassword") })
         .refine(
           (value) =>
-            /^(?=(.*[a-z]){1,})(?=(.*[A-Z]){1,})(?=(.*\d){1,})(?=(.*[@#$%^&+=!_]){1,}).{8,}$/.test(
+            /^(?:(?=.*[a-z])(?=.*[A-Z])(?=.*\d)|(?=.*[a-z])(?=.*[A-Z])(?=.*[.\$\/@!%&*_,#*-+;`])|(?=.*[a-z])(?=.*\d)(?=.*[.\$\/@!%&*_,#*-+;`])|(?=.*[A-Z])(?=.*\d)(?=.*[.\$\/@!%&*_,#*-+;`])|(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[.\$\/@!%&*_,#*-+;`])).*$/.test(
               value,
             ),
           {
-            message:
-              "Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",
+            message: t("messages.validation.securityPassword"),
           },
         ),
       confirmPassword: z
         .string()
-        .nonempty({ message: "Confirm your password" }),
+        .nonempty({ message: t("messages.validation.confirmPassword") }),
     })
     .refine(
       (schemaData) => schemaData.password === schemaData.confirmPassword,
       {
-        message: "Passwords must match",
+        message: t("messages.validation.matchPassword"),
         path: ["confirmPassword"],
       },
     );
@@ -66,12 +65,12 @@ const ResetPassword = () => {
     try {
       const response = await backendAPI.resetPassword(data.password, token);
       if (response == null) {
-        setErrorMessage("Invalid Token!");
+        setErrorMessage(t("messages.error.token"));
         return;
       }
-      setMessage("Password reset successfull!");
+      setMessage(t("messages.success.passwordReset"));
     } catch (error) {
-      setErrorMessage("There was an error updating the password!");
+      setErrorMessage(t("messages.error.updatePassword"));
     }
   }
 

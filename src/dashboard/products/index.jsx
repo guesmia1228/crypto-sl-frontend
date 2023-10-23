@@ -19,6 +19,7 @@ import { useContext } from "react";
 import CropDialog, {
   dataURLtoFile,
 } from "../../components/cropDialog/cropDialog";
+import { useTranslation } from "react-i18next";
 
 const ProductBody = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -32,6 +33,7 @@ const ProductBody = () => {
   const [products, setProducts] = useState([]);
   const [signedImagePaths, setSignedImagePaths] = useState([]);
   const [cropDialogOpen, setCropDialogOpen] = useState(false);
+  const { t } = useTranslation();
 
   const { setInfoMessage, setErrorMessage, clearMessages } =
     useContext(MessageContext);
@@ -86,21 +88,21 @@ const ProductBody = () => {
 
   const addOrUpdateProduct = async () => {
     if (!name) {
-      setErrorMessage("Name is required!");
+      setErrorMessage(t("messages.error.nameRequired"));
       return;
     }
     if (!description) {
-      setErrorMessage("Description is required!");
+      setErrorMessage(t("messages.error.descriptionRequired"));
       return;
     }
     if (!price) {
-      setErrorMessage("Price is required!");
+      setErrorMessage(t("messages.error.priceRequired"));
       return;
     }
     let priceAsFloat = null;
     priceAsFloat = parseFloat(price);
     if (!priceAsFloat) {
-      setErrorMessage("Price must be a number!");
+      setErrorMessage(t("messages.error.priceValidation"));
     }
 
     const resp1 = await dashboardApi.upsertProduct(
@@ -125,11 +127,13 @@ const ProductBody = () => {
     }
 
     if (resp1 && resp2) {
-      if (productId !== null) setInfoMessage("Product updated successfully!");
-      else setInfoMessage("Product added successfully!");
+      if (productId !== null)
+        setInfoMessage(t("messages.success.updateProduct"));
+      else setInfoMessage(t("messages.success.addProduct"));
     } else {
-      if (productId !== null) setErrorMessage("Could not update the product!");
-      else setErrorMessage("Could not add a new product!");
+      if (productId !== null)
+        setErrorMessage(t("messages.error.updateProduct"));
+      else setErrorMessage(t("messages.error.addProduct"));
     }
 
     loadProducts();
@@ -139,9 +143,9 @@ const ProductBody = () => {
   const deleteProduct = async (productId) => {
     const resp = await dashboardApi.deleteProduct(productId);
     if (resp) {
-      setInfoMessage("Product deleted successfully!");
+      setInfoMessage(t("messages.success.deleteProduct"));
     } else {
-      setErrorMessage("Could not delete the product!");
+      setErrorMessage(t("messages.error.deleteProduct"));
     }
     loadProducts();
   };

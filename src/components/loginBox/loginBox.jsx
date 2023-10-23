@@ -20,12 +20,15 @@ import setCookie from "../setCookie/setCookie";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const ConfirmMeEmail = ({ email, code, setCode, handleClick }) => {
+  const { t } = useTranslation();
+
   return (
     <div className={styles["confirm-email"]}>
-      <h3>Check your email for a code</h3>
+      <h3>{t("login.OTPTitle")}</h3>
       <p>
-        We have sent a 6-digits code to {email}. The code expires shortly, so
-        please enter it soon.
+        {t("login.OTPSubtitleP1")}
+        {email}
+        {t("login.OTPSubtitleP2")}
       </p>
       <form onSubmit={handleClick}>
         <Input
@@ -36,7 +39,7 @@ const ConfirmMeEmail = ({ email, code, setCode, handleClick }) => {
         <div className={styles["button-group"]}>
           <div className={`${styles.buttonWrapper} ${styles.buttonWrapperOTP}`}>
             <Button className={styles.button} onClick={handleClick}>
-              Confirm
+              {t("login.confirm")}
             </Button>
           </div>
         </div>
@@ -59,8 +62,8 @@ const LoginBox = () => {
   );
 
   const schema = z.object({
-    email: z.string().min(1, { message: "Please enter your email" }),
-    password: z.string().min(1, { message: "Please enter your password" }),
+    email: z.string().min(1, { message: t("messages.validation.email") }),
+    password: z.string().min(1, { message: t("messages.validation.password") }),
   });
 
   const {
@@ -123,7 +126,7 @@ const LoginBox = () => {
     const captchaValue = recaptchaRef.current.getValue();
 
     if (!captchaValue) {
-      setErrorMessage("Please verify the reCAPTCHA!");
+      setErrorMessage(t("messages.error.reCAPTCHA"));
     } else {
       if (Cookies.get("acceptCookie") !== true) {
         checkbox = false;
@@ -135,7 +138,7 @@ const LoginBox = () => {
           checkbox,
         );
         if (response == null) {
-          setErrorMessage("Invalid login data");
+          setErrorMessage(t("messages.error.loginData"));
           return;
         } else if (response.requireOtp) {
           setShowConfirmMeEmail(true);
@@ -144,7 +147,7 @@ const LoginBox = () => {
           navigateDashboard();
         }
       } catch (error) {
-        setErrorMessage("There was an error logging in");
+        setErrorMessage(t("messages.error.login"));
       }
     }
   }
@@ -156,12 +159,12 @@ const LoginBox = () => {
     try {
       const response = await backendAPI.verifyOTP(email, code, checkbox);
       if (response == null) {
-        setErrorMessage("Failed to Confirm");
+        setErrorMessage(t("messages.error.confirm"));
         return;
       }
       navigateDashboard();
     } catch (error) {
-      setErrorMessage("There was an error logging in");
+      setErrorMessage(t("messages.error.login"));
     }
   }
 
@@ -169,12 +172,12 @@ const LoginBox = () => {
     try {
       const response = await backendAPI.activateAccount(token);
       if (response == null) {
-        setErrorMessage("Error on activating account: ");
+        setErrorMessage(t("messages.error.activateAccount"));
         return;
       }
-      setMessage("Account successfully activated");
+      setMessage(t("messages.success.activateAccount"));
     } catch (error) {
-      setErrorMessage("Error on activating account: ");
+      setErrorMessage(t("messages.error.activateAccount"));
     }
   };
 
