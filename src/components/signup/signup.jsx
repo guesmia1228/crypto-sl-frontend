@@ -397,6 +397,7 @@ const Signup = () => {
             secure
           />
           <SearchOptions
+            label={t("signUp.option1Label")}
             value={CountryOption}
             setValue={setCountryOption}
             options={country_list}
