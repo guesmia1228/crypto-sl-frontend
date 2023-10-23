@@ -1,6 +1,6 @@
 import Logo from "../../assets/logo/logo2.svg";
 import Button from "../button/button";
-import Input, { Options } from "../input/input";
+import Input, { SearchOptions } from "../input/input";
 import styles from "./signup.module.css";
 import { Link } from "react-router-dom";
 import { useState, useRef } from "react";
@@ -226,9 +226,7 @@ const Signup = () => {
   const { t } = useTranslation();
   const [errorMessage, setErrorMessage] = useState(null);
   const [message, setMessage] = useState(null);
-  const [CountryOption, setCountryOption] = useState(
-    t("signUp.option1Placeholder"),
-  );
+  const [CountryOption, setCountryOption] = useState("");
   const api = new backendAPI();
 
   const schema = z
@@ -398,11 +396,12 @@ const Signup = () => {
             name={"confirmPassword"}
             secure
           />
-          <Options
-            label={t("signUp.option1Label") + "*"}
+          <SearchOptions
+            label={t("signUp.option1Label")}
             value={CountryOption}
             setValue={setCountryOption}
             options={country_list}
+            placeholder={t("signUp.option1Placeholder")}
           />
         </div>
 
