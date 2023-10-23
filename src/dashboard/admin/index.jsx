@@ -58,6 +58,7 @@ const AdminBody = ({ type }) => {
 
   useEffect(() => {
     fetchAdminData();
+    fetchAdminUsersData();
     clearMessages();
   }, []);
 
@@ -67,34 +68,22 @@ const AdminBody = ({ type }) => {
       navigate("/login");
     } else {
       const getPromises = [
-        adminApi.getTotalRegistrations(),
         adminApi.getTotalClicks(),
-        adminApi.getNumOrders(),
-        adminApi.getTotalIncome(),
-        adminApi.getUsers(),
         adminApi.getRoleReport(),
         adminApi.getTotalIncomesPerDay(),
+        adminApi.getTotalIncome(),
+        adminApi.getNumOrders(),
+        adminApi.getTotalRegistrations(),
       ];
 
       const [
-        dataReg,
         dataClick,
-        dataOrders,
-        dataInc,
-        dataUsers,
         reportResp,
         totalPricePerDate,
+        dataInc,
+        dataOrders,
+        dataReg,
       ] = await Promise.allSettled(getPromises);
-
-      console.log(
-        dataReg,
-        dataClick,
-        dataOrders,
-        dataInc,
-        dataUsers,
-        reportResp,
-        totalPricePerDate,
-      );
 
       const cardsContent = [
         {
@@ -133,14 +122,23 @@ const AdminBody = ({ type }) => {
       console.log(cardsContent);
       setCardInfo(cardsContent);
 
-      dataUsers.value.reverse();
-      updateUsers(dataUsers.value);
-
       console.log(reportResp);
       setBarContent(reportResp.value);
 
       setGraphData(totalPricePerDate.value);
       console.log(totalPricePerDate);
+    }
+  };
+
+  const fetchAdminUsersData = async () => {
+    const result = await adminApi.checkPermission();
+    if (result !== true) {
+      navigate("/login");
+    } else {
+      const dataUsers = await adminApi.getUsers();
+
+      dataUsers.reverse();
+      updateUsers(dataUsers);
     }
   };
 

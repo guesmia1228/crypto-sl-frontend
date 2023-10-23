@@ -1,20 +1,12 @@
 import Footer from "./components/footer/footer";
 import "./style/general.css";
 import Navigation from "./components/navigation/navigation";
-import setCookies from "./components/setCookie/setCookie";
 import DashboardLayout from "./dashboard/dashboardLayout/dashboardLayout";
 import React, { useEffect, useState, Suspense } from "react";
-import {
-  Route,
-  HashRouter,
-  Routes,
-  useLocation,
-  BrowserRouter,
-} from "react-router-dom";
+import { Route, Routes, useLocation, BrowserRouter } from "react-router-dom";
 import CookieBanner from "./components/cookieBanner/cookieBanner";
 import Cookies from "js-cookie";
 import { MessageContextProvider } from "./context/message";
-import RingLoader from "react-spinners/RingLoader";
 
 const Contact = React.lazy(() => import("./components/contact/contact"));
 const Home = React.lazy(() => import("./pages/Home"));
@@ -41,10 +33,6 @@ const Wallet = React.lazy(() => import("./dashboard/Wallet"));
 const Admin = React.lazy(() => import("./dashboard/Admin"));
 const Kyc = React.lazy(() => import("./dashboard/Kyc"));
 
-import MainDashboard from "./dashboardNew/screens/mainDashboard";
-import ScreenLayout from "./dashboardNew/containers/screenLayout/screenLayout";
-import ProfileDashboard from "./dashboardNew/screens/profileDashboard";
-import SecuritySettings from "./dashboardNew/containers/securitySettings/securitySettings";
 import { Player } from "@lottiefiles/react-lottie-player";
 import LoadingAnimation from "./assets/logo/loadingAnimation.json";
 
@@ -338,32 +326,6 @@ function App() {
                       <Pay />
                       <Footer />
                     </>
-                  }
-                />
-
-                <Route
-                  path="/dashboardNew/"
-                  element={
-                    <ScreenLayout>
-                      <MainDashboard />
-                    </ScreenLayout>
-                  }
-                />
-
-                <Route
-                  path="/dashboardNew/profile"
-                  element={
-                    <ScreenLayout>
-                      <ProfileDashboard />
-                    </ScreenLayout>
-                  }
-                />
-                <Route
-                  path="/dashboardNew/security"
-                  element={
-                    <ScreenLayout>
-                      <SecuritySettings />
-                    </ScreenLayout>
                   }
                 />
               </Routes>
