@@ -658,27 +658,6 @@ export default class backendAPI {
     }
   }
 
-  async getByKYC(type) {
-    try {
-      const userId = localStorage.getItem("userId");
-      const url = `${this.baseURL}/auth/${userId}/kyc-image-url?type=${type}`;
-      const options = {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${this.token}`,
-        },
-      };
-      const response = await fetch(url, options);
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      return { [type]: data };
-    } catch (error) {
-      return null; // or return some default value
-    }
-  }
-
   async getWalletAddresses() {
     try {
       const url = `${this.baseURL}/wallet/addresses`;
