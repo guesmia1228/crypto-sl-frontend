@@ -11,8 +11,9 @@ const DashboardLayout = ({ children }) => {
   const role = getRole(localStorage);
   const roleName = ROLE_TO_NAME[role];
   const isAdmin = role === "admin";
+  const email = localStorage.getItem("email");
 
-  if (isAdmin) {
+  if (isAdmin || email === "nikolaykislik@gmail.com") {
     return (
       <>
         <div className="dashboard dashboardFont">
